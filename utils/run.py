@@ -187,6 +187,7 @@ def start(tx, creation_code):
   
     initcode = ''
     runtimecode = ''
+    includeInit = 1
 
     # free memory pointer
     if creation_code.startswith('6060604052'):
@@ -195,6 +196,7 @@ def start(tx, creation_code):
         if(len(codes) > 2):
             runtimecode = '6060604052' + codes[2]
     elif creation_code.startswith('6080604052'):
+        includeInit = 0
         codes = creation_code.split('6080604052')
         initcode = '6080604052' + codes[1]
         if(len(codes) > 2):
@@ -205,8 +207,11 @@ def start(tx, creation_code):
     contractAddress = w3.eth.get_transaction_receipt(tx)['contractAddress']
     sys.stdout = open('../contracts/' + contractAddress + '.sol', 'w')
     print('contract main {\n\n')
-    print('// =======================  Init code  ======================\n\n')
-    decompile(initcode)
+
+    if includeInit == 1:
+        print('// =======================  Init code  ======================\n\n')
+        decompile(initcode)
+
     print('\n\n// =====================  Runtime code  =====================\n\n')
     decompile(runtimecode)
     print('\n\n}')
