@@ -1,3 +1,6 @@
+contract main {
+
+
 // =======================  Init code  ======================
 
 
@@ -62,3 +65,6 @@ function greet() payable {
     return Array(len=stor1.length, data=mem[160 len stor1.length])
 }
 
+
+
+}
