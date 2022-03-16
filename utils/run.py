@@ -216,14 +216,20 @@ def start(tx, creation_code):
     decompile(runtimecode)
     print('\n\n}')
 
+if(len(sys.argv) > 1):
+    af = open('CURRENT_BLOCK', 'r')
+    new_num = int(af.read()) + 10000
+    af.close()
+    bf = open('CURRENT_BLOCK', 'w')
+    bf.write(str(new_num))
+    bf.close()
+    sys.exit(0)
 
 w3 = Web3(Web3.HTTPProvider('https://mainnet.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161'))
 
 old_blocknumber = int(open('CURRENT_BLOCK', 'r').read()) - 10000
 new_blocknumber = old_blocknumber + 10000
-bf = open('CURRENT_BLOCK', 'w')
-bf.write(str(new_blocknumber))
-bf.close()
+
 
 for blocknumber in range(old_blocknumber, new_blocknumber):
     sys.stdout = sys.__stdout__
