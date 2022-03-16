@@ -220,7 +220,7 @@ def start(tx, creation_code):
 w3 = Web3(Web3.HTTPProvider('https://mainnet.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161'))
 
 old_blocknumber = int(open('CURRENT_BLOCK', 'r').read())
-new_blocknumber = old_blocknumber + 50000
+new_blocknumber = old_blocknumber + 10000
 bf = open('CURRENT_BLOCK', 'w')
 bf.write(str(new_blocknumber))
 bf.close()
