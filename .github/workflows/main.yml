@@ -39,7 +39,7 @@ jobs:
 
 
       - name: Update CURRENT_BLOCK
-        run: python3 run.py
+        run: python3 run.py update
         working-directory: utils
     
 
@@ -48,6 +48,7 @@ jobs:
         with:
           add: '.'
           message: 'update blocknumber'
+
 
       - name: Dump Contracts
         run: python3 run.py
