@@ -1,0 +1,377 @@
+contract main {
+
+
+// =======================  Init code  ======================
+
+
+const _fallback = code.data[18 len 2931]
+
+
+
+
+// =====================  Runtime code  =====================
+
+
+uint128 stor0; offset 160
+address stor0;
+uint256 stor0;
+uint256 stor1;
+uint256 stor2;
+
+function _fallback() payable {
+    call 0x1d11e5eae3112dbd44f99266872ff1d07c77dce8.getAddress() with:
+         gas gas_remaining - 25050 wei
+    require ext_call.success
+    uint256(stor0.field_0) = ext_call.return_data[0] or Mask(96, 160, uint256(stor0.field_0))
+    mem[452] = mem[481 len 3]
+    call address(stor0.field_0).getPrice(string rg1) with:
+         gas gas_remaining - 25050 wei
+        args Array(len=3, data=mem[452])
+    require ext_call.success
+    mem[516] = mem[545 len 3]
+    mem[676] = mem[694 len 14]
+    call address(stor0.field_0).query(uint256 rg1, string rg2, string rg3) with:
+       value ext_call.return_data[0] wei
+         gas gas_remaining - 34050 wei
+        args 60, 96, 160, 3, mem[516], 110, 'json(                 https://ap', 'i.kraken.com/0/public/Ticker?pai', 'r=ETHXBT                 ).resul', 't.XETHXXBT.c.0' >> 512, mem[676]
+    require ext_call.success
+    stor1 = ext_call.return_data[0]
+}
+
+function krakenTicker() payable {
+    call 0x1d11e5eae3112dbd44f99266872ff1d07c77dce8.getAddress() with:
+         gas gas_remaining - 25050 wei
+    require ext_call.success
+    uint256(stor0.field_0) = ext_call.return_data[0] or Mask(96, 160, uint256(stor0.field_0))
+    mem[452] = mem[481 len 3]
+    call address(stor0.field_0).getPrice(string rg1) with:
+         gas gas_remaining - 25050 wei
+        args Array(len=3, data=mem[452])
+    require ext_call.success
+    mem[516] = mem[545 len 3]
+    mem[676] = mem[694 len 14]
+    call address(stor0.field_0).query(uint256 rg1, string rg2, string rg3) with:
+       value ext_call.return_data[0] wei
+         gas gas_remaining - 34050 wei
+        args 60, 96, 160, 3, mem[516], 110, 'json(                 https://ap', 'i.kraken.com/0/public/Ticker?pai', 'r=ETHXBT                 ).resul', 't.XETHXXBT.c.0' >> 512, mem[676]
+    require ext_call.success
+    stor1 = ext_call.return_data[0]
+}
+
+function __callback(bytes32 arg1, string arg2) payable {
+    mem[96] = arg2.length
+    mem[128 len arg2.length] = arg2[all]
+    mem[ceil32(arg2.length) + 128] = 7
+    mem[ceil32(arg2.length) + 160] = 'DEVCON1' << 200
+    call 0x1d11e5eae3112dbd44f99266872ff1d07c77dce8.getAddress() with:
+         gas gas_remaining - 25050 wei
+    require ext_call.success
+    uint256(stor0.field_0) = Mask(96, 0, stor0.field_160)
+    call address(ext_call.return_data[0]).cbAddress() with:
+         gas gas_remaining - 25050 wei
+    require msg.sender == ext_call.return_data[12 len 20]
+    if arg1 != stor1:
+        if arg1 == stor2:
+            mem[64] = ceil32(arg2.length) + 224
+            mem[ceil32(arg2.length) + 192] = 0
+            idx = 2
+            s = 0
+            s = 0
+            s = 0
+            while idx < 42:
+                require idx < arg2.length
+                require idx + 1 < arg2.length
+                if mem[idx + 128 len 1] >= 97:
+                    if mem[idx + 128 len 1] <= 102:
+                        if mem[idx + 129 len 1] >= 97:
+                            if mem[idx + 129 len 1] <= 102:
+                                idx = idx + 2
+                                s = mem[idx + 129 len 1] - 87
+                                s = mem[idx + 128 len 1] - 87
+                                s = mem[idx + 129 len 1] + (16 * mem[idx + 128 len 1] - 87) + (256 * s) - 87
+                                continue 
+                        if mem[idx + 129 len 1] < 48:
+                            idx = idx + 2
+                            s = mem[idx + 129 len 1]
+                            s = mem[idx + 128 len 1] - 87
+                            s = mem[idx + 129 len 1] + (16 * mem[idx + 128 len 1] - 87) + (256 * s)
+                            continue 
+                        if mem[idx + 129 len 1] > 57:
+                            idx = idx + 2
+                            s = mem[idx + 129 len 1]
+                            s = mem[idx + 128 len 1] - 87
+                            s = mem[idx + 129 len 1] + (16 * mem[idx + 128 len 1] - 87) + (256 * s)
+                            continue 
+                        idx = idx + 2
+                        s = mem[idx + 129 len 1] - 48
+                        s = mem[idx + 128 len 1] - 87
+                        s = mem[idx + 129 len 1] + (16 * mem[idx + 128 len 1] - 87) + (256 * s) - 48
+                        continue 
+                if mem[idx + 128 len 1] < 48:
+                    if mem[idx + 129 len 1] >= 97:
+                        if mem[idx + 129 len 1] <= 102:
+                            idx = idx + 2
+                            s = mem[idx + 129 len 1] - 87
+                            s = mem[idx + 128 len 1]
+                            s = mem[idx + 129 len 1] + (Mask(8, 248, mem[idx + 128]) >> 244) + (256 * s) - 87
+                            continue 
+                    if mem[idx + 129 len 1] < 48:
+                        idx = idx + 2
+                        s = mem[idx + 129 len 1]
+                        s = mem[idx + 128 len 1]
+                        s = mem[idx + 129 len 1] + (Mask(8, 248, mem[idx + 128]) >> 244) + (256 * s)
+                        continue 
+                    if mem[idx + 129 len 1] > 57:
+                        idx = idx + 2
+                        s = mem[idx + 129 len 1]
+                        s = mem[idx + 128 len 1]
+                        s = mem[idx + 129 len 1] + (Mask(8, 248, mem[idx + 128]) >> 244) + (256 * s)
+                        continue 
+                    idx = idx + 2
+                    s = mem[idx + 129 len 1] - 48
+                    s = mem[idx + 128 len 1]
+                    s = mem[idx + 129 len 1] + (Mask(8, 248, mem[idx + 128]) >> 244) + (256 * s) - 48
+                    continue 
+                if mem[idx + 128 len 1] > 57:
+                    if mem[idx + 129 len 1] >= 97:
+                        if mem[idx + 129 len 1] <= 102:
+                            idx = idx + 2
+                            s = mem[idx + 129 len 1] - 87
+                            s = mem[idx + 128 len 1]
+                            s = mem[idx + 129 len 1] + (Mask(8, 248, mem[idx + 128]) >> 244) + (256 * s) - 87
+                            continue 
+                    if mem[idx + 129 len 1] < 48:
+                        idx = idx + 2
+                        s = mem[idx + 129 len 1]
+                        s = mem[idx + 128 len 1]
+                        s = mem[idx + 129 len 1] + (Mask(8, 248, mem[idx + 128]) >> 244) + (256 * s)
+                        continue 
+                    if mem[idx + 129 len 1] > 57:
+                        idx = idx + 2
+                        s = mem[idx + 129 len 1]
+                        s = mem[idx + 128 len 1]
+                        s = mem[idx + 129 len 1] + (Mask(8, 248, mem[idx + 128]) >> 244) + (256 * s)
+                        continue 
+                    idx = idx + 2
+                    s = mem[idx + 129 len 1] - 48
+                    s = mem[idx + 128 len 1]
+                    s = mem[idx + 129 len 1] + (Mask(8, 248, mem[idx + 128]) >> 244) + (256 * s) - 48
+                    continue 
+                if mem[idx + 129 len 1] >= 97:
+                    if mem[idx + 129 len 1] <= 102:
+                        idx = idx + 2
+                        s = mem[idx + 129 len 1] - 87
+                        s = mem[idx + 128 len 1] - 48
+                        s = mem[idx + 129 len 1] + (16 * mem[idx + 128 len 1] - 48) + (256 * s) - 87
+                        continue 
+                if mem[idx + 129 len 1] < 48:
+                    idx = idx + 2
+                    s = mem[idx + 129 len 1]
+                    s = mem[idx + 128 len 1] - 48
+                    s = mem[idx + 129 len 1] + (16 * mem[idx + 128 len 1] - 48) + (256 * s)
+                    continue 
+                if mem[idx + 129 len 1] > 57:
+                    idx = idx + 2
+                    s = mem[idx + 129 len 1]
+                    s = mem[idx + 128 len 1] - 48
+                    s = mem[idx + 129 len 1] + (16 * mem[idx + 128 len 1] - 48) + (256 * s)
+                    continue 
+                idx = idx + 2
+                s = mem[idx + 129 len 1] - 48
+                s = mem[idx + 128 len 1] - 48
+                s = mem[idx + 129 len 1] + (16 * mem[idx + 128 len 1] - 48) + (256 * s) - 48
+                continue 
+            call address(s) with:
+               value eth.balance(this.address) wei
+                 gas 0 wei
+        else:
+            call 0x1d11e5eae3112dbd44f99266872ff1d07c77dce8.getAddress() with:
+                 gas gas_remaining - 25050 wei
+            require ext_call.success
+            uint256(stor0.field_0) = ext_call.return_data[0] or Mask(96, 160, uint256(stor0.field_0))
+            mem[ceil32(arg2.length) + 548] = mem[ceil32(arg2.length) + 577 len 3]
+            call address(stor0.field_0).getPrice(string rg1) with:
+                 gas gas_remaining - 25050 wei
+                args Array(len=3, data=mem[ceil32(arg2.length) + 548])
+            require ext_call.success
+            mem[ceil32(arg2.length) + 612] = mem[ceil32(arg2.length) + 641 len 3]
+            mem[ceil32(arg2.length) + 772] = mem[ceil32(arg2.length) + 790 len 14]
+            call address(stor0.field_0).query(uint256 rg1, string rg2, string rg3) with:
+               value ext_call.return_data[0] wei
+                 gas gas_remaining - 34050 wei
+                args 60, 96, 160, 3, mem[ceil32(arg2.length) + 612], 110, 'json(                 https://ap', 'i.kraken.com/0/public/Ticker?pai', 'r=ETHXBT                 ).resul', 't.XETHXXBT.c.0' >> 512, mem[ceil32(arg2.length) + 772]
+            require ext_call.success
+            stor1 = ext_call.return_data[0]
+    else:
+        mem[64] = ceil32(arg2.length) + 224
+        mem[ceil32(arg2.length) + 192] = 0
+        idx = 0
+        s = 0
+        while idx < arg2.length:
+            require idx < arg2.length
+            require idx < arg2.length
+            if Mask(8, 248, mem[idx + 128]) >= 0x3000000000000000000000000000000000000000000000000000000000000000:
+                if Mask(8, 248, mem[idx + 128]) <= 0x3900000000000000000000000000000000000000000000000000000000000000:
+                    require idx < arg2.length
+                    idx = idx + 1
+                    s = (10 * s) + mem[idx + 128 len 1] - 48
+                    continue 
+            idx = idx + 1
+            s = s
+            continue 
+        if s >= 3000:
+            if arg1 == stor2:
+                mem[64] = ceil32(arg2.length) + 256
+                mem[ceil32(arg2.length) + 224] = 0
+                idx = 2
+                s = 0
+                s = 0
+                s = 0
+                while idx < 42:
+                    require idx < arg2.length
+                    require idx + 1 < arg2.length
+                    if mem[idx + 128 len 1] >= 97:
+                        if mem[idx + 128 len 1] <= 102:
+                            if mem[idx + 129 len 1] >= 97:
+                                if mem[idx + 129 len 1] <= 102:
+                                    idx = idx + 2
+                                    s = mem[idx + 129 len 1] - 87
+                                    s = mem[idx + 128 len 1] - 87
+                                    s = mem[idx + 129 len 1] + (16 * mem[idx + 128 len 1] - 87) + (256 * s) - 87
+                                    continue 
+                            if mem[idx + 129 len 1] < 48:
+                                idx = idx + 2
+                                s = mem[idx + 129 len 1]
+                                s = mem[idx + 128 len 1] - 87
+                                s = mem[idx + 129 len 1] + (16 * mem[idx + 128 len 1] - 87) + (256 * s)
+                                continue 
+                            if mem[idx + 129 len 1] > 57:
+                                idx = idx + 2
+                                s = mem[idx + 129 len 1]
+                                s = mem[idx + 128 len 1] - 87
+                                s = mem[idx + 129 len 1] + (16 * mem[idx + 128 len 1] - 87) + (256 * s)
+                                continue 
+                            idx = idx + 2
+                            s = mem[idx + 129 len 1] - 48
+                            s = mem[idx + 128 len 1] - 87
+                            s = mem[idx + 129 len 1] + (16 * mem[idx + 128 len 1] - 87) + (256 * s) - 48
+                            continue 
+                    if mem[idx + 128 len 1] < 48:
+                        if mem[idx + 129 len 1] >= 97:
+                            if mem[idx + 129 len 1] <= 102:
+                                idx = idx + 2
+                                s = mem[idx + 129 len 1] - 87
+                                s = mem[idx + 128 len 1]
+                                s = mem[idx + 129 len 1] + (Mask(8, 248, mem[idx + 128]) >> 244) + (256 * s) - 87
+                                continue 
+                        if mem[idx + 129 len 1] < 48:
+                            idx = idx + 2
+                            s = mem[idx + 129 len 1]
+                            s = mem[idx + 128 len 1]
+                            s = mem[idx + 129 len 1] + (Mask(8, 248, mem[idx + 128]) >> 244) + (256 * s)
+                            continue 
+                        if mem[idx + 129 len 1] > 57:
+                            idx = idx + 2
+                            s = mem[idx + 129 len 1]
+                            s = mem[idx + 128 len 1]
+                            s = mem[idx + 129 len 1] + (Mask(8, 248, mem[idx + 128]) >> 244) + (256 * s)
+                            continue 
+                        idx = idx + 2
+                        s = mem[idx + 129 len 1] - 48
+                        s = mem[idx + 128 len 1]
+                        s = mem[idx + 129 len 1] + (Mask(8, 248, mem[idx + 128]) >> 244) + (256 * s) - 48
+                        continue 
+                    if mem[idx + 128 len 1] > 57:
+                        if mem[idx + 129 len 1] >= 97:
+                            if mem[idx + 129 len 1] <= 102:
+                                idx = idx + 2
+                                s = mem[idx + 129 len 1] - 87
+                                s = mem[idx + 128 len 1]
+                                s = mem[idx + 129 len 1] + (Mask(8, 248, mem[idx + 128]) >> 244) + (256 * s) - 87
+                                continue 
+                        if mem[idx + 129 len 1] < 48:
+                            idx = idx + 2
+                            s = mem[idx + 129 len 1]
+                            s = mem[idx + 128 len 1]
+                            s = mem[idx + 129 len 1] + (Mask(8, 248, mem[idx + 128]) >> 244) + (256 * s)
+                            continue 
+                        if mem[idx + 129 len 1] > 57:
+                            idx = idx + 2
+                            s = mem[idx + 129 len 1]
+                            s = mem[idx + 128 len 1]
+                            s = mem[idx + 129 len 1] + (Mask(8, 248, mem[idx + 128]) >> 244) + (256 * s)
+                            continue 
+                        idx = idx + 2
+                        s = mem[idx + 129 len 1] - 48
+                        s = mem[idx + 128 len 1]
+                        s = mem[idx + 129 len 1] + (Mask(8, 248, mem[idx + 128]) >> 244) + (256 * s) - 48
+                        continue 
+                    if mem[idx + 129 len 1] >= 97:
+                        if mem[idx + 129 len 1] <= 102:
+                            idx = idx + 2
+                            s = mem[idx + 129 len 1] - 87
+                            s = mem[idx + 128 len 1] - 48
+                            s = mem[idx + 129 len 1] + (16 * mem[idx + 128 len 1] - 48) + (256 * s) - 87
+                            continue 
+                    if mem[idx + 129 len 1] < 48:
+                        idx = idx + 2
+                        s = mem[idx + 129 len 1]
+                        s = mem[idx + 128 len 1] - 48
+                        s = mem[idx + 129 len 1] + (16 * mem[idx + 128 len 1] - 48) + (256 * s)
+                        continue 
+                    if mem[idx + 129 len 1] > 57:
+                        idx = idx + 2
+                        s = mem[idx + 129 len 1]
+                        s = mem[idx + 128 len 1] - 48
+                        s = mem[idx + 129 len 1] + (16 * mem[idx + 128 len 1] - 48) + (256 * s)
+                        continue 
+                    idx = idx + 2
+                    s = mem[idx + 129 len 1] - 48
+                    s = mem[idx + 128 len 1] - 48
+                    s = mem[idx + 129 len 1] + (16 * mem[idx + 128 len 1] - 48) + (256 * s) - 48
+                    continue 
+                call address(s) with:
+                   value eth.balance(this.address) wei
+                     gas 0 wei
+            else:
+                call 0x1d11e5eae3112dbd44f99266872ff1d07c77dce8.getAddress() with:
+                     gas gas_remaining - 25050 wei
+                require ext_call.success
+                uint256(stor0.field_0) = ext_call.return_data[0] or Mask(96, 160, uint256(stor0.field_0))
+                mem[ceil32(arg2.length) + 580] = mem[ceil32(arg2.length) + 609 len 3]
+                call address(stor0.field_0).getPrice(string rg1) with:
+                     gas gas_remaining - 25050 wei
+                    args Array(len=3, data=mem[ceil32(arg2.length) + 580])
+                require ext_call.success
+                mem[ceil32(arg2.length) + 644] = mem[ceil32(arg2.length) + 673 len 3]
+                mem[ceil32(arg2.length) + 804] = mem[ceil32(arg2.length) + 822 len 14]
+                call address(stor0.field_0).query(uint256 rg1, string rg2, string rg3) with:
+                   value ext_call.return_data[0] wei
+                     gas gas_remaining - 34050 wei
+                    args 60, 96, 160, 3, mem[ceil32(arg2.length) + 644], 110, 'json(                 https://ap', 'i.kraken.com/0/public/Ticker?pai', 'r=ETHXBT                 ).resul', 't.XETHXXBT.c.0' >> 512, mem[ceil32(arg2.length) + 804]
+                require ext_call.success
+                stor1 = ext_call.return_data[0]
+        else:
+            call 0x1d11e5eae3112dbd44f99266872ff1d07c77dce8.getAddress() with:
+                 gas gas_remaining - 25050 wei
+            require ext_call.success
+            uint256(stor0.field_0) = ext_call.return_data[0] or Mask(96, 160, uint256(stor0.field_0))
+            mem[ceil32(arg2.length) + 580] = mem[ceil32(arg2.length) + 609 len 3]
+            call address(stor0.field_0).getPrice(string rg1) with:
+                 gas gas_remaining - 25050 wei
+                args Array(len=3, data=mem[ceil32(arg2.length) + 580])
+            require ext_call.success
+            mem[ceil32(arg2.length) + 676] = mem[ceil32(arg2.length) + 705 len 3]
+            mem[ceil32(arg2.length) + 772] = 0, mem[ceil32(arg2.length) + 794 len 10]
+            mem[ceil32(arg2.length) + 900] = 0, mem[ceil32(arg2.length) + 924 len 8]
+            call address(stor0.field_0).query2(uint256 rg1, string rg2, string rg3, string rg4) with:
+               value ext_call.return_data[0] wei
+                 gas gas_remaining - 34050 wei
+                args 0, 128, 192, 288, 3, mem[ceil32(arg2.length) + 676], 54, 'json(https://shapeshift.io/senda', 'mount).success.deposit', mem[ceil32(arg2.length) + 772], 88, '{"pair": "eth_btc", "amount": "0', '.2", "withdrawal": "1AAcCo21EUc1', 'jbocjssSQDzLna9Vem2UN5"}' >> 256, mem[ceil32(arg2.length) + 900]
+            require ext_call.success
+            stor2 = ext_call.return_data[0]
+}
+
+
+
+}
