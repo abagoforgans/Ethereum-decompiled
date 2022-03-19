@@ -12,7 +12,6 @@ function _fallback() payable {
     mem[64] = -380
     stor0 = msg.sender or Mask(96, 160, stor0)
     stor1.length = mem[mem[96] + 96]
-    mem[0] = 1
     if not mem[mem[96] + 96]:
         idx = 0
         while stor1.length + 31 / 32 > idx:
