@@ -17,8 +17,6 @@ function _fallback() payable {
     mem[64] = -449
     mem[-513] = mem[96] + 96
     mem[-481] = 0
-    mem[32] = 0
-    mem[0] = 0xad3228b676f7d3cd4284a5443f17f1962b36e491b30a40b2405849e597ba5fb5
     stor0[0] = (2 * mem[mem[96] + 96]) + 1
     s = 0xf0df3dcda05b4fbd9c655cde3d5ceb211e019e72ec816e127a59e7195f2cd7f5
     idx = mem[96] + 128
@@ -34,6 +32,8 @@ function _fallback() payable {
         continue 
     storAD32 = 0
     mem[64] = -385
+    mem[-449] = mem[128] + 96
+    mem[-417] = 0
     stor0[1] = (2 * mem[mem[128] + 96]) + 1
     s = 0x3f9553dc324cd1fd24b54243720c42e18e5c20165bc5e523e42b440a8654abd1
     idx = mem[128] + 128
@@ -49,6 +49,10 @@ function _fallback() payable {
         continue 
     storADA5 = 0
     mem[64] = -321
+    mem[-385] = mem[160] + 96
+    mem[-353] = 0
+    mem[32] = 0
+    mem[0] = 0xabbb5caa7dda850e60932de0934eb1f9d0f59695050f761dc64e443e5030a569
     storABBB.length = (2 * mem[mem[160] + 96]) + 1
     s = 0x1cc5dcd5de6bb5e1f7c4a928dc89b7e9d1f623bcb525344ccd68ad5beab9bb1d
     idx = mem[160] + 128

@@ -21,8 +21,6 @@ function _fallback() payable {
     stor1 = mem[mem[96] + 96] + 1
     address(stor3.field_0) = msg.sender
     Mask(96, 0, stor3.field_160) = 0
-    mem[0] = msg.sender
-    mem[32] = 258
     stor258[address(msg.sender)] = 1
     idx = 0
     while idx < mem[mem[96] + 96]:
