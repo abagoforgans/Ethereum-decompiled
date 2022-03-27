@@ -1,0 +1,53 @@
+contract main {
+
+
+// =======================  Init code  ======================
+
+
+const _fallback = code.data[24 len 1716]
+
+
+
+
+// =====================  Runtime code  =====================
+
+
+array of address stor0;
+array of address stor1;
+
+function _fallback() {
+    revert 
+}
+
+function sub_cfe1e46c(?) {
+    require ext_code.size(arg1)
+    call arg1.getName() with:
+         gas gas_remaining - 50 wei
+    require ext_call.success
+}
+
+function sub_c9b9c530(?) {
+    mem[ceil32(arg2.length) + 1294 len arg2.length] = arg2[all]
+    if not arg2.length % 32:
+        create contract with 0 wei
+                        code: code.data[678 len 1038], arg1, Array(len=msg.sender, data=arg2.length, arg2[all])
+    else:
+        mem[floor32(arg2.length) + ceil32(arg2.length) + 1294] = mem[floor32(arg2.length) + ceil32(arg2.length) + -(arg2.length % 32) + 1326 len arg2.length % 32]
+        create contract with 0 wei
+                        code: code.data[678 len 1038], arg1, Array(len=msg.sender, data=arg2.length, arg2[all], mem[ceil32(arg2.length) + arg2.length + 1294 len -(arg2.length % 32) + 32])
+    require create.new_address
+    stor0.length++
+    if not stor0.length <= stor0.length + 1:
+        idx = stor0.length + 1
+        while stor0.length > idx:
+            uint256(stor0[idx]) = 0
+            idx = idx + 1
+            continue 
+    address(stor0[stor0.length]) = address(create.new_address)
+    stor1.length++
+    stor1[stor1.length] = msg.sender
+}
+
+
+
+}
