@@ -1,0 +1,1205 @@
+contract main {
+
+
+// =======================  Init code  ======================
+
+
+address stor0;
+address stor2;
+array of uint256 stor3;
+uint256 stor4;
+uint256 stor5;
+uint256 stor6;
+uint256 stor7;
+uint256 stor8;
+uint256 stor9;
+uint256 stor10;
+uint256 stor11;
+uint256 stor12;
+uint256 stor13;
+mapping of uint256 stor15;
+
+function _fallback() {
+    stor0 = msg.sender
+    stor2 = this.address
+    stor4 = 50
+    stor5 = 2000
+    stor6 = 1487481815
+    stor7 = 1487481817
+    stor8 = 1487481815
+    stor9 = 1588481815
+    stor10 = 20
+    stor11 = 80
+    stor12 = 10
+    stor13 = 500
+    mem[128] = '61e642ed97736187ee3badacf8a93f6c'
+    mem[160] = '9976e9475e12f4e1ee1d33c9133d6085'
+    stor3.length = 129
+    s = 0
+    idx = 128
+    while 192 > idx:
+        stor3[s] = mem[idx]
+        s = s + 1
+        idx = idx + 32
+        continue 
+    idx = 2
+    while stor3.length + 31 / 32 > idx:
+        stor3[idx] = 0
+        idx = idx + 1
+        continue 
+    stor15['A Company'] = 1
+    stor15['A1 Company'] = 1
+    stor15['B Company'] = 2
+    stor15['B1 Company'] = 2
+    return code.data[825 len 4897]
+}
+
+
+
+// =====================  Runtime code  =====================
+
+
+address owner;
+address sub_8cabe7d0Address;
+address signerAddress;
+array of struct sub_c8a663ec;
+uint256 minPrice;
+uint256 maxPrice;
+uint256 sub_c39587da;
+uint256 sub_64b2a7ac;
+uint256 sub_5afffc5a;
+uint256 sub_6cc64ba2;
+uint256 sub_74effedd;
+uint256 sub_89ef2a65;
+uint256 sub_2983f8fe;
+uint256 sub_d6b68e80;
+mapping of struct record;
+mapping of uint256 stor99;
+
+function signer() {
+    return signerAddress
+}
+
+function sub_2983f8fe(?) {
+    return sub_2983f8fe
+}
+
+function record(address arg1) {
+    mem[384] = record[arg1][1].field_0
+    idx = 384
+    s = 0
+    while record[arg1][1].length + 384 > idx + 32:
+        mem[idx + 32] = record[arg1][s + 1].field_256
+        idx = idx + 32
+        s = s + 1
+        continue 
+    return address(record[arg1].field_0), 
+           Array(len=record[arg1][1].length, data=mem[384 len record[arg1][1].length + (floor32(record[arg1][1].length - 1) + -record[arg1][1].length + 32 % 32)]),
+           record[arg1].field_512,
+           record[arg1].field_768,
+           record[arg1].field_1024,
+           record[arg1].field_1280,
+           record[arg1].field_1536,
+           record[arg1].field_1792
+}
+
+function sub_5afffc5a(?) {
+    return sub_5afffc5a
+}
+
+function sub_64b2a7ac(?) {
+    return sub_64b2a7ac
+}
+
+function sub_6cc64ba2(?) {
+    return sub_6cc64ba2
+}
+
+function sub_74effedd(?) {
+    return sub_74effedd
+}
+
+function sub_89ef2a65(?) {
+    return sub_89ef2a65
+}
+
+function sub_8cabe7d0(?) {
+    return sub_8cabe7d0Address
+}
+
+function owner() {
+    return owner
+}
+
+function sub_c39587da(?) {
+    return sub_c39587da
+}
+
+function sub_c8a663ec(?) {
+    return sub_c8a663ec[0 len sub_c8a663ec.length].field_0
+}
+
+function sub_d6b68e80(?) {
+    return sub_d6b68e80
+}
+
+function maxPrice() {
+    return maxPrice
+}
+
+function minPrice() {
+    return minPrice
+}
+
+function destroy() payable {
+    require msg.sender == owner
+    selfdestruct(owner)
+}
+
+function _fallback() payable {
+    revert
+}
+
+function sub_579b119a(?) payable {
+    require msg.sender == owner
+    if arg2 != 1:
+        call owner with:
+           value record[address(arg1)].field_1536 wei
+             gas 2300 * is_zero(value) wei
+    else:
+        call arg1 with:
+           value record[address(arg1)].field_1536 wei
+             gas 2300 * is_zero(value) wei
+    require ext_call.success
+    record[address(arg1)].field_1536 = 0
+}
+
+function sub_a7203352(?) {
+    mem[128 len arg1.length] = arg1[all]
+    require msg.sender == owner
+    mem[ceil32(arg1.length) + 128 len floor32(arg1.length)] = call.data[arg1 + 36 len floor32(arg1.length)]
+    mem[ceil32(arg1.length) + floor32(arg1.length) + -(arg1.length % 32) + 160 len arg1.length % 32] = mem[-(arg1.length % 32) + floor32(arg1.length) + 160 len arg1.length % 32]
+    mem[arg1.length + ceil32(arg1.length) + 128] = 15
+    stor[mem[ceil32(arg1.length) + floor32(arg1.length) + 128 len (arg1.length % 32) + 32]][call.data[arg1 + 36 len floor32(arg1.length)]] = arg2
+}
+
+function sub_02351be3(?) payable {
+    mem[128 len arg1.length] = arg1[all]
+    mem[ceil32(arg1.length) + 128 len floor32(arg1.length)] = call.data[arg1 + 36 len floor32(arg1.length)]
+    mem[ceil32(arg1.length) + floor32(arg1.length) + -(arg1.length % 32) + 160 len arg1.length % 32] = mem[-(arg1.length % 32) + floor32(arg1.length) + 160 len arg1.length % 32]
+    mem[arg1.length + ceil32(arg1.length) + 128] = 15
+    if stor[mem[ceil32(arg1.length) + floor32(arg1.length) + 128 len (arg1.length % 32) + 32]][call.data[arg1 + 36 len floor32(arg1.length)]] == 1:
+        if p == 'r':
+            call msg.sender with:
+               value msg.value wei
+                 gas 2300 * is_zero(value) wei
+            require ext_call.success
+            return 'Failed Result'
+        mem[ceil32(arg1.length) + 128 len floor32(arg1.length)] = call.data[arg1 + 36 len floor32(arg1.length)]
+        mem[ceil32(arg1.length) + floor32(arg1.length) + -(arg1.length % 32) + 160 len arg1.length % 32] = mem[-(arg1.length % 32) + floor32(arg1.length) + 160 len arg1.length % 32]
+        mem[arg1.length + ceil32(arg1.length) + 128] = 15
+        if stor[mem[ceil32(arg1.length) + floor32(arg1.length) + 128 len (arg1.length % 32) + 32]][call.data[arg1 + 36 len floor32(arg1.length)]] == 1:
+            if 'u' != p:
+                mem[ceil32(arg1.length) + 128] = owner
+                mem[ceil32(arg1.length) + 148] = uint256(sub_c8a663ec.field_0)
+                idx = ceil32(arg1.length) + 148
+                s = 0
+                while ceil32(arg1.length) + sub_c8a663ec.length + 148 > idx + 32:
+                    mem[idx + 32] = sub_c8a663ec[s].field_256
+                    idx = idx + 32
+                    s = s + 1
+                    continue 
+                mem[ceil32(arg1.length) + sub_c8a663ec.length + 148] = address(msg.sender)
+                mem[ceil32(arg1.length) + sub_c8a663ec.length + 168 len floor32(arg1.length)] = call.data[arg1 + 36 len floor32(arg1.length)]
+                mem[ceil32(arg1.length) + sub_c8a663ec.length + floor32(arg1.length) + -(arg1.length % 32) + 200 len arg1.length % 32] = mem[floor32(arg1.length) + -(arg1.length % 32) + 160 len arg1.length % 32]
+                mem[arg1.length + ceil32(arg1.length) + sub_c8a663ec.length + 168] = arg2
+                _8895 = sha3(owner, mem[ceil32(arg1.length) + 148 len sub_c8a663ec.length + 20], call.data[arg1 + 36 len floor32(arg1.length)], mem[ceil32(arg1.length) + sub_c8a663ec.length + floor32(arg1.length) + 168 len (arg1.length % 32) + 32], block.timestamp, arg3, arg4, msg.value, signerAddress)
+                address(record[address(msg.sender)].field_0) = msg.sender
+                record[address(msg.sender)][1][].field_0 = Array(len=arg1.length, data=arg1[all])
+                record[address(msg.sender)].field_512 = arg2
+                record[address(msg.sender)].field_768 = block.timestamp
+                record[address(msg.sender)].field_1024 = arg3
+                record[address(msg.sender)].field_1280 = arg4
+                record[address(msg.sender)].field_1536 = msg.value
+                record[address(msg.sender)].field_1792 = _8895
+                return _8895
+            if arg2 < minPrice:
+                call msg.sender with:
+                   value msg.value wei
+                     gas 2300 * is_zero(value) wei
+                require ext_call.success
+                return 'Failed Result'
+            if arg2 > maxPrice:
+                call msg.sender with:
+                   value msg.value wei
+                     gas 2300 * is_zero(value) wei
+                require ext_call.success
+                return 'Failed Result'
+            if block.timestamp < sub_c39587da:
+                call msg.sender with:
+                   value msg.value wei
+                     gas 2300 * is_zero(value) wei
+                require ext_call.success
+                return 'Failed Result'
+            if block.timestamp > sub_64b2a7ac:
+                call msg.sender with:
+                   value msg.value wei
+                     gas 2300 * is_zero(value) wei
+                require ext_call.success
+                return 'Failed Result'
+            if arg3 < sub_5afffc5a:
+                call msg.sender with:
+                   value msg.value wei
+                     gas 2300 * is_zero(value) wei
+                require ext_call.success
+                return 'Failed Result'
+            if arg3 > sub_6cc64ba2:
+                call msg.sender with:
+                   value msg.value wei
+                     gas 2300 * is_zero(value) wei
+                require ext_call.success
+                return 'Failed Result'
+            if arg4 < sub_74effedd:
+                call msg.sender with:
+                   value msg.value wei
+                     gas 2300 * is_zero(value) wei
+                require ext_call.success
+                return 'Failed Result'
+            if arg4 > sub_89ef2a65:
+                call msg.sender with:
+                   value msg.value wei
+                     gas 2300 * is_zero(value) wei
+                require ext_call.success
+                return 'Failed Result'
+            if msg.value < sub_2983f8fe:
+                call msg.sender with:
+                   value msg.value wei
+                     gas 2300 * is_zero(value) wei
+                require ext_call.success
+                return 'Failed Result'
+            if msg.value > sub_d6b68e80:
+                call msg.sender with:
+                   value msg.value wei
+                     gas 2300 * is_zero(value) wei
+                require ext_call.success
+                return 'Failed Result'
+            mem[ceil32(arg1.length) + 128] = owner
+            mem[ceil32(arg1.length) + 148] = uint256(sub_c8a663ec.field_0)
+            idx = ceil32(arg1.length) + 148
+            s = 0
+            while ceil32(arg1.length) + sub_c8a663ec.length + 148 > idx + 32:
+                mem[idx + 32] = sub_c8a663ec[s].field_256
+                idx = idx + 32
+                s = s + 1
+                continue 
+            mem[ceil32(arg1.length) + sub_c8a663ec.length + 148] = address(msg.sender)
+            mem[ceil32(arg1.length) + sub_c8a663ec.length + 168 len floor32(arg1.length)] = call.data[arg1 + 36 len floor32(arg1.length)]
+            mem[ceil32(arg1.length) + sub_c8a663ec.length + floor32(arg1.length) + -(arg1.length % 32) + 200 len arg1.length % 32] = mem[floor32(arg1.length) + -(arg1.length % 32) + 160 len arg1.length % 32]
+            mem[arg1.length + ceil32(arg1.length) + sub_c8a663ec.length + 168] = arg2
+            _8900 = sha3(owner, mem[ceil32(arg1.length) + 148 len sub_c8a663ec.length + 20], call.data[arg1 + 36 len floor32(arg1.length)], mem[ceil32(arg1.length) + sub_c8a663ec.length + floor32(arg1.length) + 168 len (arg1.length % 32) + 32], block.timestamp, arg3, arg4, msg.value, signerAddress)
+            address(record[address(msg.sender)].field_0) = msg.sender
+            record[address(msg.sender)][1][].field_0 = Array(len=arg1.length, data=arg1[all])
+            record[address(msg.sender)].field_512 = arg2
+            record[address(msg.sender)].field_768 = block.timestamp
+            record[address(msg.sender)].field_1024 = arg3
+            record[address(msg.sender)].field_1280 = arg4
+            record[address(msg.sender)].field_1536 = msg.value
+            record[address(msg.sender)].field_1792 = _8900
+            return _8900
+        mem[ceil32(arg1.length) + 128 len floor32(arg1.length)] = call.data[arg1 + 36 len floor32(arg1.length)]
+        mem[ceil32(arg1.length) + floor32(arg1.length) + -(arg1.length % 32) + 160 len arg1.length % 32] = mem[-(arg1.length % 32) + floor32(arg1.length) + 160 len arg1.length % 32]
+        mem[arg1.length + ceil32(arg1.length) + 128] = 15
+        if stor[mem[ceil32(arg1.length) + floor32(arg1.length) + 128 len (arg1.length % 32) + 32]][call.data[arg1 + 36 len floor32(arg1.length)]] != 2:
+            if 'u' != u:
+                mem[ceil32(arg1.length) + 128] = owner
+                mem[ceil32(arg1.length) + 148] = uint256(sub_c8a663ec.field_0)
+                idx = ceil32(arg1.length) + 148
+                s = 0
+                while ceil32(arg1.length) + sub_c8a663ec.length + 148 > idx + 32:
+                    mem[idx + 32] = sub_c8a663ec[s].field_256
+                    idx = idx + 32
+                    s = s + 1
+                    continue 
+                mem[ceil32(arg1.length) + sub_c8a663ec.length + 148] = address(msg.sender)
+                mem[ceil32(arg1.length) + sub_c8a663ec.length + 168 len floor32(arg1.length)] = call.data[arg1 + 36 len floor32(arg1.length)]
+                mem[ceil32(arg1.length) + sub_c8a663ec.length + floor32(arg1.length) + -(arg1.length % 32) + 200 len arg1.length % 32] = mem[floor32(arg1.length) + -(arg1.length % 32) + 160 len arg1.length % 32]
+                mem[arg1.length + ceil32(arg1.length) + sub_c8a663ec.length + 168] = arg2
+                _10237 = sha3(owner, mem[ceil32(arg1.length) + 148 len sub_c8a663ec.length + 20], call.data[arg1 + 36 len floor32(arg1.length)], mem[ceil32(arg1.length) + sub_c8a663ec.length + floor32(arg1.length) + 168 len (arg1.length % 32) + 32], block.timestamp, arg3, arg4, msg.value, signerAddress)
+                address(record[address(msg.sender)].field_0) = msg.sender
+                record[address(msg.sender)][1][].field_0 = Array(len=arg1.length, data=arg1[all])
+                record[address(msg.sender)].field_512 = arg2
+                record[address(msg.sender)].field_768 = block.timestamp
+                record[address(msg.sender)].field_1024 = arg3
+                record[address(msg.sender)].field_1280 = arg4
+                record[address(msg.sender)].field_1536 = msg.value
+                record[address(msg.sender)].field_1792 = _10237
+                return _10237
+            if arg2 < minPrice:
+                call msg.sender with:
+                   value msg.value wei
+                     gas 2300 * is_zero(value) wei
+                require ext_call.success
+                return 'Failed Result'
+            if arg2 > maxPrice:
+                call msg.sender with:
+                   value msg.value wei
+                     gas 2300 * is_zero(value) wei
+                require ext_call.success
+                return 'Failed Result'
+            if block.timestamp < sub_c39587da:
+                call msg.sender with:
+                   value msg.value wei
+                     gas 2300 * is_zero(value) wei
+                require ext_call.success
+                return 'Failed Result'
+            if block.timestamp > sub_64b2a7ac:
+                call msg.sender with:
+                   value msg.value wei
+                     gas 2300 * is_zero(value) wei
+                require ext_call.success
+                return 'Failed Result'
+            if arg3 < sub_5afffc5a:
+                call msg.sender with:
+                   value msg.value wei
+                     gas 2300 * is_zero(value) wei
+                require ext_call.success
+                return 'Failed Result'
+            if arg3 > sub_6cc64ba2:
+                call msg.sender with:
+                   value msg.value wei
+                     gas 2300 * is_zero(value) wei
+                require ext_call.success
+                return 'Failed Result'
+            if arg4 < sub_74effedd:
+                call msg.sender with:
+                   value msg.value wei
+                     gas 2300 * is_zero(value) wei
+                require ext_call.success
+                return 'Failed Result'
+            if arg4 > sub_89ef2a65:
+                call msg.sender with:
+                   value msg.value wei
+                     gas 2300 * is_zero(value) wei
+                require ext_call.success
+                return 'Failed Result'
+            if msg.value < sub_2983f8fe:
+                call msg.sender with:
+                   value msg.value wei
+                     gas 2300 * is_zero(value) wei
+                require ext_call.success
+                return 'Failed Result'
+            if msg.value > sub_d6b68e80:
+                call msg.sender with:
+                   value msg.value wei
+                     gas 2300 * is_zero(value) wei
+                require ext_call.success
+                return 'Failed Result'
+            mem[ceil32(arg1.length) + 128] = owner
+            mem[ceil32(arg1.length) + 148] = uint256(sub_c8a663ec.field_0)
+            idx = ceil32(arg1.length) + 148
+            s = 0
+            while ceil32(arg1.length) + sub_c8a663ec.length + 148 > idx + 32:
+                mem[idx + 32] = sub_c8a663ec[s].field_256
+                idx = idx + 32
+                s = s + 1
+                continue 
+            mem[ceil32(arg1.length) + sub_c8a663ec.length + 148] = address(msg.sender)
+            mem[ceil32(arg1.length) + sub_c8a663ec.length + 168 len floor32(arg1.length)] = call.data[arg1 + 36 len floor32(arg1.length)]
+            mem[ceil32(arg1.length) + sub_c8a663ec.length + floor32(arg1.length) + -(arg1.length % 32) + 200 len arg1.length % 32] = mem[floor32(arg1.length) + -(arg1.length % 32) + 160 len arg1.length % 32]
+            mem[arg1.length + ceil32(arg1.length) + sub_c8a663ec.length + 168] = arg2
+            _10242 = sha3(owner, mem[ceil32(arg1.length) + 148 len sub_c8a663ec.length + 20], call.data[arg1 + 36 len floor32(arg1.length)], mem[ceil32(arg1.length) + sub_c8a663ec.length + floor32(arg1.length) + 168 len (arg1.length % 32) + 32], block.timestamp, arg3, arg4, msg.value, signerAddress)
+            address(record[address(msg.sender)].field_0) = msg.sender
+            record[address(msg.sender)][1][].field_0 = Array(len=arg1.length, data=arg1[all])
+            record[address(msg.sender)].field_512 = arg2
+            record[address(msg.sender)].field_768 = block.timestamp
+            record[address(msg.sender)].field_1024 = arg3
+            record[address(msg.sender)].field_1280 = arg4
+            record[address(msg.sender)].field_1536 = msg.value
+            record[address(msg.sender)].field_1792 = _10242
+            return _10242
+        if 'u' != r:
+            mem[ceil32(arg1.length) + 128] = owner
+            mem[ceil32(arg1.length) + 148] = uint256(sub_c8a663ec.field_0)
+            idx = ceil32(arg1.length) + 148
+            s = 0
+            while ceil32(arg1.length) + sub_c8a663ec.length + 148 > idx + 32:
+                mem[idx + 32] = sub_c8a663ec[s].field_256
+                idx = idx + 32
+                s = s + 1
+                continue 
+            mem[ceil32(arg1.length) + sub_c8a663ec.length + 148] = address(msg.sender)
+            mem[ceil32(arg1.length) + sub_c8a663ec.length + 168 len floor32(arg1.length)] = call.data[arg1 + 36 len floor32(arg1.length)]
+            mem[ceil32(arg1.length) + sub_c8a663ec.length + floor32(arg1.length) + -(arg1.length % 32) + 200 len arg1.length % 32] = mem[floor32(arg1.length) + -(arg1.length % 32) + 160 len arg1.length % 32]
+            mem[arg1.length + ceil32(arg1.length) + sub_c8a663ec.length + 168] = arg2
+            _10247 = sha3(owner, mem[ceil32(arg1.length) + 148 len sub_c8a663ec.length + 20], call.data[arg1 + 36 len floor32(arg1.length)], mem[ceil32(arg1.length) + sub_c8a663ec.length + floor32(arg1.length) + 168 len (arg1.length % 32) + 32], block.timestamp, arg3, arg4, msg.value, signerAddress)
+            address(record[address(msg.sender)].field_0) = msg.sender
+            record[address(msg.sender)][1][].field_0 = Array(len=arg1.length, data=arg1[all])
+            record[address(msg.sender)].field_512 = arg2
+            record[address(msg.sender)].field_768 = block.timestamp
+            record[address(msg.sender)].field_1024 = arg3
+            record[address(msg.sender)].field_1280 = arg4
+            record[address(msg.sender)].field_1536 = msg.value
+            record[address(msg.sender)].field_1792 = _10247
+            return _10247
+        if arg2 < minPrice:
+            call msg.sender with:
+               value msg.value wei
+                 gas 2300 * is_zero(value) wei
+            require ext_call.success
+            return 'Failed Result'
+        if arg2 > maxPrice:
+            call msg.sender with:
+               value msg.value wei
+                 gas 2300 * is_zero(value) wei
+            require ext_call.success
+            return 'Failed Result'
+        if block.timestamp < sub_c39587da:
+            call msg.sender with:
+               value msg.value wei
+                 gas 2300 * is_zero(value) wei
+            require ext_call.success
+            return 'Failed Result'
+        if block.timestamp > sub_64b2a7ac:
+            call msg.sender with:
+               value msg.value wei
+                 gas 2300 * is_zero(value) wei
+            require ext_call.success
+            return 'Failed Result'
+        if arg3 < sub_5afffc5a:
+            call msg.sender with:
+               value msg.value wei
+                 gas 2300 * is_zero(value) wei
+            require ext_call.success
+            return 'Failed Result'
+        if arg3 > sub_6cc64ba2:
+            call msg.sender with:
+               value msg.value wei
+                 gas 2300 * is_zero(value) wei
+            require ext_call.success
+            return 'Failed Result'
+        if arg4 < sub_74effedd:
+            call msg.sender with:
+               value msg.value wei
+                 gas 2300 * is_zero(value) wei
+            require ext_call.success
+            return 'Failed Result'
+        if arg4 > sub_89ef2a65:
+            call msg.sender with:
+               value msg.value wei
+                 gas 2300 * is_zero(value) wei
+            require ext_call.success
+            return 'Failed Result'
+        if msg.value < sub_2983f8fe:
+            call msg.sender with:
+               value msg.value wei
+                 gas 2300 * is_zero(value) wei
+            require ext_call.success
+            return 'Failed Result'
+        if msg.value > sub_d6b68e80:
+            call msg.sender with:
+               value msg.value wei
+                 gas 2300 * is_zero(value) wei
+            require ext_call.success
+            return 'Failed Result'
+        mem[ceil32(arg1.length) + 128] = owner
+        mem[ceil32(arg1.length) + 148] = uint256(sub_c8a663ec.field_0)
+        idx = ceil32(arg1.length) + 148
+        s = 0
+        while ceil32(arg1.length) + sub_c8a663ec.length + 148 > idx + 32:
+            mem[idx + 32] = sub_c8a663ec[s].field_256
+            idx = idx + 32
+            s = s + 1
+            continue 
+        mem[ceil32(arg1.length) + sub_c8a663ec.length + 148] = address(msg.sender)
+        mem[ceil32(arg1.length) + sub_c8a663ec.length + 168 len floor32(arg1.length)] = call.data[arg1 + 36 len floor32(arg1.length)]
+        mem[ceil32(arg1.length) + sub_c8a663ec.length + floor32(arg1.length) + -(arg1.length % 32) + 200 len arg1.length % 32] = mem[floor32(arg1.length) + -(arg1.length % 32) + 160 len arg1.length % 32]
+        mem[arg1.length + ceil32(arg1.length) + sub_c8a663ec.length + 168] = arg2
+        _10252 = sha3(owner, mem[ceil32(arg1.length) + 148 len sub_c8a663ec.length + 20], call.data[arg1 + 36 len floor32(arg1.length)], mem[ceil32(arg1.length) + sub_c8a663ec.length + floor32(arg1.length) + 168 len (arg1.length % 32) + 32], block.timestamp, arg3, arg4, msg.value, signerAddress)
+        address(record[address(msg.sender)].field_0) = msg.sender
+        record[address(msg.sender)][1][].field_0 = Array(len=arg1.length, data=arg1[all])
+        record[address(msg.sender)].field_512 = arg2
+        record[address(msg.sender)].field_768 = block.timestamp
+        record[address(msg.sender)].field_1024 = arg3
+        record[address(msg.sender)].field_1280 = arg4
+        record[address(msg.sender)].field_1536 = msg.value
+        record[address(msg.sender)].field_1792 = _10252
+        return _10252
+    mem[ceil32(arg1.length) + 128 len floor32(arg1.length)] = call.data[arg1 + 36 len floor32(arg1.length)]
+    mem[ceil32(arg1.length) + floor32(arg1.length) + -(arg1.length % 32) + 160 len arg1.length % 32] = mem[-(arg1.length % 32) + floor32(arg1.length) + 160 len arg1.length % 32]
+    mem[arg1.length + ceil32(arg1.length) + 128] = 15
+    if stor[mem[ceil32(arg1.length) + floor32(arg1.length) + 128 len (arg1.length % 32) + 32]][call.data[arg1 + 36 len floor32(arg1.length)]] != 2:
+        if u == 'r':
+            call msg.sender with:
+               value msg.value wei
+                 gas 2300 * is_zero(value) wei
+            require ext_call.success
+            return 'Failed Result'
+        mem[ceil32(arg1.length) + 128 len floor32(arg1.length)] = call.data[arg1 + 36 len floor32(arg1.length)]
+        mem[ceil32(arg1.length) + floor32(arg1.length) + -(arg1.length % 32) + 160 len arg1.length % 32] = mem[-(arg1.length % 32) + floor32(arg1.length) + 160 len arg1.length % 32]
+        mem[arg1.length + ceil32(arg1.length) + 128] = 15
+        if stor[mem[ceil32(arg1.length) + floor32(arg1.length) + 128 len (arg1.length % 32) + 32]][call.data[arg1 + 36 len floor32(arg1.length)]] == 1:
+            if 'u' != p:
+                mem[ceil32(arg1.length) + 128] = owner
+                mem[ceil32(arg1.length) + 148] = uint256(sub_c8a663ec.field_0)
+                idx = ceil32(arg1.length) + 148
+                s = 0
+                while ceil32(arg1.length) + sub_c8a663ec.length + 148 > idx + 32:
+                    mem[idx + 32] = sub_c8a663ec[s].field_256
+                    idx = idx + 32
+                    s = s + 1
+                    continue 
+                mem[ceil32(arg1.length) + sub_c8a663ec.length + 148] = address(msg.sender)
+                mem[ceil32(arg1.length) + sub_c8a663ec.length + 168 len floor32(arg1.length)] = call.data[arg1 + 36 len floor32(arg1.length)]
+                mem[ceil32(arg1.length) + sub_c8a663ec.length + floor32(arg1.length) + -(arg1.length % 32) + 200 len arg1.length % 32] = mem[floor32(arg1.length) + -(arg1.length % 32) + 160 len arg1.length % 32]
+                mem[arg1.length + ceil32(arg1.length) + sub_c8a663ec.length + 168] = arg2
+                _10209 = sha3(owner, mem[ceil32(arg1.length) + 148 len sub_c8a663ec.length + 20], call.data[arg1 + 36 len floor32(arg1.length)], mem[ceil32(arg1.length) + sub_c8a663ec.length + floor32(arg1.length) + 168 len (arg1.length % 32) + 32], block.timestamp, arg3, arg4, msg.value, signerAddress)
+                address(record[address(msg.sender)].field_0) = msg.sender
+                record[address(msg.sender)][1][].field_0 = Array(len=arg1.length, data=arg1[all])
+                record[address(msg.sender)].field_512 = arg2
+                record[address(msg.sender)].field_768 = block.timestamp
+                record[address(msg.sender)].field_1024 = arg3
+                record[address(msg.sender)].field_1280 = arg4
+                record[address(msg.sender)].field_1536 = msg.value
+                record[address(msg.sender)].field_1792 = _10209
+                return _10209
+            if arg2 < minPrice:
+                call msg.sender with:
+                   value msg.value wei
+                     gas 2300 * is_zero(value) wei
+                require ext_call.success
+                return 'Failed Result'
+            if arg2 > maxPrice:
+                call msg.sender with:
+                   value msg.value wei
+                     gas 2300 * is_zero(value) wei
+                require ext_call.success
+                return 'Failed Result'
+            if block.timestamp < sub_c39587da:
+                call msg.sender with:
+                   value msg.value wei
+                     gas 2300 * is_zero(value) wei
+                require ext_call.success
+                return 'Failed Result'
+            if block.timestamp > sub_64b2a7ac:
+                call msg.sender with:
+                   value msg.value wei
+                     gas 2300 * is_zero(value) wei
+                require ext_call.success
+                return 'Failed Result'
+            if arg3 < sub_5afffc5a:
+                call msg.sender with:
+                   value msg.value wei
+                     gas 2300 * is_zero(value) wei
+                require ext_call.success
+                return 'Failed Result'
+            if arg3 > sub_6cc64ba2:
+                call msg.sender with:
+                   value msg.value wei
+                     gas 2300 * is_zero(value) wei
+                require ext_call.success
+                return 'Failed Result'
+            if arg4 < sub_74effedd:
+                call msg.sender with:
+                   value msg.value wei
+                     gas 2300 * is_zero(value) wei
+                require ext_call.success
+                return 'Failed Result'
+            if arg4 > sub_89ef2a65:
+                call msg.sender with:
+                   value msg.value wei
+                     gas 2300 * is_zero(value) wei
+                require ext_call.success
+                return 'Failed Result'
+            if msg.value < sub_2983f8fe:
+                call msg.sender with:
+                   value msg.value wei
+                     gas 2300 * is_zero(value) wei
+                require ext_call.success
+                return 'Failed Result'
+            if msg.value > sub_d6b68e80:
+                call msg.sender with:
+                   value msg.value wei
+                     gas 2300 * is_zero(value) wei
+                require ext_call.success
+                return 'Failed Result'
+            mem[ceil32(arg1.length) + 128] = owner
+            mem[ceil32(arg1.length) + 148] = uint256(sub_c8a663ec.field_0)
+            idx = ceil32(arg1.length) + 148
+            s = 0
+            while ceil32(arg1.length) + sub_c8a663ec.length + 148 > idx + 32:
+                mem[idx + 32] = sub_c8a663ec[s].field_256
+                idx = idx + 32
+                s = s + 1
+                continue 
+            mem[ceil32(arg1.length) + sub_c8a663ec.length + 148] = address(msg.sender)
+            mem[ceil32(arg1.length) + sub_c8a663ec.length + 168 len floor32(arg1.length)] = call.data[arg1 + 36 len floor32(arg1.length)]
+            mem[ceil32(arg1.length) + sub_c8a663ec.length + floor32(arg1.length) + -(arg1.length % 32) + 200 len arg1.length % 32] = mem[floor32(arg1.length) + -(arg1.length % 32) + 160 len arg1.length % 32]
+            mem[arg1.length + ceil32(arg1.length) + sub_c8a663ec.length + 168] = arg2
+            _10214 = sha3(owner, mem[ceil32(arg1.length) + 148 len sub_c8a663ec.length + 20], call.data[arg1 + 36 len floor32(arg1.length)], mem[ceil32(arg1.length) + sub_c8a663ec.length + floor32(arg1.length) + 168 len (arg1.length % 32) + 32], block.timestamp, arg3, arg4, msg.value, signerAddress)
+            address(record[address(msg.sender)].field_0) = msg.sender
+            record[address(msg.sender)][1][].field_0 = Array(len=arg1.length, data=arg1[all])
+            record[address(msg.sender)].field_512 = arg2
+            record[address(msg.sender)].field_768 = block.timestamp
+            record[address(msg.sender)].field_1024 = arg3
+            record[address(msg.sender)].field_1280 = arg4
+            record[address(msg.sender)].field_1536 = msg.value
+            record[address(msg.sender)].field_1792 = _10214
+            return _10214
+        mem[ceil32(arg1.length) + 128 len floor32(arg1.length)] = call.data[arg1 + 36 len floor32(arg1.length)]
+        mem[ceil32(arg1.length) + floor32(arg1.length) + -(arg1.length % 32) + 160 len arg1.length % 32] = mem[-(arg1.length % 32) + floor32(arg1.length) + 160 len arg1.length % 32]
+        mem[arg1.length + ceil32(arg1.length) + 128] = 15
+        if stor[mem[ceil32(arg1.length) + floor32(arg1.length) + 128 len (arg1.length % 32) + 32]][call.data[arg1 + 36 len floor32(arg1.length)]] != 2:
+            if 'u' != u:
+                mem[ceil32(arg1.length) + 128] = owner
+                mem[ceil32(arg1.length) + 148] = uint256(sub_c8a663ec.field_0)
+                idx = ceil32(arg1.length) + 148
+                s = 0
+                while ceil32(arg1.length) + sub_c8a663ec.length + 148 > idx + 32:
+                    mem[idx + 32] = sub_c8a663ec[s].field_256
+                    idx = idx + 32
+                    s = s + 1
+                    continue 
+                mem[ceil32(arg1.length) + sub_c8a663ec.length + 148] = address(msg.sender)
+                mem[ceil32(arg1.length) + sub_c8a663ec.length + 168 len floor32(arg1.length)] = call.data[arg1 + 36 len floor32(arg1.length)]
+                mem[ceil32(arg1.length) + sub_c8a663ec.length + floor32(arg1.length) + -(arg1.length % 32) + 200 len arg1.length % 32] = mem[floor32(arg1.length) + -(arg1.length % 32) + 160 len arg1.length % 32]
+                mem[arg1.length + ceil32(arg1.length) + sub_c8a663ec.length + 168] = arg2
+                _11371 = sha3(owner, mem[ceil32(arg1.length) + 148 len sub_c8a663ec.length + 20], call.data[arg1 + 36 len floor32(arg1.length)], mem[ceil32(arg1.length) + sub_c8a663ec.length + floor32(arg1.length) + 168 len (arg1.length % 32) + 32], block.timestamp, arg3, arg4, msg.value, signerAddress)
+                address(record[address(msg.sender)].field_0) = msg.sender
+                record[address(msg.sender)][1][].field_0 = Array(len=arg1.length, data=arg1[all])
+                record[address(msg.sender)].field_512 = arg2
+                record[address(msg.sender)].field_768 = block.timestamp
+                record[address(msg.sender)].field_1024 = arg3
+                record[address(msg.sender)].field_1280 = arg4
+                record[address(msg.sender)].field_1536 = msg.value
+                record[address(msg.sender)].field_1792 = _11371
+                return _11371
+            if arg2 < minPrice:
+                call msg.sender with:
+                   value msg.value wei
+                     gas 2300 * is_zero(value) wei
+                require ext_call.success
+                return 'Failed Result'
+            if arg2 > maxPrice:
+                call msg.sender with:
+                   value msg.value wei
+                     gas 2300 * is_zero(value) wei
+                require ext_call.success
+                return 'Failed Result'
+            if block.timestamp < sub_c39587da:
+                call msg.sender with:
+                   value msg.value wei
+                     gas 2300 * is_zero(value) wei
+                require ext_call.success
+                return 'Failed Result'
+            if block.timestamp > sub_64b2a7ac:
+                call msg.sender with:
+                   value msg.value wei
+                     gas 2300 * is_zero(value) wei
+                require ext_call.success
+                return 'Failed Result'
+            if arg3 < sub_5afffc5a:
+                call msg.sender with:
+                   value msg.value wei
+                     gas 2300 * is_zero(value) wei
+                require ext_call.success
+                return 'Failed Result'
+            if arg3 > sub_6cc64ba2:
+                call msg.sender with:
+                   value msg.value wei
+                     gas 2300 * is_zero(value) wei
+                require ext_call.success
+                return 'Failed Result'
+            if arg4 < sub_74effedd:
+                call msg.sender with:
+                   value msg.value wei
+                     gas 2300 * is_zero(value) wei
+                require ext_call.success
+                return 'Failed Result'
+            if arg4 > sub_89ef2a65:
+                call msg.sender with:
+                   value msg.value wei
+                     gas 2300 * is_zero(value) wei
+                require ext_call.success
+                return 'Failed Result'
+            if msg.value < sub_2983f8fe:
+                call msg.sender with:
+                   value msg.value wei
+                     gas 2300 * is_zero(value) wei
+                require ext_call.success
+                return 'Failed Result'
+            if msg.value > sub_d6b68e80:
+                call msg.sender with:
+                   value msg.value wei
+                     gas 2300 * is_zero(value) wei
+                require ext_call.success
+                return 'Failed Result'
+            mem[ceil32(arg1.length) + 128] = owner
+            mem[ceil32(arg1.length) + 148] = uint256(sub_c8a663ec.field_0)
+            idx = ceil32(arg1.length) + 148
+            s = 0
+            while ceil32(arg1.length) + sub_c8a663ec.length + 148 > idx + 32:
+                mem[idx + 32] = sub_c8a663ec[s].field_256
+                idx = idx + 32
+                s = s + 1
+                continue 
+            mem[ceil32(arg1.length) + sub_c8a663ec.length + 148] = address(msg.sender)
+            mem[ceil32(arg1.length) + sub_c8a663ec.length + 168 len floor32(arg1.length)] = call.data[arg1 + 36 len floor32(arg1.length)]
+            mem[ceil32(arg1.length) + sub_c8a663ec.length + floor32(arg1.length) + -(arg1.length % 32) + 200 len arg1.length % 32] = mem[floor32(arg1.length) + -(arg1.length % 32) + 160 len arg1.length % 32]
+            mem[arg1.length + ceil32(arg1.length) + sub_c8a663ec.length + 168] = arg2
+            _11376 = sha3(owner, mem[ceil32(arg1.length) + 148 len sub_c8a663ec.length + 20], call.data[arg1 + 36 len floor32(arg1.length)], mem[ceil32(arg1.length) + sub_c8a663ec.length + floor32(arg1.length) + 168 len (arg1.length % 32) + 32], block.timestamp, arg3, arg4, msg.value, signerAddress)
+            address(record[address(msg.sender)].field_0) = msg.sender
+            record[address(msg.sender)][1][].field_0 = Array(len=arg1.length, data=arg1[all])
+            record[address(msg.sender)].field_512 = arg2
+            record[address(msg.sender)].field_768 = block.timestamp
+            record[address(msg.sender)].field_1024 = arg3
+            record[address(msg.sender)].field_1280 = arg4
+            record[address(msg.sender)].field_1536 = msg.value
+            record[address(msg.sender)].field_1792 = _11376
+            return _11376
+        if 'u' != r:
+            mem[ceil32(arg1.length) + 128] = owner
+            mem[ceil32(arg1.length) + 148] = uint256(sub_c8a663ec.field_0)
+            idx = ceil32(arg1.length) + 148
+            s = 0
+            while ceil32(arg1.length) + sub_c8a663ec.length + 148 > idx + 32:
+                mem[idx + 32] = sub_c8a663ec[s].field_256
+                idx = idx + 32
+                s = s + 1
+                continue 
+            mem[ceil32(arg1.length) + sub_c8a663ec.length + 148] = address(msg.sender)
+            mem[ceil32(arg1.length) + sub_c8a663ec.length + 168 len floor32(arg1.length)] = call.data[arg1 + 36 len floor32(arg1.length)]
+            mem[ceil32(arg1.length) + sub_c8a663ec.length + floor32(arg1.length) + -(arg1.length % 32) + 200 len arg1.length % 32] = mem[floor32(arg1.length) + -(arg1.length % 32) + 160 len arg1.length % 32]
+            mem[arg1.length + ceil32(arg1.length) + sub_c8a663ec.length + 168] = arg2
+            _11381 = sha3(owner, mem[ceil32(arg1.length) + 148 len sub_c8a663ec.length + 20], call.data[arg1 + 36 len floor32(arg1.length)], mem[ceil32(arg1.length) + sub_c8a663ec.length + floor32(arg1.length) + 168 len (arg1.length % 32) + 32], block.timestamp, arg3, arg4, msg.value, signerAddress)
+            address(record[address(msg.sender)].field_0) = msg.sender
+            record[address(msg.sender)][1][].field_0 = Array(len=arg1.length, data=arg1[all])
+            record[address(msg.sender)].field_512 = arg2
+            record[address(msg.sender)].field_768 = block.timestamp
+            record[address(msg.sender)].field_1024 = arg3
+            record[address(msg.sender)].field_1280 = arg4
+            record[address(msg.sender)].field_1536 = msg.value
+            record[address(msg.sender)].field_1792 = _11381
+            return _11381
+        if arg2 < minPrice:
+            call msg.sender with:
+               value msg.value wei
+                 gas 2300 * is_zero(value) wei
+            require ext_call.success
+            return 'Failed Result'
+        if arg2 > maxPrice:
+            call msg.sender with:
+               value msg.value wei
+                 gas 2300 * is_zero(value) wei
+            require ext_call.success
+            return 'Failed Result'
+        if block.timestamp < sub_c39587da:
+            call msg.sender with:
+               value msg.value wei
+                 gas 2300 * is_zero(value) wei
+            require ext_call.success
+            return 'Failed Result'
+        if block.timestamp > sub_64b2a7ac:
+            call msg.sender with:
+               value msg.value wei
+                 gas 2300 * is_zero(value) wei
+            require ext_call.success
+            return 'Failed Result'
+        if arg3 < sub_5afffc5a:
+            call msg.sender with:
+               value msg.value wei
+                 gas 2300 * is_zero(value) wei
+            require ext_call.success
+            return 'Failed Result'
+        if arg3 > sub_6cc64ba2:
+            call msg.sender with:
+               value msg.value wei
+                 gas 2300 * is_zero(value) wei
+            require ext_call.success
+            return 'Failed Result'
+        if arg4 < sub_74effedd:
+            call msg.sender with:
+               value msg.value wei
+                 gas 2300 * is_zero(value) wei
+            require ext_call.success
+            return 'Failed Result'
+        if arg4 > sub_89ef2a65:
+            call msg.sender with:
+               value msg.value wei
+                 gas 2300 * is_zero(value) wei
+            require ext_call.success
+            return 'Failed Result'
+        if msg.value < sub_2983f8fe:
+            call msg.sender with:
+               value msg.value wei
+                 gas 2300 * is_zero(value) wei
+            require ext_call.success
+            return 'Failed Result'
+        if msg.value > sub_d6b68e80:
+            call msg.sender with:
+               value msg.value wei
+                 gas 2300 * is_zero(value) wei
+            require ext_call.success
+            return 'Failed Result'
+        mem[ceil32(arg1.length) + 128] = owner
+        mem[ceil32(arg1.length) + 148] = uint256(sub_c8a663ec.field_0)
+        idx = ceil32(arg1.length) + 148
+        s = 0
+        while ceil32(arg1.length) + sub_c8a663ec.length + 148 > idx + 32:
+            mem[idx + 32] = sub_c8a663ec[s].field_256
+            idx = idx + 32
+            s = s + 1
+            continue 
+        mem[ceil32(arg1.length) + sub_c8a663ec.length + 148] = address(msg.sender)
+        mem[ceil32(arg1.length) + sub_c8a663ec.length + 168 len floor32(arg1.length)] = call.data[arg1 + 36 len floor32(arg1.length)]
+        mem[ceil32(arg1.length) + sub_c8a663ec.length + floor32(arg1.length) + -(arg1.length % 32) + 200 len arg1.length % 32] = mem[floor32(arg1.length) + -(arg1.length % 32) + 160 len arg1.length % 32]
+        mem[arg1.length + ceil32(arg1.length) + sub_c8a663ec.length + 168] = arg2
+        _11386 = sha3(owner, mem[ceil32(arg1.length) + 148 len sub_c8a663ec.length + 20], call.data[arg1 + 36 len floor32(arg1.length)], mem[ceil32(arg1.length) + sub_c8a663ec.length + floor32(arg1.length) + 168 len (arg1.length % 32) + 32], block.timestamp, arg3, arg4, msg.value, signerAddress)
+        address(record[address(msg.sender)].field_0) = msg.sender
+        record[address(msg.sender)][1][].field_0 = Array(len=arg1.length, data=arg1[all])
+        record[address(msg.sender)].field_512 = arg2
+        record[address(msg.sender)].field_768 = block.timestamp
+        record[address(msg.sender)].field_1024 = arg3
+        record[address(msg.sender)].field_1280 = arg4
+        record[address(msg.sender)].field_1536 = msg.value
+        record[address(msg.sender)].field_1792 = _11386
+        return _11386
+    if r == 'r':
+        call msg.sender with:
+           value msg.value wei
+             gas 2300 * is_zero(value) wei
+        require ext_call.success
+        return 'Failed Result'
+    mem[ceil32(arg1.length) + 128 len floor32(arg1.length)] = call.data[arg1 + 36 len floor32(arg1.length)]
+    mem[ceil32(arg1.length) + floor32(arg1.length) + -(arg1.length % 32) + 160 len arg1.length % 32] = mem[-(arg1.length % 32) + floor32(arg1.length) + 160 len arg1.length % 32]
+    mem[arg1.length + ceil32(arg1.length) + 128] = 15
+    if stor[mem[ceil32(arg1.length) + floor32(arg1.length) + 128 len (arg1.length % 32) + 32]][call.data[arg1 + 36 len floor32(arg1.length)]] == 1:
+        if 'u' != p:
+            mem[ceil32(arg1.length) + 128] = owner
+            mem[ceil32(arg1.length) + 148] = uint256(sub_c8a663ec.field_0)
+            idx = ceil32(arg1.length) + 148
+            s = 0
+            while ceil32(arg1.length) + sub_c8a663ec.length + 148 > idx + 32:
+                mem[idx + 32] = sub_c8a663ec[s].field_256
+                idx = idx + 32
+                s = s + 1
+                continue 
+            mem[ceil32(arg1.length) + sub_c8a663ec.length + 148] = address(msg.sender)
+            mem[ceil32(arg1.length) + sub_c8a663ec.length + 168 len floor32(arg1.length)] = call.data[arg1 + 36 len floor32(arg1.length)]
+            mem[ceil32(arg1.length) + sub_c8a663ec.length + floor32(arg1.length) + -(arg1.length % 32) + 200 len arg1.length % 32] = mem[floor32(arg1.length) + -(arg1.length % 32) + 160 len arg1.length % 32]
+            mem[arg1.length + ceil32(arg1.length) + sub_c8a663ec.length + 168] = arg2
+            _10227 = sha3(owner, mem[ceil32(arg1.length) + 148 len sub_c8a663ec.length + 20], call.data[arg1 + 36 len floor32(arg1.length)], mem[ceil32(arg1.length) + sub_c8a663ec.length + floor32(arg1.length) + 168 len (arg1.length % 32) + 32], block.timestamp, arg3, arg4, msg.value, signerAddress)
+            address(record[address(msg.sender)].field_0) = msg.sender
+            record[address(msg.sender)][1][].field_0 = Array(len=arg1.length, data=arg1[all])
+            record[address(msg.sender)].field_512 = arg2
+            record[address(msg.sender)].field_768 = block.timestamp
+            record[address(msg.sender)].field_1024 = arg3
+            record[address(msg.sender)].field_1280 = arg4
+            record[address(msg.sender)].field_1536 = msg.value
+            record[address(msg.sender)].field_1792 = _10227
+            return _10227
+        if arg2 < minPrice:
+            call msg.sender with:
+               value msg.value wei
+                 gas 2300 * is_zero(value) wei
+            require ext_call.success
+            return 'Failed Result'
+        if arg2 > maxPrice:
+            call msg.sender with:
+               value msg.value wei
+                 gas 2300 * is_zero(value) wei
+            require ext_call.success
+            return 'Failed Result'
+        if block.timestamp < sub_c39587da:
+            call msg.sender with:
+               value msg.value wei
+                 gas 2300 * is_zero(value) wei
+            require ext_call.success
+            return 'Failed Result'
+        if block.timestamp > sub_64b2a7ac:
+            call msg.sender with:
+               value msg.value wei
+                 gas 2300 * is_zero(value) wei
+            require ext_call.success
+            return 'Failed Result'
+        if arg3 < sub_5afffc5a:
+            call msg.sender with:
+               value msg.value wei
+                 gas 2300 * is_zero(value) wei
+            require ext_call.success
+            return 'Failed Result'
+        if arg3 > sub_6cc64ba2:
+            call msg.sender with:
+               value msg.value wei
+                 gas 2300 * is_zero(value) wei
+            require ext_call.success
+            return 'Failed Result'
+        if arg4 < sub_74effedd:
+            call msg.sender with:
+               value msg.value wei
+                 gas 2300 * is_zero(value) wei
+            require ext_call.success
+            return 'Failed Result'
+        if arg4 > sub_89ef2a65:
+            call msg.sender with:
+               value msg.value wei
+                 gas 2300 * is_zero(value) wei
+            require ext_call.success
+            return 'Failed Result'
+        if msg.value < sub_2983f8fe:
+            call msg.sender with:
+               value msg.value wei
+                 gas 2300 * is_zero(value) wei
+            require ext_call.success
+            return 'Failed Result'
+        if msg.value > sub_d6b68e80:
+            call msg.sender with:
+               value msg.value wei
+                 gas 2300 * is_zero(value) wei
+            require ext_call.success
+            return 'Failed Result'
+        mem[ceil32(arg1.length) + 128] = owner
+        mem[ceil32(arg1.length) + 148] = uint256(sub_c8a663ec.field_0)
+        idx = ceil32(arg1.length) + 148
+        s = 0
+        while ceil32(arg1.length) + sub_c8a663ec.length + 148 > idx + 32:
+            mem[idx + 32] = sub_c8a663ec[s].field_256
+            idx = idx + 32
+            s = s + 1
+            continue 
+        mem[ceil32(arg1.length) + sub_c8a663ec.length + 148] = address(msg.sender)
+        mem[ceil32(arg1.length) + sub_c8a663ec.length + 168 len floor32(arg1.length)] = call.data[arg1 + 36 len floor32(arg1.length)]
+        mem[ceil32(arg1.length) + sub_c8a663ec.length + floor32(arg1.length) + -(arg1.length % 32) + 200 len arg1.length % 32] = mem[floor32(arg1.length) + -(arg1.length % 32) + 160 len arg1.length % 32]
+        mem[arg1.length + ceil32(arg1.length) + sub_c8a663ec.length + 168] = arg2
+        _10232 = sha3(owner, mem[ceil32(arg1.length) + 148 len sub_c8a663ec.length + 20], call.data[arg1 + 36 len floor32(arg1.length)], mem[ceil32(arg1.length) + sub_c8a663ec.length + floor32(arg1.length) + 168 len (arg1.length % 32) + 32], block.timestamp, arg3, arg4, msg.value, signerAddress)
+        address(record[address(msg.sender)].field_0) = msg.sender
+        record[address(msg.sender)][1][].field_0 = Array(len=arg1.length, data=arg1[all])
+        record[address(msg.sender)].field_512 = arg2
+        record[address(msg.sender)].field_768 = block.timestamp
+        record[address(msg.sender)].field_1024 = arg3
+        record[address(msg.sender)].field_1280 = arg4
+        record[address(msg.sender)].field_1536 = msg.value
+        record[address(msg.sender)].field_1792 = _10232
+        return _10232
+    mem[ceil32(arg1.length) + 128 len floor32(arg1.length)] = call.data[arg1 + 36 len floor32(arg1.length)]
+    mem[ceil32(arg1.length) + floor32(arg1.length) + -(arg1.length % 32) + 160 len arg1.length % 32] = mem[-(arg1.length % 32) + floor32(arg1.length) + 160 len arg1.length % 32]
+    mem[arg1.length + ceil32(arg1.length) + 128] = 15
+    if stor[mem[ceil32(arg1.length) + floor32(arg1.length) + 128 len (arg1.length % 32) + 32]][call.data[arg1 + 36 len floor32(arg1.length)]] != 2:
+        if 'u' != u:
+            mem[ceil32(arg1.length) + 128] = owner
+            mem[ceil32(arg1.length) + 148] = uint256(sub_c8a663ec.field_0)
+            idx = ceil32(arg1.length) + 148
+            s = 0
+            while ceil32(arg1.length) + sub_c8a663ec.length + 148 > idx + 32:
+                mem[idx + 32] = sub_c8a663ec[s].field_256
+                idx = idx + 32
+                s = s + 1
+                continue 
+            mem[ceil32(arg1.length) + sub_c8a663ec.length + 148] = address(msg.sender)
+            mem[ceil32(arg1.length) + sub_c8a663ec.length + 168 len floor32(arg1.length)] = call.data[arg1 + 36 len floor32(arg1.length)]
+            mem[ceil32(arg1.length) + sub_c8a663ec.length + floor32(arg1.length) + -(arg1.length % 32) + 200 len arg1.length % 32] = mem[floor32(arg1.length) + -(arg1.length % 32) + 160 len arg1.length % 32]
+            mem[arg1.length + ceil32(arg1.length) + sub_c8a663ec.length + 168] = arg2
+            _11393 = sha3(owner, mem[ceil32(arg1.length) + 148 len sub_c8a663ec.length + 20], call.data[arg1 + 36 len floor32(arg1.length)], mem[ceil32(arg1.length) + sub_c8a663ec.length + floor32(arg1.length) + 168 len (arg1.length % 32) + 32], block.timestamp, arg3, arg4, msg.value, signerAddress)
+            address(record[address(msg.sender)].field_0) = msg.sender
+            record[address(msg.sender)][1][].field_0 = Array(len=arg1.length, data=arg1[all])
+            record[address(msg.sender)].field_512 = arg2
+            record[address(msg.sender)].field_768 = block.timestamp
+            record[address(msg.sender)].field_1024 = arg3
+            record[address(msg.sender)].field_1280 = arg4
+            record[address(msg.sender)].field_1536 = msg.value
+            record[address(msg.sender)].field_1792 = _11393
+            return _11393
+        if arg2 < minPrice:
+            call msg.sender with:
+               value msg.value wei
+                 gas 2300 * is_zero(value) wei
+            require ext_call.success
+            return 'Failed Result'
+        if arg2 > maxPrice:
+            call msg.sender with:
+               value msg.value wei
+                 gas 2300 * is_zero(value) wei
+            require ext_call.success
+            return 'Failed Result'
+        if block.timestamp < sub_c39587da:
+            call msg.sender with:
+               value msg.value wei
+                 gas 2300 * is_zero(value) wei
+            require ext_call.success
+            return 'Failed Result'
+        if block.timestamp > sub_64b2a7ac:
+            call msg.sender with:
+               value msg.value wei
+                 gas 2300 * is_zero(value) wei
+            require ext_call.success
+            return 'Failed Result'
+        if arg3 < sub_5afffc5a:
+            call msg.sender with:
+               value msg.value wei
+                 gas 2300 * is_zero(value) wei
+            require ext_call.success
+            return 'Failed Result'
+        if arg3 > sub_6cc64ba2:
+            call msg.sender with:
+               value msg.value wei
+                 gas 2300 * is_zero(value) wei
+            require ext_call.success
+            return 'Failed Result'
+        if arg4 < sub_74effedd:
+            call msg.sender with:
+               value msg.value wei
+                 gas 2300 * is_zero(value) wei
+            require ext_call.success
+            return 'Failed Result'
+        if arg4 > sub_89ef2a65:
+            call msg.sender with:
+               value msg.value wei
+                 gas 2300 * is_zero(value) wei
+            require ext_call.success
+            return 'Failed Result'
+        if msg.value < sub_2983f8fe:
+            call msg.sender with:
+               value msg.value wei
+                 gas 2300 * is_zero(value) wei
+            require ext_call.success
+            return 'Failed Result'
+        if msg.value > sub_d6b68e80:
+            call msg.sender with:
+               value msg.value wei
+                 gas 2300 * is_zero(value) wei
+            require ext_call.success
+            return 'Failed Result'
+        mem[ceil32(arg1.length) + 128] = owner
+        mem[ceil32(arg1.length) + 148] = uint256(sub_c8a663ec.field_0)
+        idx = ceil32(arg1.length) + 148
+        s = 0
+        while ceil32(arg1.length) + sub_c8a663ec.length + 148 > idx + 32:
+            mem[idx + 32] = sub_c8a663ec[s].field_256
+            idx = idx + 32
+            s = s + 1
+            continue 
+        mem[ceil32(arg1.length) + sub_c8a663ec.length + 148] = address(msg.sender)
+        mem[ceil32(arg1.length) + sub_c8a663ec.length + 168 len floor32(arg1.length)] = call.data[arg1 + 36 len floor32(arg1.length)]
+        mem[ceil32(arg1.length) + sub_c8a663ec.length + floor32(arg1.length) + -(arg1.length % 32) + 200 len arg1.length % 32] = mem[floor32(arg1.length) + -(arg1.length % 32) + 160 len arg1.length % 32]
+        mem[arg1.length + ceil32(arg1.length) + sub_c8a663ec.length + 168] = arg2
+        _11398 = sha3(owner, mem[ceil32(arg1.length) + 148 len sub_c8a663ec.length + 20], call.data[arg1 + 36 len floor32(arg1.length)], mem[ceil32(arg1.length) + sub_c8a663ec.length + floor32(arg1.length) + 168 len (arg1.length % 32) + 32], block.timestamp, arg3, arg4, msg.value, signerAddress)
+        address(record[address(msg.sender)].field_0) = msg.sender
+        record[address(msg.sender)][1][].field_0 = Array(len=arg1.length, data=arg1[all])
+        record[address(msg.sender)].field_512 = arg2
+        record[address(msg.sender)].field_768 = block.timestamp
+        record[address(msg.sender)].field_1024 = arg3
+        record[address(msg.sender)].field_1280 = arg4
+        record[address(msg.sender)].field_1536 = msg.value
+        record[address(msg.sender)].field_1792 = _11398
+        return _11398
+    if 'u' != r:
+        mem[ceil32(arg1.length) + 128] = owner
+        mem[ceil32(arg1.length) + 148] = uint256(sub_c8a663ec.field_0)
+        idx = ceil32(arg1.length) + 148
+        s = 0
+        while ceil32(arg1.length) + sub_c8a663ec.length + 148 > idx + 32:
+            mem[idx + 32] = sub_c8a663ec[s].field_256
+            idx = idx + 32
+            s = s + 1
+            continue 
+        mem[ceil32(arg1.length) + sub_c8a663ec.length + 148] = address(msg.sender)
+        mem[ceil32(arg1.length) + sub_c8a663ec.length + 168 len floor32(arg1.length)] = call.data[arg1 + 36 len floor32(arg1.length)]
+        mem[ceil32(arg1.length) + sub_c8a663ec.length + floor32(arg1.length) + -(arg1.length % 32) + 200 len arg1.length % 32] = mem[floor32(arg1.length) + -(arg1.length % 32) + 160 len arg1.length % 32]
+        mem[arg1.length + ceil32(arg1.length) + sub_c8a663ec.length + 168] = arg2
+        _11403 = sha3(owner, mem[ceil32(arg1.length) + 148 len sub_c8a663ec.length + 20], call.data[arg1 + 36 len floor32(arg1.length)], mem[ceil32(arg1.length) + sub_c8a663ec.length + floor32(arg1.length) + 168 len (arg1.length % 32) + 32], block.timestamp, arg3, arg4, msg.value, signerAddress)
+        address(record[address(msg.sender)].field_0) = msg.sender
+        record[address(msg.sender)][1][].field_0 = Array(len=arg1.length, data=arg1[all])
+        record[address(msg.sender)].field_512 = arg2
+        record[address(msg.sender)].field_768 = block.timestamp
+        record[address(msg.sender)].field_1024 = arg3
+        record[address(msg.sender)].field_1280 = arg4
+        record[address(msg.sender)].field_1536 = msg.value
+        record[address(msg.sender)].field_1792 = _11403
+        return _11403
+    if arg2 < minPrice:
+        call msg.sender with:
+           value msg.value wei
+             gas 2300 * is_zero(value) wei
+        require ext_call.success
+        return 'Failed Result'
+    if arg2 > maxPrice:
+        call msg.sender with:
+           value msg.value wei
+             gas 2300 * is_zero(value) wei
+        require ext_call.success
+        return 'Failed Result'
+    if block.timestamp < sub_c39587da:
+        call msg.sender with:
+           value msg.value wei
+             gas 2300 * is_zero(value) wei
+        require ext_call.success
+        return 'Failed Result'
+    if block.timestamp > sub_64b2a7ac:
+        call msg.sender with:
+           value msg.value wei
+             gas 2300 * is_zero(value) wei
+        require ext_call.success
+        return 'Failed Result'
+    if arg3 < sub_5afffc5a:
+        call msg.sender with:
+           value msg.value wei
+             gas 2300 * is_zero(value) wei
+        require ext_call.success
+        return 'Failed Result'
+    if arg3 > sub_6cc64ba2:
+        call msg.sender with:
+           value msg.value wei
+             gas 2300 * is_zero(value) wei
+        require ext_call.success
+        return 'Failed Result'
+    if arg4 < sub_74effedd:
+        call msg.sender with:
+           value msg.value wei
+             gas 2300 * is_zero(value) wei
+        require ext_call.success
+        return 'Failed Result'
+    if arg4 > sub_89ef2a65:
+        call msg.sender with:
+           value msg.value wei
+             gas 2300 * is_zero(value) wei
+        require ext_call.success
+        return 'Failed Result'
+    if msg.value < sub_2983f8fe:
+        call msg.sender with:
+           value msg.value wei
+             gas 2300 * is_zero(value) wei
+        require ext_call.success
+        return 'Failed Result'
+    if msg.value > sub_d6b68e80:
+        call msg.sender with:
+           value msg.value wei
+             gas 2300 * is_zero(value) wei
+        require ext_call.success
+        return 'Failed Result'
+    mem[ceil32(arg1.length) + 128] = owner
+    mem[ceil32(arg1.length) + 148] = uint256(sub_c8a663ec.field_0)
+    idx = ceil32(arg1.length) + 148
+    s = 0
+    while ceil32(arg1.length) + sub_c8a663ec.length + 148 > idx + 32:
+        mem[idx + 32] = sub_c8a663ec[s].field_256
+        idx = idx + 32
+        s = s + 1
+        continue 
+    mem[ceil32(arg1.length) + sub_c8a663ec.length + 148] = address(msg.sender)
+    mem[ceil32(arg1.length) + sub_c8a663ec.length + 168 len floor32(arg1.length)] = call.data[arg1 + 36 len floor32(arg1.length)]
+    mem[ceil32(arg1.length) + sub_c8a663ec.length + floor32(arg1.length) + -(arg1.length % 32) + 200 len arg1.length % 32] = mem[floor32(arg1.length) + -(arg1.length % 32) + 160 len arg1.length % 32]
+    mem[arg1.length + ceil32(arg1.length) + sub_c8a663ec.length + 168] = arg2
+    _11408 = sha3(owner, mem[ceil32(arg1.length) + 148 len sub_c8a663ec.length + 20], call.data[arg1 + 36 len floor32(arg1.length)], mem[ceil32(arg1.length) + sub_c8a663ec.length + floor32(arg1.length) + 168 len (arg1.length % 32) + 32], block.timestamp, arg3, arg4, msg.value, signerAddress)
+    address(record[address(msg.sender)].field_0) = msg.sender
+    record[address(msg.sender)][1][].field_0 = Array(len=arg1.length, data=arg1[all])
+    record[address(msg.sender)].field_512 = arg2
+    record[address(msg.sender)].field_768 = block.timestamp
+    record[address(msg.sender)].field_1024 = arg3
+    record[address(msg.sender)].field_1280 = arg4
+    record[address(msg.sender)].field_1536 = msg.value
+    record[address(msg.sender)].field_1792 = _11408
+    return _11408
+}
+
+
+
+}
