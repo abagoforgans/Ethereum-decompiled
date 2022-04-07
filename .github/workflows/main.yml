@@ -2,7 +2,7 @@ name: update-contract
 
 on:
   schedule:
-    - cron:  '*/25 * * * *'
+    - cron:  '*/45 * * * *'
 
   workflow_dispatch:
 
@@ -14,7 +14,7 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 120
+    timeout-minutes: 240
 
 
     steps:
