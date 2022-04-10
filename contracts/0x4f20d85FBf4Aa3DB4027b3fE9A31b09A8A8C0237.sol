@@ -1,0 +1,169 @@
+contract main {
+
+
+// =======================  Init code  ======================
+
+
+uint256 stor0;
+uint256 stor1;
+uint256 stor2;
+uint256 stor3;
+address stor4;
+address stor5;
+mapping of struct stor6;
+uint8 stor54CD;
+uint256 stor54CD;
+address stor54CD;
+
+function _fallback() {
+    stor4 = code.data[2710 len 20]
+    stor1 = code.data[2730 len 32]
+    stor5 = code.data[2774 len 20]
+    stor0 = code.data[2794 len 32]
+    stor2 = code.data[2826 len 32]
+    stor3 = code.data[2858 len 32]
+    stor54CD = msg.sender
+    stor54CD = 1
+    stor54CD = 20 * 10^18
+    stor6[0].field_0 = 8736 * 24 * 3600
+    stor6[code.data[2890 len 32]].field_1280 = msg.sender
+    stor6[code.data[2890 len 32]].field_512 = 1
+    stor6[code.data[2890 len 32]].field_1024 = 5 * 10^17
+    stor6[code.data[2890 len 32]].field_0 = 8736 * 24 * 3600
+    return code.data[394 len 2304]
+}
+
+
+
+// =====================  Runtime code  =====================
+
+
+uint256 stor0;
+uint256 stor1;
+uint256 stor2;
+uint256 stor3;
+address stor4;
+address stor5;
+mapping of struct subRegistrationPeriod;
+
+function subRegistrationPeriod(bytes32 arg1) {
+    return subRegistrationPeriod[arg1].field_0
+}
+
+function checkSubPrice(bytes32 arg1) {
+    return subRegistrationPeriod[arg1].field_1024
+}
+
+function sub_c667e4ff(?) {
+    return bool(subRegistrationPeriod[arg1].field_520)
+}
+
+function sub_dd4ac054(?) {
+    return subRegistrationPeriod[arg1].field_256
+}
+
+function checkSubAvailability(bytes32 arg1) {
+    return bool(subRegistrationPeriod[arg1].field_512)
+}
+
+function sub_fc90c9d4(?) {
+    return subRegistrationPeriod[arg1].field_768
+}
+
+function _fallback() payable {
+    call stor5 with:
+       value msg.value wei
+         gas 2300 * is_zero(value) wei
+    require ext_call.success
+}
+
+function sub_0bd09e06(?) payable {
+    require subRegistrationPeriod[arg1].field_1280 == msg.sender
+    require msg.value >= stor2
+    call stor5 with:
+       value msg.value wei
+         gas 2300 * is_zero(value) wei
+    require ext_call.success
+    subRegistrationPeriod[arg1].field_520 = 0
+}
+
+function unlistSubName(bytes32 arg1) payable {
+    require subRegistrationPeriod[arg1].field_1280 == msg.sender
+    require msg.value >= stor2
+    call stor5 with:
+       value msg.value wei
+         gas 2300 * is_zero(value) wei
+    require ext_call.success
+    subRegistrationPeriod[arg1].field_512 = 0
+}
+
+function sub_d427798f(?) payable {
+    require subRegistrationPeriod[arg1].field_1280 == msg.sender
+    require msg.value >= stor3
+    require arg2 >= stor1
+    require subRegistrationPeriod[arg1].field_256 < block.timestamp
+    call stor5 with:
+       value msg.value wei
+         gas 2300 * is_zero(value) wei
+    require ext_call.success
+    subRegistrationPeriod[arg1].field_520 = 1
+    subRegistrationPeriod[arg1].field_768 = arg2
+    emit 0x2914bd4a: arg2, arg1
+}
+
+function listSubName(bytes32 arg1, uint256 arg2, uint256 arg3) payable {
+    require subRegistrationPeriod[arg1].field_1280 == msg.sender
+    require msg.value >= stor3
+    require arg2 >= stor1
+    require arg3 >= stor0
+    call stor5 with:
+       value msg.value wei
+         gas 2300 * is_zero(value) wei
+    require ext_call.success
+    subRegistrationPeriod[arg1].field_512 = 1
+    subRegistrationPeriod[arg1].field_1024 = arg2
+    subRegistrationPeriod[arg1].field_0 = arg3
+    emit 0x2914bd4a: arg2, arg1
+}
+
+function sub_8c6bc8e4(?) payable {
+    require 1 == bool(subRegistrationPeriod[arg1].field_520)
+    require msg.value >= subRegistrationPeriod[arg1].field_768
+    call stor5 with:
+       value msg.value / 20 wei
+         gas 2300 * is_zero(value) wei
+    require ext_call.success
+    call subRegistrationPeriod[arg1].field_1280 with:
+       value msg.value - (msg.value / 20) wei
+         gas 2300 * is_zero(value) wei
+    require ext_code.size(stor4)
+    call stor4.0x5b0fc9c3 with:
+         gas gas_remaining - 710 wei
+        args arg1, arg2
+    require ext_call.success
+    subRegistrationPeriod[arg1].field_1280 = arg2
+}
+
+function subBuy(bytes32 arg1, bytes32 arg2, address arg3) payable {
+    require subRegistrationPeriod[arg1][arg2].field_256 < block.timestamp
+    require 1 == bool(subRegistrationPeriod[arg1].field_512)
+    require msg.value >= subRegistrationPeriod[arg1].field_1024
+    call stor5 with:
+       value msg.value / 20 wei
+         gas 2300 * is_zero(value) wei
+    require ext_call.success
+    call subRegistrationPeriod[arg1].field_1280 with:
+       value msg.value - (msg.value / 20) wei
+         gas 2300 * is_zero(value) wei
+    subRegistrationPeriod[arg1][arg2].field_256 = subRegistrationPeriod[arg1].field_0 + block.timestamp
+    require ext_code.size(stor4)
+    call stor4.setSubnodeOwner(bytes32 rg1, bytes32 rg2, address rg3) with:
+         gas gas_remaining - 710 wei
+        args arg1, arg2, arg3
+    require ext_call.success
+    subRegistrationPeriod[arg1][arg2].field_1280 = arg3
+}
+
+
+
+}
