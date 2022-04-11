@@ -1,0 +1,246 @@
+contract main {
+
+
+// =======================  Init code  ======================
+
+
+address stor1;
+uint256 stor2;
+uint256 stor3;
+uint256 stor4;
+uint256 stor5;
+uint256 stor6;
+uint256 stor7;
+mapping of uint256 stor9;
+
+function _fallback() {
+    stor7 = 'My_ConfToken'
+    stor3 = 1000
+    stor2 = 1000
+    stor1 = 0x443b9375536521127dbfabff21f770e4e684475d
+    stor4 = 100
+    stor5 = 1
+    stor6 = 'CONF'
+    stor9[0x443b9375536521127dbfabff21f770e4e684475d] = 1000
+    return code.data[192 len 3721]
+}
+
+
+
+// =====================  Runtime code  =====================
+
+
+const __DEBUG_BAL = eth.balance(this.address)
+
+
+address owner;
+uint256 initialIssuance;
+uint256 totalSupply;
+uint128 stor4;
+uint128 stor4; offset 128
+uint256 currentEthPrice;
+uint128 stor5;
+uint128 stor5; offset 128
+uint256 currentTokenPrice;
+uint256 symbol;
+uint256 name;
+mapping of uint256 allowance;
+mapping of uint256 balances;
+mapping of uint256 productLimits;
+mapping of struct productPrices;
+mapping of uint256 checkProduct;
+
+function name() {
+    return name
+}
+
+function seeEthPrice() {
+    return currentEthPrice
+}
+
+function totalSupply() {
+    return totalSupply
+}
+
+function currentEthPrice() {
+    return currentEthPrice
+}
+
+function balances(address arg1) {
+    return balances[arg1]
+}
+
+function checkProduct(bytes32 arg1) {
+    return checkProduct[address(msg.sender)][arg1]
+}
+
+function inventoryProduct(bytes32 arg1) {
+    return productLimits[arg1]
+}
+
+function productPrices(bytes32 arg1) {
+    return productPrices[arg1].field_0
+}
+
+function balanceOf(address arg1) {
+    return balances[address(arg1)]
+}
+
+function currentTokenPrice() {
+    return currentTokenPrice
+}
+
+function owner() {
+    return owner
+}
+
+function symbol() {
+    return symbol
+}
+
+function allowance(address arg1, address arg2) {
+    return allowance[address(arg1)][address(arg2)]
+}
+
+function productLimits(bytes32 arg1) {
+    return productLimits[arg1]
+}
+
+function initialIssuance() {
+    return initialIssuance
+}
+
+function _fallback() payable {
+    revert
+}
+
+function __getEthPrice(uint256 arg1) {
+    require owner == msg.sender
+    currentEthPrice = arg1
+}
+
+function nullifyProduct(bytes32 arg1) {
+    require owner == msg.sender
+    productLimits[arg1] = 0
+}
+
+function approve(address arg1, uint256 arg2) {
+    allowance[address(msg.sender)][address(arg1)] = arg2
+    return 1
+}
+
+function modifyProductLimit(bytes32 arg1, uint256 arg2) {
+    require owner == msg.sender
+    productLimits[arg1] = arg2
+}
+
+function modifyProductPrice(bytes32 arg1, uint256 arg2) {
+    require owner == msg.sender
+    productPrices[arg1].field_0 = arg2
+}
+
+function setEthPrice(uint128 arg1) {
+    require owner == msg.sender
+    uint128(stor4.field_0) = arg1
+    uint128(stor4.field_128) = 0
+}
+
+function setTokenPrice(uint128 arg1) {
+    require owner == msg.sender
+    uint128(stor5.field_0) = arg1
+    uint128(stor5.field_128) = 0
+}
+
+function modifyProductPrice(bytes32 arg1, uint256 arg2, uint256 arg3) {
+    require owner == msg.sender
+    productPrices[arg1].field_0 = arg2
+    productLimits[arg1] = arg3
+}
+
+function __redeem() {
+    require owner == msg.sender
+    call msg.sender with:
+       value eth.balance(this.address) wei
+         gas 2300 * is_zero(value) wei
+    require ext_call.success
+    return 1
+}
+
+function createProduct(bytes32 arg1, uint128 arg2, uint256 arg3) {
+    if owner != msg.sender:
+        require arg3 > 0
+    productPrices[arg1].field_0 = arg2
+    productPrices[arg1].field_128 = 0
+    productLimits[arg1] = arg3
+    return 1
+}
+
+function transferFrom(address arg1, address arg2, uint256 arg3) {
+    require allowance[address(arg1)][address(msg.sender)] >= arg3
+    require arg3 > 0
+    require balances[address(arg2)] + arg3 > balances[address(arg2)]
+    require arg3 <= balances[address(arg1)]
+    balances[address(arg1)] -= arg3
+    require arg3 <= allowance[address(arg1)][address(msg.sender)]
+    allowance[address(arg1)][address(msg.sender)] -= arg3
+    require arg3 + balances[address(arg2)] >= balances[address(arg2)]
+    require arg3 + balances[address(arg2)] >= arg3
+    balances[address(arg2)] += arg3
+    return 1
+}
+
+function transferTo(address arg1, uint256 arg2) payable {
+    require arg1
+    require arg2 > 0
+    require balances[address(msg.sender)] >= arg2
+    require arg2 + balances[address(arg1)] >= balances[address(arg1)]
+    require arg2 + balances[address(arg1)] >= arg2
+    require arg2 + balances[address(arg1)] > balances[address(arg1)]
+    emit Transfer(arg2, msg.sender, arg1);
+    require arg2 <= balances[address(msg.sender)]
+    balances[address(msg.sender)] -= arg2
+    require balances[address(msg.sender)] >= balances[address(msg.sender)] - arg2
+    require balances[address(msg.sender)] >= arg2
+    balances[address(arg1)] = balances[address(msg.sender)]
+    return 1
+}
+
+function buyToken() payable {
+    require msg.value > currentTokenPrice
+    require msg.value > 0
+    require currentEthPrice
+    require msg.value > currentTokenPrice * 10^18 / currentEthPrice
+    require currentTokenPrice * 10^18 / currentEthPrice
+    require msg.value / currentTokenPrice * 10^18 / currentEthPrice / 10^18 > 0
+    require msg.value / currentTokenPrice * 10^18 / currentEthPrice / 10^18 <= totalSupply
+    totalSupply -= msg.value / currentTokenPrice * 10^18 / currentEthPrice / 10^18
+    require (msg.value / currentTokenPrice * 10^18 / currentEthPrice / 10^18) + balances[address(msg.sender)] >= balances[address(msg.sender)]
+    require (msg.value / currentTokenPrice * 10^18 / currentEthPrice / 10^18) + balances[address(msg.sender)] >= msg.value / currentTokenPrice * 10^18 / currentEthPrice / 10^18
+    balances[address(msg.sender)] += msg.value / currentTokenPrice * 10^18 / currentEthPrice / 10^18
+}
+
+function purchaseProduct(bytes32 arg1, uint256 arg2) {
+    if productLimits[arg1] <= 0:
+        require arg2 <= productLimits[arg1]
+        if productLimits[arg1] - arg2 < 0:
+            if arg2:
+                require arg2
+                require productPrices[arg1].field_0 * arg2 / arg2 == productPrices[arg1].field_0
+            require productPrices[arg1].field_0 * arg2 <= balances[address(msg.sender)]
+    if productPrices[arg1].field_0:
+        require productPrices[arg1].field_0
+        require arg2 * productPrices[arg1].field_0 / productPrices[arg1].field_0 == arg2
+    require balances[address(msg.sender)] >= arg2 * productPrices[arg1].field_0
+    require arg2 * productPrices[arg1].field_0 <= balances[address(msg.sender)]
+    balances[address(msg.sender)] += -1 * arg2 * productPrices[arg1].field_0
+    totalSupply += arg2 * productPrices[arg1].field_0
+    require arg2 <= productLimits[arg1]
+    productLimits[arg1] -= arg2
+    require arg2 + checkProduct[address(msg.sender)][arg1] >= checkProduct[address(msg.sender)][arg1]
+    require arg2 + checkProduct[address(msg.sender)][arg1] >= arg2
+    checkProduct[address(msg.sender)][arg1] += arg2
+}
+
+
+
+}

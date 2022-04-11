@@ -1,0 +1,76 @@
+contract main {
+
+
+// =======================  Init code  ======================
+
+
+address stor0;
+uint256 stor1;
+uint256 stor2;
+uint256 stor3;
+uint128 stor4; offset 160
+address stor4;
+
+function _fallback() {
+    stor0 = code.data[1135 len 20]
+    address(stor4.field_0) = code.data[1167 len 20]
+    stor1 = code.data[1187 len 32]
+    Mask(96, 0, stor4.field_160) = 0
+    stor2 = 0
+    stor3 = code.data[1219 len 32]
+    return code.data[265 len 858]
+}
+
+
+
+// =====================  Runtime code  =====================
+
+
+address stor0;
+uint256 available;
+uint256 amountRaised;
+uint256 price;
+uint8 stor4; offset 160
+uint128 stor4; offset 160
+address stor4;
+
+function available() {
+    return available
+}
+
+function amountRaised() {
+    return amountRaised
+}
+
+function price() {
+    return price
+}
+
+function sub_85d8d4e0(?) {
+    Mask(96, 0, stor4.field_160) = 1
+}
+
+function claimFunding() {
+    call stor0 with:
+       value amountRaised wei
+         gas 2300 * is_zero(value) wei
+    require ext_call.success
+    amountRaised = 0
+}
+
+function _fallback() payable {
+    require not uint8(stor4.field_160)
+    require price
+    amountRaised += msg.value
+    require msg.value / price <= available
+    require ext_code.size(address(stor4.field_0))
+    call address(stor4.field_0).transferFrom(address rg1, address rg2, uint256 rg3) with:
+         gas gas_remaining - 50 wei
+        args stor0, msg.sender, msg.value / price
+    require ext_call.success
+    available -= msg.value / price
+}
+
+
+
+}
