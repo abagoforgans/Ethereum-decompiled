@@ -1,0 +1,144 @@
+contract main {
+
+
+// =======================  Init code  ======================
+
+
+mapping of uint256 stor1;
+uint8 stor3; offset 160
+address stor3;
+uint256 stor4;
+
+function _fallback() payable {
+    uint8(stor3.field_160) = 0
+    require not msg.value
+    address(stor3.field_0) = msg.sender
+    if code.data[3260 len 32]:
+        stor1[address(msg.sender)] = code.data[3260 len 32]
+        stor4 = code.data[3260 len 32]
+    else:
+        stor1[address(msg.sender)] = 2 * 10^16
+        stor4 = 2 * 10^16
+    return code.data[150 len 3110]
+}
+
+
+
+// =====================  Runtime code  =====================
+
+
+const name = 'aleToken'
+
+const decimals = 8
+
+const version = ''
+
+const symbol = ''
+
+const INITIAL_SUPPLY = 2 * 10^16
+
+
+uint256 stor0;
+mapping of uint256 transferableTokens;
+mapping of uint256 allowance;
+uint8 stor3; offset 160
+address owner;
+uint256 totalSupply;
+mapping of uint8 stor5;
+
+function mintingFinished() {
+    return bool(stor3)
+}
+
+function totalSupply() {
+    return totalSupply
+}
+
+function balanceOf(address arg1) {
+    return transferableTokens[address(arg1)]
+}
+
+function owner() {
+    return owner
+}
+
+function frozenAccount(address arg1) {
+    return bool(stor5[arg1])
+}
+
+function transferableTokens(address arg1, uint64 arg2) {
+    return transferableTokens[address(arg1)]
+}
+
+function allowance(address arg1, address arg2) {
+    return allowance[address(arg1)][address(arg2)]
+}
+
+function _fallback() {
+    revert
+}
+
+function transferOwnership(address arg1) {
+    require owner == msg.sender
+    if arg1:
+        owner = arg1
+}
+
+function finishMinting() {
+    require owner == msg.sender
+    stor3 = 1
+    emit MintFinished()
+    return 1
+}
+
+function freezeAccount(address arg1, bool arg2) {
+    require owner == msg.sender
+    stor5[address(arg1)] = uint8(arg2)
+    emit FrozenFunds(address(arg1), arg2);
+}
+
+function approve(address arg1, uint256 arg2) {
+    if arg2:
+        require not allowance[address(msg.sender)][address(arg1)]
+    allowance[address(msg.sender)][address(arg1)] = arg2
+    emit Approval(arg2, msg.sender, arg1);
+    return 1
+}
+
+function mint(address arg1, uint256 arg2) {
+    require owner == msg.sender
+    require not stor3
+    require arg2 + stor0 >= stor0
+    stor0 += arg2
+    require arg2 + transferableTokens[address(arg1)] >= transferableTokens[address(arg1)]
+    transferableTokens[address(arg1)] += arg2
+    emit Mint(arg2, arg1);
+    return 1
+}
+
+function transfer(address arg1, uint256 arg2) {
+    require not stor5[address(msg.sender)]
+    require arg2 <= transferableTokens[address(msg.sender)]
+    require arg2 <= transferableTokens[address(msg.sender)]
+    transferableTokens[address(msg.sender)] -= arg2
+    require arg2 + transferableTokens[arg1] >= transferableTokens[arg1]
+    transferableTokens[address(arg1)] = arg2 + transferableTokens[arg1]
+    emit Transfer(arg2, msg.sender, arg1);
+    return 1
+}
+
+function transferFrom(address arg1, address arg2, uint256 arg3) {
+    require arg3 <= transferableTokens[address(arg1)]
+    require arg3 + transferableTokens[address(arg2)] >= transferableTokens[address(arg2)]
+    transferableTokens[address(arg2)] += arg3
+    require arg3 <= transferableTokens[arg1]
+    transferableTokens[address(arg1)] = transferableTokens[arg1] - arg3
+    require arg3 <= allowance[address(arg1)][address(msg.sender)]
+    allowance[address(arg1)][address(msg.sender)] -= arg3
+    emit Transfer(arg3, arg1, arg2);
+    return 1
+}
+
+
+
+}
