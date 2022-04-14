@@ -1,0 +1,190 @@
+contract main {
+
+
+// =======================  Init code  ======================
+
+
+address stor0;
+
+function _fallback() {
+    stor0 = msg.sender
+    return code.data[62 len 3255]
+}
+
+
+
+// =====================  Runtime code  =====================
+
+
+address owner;
+uint8 stor1; offset 160
+address stor1;
+address controllerAddress;
+mapping of uint256 balanceOf;
+mapping of uint256 allowance;
+uint256 totalSupply;
+uint256 mintingNonce;
+uint8 mintingStopped;
+
+function totalSupply() {
+    return totalSupply
+}
+
+function balanceOf(address arg1) {
+    return balanceOf[arg1]
+}
+
+function owner() {
+    return owner
+}
+
+function finalized() {
+    return bool(uint8(stor1.field_160))
+}
+
+function allowance(address arg1, address arg2) {
+    return allowance[arg1][arg2]
+}
+
+function mintingStopped() {
+    return bool(mintingStopped)
+}
+
+function controller() {
+    return controllerAddress
+}
+
+function mintingNonce() {
+    return mintingNonce
+}
+
+function _fallback() payable {
+    revert
+}
+
+function stopMinting() {
+    require owner == msg.sender
+    mintingStopped = 1
+}
+
+function finalize() {
+    require owner == msg.sender
+    uint8(stor1.field_160) = 1
+}
+
+function changeOwner(address arg1) {
+    require owner == msg.sender
+    address(stor1.field_0) = arg1
+}
+
+function acceptOwnership() {
+    if address(stor1.field_0) == msg.sender:
+        owner = address(stor1.field_0)
+}
+
+function setController(address arg1) {
+    require owner == msg.sender
+    require not uint8(stor1.field_160)
+    controllerAddress = arg1
+}
+
+function burn(address arg1, uint256 arg2) {
+    require controllerAddress == msg.sender
+    require arg2 <= balanceOf[address(arg1)]
+    balanceOf[address(arg1)] -= arg2
+    require arg2 <= totalSupply
+    totalSupply -= arg2
+}
+
+function approve(address arg1, address arg2, uint256 arg3) {
+    require controllerAddress == msg.sender
+    if arg3:
+        if allowance[address(arg1)][address(arg2)]:
+            return 0
+    allowance[address(arg1)][address(arg2)] = arg3
+    return 1
+}
+
+function decreaseApproval(address arg1, address arg2, uint256 arg3) {
+    require controllerAddress == msg.sender
+    if arg3 <= allowance[address(arg1)][address(arg2)]:
+        allowance[address(arg1)][address(arg2)] -= arg3
+    else:
+        allowance[address(arg1)][address(arg2)] = 0
+    return 1
+}
+
+function increaseApproval(address arg1, address arg2, uint256 arg3) {
+    require controllerAddress == msg.sender
+    require arg3 + allowance[address(arg1)][address(arg2)] >= allowance[address(arg1)][address(arg2)]
+    require arg3 + allowance[address(arg1)][address(arg2)] >= arg3
+    allowance[address(arg1)][address(arg2)] += arg3
+    return 1
+}
+
+function transfer(address arg1, address arg2, uint256 arg3) {
+    require controllerAddress == msg.sender
+    if balanceOf[address(arg1)] < arg3:
+        return 0
+    require arg3 <= balanceOf[address(arg1)]
+    balanceOf[address(arg1)] -= arg3
+    require arg3 + balanceOf[arg2] >= balanceOf[arg2]
+    require arg3 + balanceOf[arg2] >= arg3
+    balanceOf[address(arg2)] = arg3 + balanceOf[arg2]
+    return 1
+}
+
+function transferFrom(address arg1, address arg2, address arg3, uint256 arg4) {
+    require controllerAddress == msg.sender
+    if balanceOf[address(arg2)] < arg4:
+        return 0
+    if allowance[address(arg2)][address(arg1)] < arg4:
+        return 0
+    require arg4 + balanceOf[address(arg3)] >= balanceOf[address(arg3)]
+    require arg4 + balanceOf[address(arg3)] >= arg4
+    balanceOf[address(arg3)] += arg4
+    require arg4 <= balanceOf[arg2]
+    balanceOf[address(arg2)] = balanceOf[arg2] - arg4
+    require arg4 <= allowance[address(arg2)][address(arg1)]
+    allowance[address(arg2)][address(arg1)] -= arg4
+    return 1
+}
+
+function multiMint(uint256 arg1, uint256[] arg2) {
+    mem[128 len 32 * arg2.length] = call.data[arg2 + 36 len 32 * arg2.length]
+    require owner == msg.sender
+    require not mintingStopped
+    if arg1 == mintingNonce:
+        mintingNonce++
+        s = 0
+        s = 0
+        idx = 0
+        s = 0
+        while idx < arg2.length:
+            require idx < arg2.length
+            _12 = mem[(32 * idx) + 128]
+            require idx < arg2.length
+            _14 = mem[(32 * idx) + 128]
+            mem[0] = mem[(32 * idx) + 128 len 20]
+            mem[32] = 3
+            balanceOf[mem[(32 * idx) + 128 len 20]] += mem[(32 * idx) + 148 len 12]
+            mem[(32 * arg2.length) + 128] = 0xf5c86d2a00000000000000000000000000000000000000000000000000000000
+            mem[(32 * arg2.length) + 132] = 0
+            mem[(32 * arg2.length) + 164] = Mask(160, 96, _12) >> 96
+            mem[(32 * arg2.length) + 196] = Mask(96, 0, _14)
+            require ext_code.size(controllerAddress)
+            call controllerAddress.0xf5c86d2a with:
+                 gas gas_remaining - 710 wei
+                args 0, Mask(160, 96, _12), Mask(96, 0, _14)
+            require ext_call.success
+            s = Mask(96, 0, _14)
+            s = Mask(160, 96, _12) >> 96
+            idx = idx + 1
+            s = Mask(96, 0, _14) + s
+            continue 
+        totalSupply += Mask(96, 0, _14) * arg2.length
+}
+
+
+
+}
