@@ -1,0 +1,108 @@
+contract main {
+
+
+// =======================  Init code  ======================
+
+
+uint256 stor0;
+address stor4;
+
+function _fallback() {
+    stor4 = msg.sender
+    stor0 = 1300000000 * 10^18
+    return code.data[73 len 2498]
+}
+
+
+
+// =====================  Runtime code  =====================
+
+
+const name = 'ExchangeGoodsChain'
+
+const decimals = 18
+
+const version = '1.0'
+
+const symbol = 'EGC'
+
+
+uint256 totalSupply;
+mapping of uint256 balanceOf;
+mapping of uint256 allowance;
+address hostAddress;
+address owner;
+
+function totalSupply() {
+    return totalSupply
+}
+
+function balanceOf(address arg1) {
+    return balanceOf[address(arg1)]
+}
+
+function owner() {
+    return owner
+}
+
+function allowance(address arg1, address arg2) {
+    return allowance[address(arg1)][address(arg2)]
+}
+
+function host() {
+    return hostAddress
+}
+
+function kill() {
+    require owner == msg.sender
+    selfdestruct(owner)
+}
+
+function _fallback() payable {
+    revert
+}
+
+function changeOwner(address arg1) {
+    require owner == msg.sender
+    owner = arg1
+}
+
+function approve(address arg1, uint256 arg2) {
+    if arg2:
+        require not allowance[address(msg.sender)][address(arg1)]
+    allowance[address(msg.sender)][address(arg1)] = arg2
+    emit Approval(arg2, msg.sender, arg1);
+}
+
+function initToken(address arg1) {
+    require owner == msg.sender
+    require arg1
+    hostAddress = arg1
+    require totalSupply + balanceOf[address(arg1)] >= balanceOf[address(arg1)]
+    balanceOf[stor3] = totalSupply + balanceOf[address(arg1)]
+    emit InitHostBalance(hostAddress, totalSupply);
+}
+
+function transfer(address arg1, uint256 arg2) {
+    require calldata.size >= 68
+    require arg2 <= balanceOf[address(msg.sender)]
+    balanceOf[address(msg.sender)] -= arg2
+    require arg2 + balanceOf[arg1] >= balanceOf[arg1]
+    balanceOf[address(arg1)] = arg2 + balanceOf[arg1]
+    emit Transfer(arg2, msg.sender, arg1);
+}
+
+function transferFrom(address arg1, address arg2, uint256 arg3) {
+    require calldata.size >= 100
+    require arg3 + balanceOf[address(arg2)] >= balanceOf[address(arg2)]
+    balanceOf[address(arg2)] += arg3
+    require arg3 <= balanceOf[arg1]
+    balanceOf[address(arg1)] = balanceOf[arg1] - arg3
+    require arg3 <= allowance[address(arg1)][address(msg.sender)]
+    allowance[address(arg1)][address(msg.sender)] -= arg3
+    emit Transfer(arg3, arg1, arg2);
+}
+
+
+
+}
