@@ -1,0 +1,118 @@
+contract main {
+
+
+// =======================  Init code  ======================
+
+
+mapping of uint256 stor1;
+uint256 stor3;
+uint256 stor4;
+
+function _fallback() payable {
+    stor3 = 8
+    stor4 = 6772757848484848
+    require not msg.value
+    stor1[address(msg.sender)] = stor4
+    return code.data[77 len 2863]
+}
+
+
+
+// =====================  Runtime code  =====================
+
+
+const name = 'ChickenToken'
+
+const symbol = 'CHKN'
+
+
+mapping of uint256 balanceOf;
+mapping of uint256 allowance;
+uint256 decimals;
+uint256 totalSupply;
+
+function totalSupply() {
+    return totalSupply
+}
+
+function decimals() {
+    return decimals
+}
+
+function balanceOf(address arg1) {
+    return balanceOf[address(arg1)]
+}
+
+function allowance(address arg1, address arg2) {
+    return allowance[address(arg1)][address(arg2)]
+}
+
+function _fallback() payable {
+    revert
+}
+
+function approve(address arg1, uint256 arg2) {
+    if arg2:
+        require not allowance[address(msg.sender)][address(arg1)]
+    allowance[address(msg.sender)][address(arg1)] = arg2
+    emit Approval(arg2, msg.sender, arg1);
+    return 1
+}
+
+function increaseApproval(address arg1, uint256 arg2) {
+    require arg2 + allowance[address(msg.sender)][address(arg1)] >= allowance[address(msg.sender)][address(arg1)]
+    allowance[address(msg.sender)][address(arg1)] += arg2
+    emit Approval((arg2 + allowance[address(msg.sender)][address(arg1)]), msg.sender, arg1);
+    return 1
+}
+
+function decreaseApproval(address arg1, uint256 arg2) {
+    if arg2 <= allowance[address(msg.sender)][address(arg1)]:
+        allowance[address(msg.sender)][address(arg1)] -= arg2
+    else:
+        allowance[address(msg.sender)][address(arg1)] = 0
+    emit Approval(allowance[address(msg.sender)][address(arg1)], msg.sender, arg1);
+    return 1
+}
+
+function transfer(address arg1, uint256 arg2) {
+    require arg1
+    require arg2 <= balanceOf[address(msg.sender)]
+    require arg2 <= balanceOf[address(msg.sender)]
+    balanceOf[address(msg.sender)] -= arg2
+    require arg2 + balanceOf[arg1] >= balanceOf[arg1]
+    balanceOf[address(arg1)] = arg2 + balanceOf[arg1]
+    emit Transfer(arg2, msg.sender, arg1);
+    return 1
+}
+
+function approveAndCall(address arg1, uint256 arg2, bytes arg3) {
+    if arg2:
+        require not allowance[address(msg.sender)][address(arg1)]
+    allowance[address(msg.sender)][address(arg1)] = arg2
+    emit Approval(arg2, msg.sender, arg1);
+    require ext_code.size(arg1)
+    call arg1.receiveApproval(address rg1, uint256 rg2, address rg3, bytes rg4) with:
+         gas gas_remaining - 710 wei
+        args msg.sender, arg2, address(this.address), Array(len=arg3.length, data=arg3[all])
+    require ext_call.success
+    return 1
+}
+
+function transferFrom(address arg1, address arg2, uint256 arg3) {
+    require arg2
+    require arg3 <= balanceOf[address(arg1)]
+    require arg3 <= allowance[address(arg1)][address(msg.sender)]
+    require arg3 <= balanceOf[address(arg1)]
+    balanceOf[address(arg1)] -= arg3
+    require arg3 + balanceOf[arg2] >= balanceOf[arg2]
+    balanceOf[address(arg2)] = arg3 + balanceOf[arg2]
+    require arg3 <= allowance[address(arg1)][address(msg.sender)]
+    allowance[address(arg1)][address(msg.sender)] -= arg3
+    emit Transfer(arg3, arg1, arg2);
+    return 1
+}
+
+
+
+}
