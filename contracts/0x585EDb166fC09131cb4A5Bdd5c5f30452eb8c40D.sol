@@ -1,0 +1,1499 @@
+contract main {
+
+
+// =======================  Init code  ======================
+
+
+uint256 stor6;
+
+function _fallback() payable {
+    stor6 = 10000
+    require not msg.value
+    return code.data[37 len 6902]
+}
+
+
+
+// =====================  Runtime code  =====================
+
+
+address proxyAddress;
+address stor1;
+address stor2;
+uint256 absMinFee;
+uint256 feePercent;
+uint256 absMaxFee;
+uint256 sub_9223ccda;
+address feeAddress;
+
+function feeAddress() {
+    return feeAddress
+}
+
+function absMaxFee() {
+    return absMaxFee
+}
+
+function feePercent() {
+    return feePercent
+}
+
+function sub_9223ccda(?) {
+    return sub_9223ccda
+}
+
+function absMinFee() {
+    return absMinFee
+}
+
+function proxy() {
+    return proxyAddress
+}
+
+function _fallback() payable {
+    revert
+}
+
+function init(address arg1) {
+    if proxyAddress:
+        return 0
+    proxyAddress = arg1
+    return 1
+}
+
+function calculateFee(uint256 arg1) {
+    if not feeAddress:
+        return 0
+    if feeAddress == msg.sender:
+        return 0
+    if arg1 * feePercent / 10000 < absMinFee:
+        return absMinFee
+    if arg1 * feePercent / 10000 <= absMaxFee:
+        return (arg1 * feePercent / 10000)
+    return absMaxFee
+}
+
+function _performApprove(address arg1, uint256 arg2, address arg3) {
+    if proxyAddress != msg.sender:
+        return 0
+    require ext_code.size(proxyAddress)
+    call proxyAddress.0x7bcdc2f0 with:
+         gas gas_remaining - 710 wei
+        args address(arg1), arg2, arg3
+    require ext_call.success
+    return bool(ext_call.return_data[0])
+}
+
+function _performGeneric(bytes arg1, address arg2) payable {
+    if proxyAddress != msg.sender:
+        return 0
+    require not stor1
+    stor1 = arg2
+    call this.address with:
+       value msg.value wei
+         gas 63 * gas_remaining / 64 wei
+        args arg1[all]
+    require ext_call.success
+    stor1 = 0
+    return ext_call.return_data[0]
+}
+
+function setupFee(address arg1) {
+    if not stor2:
+        return 0
+    require ext_code.size(stor2)
+    if this.address == msg.sender:
+        call stor2.hasRole(address rg1, bytes32 rg2, address rg3) with:
+             gas gas_remaining - 710 wei
+            args address(this.address), 'admin', stor1
+    else:
+        call stor2.hasRole(address rg1, bytes32 rg2, address rg3) with:
+             gas gas_remaining - 710 wei
+            args address(this.address), 'admin', msg.sender
+    require ext_call.success
+    if not ext_call.return_data[0]:
+        return 0
+    feeAddress = arg1
+    return 1
+}
+
+function setupAmbi2(address arg1) {
+    if stor2:
+        return 0
+    require ext_code.size(arg1)
+    call arg1.claimFor(address rg1, address rg2) with:
+         gas gas_remaining - 710 wei
+        args address(this.address), msg.sender
+    require ext_call.success
+    if not ext_call.return_data[0]:
+        require ext_code.size(arg1)
+        call arg1.isOwner(address rg1, address rg2) with:
+             gas gas_remaining - 710 wei
+            args address(this.address), msg.sender
+        require ext_call.success
+        if not ext_call.return_data[0]:
+            return 0
+    stor2 = arg1
+    return 1
+}
+
+function sub_16865b2e(?) {
+    if not stor2:
+        return 0
+    require ext_code.size(stor2)
+    if this.address == msg.sender:
+        call stor2.hasRole(address rg1, bytes32 rg2, address rg3) with:
+             gas gas_remaining - 710 wei
+            args address(this.address), 'admin', stor1
+    else:
+        call stor2.hasRole(address rg1, bytes32 rg2, address rg3) with:
+             gas gas_remaining - 710 wei
+            args address(this.address), 'admin', msg.sender
+    require ext_call.success
+    if not ext_call.return_data[0]:
+        return 0
+    if arg1 >= sub_9223ccda:
+        return 0
+    if arg1 < feePercent:
+        feePercent = arg1
+    sub_9223ccda = arg1
+    return 1
+}
+
+function setFeeStructure(uint256 arg1, uint256 arg2, uint256 arg3) {
+    if not stor2:
+        return 0
+    require ext_code.size(stor2)
+    if this.address == msg.sender:
+        call stor2.hasRole(address rg1, bytes32 rg2, address rg3) with:
+             gas gas_remaining - 710 wei
+            args address(this.address), 'cron', stor1
+    else:
+        call stor2.hasRole(address rg1, bytes32 rg2, address rg3) with:
+             gas gas_remaining - 710 wei
+            args address(this.address), 'cron', msg.sender
+    require ext_call.success
+    if not ext_call.return_data[0]:
+        return 0
+    if arg2 > sub_9223ccda:
+        return 0
+    if arg3 < arg1:
+        return 0
+    absMinFee = arg1
+    feePercent = arg2
+    absMaxFee = arg3
+    return 1
+}
+
+function takeFee(address arg1, uint256 arg2, string arg3) {
+    if not stor2:
+        return 0
+    require ext_code.size(stor2)
+    if this.address == msg.sender:
+        call stor2.hasRole(address rg1, bytes32 rg2, address rg3) with:
+             gas gas_remaining - 710 wei
+            args address(this.address), 'fee', stor1
+    else:
+        call stor2.hasRole(address rg1, bytes32 rg2, address rg3) with:
+             gas gas_remaining - 710 wei
+            args address(this.address), 'fee', msg.sender
+    require ext_call.success
+    if not ext_call.return_data[0]:
+        return 0
+    require ext_code.size(proxyAddress)
+    call proxyAddress.0x14cba002 with:
+         gas gas_remaining - 710 wei
+        args address(arg1), feeAddress, arg2, Array(len=arg3.length, data=arg3[all]), proxyAddress
+    require ext_call.success
+    return bool(ext_call.return_data[0])
+}
+
+function _performTransferFromWithReference(address arg1, address arg2, uint256 arg3, string arg4, address arg5) {
+    if proxyAddress != msg.sender:
+        return 0
+    require ext_code.size(proxyAddress)
+    if not feeAddress:
+        call proxyAddress.0x14cba002 with:
+             gas gas_remaining - 710 wei
+            args address(arg1), address(arg2), arg3, Array(len=arg4.length, data=arg4[all]), address(arg5)
+        require ext_call.success
+    else:
+        if feeAddress == arg1:
+            call proxyAddress.0x14cba002 with:
+                 gas gas_remaining - 710 wei
+                args address(arg1), address(arg2), arg3, Array(len=arg4.length, data=arg4[all]), address(arg5)
+            require ext_call.success
+        else:
+            if arg3 * feePercent / 10000 < absMinFee:
+                if absMinFee > 0:
+                    call proxyAddress.0x14cba002 with:
+                         gas gas_remaining - 710 wei
+                        args address(arg1), feeAddress, absMinFee, 'Transfer fee', address(arg1)
+                    require ext_call.success
+                    if not ext_call.return_data[0]:
+                        return 0
+                call proxyAddress.0x14cba002 with:
+                     gas gas_remaining - 710 wei
+                    args address(arg1), address(arg2), arg3, Array(len=arg4.length, data=arg4[all]), address(arg5)
+                require ext_call.success
+                if not ext_call.return_data[0]:
+                    require not absMinFee
+            else:
+                if arg3 * feePercent / 10000 <= absMaxFee:
+                    if arg3 * feePercent / 10000 > 0:
+                        call proxyAddress.0x14cba002 with:
+                             gas gas_remaining - 710 wei
+                            args address(arg1), feeAddress, arg3 * feePercent / 10000, 'Transfer fee', address(arg1)
+                        require ext_call.success
+                        if not ext_call.return_data[0]:
+                            return 0
+                    call proxyAddress.0x14cba002 with:
+                         gas gas_remaining - 710 wei
+                        args address(arg1), address(arg2), arg3, Array(len=arg4.length, data=arg4[all]), address(arg5)
+                    require ext_call.success
+                    if not ext_call.return_data[0]:
+                        require not arg3 * feePercent / 10000
+                else:
+                    if absMaxFee > 0:
+                        call proxyAddress.0x14cba002 with:
+                             gas gas_remaining - 710 wei
+                            args address(arg1), feeAddress, absMaxFee, 'Transfer fee', address(arg1)
+                        require ext_call.success
+                        if not ext_call.return_data[0]:
+                            return 0
+                    call proxyAddress.0x14cba002 with:
+                         gas gas_remaining - 710 wei
+                        args address(arg1), address(arg2), arg3, Array(len=arg4.length, data=arg4[all]), address(arg5)
+                    require ext_call.success
+                    if not ext_call.return_data[0]:
+                        require not absMaxFee
+    return bool(ext_call.return_data[0])
+}
+
+function _performTransferFromToICAPWithReference(address arg1, bytes32 arg2, uint256 arg3, string arg4, address arg5) {
+    mem[128 len arg4.length] = arg4[all]
+    if proxyAddress != msg.sender:
+        return 0
+    if not feeAddress:
+        mem[ceil32(arg4.length) + 128] = 0x9b487f3f00000000000000000000000000000000000000000000000000000000
+        mem[ceil32(arg4.length) + 132] = arg1
+        mem[ceil32(arg4.length) + 164] = arg2
+        mem[ceil32(arg4.length) + 196] = arg3
+        mem[ceil32(arg4.length) + 260] = arg5
+        mem[ceil32(arg4.length) + 228] = 160
+        mem[ceil32(arg4.length) + 292] = arg4.length
+        if 0 >= arg4.length:
+            if not arg4.length % 32:
+                require ext_code.size(proxyAddress)
+                call proxyAddress.0x9b487f3f with:
+                     gas gas_remaining - 710 wei
+                    args 0, 0, uint32(arg2), arg3, 160, address(arg5), arg4.length, mem[ceil32(arg4.length) + 324 len arg4.length]
+            else:
+                mem[floor32(arg4.length) + ceil32(arg4.length) + 324] = mem[floor32(arg4.length) + ceil32(arg4.length) + -(arg4.length % 32) + 356 len arg4.length % 32]
+                require ext_code.size(proxyAddress)
+                call proxyAddress.0x9b487f3f with:
+                     gas gas_remaining - 710 wei
+                    args address(arg1), arg2, arg3, Array(len=arg4.length, data=mem[ceil32(arg4.length) + 324 len floor32(arg4.length) + 32]), address(arg5)
+        else:
+            mem[ceil32(arg4.length) + 324] = mem[128]
+            mem[ceil32(arg4.length) + 356 len floor32(arg4.length - 1)] = mem[160 len floor32(arg4.length - 1)]
+            require ext_code.size(proxyAddress)
+            call proxyAddress.0x9b487f3f with:
+                 gas gas_remaining - 710 wei
+                args address(arg1), arg2, arg3, Array(len=arg4.length, data=mem[ceil32(arg4.length) + 324 len arg4.length]), address(arg5)
+        require ext_call.success
+    else:
+        if feeAddress == arg1:
+            mem[ceil32(arg4.length) + 128] = 0x9b487f3f00000000000000000000000000000000000000000000000000000000
+            mem[ceil32(arg4.length) + 132] = arg1
+            mem[ceil32(arg4.length) + 164] = arg2
+            mem[ceil32(arg4.length) + 196] = arg3
+            mem[ceil32(arg4.length) + 260] = arg5
+            mem[ceil32(arg4.length) + 228] = 160
+            mem[ceil32(arg4.length) + 292] = arg4.length
+            if 0 >= arg4.length:
+                if not arg4.length % 32:
+                    require ext_code.size(proxyAddress)
+                    call proxyAddress.0x9b487f3f with:
+                         gas gas_remaining - 710 wei
+                        args 0, 0, uint32(arg2), arg3, 160, address(arg5), arg4.length, mem[ceil32(arg4.length) + 324 len arg4.length]
+                else:
+                    mem[floor32(arg4.length) + ceil32(arg4.length) + 324] = mem[floor32(arg4.length) + ceil32(arg4.length) + -(arg4.length % 32) + 356 len arg4.length % 32]
+                    require ext_code.size(proxyAddress)
+                    call proxyAddress.0x9b487f3f with:
+                         gas gas_remaining - 710 wei
+                        args address(arg1), arg2, arg3, Array(len=arg4.length, data=mem[ceil32(arg4.length) + 324 len floor32(arg4.length) + 32]), address(arg5)
+            else:
+                mem[ceil32(arg4.length) + 324] = mem[128]
+                mem[ceil32(arg4.length) + 356 len floor32(arg4.length - 1)] = mem[160 len floor32(arg4.length - 1)]
+                require ext_code.size(proxyAddress)
+                call proxyAddress.0x9b487f3f with:
+                     gas gas_remaining - 710 wei
+                    args address(arg1), arg2, arg3, Array(len=arg4.length, data=mem[ceil32(arg4.length) + 324 len arg4.length]), address(arg5)
+            require ext_call.success
+        else:
+            if arg3 * feePercent / 10000 < absMinFee:
+                if absMinFee <= 0:
+                    mem[ceil32(arg4.length) + 128] = 0x9b487f3f00000000000000000000000000000000000000000000000000000000
+                    mem[ceil32(arg4.length) + 132] = arg1
+                    mem[ceil32(arg4.length) + 164] = arg2
+                    mem[ceil32(arg4.length) + 196] = arg3
+                    mem[ceil32(arg4.length) + 260] = arg5
+                    mem[ceil32(arg4.length) + 228] = 160
+                    mem[ceil32(arg4.length) + 292] = arg4.length
+                    if 0 >= arg4.length:
+                        if not arg4.length % 32:
+                            require ext_code.size(proxyAddress)
+                            call proxyAddress.0x9b487f3f with:
+                                 gas gas_remaining - 710 wei
+                                args 0, 0, uint32(arg2), arg3, 160, address(arg5), arg4.length, mem[ceil32(arg4.length) + 324 len arg4.length]
+                        else:
+                            mem[floor32(arg4.length) + ceil32(arg4.length) + 324] = mem[floor32(arg4.length) + ceil32(arg4.length) + -(arg4.length % 32) + 356 len arg4.length % 32]
+                            require ext_code.size(proxyAddress)
+                            call proxyAddress.0x9b487f3f with:
+                                 gas gas_remaining - 710 wei
+                                args address(arg1), arg2, arg3, Array(len=arg4.length, data=mem[ceil32(arg4.length) + 324 len floor32(arg4.length) + 32]), address(arg5)
+                    else:
+                        mem[ceil32(arg4.length) + 324] = mem[128]
+                        mem[ceil32(arg4.length) + 356 len floor32(arg4.length - 1)] = mem[160 len floor32(arg4.length - 1)]
+                        require ext_code.size(proxyAddress)
+                        call proxyAddress.0x9b487f3f with:
+                             gas gas_remaining - 710 wei
+                            args address(arg1), arg2, arg3, Array(len=arg4.length, data=mem[ceil32(arg4.length) + 324 len arg4.length]), address(arg5)
+                else:
+                    mem[ceil32(arg4.length) + 128] = 12
+                    mem[ceil32(arg4.length) + 160] = 'Transfer fee'
+                    mem[ceil32(arg4.length) + 388] = Mask(96, 0, 'Transfer fee')
+                    require ext_code.size(proxyAddress)
+                    call proxyAddress.0x14cba002 with:
+                         gas gas_remaining - 710 wei
+                        args address(arg1), feeAddress, absMinFee, 'Transfer fee', address(arg1)
+                    require ext_call.success
+                    if not ext_call.return_data[0]:
+                        return 0
+                    mem[ceil32(arg4.length) + 192] = 0x9b487f3f00000000000000000000000000000000000000000000000000000000
+                    mem[ceil32(arg4.length) + 196] = arg1
+                    mem[ceil32(arg4.length) + 228] = arg2
+                    mem[ceil32(arg4.length) + 260] = arg3
+                    mem[ceil32(arg4.length) + 324] = arg5
+                    mem[ceil32(arg4.length) + 292] = 160
+                    mem[ceil32(arg4.length) + 356] = arg4.length
+                    if 0 < arg4.length:
+                        mem[ceil32(arg4.length) + 388] = mem[128]
+                        mem[ceil32(arg4.length) + 420 len floor32(arg4.length - 1)] = mem[160 len floor32(arg4.length - 1)]
+                    require ext_code.size(proxyAddress)
+                    call proxyAddress.0x9b487f3f with:
+                         gas gas_remaining - 710 wei
+                        args address(arg1), arg2, arg3, Array(len=arg4.length, data=mem[ceil32(arg4.length) + 388 len arg4.length]), address(arg5)
+                require ext_call.success
+                if not ext_call.return_data[0]:
+                    require not absMinFee
+            else:
+                if arg3 * feePercent / 10000 <= absMaxFee:
+                    if arg3 * feePercent / 10000 <= 0:
+                        mem[ceil32(arg4.length) + 128] = 0x9b487f3f00000000000000000000000000000000000000000000000000000000
+                        mem[ceil32(arg4.length) + 132] = arg1
+                        mem[ceil32(arg4.length) + 164] = arg2
+                        mem[ceil32(arg4.length) + 196] = arg3
+                        mem[ceil32(arg4.length) + 260] = arg5
+                        mem[ceil32(arg4.length) + 228] = 160
+                        mem[ceil32(arg4.length) + 292] = arg4.length
+                        if 0 >= arg4.length:
+                            if not arg4.length % 32:
+                                require ext_code.size(proxyAddress)
+                                call proxyAddress.0x9b487f3f with:
+                                     gas gas_remaining - 710 wei
+                                    args 0, 0, uint32(arg2), arg3, 160, address(arg5), arg4.length, mem[ceil32(arg4.length) + 324 len arg4.length]
+                            else:
+                                mem[floor32(arg4.length) + ceil32(arg4.length) + 324] = mem[floor32(arg4.length) + ceil32(arg4.length) + -(arg4.length % 32) + 356 len arg4.length % 32]
+                                require ext_code.size(proxyAddress)
+                                call proxyAddress.0x9b487f3f with:
+                                     gas gas_remaining - 710 wei
+                                    args address(arg1), arg2, arg3, Array(len=arg4.length, data=mem[ceil32(arg4.length) + 324 len floor32(arg4.length) + 32]), address(arg5)
+                        else:
+                            mem[ceil32(arg4.length) + 324] = mem[128]
+                            mem[ceil32(arg4.length) + 356 len floor32(arg4.length - 1)] = mem[160 len floor32(arg4.length - 1)]
+                            require ext_code.size(proxyAddress)
+                            call proxyAddress.0x9b487f3f with:
+                                 gas gas_remaining - 710 wei
+                                args address(arg1), arg2, arg3, Array(len=arg4.length, data=mem[ceil32(arg4.length) + 324 len arg4.length]), address(arg5)
+                    else:
+                        mem[ceil32(arg4.length) + 128] = 12
+                        mem[ceil32(arg4.length) + 160] = 'Transfer fee'
+                        mem[ceil32(arg4.length) + 388] = Mask(96, 0, 'Transfer fee')
+                        require ext_code.size(proxyAddress)
+                        call proxyAddress.0x14cba002 with:
+                             gas gas_remaining - 710 wei
+                            args address(arg1), feeAddress, arg3 * feePercent / 10000, 'Transfer fee', address(arg1)
+                        require ext_call.success
+                        if not ext_call.return_data[0]:
+                            return 0
+                        mem[ceil32(arg4.length) + 192] = 0x9b487f3f00000000000000000000000000000000000000000000000000000000
+                        mem[ceil32(arg4.length) + 196] = arg1
+                        mem[ceil32(arg4.length) + 228] = arg2
+                        mem[ceil32(arg4.length) + 260] = arg3
+                        mem[ceil32(arg4.length) + 324] = arg5
+                        mem[ceil32(arg4.length) + 292] = 160
+                        mem[ceil32(arg4.length) + 356] = arg4.length
+                        if 0 < arg4.length:
+                            mem[ceil32(arg4.length) + 388] = mem[128]
+                            mem[ceil32(arg4.length) + 420 len floor32(arg4.length - 1)] = mem[160 len floor32(arg4.length - 1)]
+                        require ext_code.size(proxyAddress)
+                        call proxyAddress.0x9b487f3f with:
+                             gas gas_remaining - 710 wei
+                            args address(arg1), arg2, arg3, Array(len=arg4.length, data=mem[ceil32(arg4.length) + 388 len arg4.length]), address(arg5)
+                    require ext_call.success
+                    if not ext_call.return_data[0]:
+                        require not arg3 * feePercent / 10000
+                else:
+                    if absMaxFee <= 0:
+                        mem[ceil32(arg4.length) + 128] = 0x9b487f3f00000000000000000000000000000000000000000000000000000000
+                        mem[ceil32(arg4.length) + 132] = arg1
+                        mem[ceil32(arg4.length) + 164] = arg2
+                        mem[ceil32(arg4.length) + 196] = arg3
+                        mem[ceil32(arg4.length) + 260] = arg5
+                        mem[ceil32(arg4.length) + 228] = 160
+                        mem[ceil32(arg4.length) + 292] = arg4.length
+                        if 0 >= arg4.length:
+                            if not arg4.length % 32:
+                                require ext_code.size(proxyAddress)
+                                call proxyAddress.0x9b487f3f with:
+                                     gas gas_remaining - 710 wei
+                                    args 0, 0, uint32(arg2), arg3, 160, address(arg5), arg4.length, mem[ceil32(arg4.length) + 324 len arg4.length]
+                            else:
+                                mem[floor32(arg4.length) + ceil32(arg4.length) + 324] = mem[floor32(arg4.length) + ceil32(arg4.length) + -(arg4.length % 32) + 356 len arg4.length % 32]
+                                require ext_code.size(proxyAddress)
+                                call proxyAddress.0x9b487f3f with:
+                                     gas gas_remaining - 710 wei
+                                    args address(arg1), arg2, arg3, Array(len=arg4.length, data=mem[ceil32(arg4.length) + 324 len floor32(arg4.length) + 32]), address(arg5)
+                        else:
+                            mem[ceil32(arg4.length) + 324] = mem[128]
+                            mem[ceil32(arg4.length) + 356 len floor32(arg4.length - 1)] = mem[160 len floor32(arg4.length - 1)]
+                            require ext_code.size(proxyAddress)
+                            call proxyAddress.0x9b487f3f with:
+                                 gas gas_remaining - 710 wei
+                                args address(arg1), arg2, arg3, Array(len=arg4.length, data=mem[ceil32(arg4.length) + 324 len arg4.length]), address(arg5)
+                    else:
+                        mem[ceil32(arg4.length) + 128] = 12
+                        mem[ceil32(arg4.length) + 160] = 'Transfer fee'
+                        mem[ceil32(arg4.length) + 388] = Mask(96, 0, 'Transfer fee')
+                        require ext_code.size(proxyAddress)
+                        call proxyAddress.0x14cba002 with:
+                             gas gas_remaining - 710 wei
+                            args address(arg1), feeAddress, absMaxFee, 'Transfer fee', address(arg1)
+                        require ext_call.success
+                        if not ext_call.return_data[0]:
+                            return 0
+                        mem[ceil32(arg4.length) + 192] = 0x9b487f3f00000000000000000000000000000000000000000000000000000000
+                        mem[ceil32(arg4.length) + 196] = arg1
+                        mem[ceil32(arg4.length) + 228] = arg2
+                        mem[ceil32(arg4.length) + 260] = arg3
+                        mem[ceil32(arg4.length) + 324] = arg5
+                        mem[ceil32(arg4.length) + 292] = 160
+                        mem[ceil32(arg4.length) + 356] = arg4.length
+                        if 0 < arg4.length:
+                            mem[ceil32(arg4.length) + 388] = mem[128]
+                            mem[ceil32(arg4.length) + 420 len floor32(arg4.length - 1)] = mem[160 len floor32(arg4.length - 1)]
+                        require ext_code.size(proxyAddress)
+                        call proxyAddress.0x9b487f3f with:
+                             gas gas_remaining - 710 wei
+                            args address(arg1), arg2, arg3, Array(len=arg4.length, data=mem[ceil32(arg4.length) + 388 len arg4.length]), address(arg5)
+                    require ext_call.success
+                    if not ext_call.return_data[0]:
+                        require not absMaxFee
+    return bool(ext_call.return_data[0])
+}
+
+function _performTransferWithReference(address arg1, uint256 arg2, string arg3, address arg4) {
+    mem[128 len arg3.length] = arg3[all]
+    if proxyAddress != msg.sender:
+        return 0
+    if not feeAddress:
+        if 0 <= arg2:
+            if 0 >= arg2:
+                return 1
+            require ext_code.size(proxyAddress)
+            call proxyAddress.0x14cba002 with:
+                 gas gas_remaining - 710 wei
+                args address(arg4), address(arg1), arg2, Array(len=arg3.length, data=arg3[all]), address(arg4)
+            require ext_call.success
+        else:
+            if arg2 <= 0:
+                if arg2 >= arg2:
+                    return 1
+                mem[ceil32(arg3.length) + 128] = 0x14cba00200000000000000000000000000000000000000000000000000000000
+                mem[ceil32(arg3.length) + 324 len ceil32(arg3.length)] = arg3[all], mem[arg3.length + 128 len ceil32(arg3.length) - arg3.length]
+                if not arg3.length % 32:
+                    require ext_code.size(proxyAddress)
+                    call proxyAddress.0x14cba002 with:
+                         gas gas_remaining - 710 wei
+                        args address(arg4), address(arg1), 0, 160, address(arg4), arg3.length, Mask(8 * arg3.length, -(8 * arg3.length) + 256, arg3[all], mem[arg3.length + 128 len ceil32(arg3.length) - arg3.length]) << (8 * arg3.length) - 256
+                else:
+                    mem[floor32(arg3.length) + ceil32(arg3.length) + 324] = mem[floor32(arg3.length) + ceil32(arg3.length) + -(arg3.length % 32) + 356 len arg3.length % 32]
+                    require ext_code.size(proxyAddress)
+                    call proxyAddress.0x14cba002 with:
+                         gas gas_remaining - 710 wei
+                        args address(arg4), address(arg1), 0, 160, address(arg4), arg3.length, Mask(8 * ceil32(arg3.length), -(8 * ceil32(arg3.length)) + 256, arg3[all], mem[arg3.length + 128 len ceil32(arg3.length) - arg3.length]) << (8 * ceil32(arg3.length)) - 256, mem[(2 * ceil32(arg3.length)) + 324 len floor32(arg3.length) + -ceil32(arg3.length) + 32]
+            else:
+                mem[ceil32(arg3.length) + 128] = 12
+                mem[ceil32(arg3.length) + 388] = Mask(96, 0, 'Transfer fee')
+                require ext_code.size(proxyAddress)
+                call proxyAddress.0x14cba002 with:
+                     gas gas_remaining - 710 wei
+                    args address(arg4), feeAddress, arg2, 'Transfer fee', address(arg4)
+                require ext_call.success
+                if not ext_call.return_data[0]:
+                    return 0
+                if arg2 >= arg2:
+                    return 1
+                mem[ceil32(arg3.length) + 388 len ceil32(arg3.length)] = arg3[all], mem[arg3.length + 128 len ceil32(arg3.length) - arg3.length]
+                if not arg3.length % 32:
+                    require ext_code.size(proxyAddress)
+                    call proxyAddress.0x14cba002 with:
+                         gas gas_remaining - 710 wei
+                        args address(arg4), address(arg1), 0, 160, address(arg4), arg3.length, Mask(8 * arg3.length, -(8 * arg3.length) + 256, arg3[all], mem[arg3.length + 128 len ceil32(arg3.length) - arg3.length]) << (8 * arg3.length) - 256
+                else:
+                    mem[floor32(arg3.length) + ceil32(arg3.length) + 388] = mem[floor32(arg3.length) + ceil32(arg3.length) + -(arg3.length % 32) + 420 len arg3.length % 32]
+                    require ext_code.size(proxyAddress)
+                    call proxyAddress.0x14cba002 with:
+                         gas gas_remaining - 710 wei
+                        args address(arg4), address(arg1), 0, 160, address(arg4), arg3.length, Mask(8 * ceil32(arg3.length), -(8 * ceil32(arg3.length)) + 256, arg3[all], mem[arg3.length + 128 len ceil32(arg3.length) - arg3.length]) << (8 * ceil32(arg3.length)) - 256, mem[(2 * ceil32(arg3.length)) + 388 len floor32(arg3.length) + -ceil32(arg3.length) + 32]
+            require ext_call.success
+            if not ext_call.return_data[0]:
+                require not arg2
+    else:
+        if feeAddress == arg4:
+            if 0 <= arg2:
+                if 0 >= arg2:
+                    return 1
+                require ext_code.size(proxyAddress)
+                call proxyAddress.0x14cba002 with:
+                     gas gas_remaining - 710 wei
+                    args address(arg4), address(arg1), arg2, Array(len=arg3.length, data=arg3[all]), address(arg4)
+                require ext_call.success
+            else:
+                if arg2 <= 0:
+                    if arg2 >= arg2:
+                        return 1
+                    mem[ceil32(arg3.length) + 128] = 0x14cba00200000000000000000000000000000000000000000000000000000000
+                    mem[ceil32(arg3.length) + 324 len ceil32(arg3.length)] = arg3[all], mem[arg3.length + 128 len ceil32(arg3.length) - arg3.length]
+                    if not arg3.length % 32:
+                        require ext_code.size(proxyAddress)
+                        call proxyAddress.0x14cba002 with:
+                             gas gas_remaining - 710 wei
+                            args address(arg4), address(arg1), 0, 160, address(arg4), arg3.length, Mask(8 * arg3.length, -(8 * arg3.length) + 256, arg3[all], mem[arg3.length + 128 len ceil32(arg3.length) - arg3.length]) << (8 * arg3.length) - 256
+                    else:
+                        mem[floor32(arg3.length) + ceil32(arg3.length) + 324] = mem[floor32(arg3.length) + ceil32(arg3.length) + -(arg3.length % 32) + 356 len arg3.length % 32]
+                        require ext_code.size(proxyAddress)
+                        call proxyAddress.0x14cba002 with:
+                             gas gas_remaining - 710 wei
+                            args address(arg4), address(arg1), 0, 160, address(arg4), arg3.length, Mask(8 * ceil32(arg3.length), -(8 * ceil32(arg3.length)) + 256, arg3[all], mem[arg3.length + 128 len ceil32(arg3.length) - arg3.length]) << (8 * ceil32(arg3.length)) - 256, mem[(2 * ceil32(arg3.length)) + 324 len floor32(arg3.length) + -ceil32(arg3.length) + 32]
+                else:
+                    mem[ceil32(arg3.length) + 128] = 12
+                    mem[ceil32(arg3.length) + 388] = Mask(96, 0, 'Transfer fee')
+                    require ext_code.size(proxyAddress)
+                    call proxyAddress.0x14cba002 with:
+                         gas gas_remaining - 710 wei
+                        args address(arg4), feeAddress, arg2, 'Transfer fee', address(arg4)
+                    require ext_call.success
+                    if not ext_call.return_data[0]:
+                        return 0
+                    if arg2 >= arg2:
+                        return 1
+                    mem[ceil32(arg3.length) + 388 len ceil32(arg3.length)] = arg3[all], mem[arg3.length + 128 len ceil32(arg3.length) - arg3.length]
+                    if not arg3.length % 32:
+                        require ext_code.size(proxyAddress)
+                        call proxyAddress.0x14cba002 with:
+                             gas gas_remaining - 710 wei
+                            args address(arg4), address(arg1), 0, 160, address(arg4), arg3.length, Mask(8 * arg3.length, -(8 * arg3.length) + 256, arg3[all], mem[arg3.length + 128 len ceil32(arg3.length) - arg3.length]) << (8 * arg3.length) - 256
+                    else:
+                        mem[floor32(arg3.length) + ceil32(arg3.length) + 388] = mem[floor32(arg3.length) + ceil32(arg3.length) + -(arg3.length % 32) + 420 len arg3.length % 32]
+                        require ext_code.size(proxyAddress)
+                        call proxyAddress.0x14cba002 with:
+                             gas gas_remaining - 710 wei
+                            args address(arg4), address(arg1), 0, 160, address(arg4), arg3.length, Mask(8 * ceil32(arg3.length), -(8 * ceil32(arg3.length)) + 256, arg3[all], mem[arg3.length + 128 len ceil32(arg3.length) - arg3.length]) << (8 * ceil32(arg3.length)) - 256, mem[(2 * ceil32(arg3.length)) + 388 len floor32(arg3.length) + -ceil32(arg3.length) + 32]
+                require ext_call.success
+                if not ext_call.return_data[0]:
+                    require not arg2
+        else:
+            if arg2 * feePercent / 10000 < absMinFee:
+                if absMinFee <= arg2:
+                    if absMinFee > 0:
+                        require ext_code.size(proxyAddress)
+                        call proxyAddress.0x14cba002 with:
+                             gas gas_remaining - 710 wei
+                            args address(arg4), feeAddress, absMinFee, 'Transfer fee', address(arg4)
+                        require ext_call.success
+                        if not ext_call.return_data[0]:
+                            return 0
+                    if absMinFee >= arg2:
+                        return 1
+                    require ext_code.size(proxyAddress)
+                    call proxyAddress.0x14cba002 with:
+                         gas gas_remaining - 710 wei
+                        args address(arg4), address(arg1), arg2 - absMinFee, Array(len=arg3.length, data=arg3[all]), address(arg4)
+                    require ext_call.success
+                    if not ext_call.return_data[0]:
+                        require not absMinFee
+                else:
+                    if arg2 <= 0:
+                        if arg2 >= arg2:
+                            return 1
+                        mem[ceil32(arg3.length) + 128] = 0x14cba00200000000000000000000000000000000000000000000000000000000
+                        mem[ceil32(arg3.length) + 324 len ceil32(arg3.length)] = arg3[all], mem[arg3.length + 128 len ceil32(arg3.length) - arg3.length]
+                        if not arg3.length % 32:
+                            require ext_code.size(proxyAddress)
+                            call proxyAddress.0x14cba002 with:
+                                 gas gas_remaining - 710 wei
+                                args address(arg4), address(arg1), 0, 160, address(arg4), arg3.length, Mask(8 * arg3.length, -(8 * arg3.length) + 256, arg3[all], mem[arg3.length + 128 len ceil32(arg3.length) - arg3.length]) << (8 * arg3.length) - 256
+                        else:
+                            mem[floor32(arg3.length) + ceil32(arg3.length) + 324] = mem[floor32(arg3.length) + ceil32(arg3.length) + -(arg3.length % 32) + 356 len arg3.length % 32]
+                            require ext_code.size(proxyAddress)
+                            call proxyAddress.0x14cba002 with:
+                                 gas gas_remaining - 710 wei
+                                args address(arg4), address(arg1), 0, 160, address(arg4), arg3.length, Mask(8 * ceil32(arg3.length), -(8 * ceil32(arg3.length)) + 256, arg3[all], mem[arg3.length + 128 len ceil32(arg3.length) - arg3.length]) << (8 * ceil32(arg3.length)) - 256, mem[(2 * ceil32(arg3.length)) + 324 len floor32(arg3.length) + -ceil32(arg3.length) + 32]
+                    else:
+                        mem[ceil32(arg3.length) + 128] = 12
+                        mem[ceil32(arg3.length) + 388] = Mask(96, 0, 'Transfer fee')
+                        require ext_code.size(proxyAddress)
+                        call proxyAddress.0x14cba002 with:
+                             gas gas_remaining - 710 wei
+                            args address(arg4), feeAddress, arg2, 'Transfer fee', address(arg4)
+                        require ext_call.success
+                        if not ext_call.return_data[0]:
+                            return 0
+                        if arg2 >= arg2:
+                            return 1
+                        mem[ceil32(arg3.length) + 388 len ceil32(arg3.length)] = arg3[all], mem[arg3.length + 128 len ceil32(arg3.length) - arg3.length]
+                        if not arg3.length % 32:
+                            require ext_code.size(proxyAddress)
+                            call proxyAddress.0x14cba002 with:
+                                 gas gas_remaining - 710 wei
+                                args address(arg4), address(arg1), 0, 160, address(arg4), arg3.length, Mask(8 * arg3.length, -(8 * arg3.length) + 256, arg3[all], mem[arg3.length + 128 len ceil32(arg3.length) - arg3.length]) << (8 * arg3.length) - 256
+                        else:
+                            mem[floor32(arg3.length) + ceil32(arg3.length) + 388] = mem[floor32(arg3.length) + ceil32(arg3.length) + -(arg3.length % 32) + 420 len arg3.length % 32]
+                            require ext_code.size(proxyAddress)
+                            call proxyAddress.0x14cba002 with:
+                                 gas gas_remaining - 710 wei
+                                args address(arg4), address(arg1), 0, 160, address(arg4), arg3.length, Mask(8 * ceil32(arg3.length), -(8 * ceil32(arg3.length)) + 256, arg3[all], mem[arg3.length + 128 len ceil32(arg3.length) - arg3.length]) << (8 * ceil32(arg3.length)) - 256, mem[(2 * ceil32(arg3.length)) + 388 len floor32(arg3.length) + -ceil32(arg3.length) + 32]
+                    require ext_call.success
+                    if not ext_call.return_data[0]:
+                        require not arg2
+            else:
+                if arg2 * feePercent / 10000 <= absMaxFee:
+                    if arg2 * feePercent / 10000 <= arg2:
+                        if arg2 * feePercent / 10000 > 0:
+                            require ext_code.size(proxyAddress)
+                            call proxyAddress.0x14cba002 with:
+                                 gas gas_remaining - 710 wei
+                                args address(arg4), feeAddress, arg2 * feePercent / 10000, 'Transfer fee', address(arg4)
+                            require ext_call.success
+                            if not ext_call.return_data[0]:
+                                return 0
+                        if arg2 * feePercent / 10000 >= arg2:
+                            return 1
+                        require ext_code.size(proxyAddress)
+                        call proxyAddress.0x14cba002 with:
+                             gas gas_remaining - 710 wei
+                            args address(arg4), address(arg1), arg2 - (arg2 * feePercent / 10000), Array(len=arg3.length, data=arg3[all]), address(arg4)
+                        require ext_call.success
+                        if not ext_call.return_data[0]:
+                            require not arg2 * feePercent / 10000
+                    else:
+                        if arg2 <= 0:
+                            if arg2 >= arg2:
+                                return 1
+                            mem[ceil32(arg3.length) + 128] = 0x14cba00200000000000000000000000000000000000000000000000000000000
+                            mem[ceil32(arg3.length) + 324 len ceil32(arg3.length)] = arg3[all], mem[arg3.length + 128 len ceil32(arg3.length) - arg3.length]
+                            if not arg3.length % 32:
+                                require ext_code.size(proxyAddress)
+                                call proxyAddress.0x14cba002 with:
+                                     gas gas_remaining - 710 wei
+                                    args address(arg4), address(arg1), 0, 160, address(arg4), arg3.length, Mask(8 * arg3.length, -(8 * arg3.length) + 256, arg3[all], mem[arg3.length + 128 len ceil32(arg3.length) - arg3.length]) << (8 * arg3.length) - 256
+                            else:
+                                mem[floor32(arg3.length) + ceil32(arg3.length) + 324] = mem[floor32(arg3.length) + ceil32(arg3.length) + -(arg3.length % 32) + 356 len arg3.length % 32]
+                                require ext_code.size(proxyAddress)
+                                call proxyAddress.0x14cba002 with:
+                                     gas gas_remaining - 710 wei
+                                    args address(arg4), address(arg1), 0, 160, address(arg4), arg3.length, Mask(8 * ceil32(arg3.length), -(8 * ceil32(arg3.length)) + 256, arg3[all], mem[arg3.length + 128 len ceil32(arg3.length) - arg3.length]) << (8 * ceil32(arg3.length)) - 256, mem[(2 * ceil32(arg3.length)) + 324 len floor32(arg3.length) + -ceil32(arg3.length) + 32]
+                        else:
+                            mem[ceil32(arg3.length) + 128] = 12
+                            mem[ceil32(arg3.length) + 388] = Mask(96, 0, 'Transfer fee')
+                            require ext_code.size(proxyAddress)
+                            call proxyAddress.0x14cba002 with:
+                                 gas gas_remaining - 710 wei
+                                args address(arg4), feeAddress, arg2, 'Transfer fee', address(arg4)
+                            require ext_call.success
+                            if not ext_call.return_data[0]:
+                                return 0
+                            if arg2 >= arg2:
+                                return 1
+                            mem[ceil32(arg3.length) + 388 len ceil32(arg3.length)] = arg3[all], mem[arg3.length + 128 len ceil32(arg3.length) - arg3.length]
+                            if not arg3.length % 32:
+                                require ext_code.size(proxyAddress)
+                                call proxyAddress.0x14cba002 with:
+                                     gas gas_remaining - 710 wei
+                                    args address(arg4), address(arg1), 0, 160, address(arg4), arg3.length, Mask(8 * arg3.length, -(8 * arg3.length) + 256, arg3[all], mem[arg3.length + 128 len ceil32(arg3.length) - arg3.length]) << (8 * arg3.length) - 256
+                            else:
+                                mem[floor32(arg3.length) + ceil32(arg3.length) + 388] = mem[floor32(arg3.length) + ceil32(arg3.length) + -(arg3.length % 32) + 420 len arg3.length % 32]
+                                require ext_code.size(proxyAddress)
+                                call proxyAddress.0x14cba002 with:
+                                     gas gas_remaining - 710 wei
+                                    args address(arg4), address(arg1), 0, 160, address(arg4), arg3.length, Mask(8 * ceil32(arg3.length), -(8 * ceil32(arg3.length)) + 256, arg3[all], mem[arg3.length + 128 len ceil32(arg3.length) - arg3.length]) << (8 * ceil32(arg3.length)) - 256, mem[(2 * ceil32(arg3.length)) + 388 len floor32(arg3.length) + -ceil32(arg3.length) + 32]
+                        require ext_call.success
+                        if not ext_call.return_data[0]:
+                            require not arg2
+                else:
+                    if absMaxFee <= arg2:
+                        if absMaxFee > 0:
+                            require ext_code.size(proxyAddress)
+                            call proxyAddress.0x14cba002 with:
+                                 gas gas_remaining - 710 wei
+                                args address(arg4), feeAddress, absMaxFee, 'Transfer fee', address(arg4)
+                            require ext_call.success
+                            if not ext_call.return_data[0]:
+                                return 0
+                        if absMaxFee >= arg2:
+                            return 1
+                        require ext_code.size(proxyAddress)
+                        call proxyAddress.0x14cba002 with:
+                             gas gas_remaining - 710 wei
+                            args address(arg4), address(arg1), arg2 - absMaxFee, Array(len=arg3.length, data=arg3[all]), address(arg4)
+                        require ext_call.success
+                        if not ext_call.return_data[0]:
+                            require not absMaxFee
+                    else:
+                        if arg2 <= 0:
+                            if arg2 >= arg2:
+                                return 1
+                            mem[ceil32(arg3.length) + 128] = 0x14cba00200000000000000000000000000000000000000000000000000000000
+                            mem[ceil32(arg3.length) + 324 len ceil32(arg3.length)] = arg3[all], mem[arg3.length + 128 len ceil32(arg3.length) - arg3.length]
+                            if not arg3.length % 32:
+                                require ext_code.size(proxyAddress)
+                                call proxyAddress.0x14cba002 with:
+                                     gas gas_remaining - 710 wei
+                                    args address(arg4), address(arg1), 0, 160, address(arg4), arg3.length, Mask(8 * arg3.length, -(8 * arg3.length) + 256, arg3[all], mem[arg3.length + 128 len ceil32(arg3.length) - arg3.length]) << (8 * arg3.length) - 256
+                            else:
+                                mem[floor32(arg3.length) + ceil32(arg3.length) + 324] = mem[floor32(arg3.length) + ceil32(arg3.length) + -(arg3.length % 32) + 356 len arg3.length % 32]
+                                require ext_code.size(proxyAddress)
+                                call proxyAddress.0x14cba002 with:
+                                     gas gas_remaining - 710 wei
+                                    args address(arg4), address(arg1), 0, 160, address(arg4), arg3.length, Mask(8 * ceil32(arg3.length), -(8 * ceil32(arg3.length)) + 256, arg3[all], mem[arg3.length + 128 len ceil32(arg3.length) - arg3.length]) << (8 * ceil32(arg3.length)) - 256, mem[(2 * ceil32(arg3.length)) + 324 len floor32(arg3.length) + -ceil32(arg3.length) + 32]
+                        else:
+                            mem[ceil32(arg3.length) + 128] = 12
+                            mem[ceil32(arg3.length) + 388] = Mask(96, 0, 'Transfer fee')
+                            require ext_code.size(proxyAddress)
+                            call proxyAddress.0x14cba002 with:
+                                 gas gas_remaining - 710 wei
+                                args address(arg4), feeAddress, arg2, 'Transfer fee', address(arg4)
+                            require ext_call.success
+                            if not ext_call.return_data[0]:
+                                return 0
+                            if arg2 >= arg2:
+                                return 1
+                            mem[ceil32(arg3.length) + 388 len ceil32(arg3.length)] = arg3[all], mem[arg3.length + 128 len ceil32(arg3.length) - arg3.length]
+                            if not arg3.length % 32:
+                                require ext_code.size(proxyAddress)
+                                call proxyAddress.0x14cba002 with:
+                                     gas gas_remaining - 710 wei
+                                    args address(arg4), address(arg1), 0, 160, address(arg4), arg3.length, Mask(8 * arg3.length, -(8 * arg3.length) + 256, arg3[all], mem[arg3.length + 128 len ceil32(arg3.length) - arg3.length]) << (8 * arg3.length) - 256
+                            else:
+                                mem[floor32(arg3.length) + ceil32(arg3.length) + 388] = mem[floor32(arg3.length) + ceil32(arg3.length) + -(arg3.length % 32) + 420 len arg3.length % 32]
+                                require ext_code.size(proxyAddress)
+                                call proxyAddress.0x14cba002 with:
+                                     gas gas_remaining - 710 wei
+                                    args address(arg4), address(arg1), 0, 160, address(arg4), arg3.length, Mask(8 * ceil32(arg3.length), -(8 * ceil32(arg3.length)) + 256, arg3[all], mem[arg3.length + 128 len ceil32(arg3.length) - arg3.length]) << (8 * ceil32(arg3.length)) - 256, mem[(2 * ceil32(arg3.length)) + 388 len floor32(arg3.length) + -ceil32(arg3.length) + 32]
+                        require ext_call.success
+                        if not ext_call.return_data[0]:
+                            require not arg2
+    return bool(ext_call.return_data[0])
+}
+
+function _performTransferToICAPWithReference(bytes32 arg1, uint256 arg2, string arg3, address arg4) {
+    mem[128 len arg3.length] = arg3[all]
+    if proxyAddress != msg.sender:
+        return 0
+    if not feeAddress:
+        if 0 <= arg2:
+            if 0 >= arg2:
+                return 1
+            mem[ceil32(arg3.length) + 128] = 0x9b487f3f00000000000000000000000000000000000000000000000000000000
+            mem[ceil32(arg3.length) + 132] = arg4
+            mem[ceil32(arg3.length) + 164] = arg1
+            mem[ceil32(arg3.length) + 196] = arg2
+            mem[ceil32(arg3.length) + 260] = arg4
+            mem[ceil32(arg3.length) + 228] = 160
+            mem[ceil32(arg3.length) + 292] = arg3.length
+            if 0 >= arg3.length:
+                if not arg3.length % 32:
+                    require ext_code.size(proxyAddress)
+                    call proxyAddress.0x9b487f3f with:
+                         gas gas_remaining - 710 wei
+                        args 0, 0, uint32(arg1), arg2, 160, address(arg4), arg3.length, mem[ceil32(arg3.length) + 324 len arg3.length]
+                else:
+                    mem[floor32(arg3.length) + ceil32(arg3.length) + 324] = mem[floor32(arg3.length) + ceil32(arg3.length) + -(arg3.length % 32) + 356 len arg3.length % 32]
+                    require ext_code.size(proxyAddress)
+                    call proxyAddress.0x9b487f3f with:
+                         gas gas_remaining - 710 wei
+                        args address(arg4), arg1, arg2, Array(len=arg3.length, data=mem[ceil32(arg3.length) + 324 len floor32(arg3.length) + 32]), address(arg4)
+            else:
+                mem[ceil32(arg3.length) + 324] = mem[128]
+                mem[ceil32(arg3.length) + 356 len floor32(arg3.length - 1)] = mem[160 len floor32(arg3.length - 1)]
+                require ext_code.size(proxyAddress)
+                call proxyAddress.0x9b487f3f with:
+                     gas gas_remaining - 710 wei
+                    args address(arg4), arg1, arg2, Array(len=arg3.length, data=mem[ceil32(arg3.length) + 324 len arg3.length]), address(arg4)
+            require ext_call.success
+        else:
+            if arg2 <= 0:
+                if arg2 >= arg2:
+                    return 1
+                mem[ceil32(arg3.length) + 128] = 0x9b487f3f00000000000000000000000000000000000000000000000000000000
+                mem[ceil32(arg3.length) + 132] = arg4
+                mem[ceil32(arg3.length) + 164] = arg1
+                mem[ceil32(arg3.length) + 196] = 0
+                mem[ceil32(arg3.length) + 260] = arg4
+                mem[ceil32(arg3.length) + 228] = 160
+                mem[ceil32(arg3.length) + 292] = arg3.length
+                if 0 >= arg3.length:
+                    if not arg3.length % 32:
+                        require ext_code.size(proxyAddress)
+                        call proxyAddress.0x9b487f3f with:
+                             gas gas_remaining - 710 wei
+                            args 0, 0, uint32(arg1), 0, 160, address(arg4), arg3.length, mem[ceil32(arg3.length) + 324 len arg3.length]
+                    else:
+                        mem[floor32(arg3.length) + ceil32(arg3.length) + 324] = mem[floor32(arg3.length) + ceil32(arg3.length) + -(arg3.length % 32) + 356 len arg3.length % 32]
+                        require ext_code.size(proxyAddress)
+                        call proxyAddress.0x9b487f3f with:
+                             gas gas_remaining - 710 wei
+                            args address(arg4), arg1, 0, 160, address(arg4), arg3.length, mem[ceil32(arg3.length) + 324 len floor32(arg3.length) + 32]
+                else:
+                    mem[ceil32(arg3.length) + 324] = mem[128]
+                    mem[ceil32(arg3.length) + 356 len floor32(arg3.length - 1)] = mem[160 len floor32(arg3.length - 1)]
+                    if not arg3.length % 32:
+                        require ext_code.size(proxyAddress)
+                        call proxyAddress.0x9b487f3f with:
+                             gas gas_remaining - 710 wei
+                            args address(arg4), arg1, 0, 160, address(arg4), arg3.length, mem[ceil32(arg3.length) + 324 len arg3.length]
+                    else:
+                        mem[floor32(arg3.length) + ceil32(arg3.length) + 324] = mem[floor32(arg3.length) + ceil32(arg3.length) + -(arg3.length % 32) + 356 len arg3.length % 32]
+                        require ext_code.size(proxyAddress)
+                        call proxyAddress.0x9b487f3f with:
+                             gas gas_remaining - 710 wei
+                            args address(arg4), arg1, 0, 160, address(arg4), arg3.length, mem[128], mem[ceil32(arg3.length) + 356 len floor32(arg3.length)]
+            else:
+                mem[ceil32(arg3.length) + 128] = 12
+                mem[ceil32(arg3.length) + 160] = 'Transfer fee'
+                mem[ceil32(arg3.length) + 388] = Mask(96, 0, 'Transfer fee')
+                require ext_code.size(proxyAddress)
+                call proxyAddress.0x14cba002 with:
+                     gas gas_remaining - 710 wei
+                    args address(arg4), feeAddress, arg2, 'Transfer fee', address(arg4)
+                require ext_call.success
+                if not ext_call.return_data[0]:
+                    return 0
+                if arg2 >= arg2:
+                    return 1
+                mem[ceil32(arg3.length) + 192] = 0x9b487f3f00000000000000000000000000000000000000000000000000000000
+                mem[ceil32(arg3.length) + 196] = arg4
+                mem[ceil32(arg3.length) + 228] = arg1
+                mem[ceil32(arg3.length) + 260] = 0
+                mem[ceil32(arg3.length) + 324] = arg4
+                mem[ceil32(arg3.length) + 292] = 160
+                mem[ceil32(arg3.length) + 356] = arg3.length
+                if 0 >= arg3.length:
+                    if not arg3.length % 32:
+                        require ext_code.size(proxyAddress)
+                        call proxyAddress.0x9b487f3f with:
+                             gas gas_remaining - 710 wei
+                            args address(arg4), arg1, 0, 160, address(arg4), arg3.length, mem[ceil32(arg3.length) + 388 len arg3.length]
+                    else:
+                        mem[floor32(arg3.length) + ceil32(arg3.length) + 388] = mem[floor32(arg3.length) + ceil32(arg3.length) + -(arg3.length % 32) + 420 len arg3.length % 32]
+                        require ext_code.size(proxyAddress)
+                        call proxyAddress.0x9b487f3f with:
+                             gas gas_remaining - 710 wei
+                            args address(arg4), arg1, 0, 160, address(arg4), arg3.length, 'Transfer fee' << 160, mem[ceil32(arg3.length) + 420 len floor32(arg3.length)]
+                else:
+                    mem[ceil32(arg3.length) + 388] = mem[128]
+                    mem[ceil32(arg3.length) + 420 len floor32(arg3.length - 1)] = mem[160 len floor32(arg3.length - 1)]
+                    if not arg3.length % 32:
+                        require ext_code.size(proxyAddress)
+                        call proxyAddress.0x9b487f3f with:
+                             gas gas_remaining - 710 wei
+                            args address(arg4), arg1, 0, 160, address(arg4), arg3.length, mem[ceil32(arg3.length) + 388 len arg3.length]
+                    else:
+                        mem[floor32(arg3.length) + ceil32(arg3.length) + 388] = mem[floor32(arg3.length) + ceil32(arg3.length) + -(arg3.length % 32) + 420 len arg3.length % 32]
+                        require ext_code.size(proxyAddress)
+                        call proxyAddress.0x9b487f3f with:
+                             gas gas_remaining - 710 wei
+                            args address(arg4), arg1, 0, 160, address(arg4), arg3.length, mem[128], mem[ceil32(arg3.length) + 420 len floor32(arg3.length)]
+            require ext_call.success
+            if not ext_call.return_data[0]:
+                require not arg2
+    else:
+        if feeAddress == arg4:
+            if 0 <= arg2:
+                if 0 >= arg2:
+                    return 1
+                mem[ceil32(arg3.length) + 128] = 0x9b487f3f00000000000000000000000000000000000000000000000000000000
+                mem[ceil32(arg3.length) + 132] = arg4
+                mem[ceil32(arg3.length) + 164] = arg1
+                mem[ceil32(arg3.length) + 196] = arg2
+                mem[ceil32(arg3.length) + 260] = arg4
+                mem[ceil32(arg3.length) + 228] = 160
+                mem[ceil32(arg3.length) + 292] = arg3.length
+                if 0 >= arg3.length:
+                    if not arg3.length % 32:
+                        require ext_code.size(proxyAddress)
+                        call proxyAddress.0x9b487f3f with:
+                             gas gas_remaining - 710 wei
+                            args 0, 0, uint32(arg1), arg2, 160, address(arg4), arg3.length, mem[ceil32(arg3.length) + 324 len arg3.length]
+                    else:
+                        mem[floor32(arg3.length) + ceil32(arg3.length) + 324] = mem[floor32(arg3.length) + ceil32(arg3.length) + -(arg3.length % 32) + 356 len arg3.length % 32]
+                        require ext_code.size(proxyAddress)
+                        call proxyAddress.0x9b487f3f with:
+                             gas gas_remaining - 710 wei
+                            args address(arg4), arg1, arg2, Array(len=arg3.length, data=mem[ceil32(arg3.length) + 324 len floor32(arg3.length) + 32]), address(arg4)
+                else:
+                    mem[ceil32(arg3.length) + 324] = mem[128]
+                    mem[ceil32(arg3.length) + 356 len floor32(arg3.length - 1)] = mem[160 len floor32(arg3.length - 1)]
+                    require ext_code.size(proxyAddress)
+                    call proxyAddress.0x9b487f3f with:
+                         gas gas_remaining - 710 wei
+                        args address(arg4), arg1, arg2, Array(len=arg3.length, data=mem[ceil32(arg3.length) + 324 len arg3.length]), address(arg4)
+                require ext_call.success
+            else:
+                if arg2 <= 0:
+                    if arg2 >= arg2:
+                        return 1
+                    mem[ceil32(arg3.length) + 128] = 0x9b487f3f00000000000000000000000000000000000000000000000000000000
+                    mem[ceil32(arg3.length) + 132] = arg4
+                    mem[ceil32(arg3.length) + 164] = arg1
+                    mem[ceil32(arg3.length) + 196] = 0
+                    mem[ceil32(arg3.length) + 260] = arg4
+                    mem[ceil32(arg3.length) + 228] = 160
+                    mem[ceil32(arg3.length) + 292] = arg3.length
+                    if 0 >= arg3.length:
+                        if not arg3.length % 32:
+                            require ext_code.size(proxyAddress)
+                            call proxyAddress.0x9b487f3f with:
+                                 gas gas_remaining - 710 wei
+                                args 0, 0, uint32(arg1), 0, 160, address(arg4), arg3.length, mem[ceil32(arg3.length) + 324 len arg3.length]
+                        else:
+                            mem[floor32(arg3.length) + ceil32(arg3.length) + 324] = mem[floor32(arg3.length) + ceil32(arg3.length) + -(arg3.length % 32) + 356 len arg3.length % 32]
+                            require ext_code.size(proxyAddress)
+                            call proxyAddress.0x9b487f3f with:
+                                 gas gas_remaining - 710 wei
+                                args address(arg4), arg1, 0, 160, address(arg4), arg3.length, mem[ceil32(arg3.length) + 324 len floor32(arg3.length) + 32]
+                    else:
+                        mem[ceil32(arg3.length) + 324] = mem[128]
+                        mem[ceil32(arg3.length) + 356 len floor32(arg3.length - 1)] = mem[160 len floor32(arg3.length - 1)]
+                        if not arg3.length % 32:
+                            require ext_code.size(proxyAddress)
+                            call proxyAddress.0x9b487f3f with:
+                                 gas gas_remaining - 710 wei
+                                args address(arg4), arg1, 0, 160, address(arg4), arg3.length, mem[ceil32(arg3.length) + 324 len arg3.length]
+                        else:
+                            mem[floor32(arg3.length) + ceil32(arg3.length) + 324] = mem[floor32(arg3.length) + ceil32(arg3.length) + -(arg3.length % 32) + 356 len arg3.length % 32]
+                            require ext_code.size(proxyAddress)
+                            call proxyAddress.0x9b487f3f with:
+                                 gas gas_remaining - 710 wei
+                                args address(arg4), arg1, 0, 160, address(arg4), arg3.length, mem[128], mem[ceil32(arg3.length) + 356 len floor32(arg3.length)]
+                else:
+                    mem[ceil32(arg3.length) + 128] = 12
+                    mem[ceil32(arg3.length) + 160] = 'Transfer fee'
+                    mem[ceil32(arg3.length) + 388] = Mask(96, 0, 'Transfer fee')
+                    require ext_code.size(proxyAddress)
+                    call proxyAddress.0x14cba002 with:
+                         gas gas_remaining - 710 wei
+                        args address(arg4), feeAddress, arg2, 'Transfer fee', address(arg4)
+                    require ext_call.success
+                    if not ext_call.return_data[0]:
+                        return 0
+                    if arg2 >= arg2:
+                        return 1
+                    mem[ceil32(arg3.length) + 192] = 0x9b487f3f00000000000000000000000000000000000000000000000000000000
+                    mem[ceil32(arg3.length) + 196] = arg4
+                    mem[ceil32(arg3.length) + 228] = arg1
+                    mem[ceil32(arg3.length) + 260] = 0
+                    mem[ceil32(arg3.length) + 324] = arg4
+                    mem[ceil32(arg3.length) + 292] = 160
+                    mem[ceil32(arg3.length) + 356] = arg3.length
+                    if 0 >= arg3.length:
+                        if not arg3.length % 32:
+                            require ext_code.size(proxyAddress)
+                            call proxyAddress.0x9b487f3f with:
+                                 gas gas_remaining - 710 wei
+                                args address(arg4), arg1, 0, 160, address(arg4), arg3.length, mem[ceil32(arg3.length) + 388 len arg3.length]
+                        else:
+                            mem[floor32(arg3.length) + ceil32(arg3.length) + 388] = mem[floor32(arg3.length) + ceil32(arg3.length) + -(arg3.length % 32) + 420 len arg3.length % 32]
+                            require ext_code.size(proxyAddress)
+                            call proxyAddress.0x9b487f3f with:
+                                 gas gas_remaining - 710 wei
+                                args address(arg4), arg1, 0, 160, address(arg4), arg3.length, 'Transfer fee' << 160, mem[ceil32(arg3.length) + 420 len floor32(arg3.length)]
+                    else:
+                        mem[ceil32(arg3.length) + 388] = mem[128]
+                        mem[ceil32(arg3.length) + 420 len floor32(arg3.length - 1)] = mem[160 len floor32(arg3.length - 1)]
+                        if not arg3.length % 32:
+                            require ext_code.size(proxyAddress)
+                            call proxyAddress.0x9b487f3f with:
+                                 gas gas_remaining - 710 wei
+                                args address(arg4), arg1, 0, 160, address(arg4), arg3.length, mem[ceil32(arg3.length) + 388 len arg3.length]
+                        else:
+                            mem[floor32(arg3.length) + ceil32(arg3.length) + 388] = mem[floor32(arg3.length) + ceil32(arg3.length) + -(arg3.length % 32) + 420 len arg3.length % 32]
+                            require ext_code.size(proxyAddress)
+                            call proxyAddress.0x9b487f3f with:
+                                 gas gas_remaining - 710 wei
+                                args address(arg4), arg1, 0, 160, address(arg4), arg3.length, mem[128], mem[ceil32(arg3.length) + 420 len floor32(arg3.length)]
+                require ext_call.success
+                if not ext_call.return_data[0]:
+                    require not arg2
+        else:
+            if arg2 * feePercent / 10000 < absMinFee:
+                if absMinFee <= arg2:
+                    if absMinFee <= 0:
+                        if absMinFee >= arg2:
+                            return 1
+                        mem[ceil32(arg3.length) + 128] = 0x9b487f3f00000000000000000000000000000000000000000000000000000000
+                        mem[ceil32(arg3.length) + 132] = arg4
+                        mem[ceil32(arg3.length) + 164] = arg1
+                        mem[ceil32(arg3.length) + 196] = arg2 - absMinFee
+                        mem[ceil32(arg3.length) + 260] = arg4
+                        mem[ceil32(arg3.length) + 228] = 160
+                        mem[ceil32(arg3.length) + 292] = arg3.length
+                        if 0 >= arg3.length:
+                            if not arg3.length % 32:
+                                require ext_code.size(proxyAddress)
+                                call proxyAddress.0x9b487f3f with:
+                                     gas gas_remaining - 710 wei
+                                    args 0, 0, uint32(arg1), arg2 - absMinFee, 160, address(arg4), arg3.length, mem[ceil32(arg3.length) + 324 len arg3.length]
+                            else:
+                                mem[floor32(arg3.length) + ceil32(arg3.length) + 324] = mem[floor32(arg3.length) + ceil32(arg3.length) + -(arg3.length % 32) + 356 len arg3.length % 32]
+                                require ext_code.size(proxyAddress)
+                                call proxyAddress.0x9b487f3f with:
+                                     gas gas_remaining - 710 wei
+                                    args address(arg4), arg1, arg2 - absMinFee, Array(len=arg3.length, data=mem[ceil32(arg3.length) + 324 len floor32(arg3.length) + 32]), address(arg4)
+                        else:
+                            mem[ceil32(arg3.length) + 324] = mem[128]
+                            mem[ceil32(arg3.length) + 356 len floor32(arg3.length - 1)] = mem[160 len floor32(arg3.length - 1)]
+                            require ext_code.size(proxyAddress)
+                            call proxyAddress.0x9b487f3f with:
+                                 gas gas_remaining - 710 wei
+                                args address(arg4), arg1, arg2 - absMinFee, Array(len=arg3.length, data=mem[ceil32(arg3.length) + 324 len arg3.length]), address(arg4)
+                    else:
+                        mem[ceil32(arg3.length) + 128] = 12
+                        mem[ceil32(arg3.length) + 160] = 'Transfer fee'
+                        mem[ceil32(arg3.length) + 388] = Mask(96, 0, 'Transfer fee')
+                        require ext_code.size(proxyAddress)
+                        call proxyAddress.0x14cba002 with:
+                             gas gas_remaining - 710 wei
+                            args address(arg4), feeAddress, absMinFee, 'Transfer fee', address(arg4)
+                        require ext_call.success
+                        if not ext_call.return_data[0]:
+                            return 0
+                        if absMinFee >= arg2:
+                            return 1
+                        mem[ceil32(arg3.length) + 192] = 0x9b487f3f00000000000000000000000000000000000000000000000000000000
+                        mem[ceil32(arg3.length) + 196] = arg4
+                        mem[ceil32(arg3.length) + 228] = arg1
+                        mem[ceil32(arg3.length) + 260] = arg2 - absMinFee
+                        mem[ceil32(arg3.length) + 324] = arg4
+                        mem[ceil32(arg3.length) + 292] = 160
+                        mem[ceil32(arg3.length) + 356] = arg3.length
+                        if 0 < arg3.length:
+                            mem[ceil32(arg3.length) + 388] = mem[128]
+                            mem[ceil32(arg3.length) + 420 len floor32(arg3.length - 1)] = mem[160 len floor32(arg3.length - 1)]
+                        require ext_code.size(proxyAddress)
+                        call proxyAddress.0x9b487f3f with:
+                             gas gas_remaining - 710 wei
+                            args address(arg4), arg1, arg2 - absMinFee, Array(len=arg3.length, data=mem[ceil32(arg3.length) + 388 len arg3.length]), address(arg4)
+                    require ext_call.success
+                    if not ext_call.return_data[0]:
+                        require not absMinFee
+                else:
+                    if arg2 <= 0:
+                        if arg2 >= arg2:
+                            return 1
+                        mem[ceil32(arg3.length) + 128] = 0x9b487f3f00000000000000000000000000000000000000000000000000000000
+                        mem[ceil32(arg3.length) + 132] = arg4
+                        mem[ceil32(arg3.length) + 164] = arg1
+                        mem[ceil32(arg3.length) + 196] = 0
+                        mem[ceil32(arg3.length) + 260] = arg4
+                        mem[ceil32(arg3.length) + 228] = 160
+                        mem[ceil32(arg3.length) + 292] = arg3.length
+                        if 0 >= arg3.length:
+                            if not arg3.length % 32:
+                                require ext_code.size(proxyAddress)
+                                call proxyAddress.0x9b487f3f with:
+                                     gas gas_remaining - 710 wei
+                                    args 0, 0, uint32(arg1), 0, 160, address(arg4), arg3.length, mem[ceil32(arg3.length) + 324 len arg3.length]
+                            else:
+                                mem[floor32(arg3.length) + ceil32(arg3.length) + 324] = mem[floor32(arg3.length) + ceil32(arg3.length) + -(arg3.length % 32) + 356 len arg3.length % 32]
+                                require ext_code.size(proxyAddress)
+                                call proxyAddress.0x9b487f3f with:
+                                     gas gas_remaining - 710 wei
+                                    args address(arg4), arg1, 0, 160, address(arg4), arg3.length, mem[ceil32(arg3.length) + 324 len floor32(arg3.length) + 32]
+                        else:
+                            mem[ceil32(arg3.length) + 324] = mem[128]
+                            mem[ceil32(arg3.length) + 356 len floor32(arg3.length - 1)] = mem[160 len floor32(arg3.length - 1)]
+                            if not arg3.length % 32:
+                                require ext_code.size(proxyAddress)
+                                call proxyAddress.0x9b487f3f with:
+                                     gas gas_remaining - 710 wei
+                                    args address(arg4), arg1, 0, 160, address(arg4), arg3.length, mem[ceil32(arg3.length) + 324 len arg3.length]
+                            else:
+                                mem[floor32(arg3.length) + ceil32(arg3.length) + 324] = mem[floor32(arg3.length) + ceil32(arg3.length) + -(arg3.length % 32) + 356 len arg3.length % 32]
+                                require ext_code.size(proxyAddress)
+                                call proxyAddress.0x9b487f3f with:
+                                     gas gas_remaining - 710 wei
+                                    args address(arg4), arg1, 0, 160, address(arg4), arg3.length, mem[128], mem[ceil32(arg3.length) + 356 len floor32(arg3.length)]
+                    else:
+                        mem[ceil32(arg3.length) + 128] = 12
+                        mem[ceil32(arg3.length) + 160] = 'Transfer fee'
+                        mem[ceil32(arg3.length) + 388] = Mask(96, 0, 'Transfer fee')
+                        require ext_code.size(proxyAddress)
+                        call proxyAddress.0x14cba002 with:
+                             gas gas_remaining - 710 wei
+                            args address(arg4), feeAddress, arg2, 'Transfer fee', address(arg4)
+                        require ext_call.success
+                        if not ext_call.return_data[0]:
+                            return 0
+                        if arg2 >= arg2:
+                            return 1
+                        mem[ceil32(arg3.length) + 192] = 0x9b487f3f00000000000000000000000000000000000000000000000000000000
+                        mem[ceil32(arg3.length) + 196] = arg4
+                        mem[ceil32(arg3.length) + 228] = arg1
+                        mem[ceil32(arg3.length) + 260] = 0
+                        mem[ceil32(arg3.length) + 324] = arg4
+                        mem[ceil32(arg3.length) + 292] = 160
+                        mem[ceil32(arg3.length) + 356] = arg3.length
+                        if 0 >= arg3.length:
+                            if not arg3.length % 32:
+                                require ext_code.size(proxyAddress)
+                                call proxyAddress.0x9b487f3f with:
+                                     gas gas_remaining - 710 wei
+                                    args address(arg4), arg1, 0, 160, address(arg4), arg3.length, mem[ceil32(arg3.length) + 388 len arg3.length]
+                            else:
+                                mem[floor32(arg3.length) + ceil32(arg3.length) + 388] = mem[floor32(arg3.length) + ceil32(arg3.length) + -(arg3.length % 32) + 420 len arg3.length % 32]
+                                require ext_code.size(proxyAddress)
+                                call proxyAddress.0x9b487f3f with:
+                                     gas gas_remaining - 710 wei
+                                    args address(arg4), arg1, 0, 160, address(arg4), arg3.length, 'Transfer fee' << 160, mem[ceil32(arg3.length) + 420 len floor32(arg3.length)]
+                        else:
+                            mem[ceil32(arg3.length) + 388] = mem[128]
+                            mem[ceil32(arg3.length) + 420 len floor32(arg3.length - 1)] = mem[160 len floor32(arg3.length - 1)]
+                            if not arg3.length % 32:
+                                require ext_code.size(proxyAddress)
+                                call proxyAddress.0x9b487f3f with:
+                                     gas gas_remaining - 710 wei
+                                    args address(arg4), arg1, 0, 160, address(arg4), arg3.length, mem[ceil32(arg3.length) + 388 len arg3.length]
+                            else:
+                                mem[floor32(arg3.length) + ceil32(arg3.length) + 388] = mem[floor32(arg3.length) + ceil32(arg3.length) + -(arg3.length % 32) + 420 len arg3.length % 32]
+                                require ext_code.size(proxyAddress)
+                                call proxyAddress.0x9b487f3f with:
+                                     gas gas_remaining - 710 wei
+                                    args address(arg4), arg1, 0, 160, address(arg4), arg3.length, mem[128], mem[ceil32(arg3.length) + 420 len floor32(arg3.length)]
+                    require ext_call.success
+                    if not ext_call.return_data[0]:
+                        require not arg2
+            else:
+                if arg2 * feePercent / 10000 <= absMaxFee:
+                    if arg2 * feePercent / 10000 <= arg2:
+                        if arg2 * feePercent / 10000 <= 0:
+                            if arg2 * feePercent / 10000 >= arg2:
+                                return 1
+                            mem[ceil32(arg3.length) + 128] = 0x9b487f3f00000000000000000000000000000000000000000000000000000000
+                            mem[ceil32(arg3.length) + 132] = arg4
+                            mem[ceil32(arg3.length) + 164] = arg1
+                            mem[ceil32(arg3.length) + 196] = arg2 - (arg2 * feePercent / 10000)
+                            mem[ceil32(arg3.length) + 260] = arg4
+                            mem[ceil32(arg3.length) + 228] = 160
+                            mem[ceil32(arg3.length) + 292] = arg3.length
+                            if 0 >= arg3.length:
+                                if not arg3.length % 32:
+                                    require ext_code.size(proxyAddress)
+                                    call proxyAddress.0x9b487f3f with:
+                                         gas gas_remaining - 710 wei
+                                        args 0, 0, uint32(arg1), arg2 - (arg2 * feePercent / 10000), 160, address(arg4), arg3.length, mem[ceil32(arg3.length) + 324 len arg3.length]
+                                else:
+                                    mem[floor32(arg3.length) + ceil32(arg3.length) + 324] = mem[floor32(arg3.length) + ceil32(arg3.length) + -(arg3.length % 32) + 356 len arg3.length % 32]
+                                    require ext_code.size(proxyAddress)
+                                    call proxyAddress.0x9b487f3f with:
+                                         gas gas_remaining - 710 wei
+                                        args address(arg4), arg1, arg2 - (arg2 * feePercent / 10000), Array(len=arg3.length, data=mem[ceil32(arg3.length) + 324 len floor32(arg3.length) + 32]), address(arg4)
+                            else:
+                                mem[ceil32(arg3.length) + 324] = mem[128]
+                                mem[ceil32(arg3.length) + 356 len floor32(arg3.length - 1)] = mem[160 len floor32(arg3.length - 1)]
+                                require ext_code.size(proxyAddress)
+                                call proxyAddress.0x9b487f3f with:
+                                     gas gas_remaining - 710 wei
+                                    args address(arg4), arg1, arg2 - (arg2 * feePercent / 10000), Array(len=arg3.length, data=mem[ceil32(arg3.length) + 324 len arg3.length]), address(arg4)
+                        else:
+                            mem[ceil32(arg3.length) + 128] = 12
+                            mem[ceil32(arg3.length) + 160] = 'Transfer fee'
+                            mem[ceil32(arg3.length) + 388] = Mask(96, 0, 'Transfer fee')
+                            require ext_code.size(proxyAddress)
+                            call proxyAddress.0x14cba002 with:
+                                 gas gas_remaining - 710 wei
+                                args address(arg4), feeAddress, arg2 * feePercent / 10000, 'Transfer fee', address(arg4)
+                            require ext_call.success
+                            if not ext_call.return_data[0]:
+                                return 0
+                            if arg2 * feePercent / 10000 >= arg2:
+                                return 1
+                            mem[ceil32(arg3.length) + 192] = 0x9b487f3f00000000000000000000000000000000000000000000000000000000
+                            mem[ceil32(arg3.length) + 196] = arg4
+                            mem[ceil32(arg3.length) + 228] = arg1
+                            mem[ceil32(arg3.length) + 260] = arg2 - (arg2 * feePercent / 10000)
+                            mem[ceil32(arg3.length) + 324] = arg4
+                            mem[ceil32(arg3.length) + 292] = 160
+                            mem[ceil32(arg3.length) + 356] = arg3.length
+                            if 0 < arg3.length:
+                                mem[ceil32(arg3.length) + 388] = mem[128]
+                                mem[ceil32(arg3.length) + 420 len floor32(arg3.length - 1)] = mem[160 len floor32(arg3.length - 1)]
+                            require ext_code.size(proxyAddress)
+                            call proxyAddress.0x9b487f3f with:
+                                 gas gas_remaining - 710 wei
+                                args address(arg4), arg1, arg2 - (arg2 * feePercent / 10000), Array(len=arg3.length, data=mem[ceil32(arg3.length) + 388 len arg3.length]), address(arg4)
+                        require ext_call.success
+                        if not ext_call.return_data[0]:
+                            require not arg2 * feePercent / 10000
+                    else:
+                        if arg2 <= 0:
+                            if arg2 >= arg2:
+                                return 1
+                            mem[ceil32(arg3.length) + 128] = 0x9b487f3f00000000000000000000000000000000000000000000000000000000
+                            mem[ceil32(arg3.length) + 132] = arg4
+                            mem[ceil32(arg3.length) + 164] = arg1
+                            mem[ceil32(arg3.length) + 196] = 0
+                            mem[ceil32(arg3.length) + 260] = arg4
+                            mem[ceil32(arg3.length) + 228] = 160
+                            mem[ceil32(arg3.length) + 292] = arg3.length
+                            if 0 >= arg3.length:
+                                if not arg3.length % 32:
+                                    require ext_code.size(proxyAddress)
+                                    call proxyAddress.0x9b487f3f with:
+                                         gas gas_remaining - 710 wei
+                                        args 0, 0, uint32(arg1), 0, 160, address(arg4), arg3.length, mem[ceil32(arg3.length) + 324 len arg3.length]
+                                else:
+                                    mem[floor32(arg3.length) + ceil32(arg3.length) + 324] = mem[floor32(arg3.length) + ceil32(arg3.length) + -(arg3.length % 32) + 356 len arg3.length % 32]
+                                    require ext_code.size(proxyAddress)
+                                    call proxyAddress.0x9b487f3f with:
+                                         gas gas_remaining - 710 wei
+                                        args address(arg4), arg1, 0, 160, address(arg4), arg3.length, mem[ceil32(arg3.length) + 324 len floor32(arg3.length) + 32]
+                            else:
+                                mem[ceil32(arg3.length) + 324] = mem[128]
+                                mem[ceil32(arg3.length) + 356 len floor32(arg3.length - 1)] = mem[160 len floor32(arg3.length - 1)]
+                                if not arg3.length % 32:
+                                    require ext_code.size(proxyAddress)
+                                    call proxyAddress.0x9b487f3f with:
+                                         gas gas_remaining - 710 wei
+                                        args address(arg4), arg1, 0, 160, address(arg4), arg3.length, mem[ceil32(arg3.length) + 324 len arg3.length]
+                                else:
+                                    mem[floor32(arg3.length) + ceil32(arg3.length) + 324] = mem[floor32(arg3.length) + ceil32(arg3.length) + -(arg3.length % 32) + 356 len arg3.length % 32]
+                                    require ext_code.size(proxyAddress)
+                                    call proxyAddress.0x9b487f3f with:
+                                         gas gas_remaining - 710 wei
+                                        args address(arg4), arg1, 0, 160, address(arg4), arg3.length, mem[128], mem[ceil32(arg3.length) + 356 len floor32(arg3.length)]
+                        else:
+                            mem[ceil32(arg3.length) + 128] = 12
+                            mem[ceil32(arg3.length) + 160] = 'Transfer fee'
+                            mem[ceil32(arg3.length) + 388] = Mask(96, 0, 'Transfer fee')
+                            require ext_code.size(proxyAddress)
+                            call proxyAddress.0x14cba002 with:
+                                 gas gas_remaining - 710 wei
+                                args address(arg4), feeAddress, arg2, 'Transfer fee', address(arg4)
+                            require ext_call.success
+                            if not ext_call.return_data[0]:
+                                return 0
+                            if arg2 >= arg2:
+                                return 1
+                            mem[ceil32(arg3.length) + 192] = 0x9b487f3f00000000000000000000000000000000000000000000000000000000
+                            mem[ceil32(arg3.length) + 196] = arg4
+                            mem[ceil32(arg3.length) + 228] = arg1
+                            mem[ceil32(arg3.length) + 260] = 0
+                            mem[ceil32(arg3.length) + 324] = arg4
+                            mem[ceil32(arg3.length) + 292] = 160
+                            mem[ceil32(arg3.length) + 356] = arg3.length
+                            if 0 >= arg3.length:
+                                if not arg3.length % 32:
+                                    require ext_code.size(proxyAddress)
+                                    call proxyAddress.0x9b487f3f with:
+                                         gas gas_remaining - 710 wei
+                                        args address(arg4), arg1, 0, 160, address(arg4), arg3.length, mem[ceil32(arg3.length) + 388 len arg3.length]
+                                else:
+                                    mem[floor32(arg3.length) + ceil32(arg3.length) + 388] = mem[floor32(arg3.length) + ceil32(arg3.length) + -(arg3.length % 32) + 420 len arg3.length % 32]
+                                    require ext_code.size(proxyAddress)
+                                    call proxyAddress.0x9b487f3f with:
+                                         gas gas_remaining - 710 wei
+                                        args address(arg4), arg1, 0, 160, address(arg4), arg3.length, 'Transfer fee' << 160, mem[ceil32(arg3.length) + 420 len floor32(arg3.length)]
+                            else:
+                                mem[ceil32(arg3.length) + 388] = mem[128]
+                                mem[ceil32(arg3.length) + 420 len floor32(arg3.length - 1)] = mem[160 len floor32(arg3.length - 1)]
+                                if not arg3.length % 32:
+                                    require ext_code.size(proxyAddress)
+                                    call proxyAddress.0x9b487f3f with:
+                                         gas gas_remaining - 710 wei
+                                        args address(arg4), arg1, 0, 160, address(arg4), arg3.length, mem[ceil32(arg3.length) + 388 len arg3.length]
+                                else:
+                                    mem[floor32(arg3.length) + ceil32(arg3.length) + 388] = mem[floor32(arg3.length) + ceil32(arg3.length) + -(arg3.length % 32) + 420 len arg3.length % 32]
+                                    require ext_code.size(proxyAddress)
+                                    call proxyAddress.0x9b487f3f with:
+                                         gas gas_remaining - 710 wei
+                                        args address(arg4), arg1, 0, 160, address(arg4), arg3.length, mem[128], mem[ceil32(arg3.length) + 420 len floor32(arg3.length)]
+                        require ext_call.success
+                        if not ext_call.return_data[0]:
+                            require not arg2
+                else:
+                    if absMaxFee <= arg2:
+                        if absMaxFee <= 0:
+                            if absMaxFee >= arg2:
+                                return 1
+                            mem[ceil32(arg3.length) + 128] = 0x9b487f3f00000000000000000000000000000000000000000000000000000000
+                            mem[ceil32(arg3.length) + 132] = arg4
+                            mem[ceil32(arg3.length) + 164] = arg1
+                            mem[ceil32(arg3.length) + 196] = arg2 - absMaxFee
+                            mem[ceil32(arg3.length) + 260] = arg4
+                            mem[ceil32(arg3.length) + 228] = 160
+                            mem[ceil32(arg3.length) + 292] = arg3.length
+                            if 0 >= arg3.length:
+                                if not arg3.length % 32:
+                                    require ext_code.size(proxyAddress)
+                                    call proxyAddress.0x9b487f3f with:
+                                         gas gas_remaining - 710 wei
+                                        args 0, 0, uint32(arg1), arg2 - absMaxFee, 160, address(arg4), arg3.length, mem[ceil32(arg3.length) + 324 len arg3.length]
+                                else:
+                                    mem[floor32(arg3.length) + ceil32(arg3.length) + 324] = mem[floor32(arg3.length) + ceil32(arg3.length) + -(arg3.length % 32) + 356 len arg3.length % 32]
+                                    require ext_code.size(proxyAddress)
+                                    call proxyAddress.0x9b487f3f with:
+                                         gas gas_remaining - 710 wei
+                                        args address(arg4), arg1, arg2 - absMaxFee, Array(len=arg3.length, data=mem[ceil32(arg3.length) + 324 len floor32(arg3.length) + 32]), address(arg4)
+                            else:
+                                mem[ceil32(arg3.length) + 324] = mem[128]
+                                mem[ceil32(arg3.length) + 356 len floor32(arg3.length - 1)] = mem[160 len floor32(arg3.length - 1)]
+                                require ext_code.size(proxyAddress)
+                                call proxyAddress.0x9b487f3f with:
+                                     gas gas_remaining - 710 wei
+                                    args address(arg4), arg1, arg2 - absMaxFee, Array(len=arg3.length, data=mem[ceil32(arg3.length) + 324 len arg3.length]), address(arg4)
+                        else:
+                            mem[ceil32(arg3.length) + 128] = 12
+                            mem[ceil32(arg3.length) + 160] = 'Transfer fee'
+                            mem[ceil32(arg3.length) + 388] = Mask(96, 0, 'Transfer fee')
+                            require ext_code.size(proxyAddress)
+                            call proxyAddress.0x14cba002 with:
+                                 gas gas_remaining - 710 wei
+                                args address(arg4), feeAddress, absMaxFee, 'Transfer fee', address(arg4)
+                            require ext_call.success
+                            if not ext_call.return_data[0]:
+                                return 0
+                            if absMaxFee >= arg2:
+                                return 1
+                            mem[ceil32(arg3.length) + 192] = 0x9b487f3f00000000000000000000000000000000000000000000000000000000
+                            mem[ceil32(arg3.length) + 196] = arg4
+                            mem[ceil32(arg3.length) + 228] = arg1
+                            mem[ceil32(arg3.length) + 260] = arg2 - absMaxFee
+                            mem[ceil32(arg3.length) + 324] = arg4
+                            mem[ceil32(arg3.length) + 292] = 160
+                            mem[ceil32(arg3.length) + 356] = arg3.length
+                            if 0 < arg3.length:
+                                mem[ceil32(arg3.length) + 388] = mem[128]
+                                mem[ceil32(arg3.length) + 420 len floor32(arg3.length - 1)] = mem[160 len floor32(arg3.length - 1)]
+                            require ext_code.size(proxyAddress)
+                            call proxyAddress.0x9b487f3f with:
+                                 gas gas_remaining - 710 wei
+                                args address(arg4), arg1, arg2 - absMaxFee, Array(len=arg3.length, data=mem[ceil32(arg3.length) + 388 len arg3.length]), address(arg4)
+                        require ext_call.success
+                        if not ext_call.return_data[0]:
+                            require not absMaxFee
+                    else:
+                        if arg2 <= 0:
+                            if arg2 >= arg2:
+                                return 1
+                            mem[ceil32(arg3.length) + 128] = 0x9b487f3f00000000000000000000000000000000000000000000000000000000
+                            mem[ceil32(arg3.length) + 132] = arg4
+                            mem[ceil32(arg3.length) + 164] = arg1
+                            mem[ceil32(arg3.length) + 196] = 0
+                            mem[ceil32(arg3.length) + 260] = arg4
+                            mem[ceil32(arg3.length) + 228] = 160
+                            mem[ceil32(arg3.length) + 292] = arg3.length
+                            if 0 >= arg3.length:
+                                if not arg3.length % 32:
+                                    require ext_code.size(proxyAddress)
+                                    call proxyAddress.0x9b487f3f with:
+                                         gas gas_remaining - 710 wei
+                                        args 0, 0, uint32(arg1), 0, 160, address(arg4), arg3.length, mem[ceil32(arg3.length) + 324 len arg3.length]
+                                else:
+                                    mem[floor32(arg3.length) + ceil32(arg3.length) + 324] = mem[floor32(arg3.length) + ceil32(arg3.length) + -(arg3.length % 32) + 356 len arg3.length % 32]
+                                    require ext_code.size(proxyAddress)
+                                    call proxyAddress.0x9b487f3f with:
+                                         gas gas_remaining - 710 wei
+                                        args address(arg4), arg1, 0, 160, address(arg4), arg3.length, mem[ceil32(arg3.length) + 324 len floor32(arg3.length) + 32]
+                            else:
+                                mem[ceil32(arg3.length) + 324] = mem[128]
+                                mem[ceil32(arg3.length) + 356 len floor32(arg3.length - 1)] = mem[160 len floor32(arg3.length - 1)]
+                                if not arg3.length % 32:
+                                    require ext_code.size(proxyAddress)
+                                    call proxyAddress.0x9b487f3f with:
+                                         gas gas_remaining - 710 wei
+                                        args address(arg4), arg1, 0, 160, address(arg4), arg3.length, mem[ceil32(arg3.length) + 324 len arg3.length]
+                                else:
+                                    mem[floor32(arg3.length) + ceil32(arg3.length) + 324] = mem[floor32(arg3.length) + ceil32(arg3.length) + -(arg3.length % 32) + 356 len arg3.length % 32]
+                                    require ext_code.size(proxyAddress)
+                                    call proxyAddress.0x9b487f3f with:
+                                         gas gas_remaining - 710 wei
+                                        args address(arg4), arg1, 0, 160, address(arg4), arg3.length, mem[128], mem[ceil32(arg3.length) + 356 len floor32(arg3.length)]
+                        else:
+                            mem[ceil32(arg3.length) + 128] = 12
+                            mem[ceil32(arg3.length) + 160] = 'Transfer fee'
+                            mem[ceil32(arg3.length) + 388] = Mask(96, 0, 'Transfer fee')
+                            require ext_code.size(proxyAddress)
+                            call proxyAddress.0x14cba002 with:
+                                 gas gas_remaining - 710 wei
+                                args address(arg4), feeAddress, arg2, 'Transfer fee', address(arg4)
+                            require ext_call.success
+                            if not ext_call.return_data[0]:
+                                return 0
+                            if arg2 >= arg2:
+                                return 1
+                            mem[ceil32(arg3.length) + 192] = 0x9b487f3f00000000000000000000000000000000000000000000000000000000
+                            mem[ceil32(arg3.length) + 196] = arg4
+                            mem[ceil32(arg3.length) + 228] = arg1
+                            mem[ceil32(arg3.length) + 260] = 0
+                            mem[ceil32(arg3.length) + 324] = arg4
+                            mem[ceil32(arg3.length) + 292] = 160
+                            mem[ceil32(arg3.length) + 356] = arg3.length
+                            if 0 >= arg3.length:
+                                if not arg3.length % 32:
+                                    require ext_code.size(proxyAddress)
+                                    call proxyAddress.0x9b487f3f with:
+                                         gas gas_remaining - 710 wei
+                                        args address(arg4), arg1, 0, 160, address(arg4), arg3.length, mem[ceil32(arg3.length) + 388 len arg3.length]
+                                else:
+                                    mem[floor32(arg3.length) + ceil32(arg3.length) + 388] = mem[floor32(arg3.length) + ceil32(arg3.length) + -(arg3.length % 32) + 420 len arg3.length % 32]
+                                    require ext_code.size(proxyAddress)
+                                    call proxyAddress.0x9b487f3f with:
+                                         gas gas_remaining - 710 wei
+                                        args address(arg4), arg1, 0, 160, address(arg4), arg3.length, 'Transfer fee' << 160, mem[ceil32(arg3.length) + 420 len floor32(arg3.length)]
+                            else:
+                                mem[ceil32(arg3.length) + 388] = mem[128]
+                                mem[ceil32(arg3.length) + 420 len floor32(arg3.length - 1)] = mem[160 len floor32(arg3.length - 1)]
+                                if not arg3.length % 32:
+                                    require ext_code.size(proxyAddress)
+                                    call proxyAddress.0x9b487f3f with:
+                                         gas gas_remaining - 710 wei
+                                        args address(arg4), arg1, 0, 160, address(arg4), arg3.length, mem[ceil32(arg3.length) + 388 len arg3.length]
+                                else:
+                                    mem[floor32(arg3.length) + ceil32(arg3.length) + 388] = mem[floor32(arg3.length) + ceil32(arg3.length) + -(arg3.length % 32) + 420 len arg3.length % 32]
+                                    require ext_code.size(proxyAddress)
+                                    call proxyAddress.0x9b487f3f with:
+                                         gas gas_remaining - 710 wei
+                                        args address(arg4), arg1, 0, 160, address(arg4), arg3.length, mem[128], mem[ceil32(arg3.length) + 420 len floor32(arg3.length)]
+                        require ext_call.success
+                        if not ext_call.return_data[0]:
+                            require not arg2
+    return bool(ext_call.return_data[0])
+}
+
+
+
+}

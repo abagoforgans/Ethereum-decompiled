@@ -1,0 +1,339 @@
+contract main {
+
+
+// =======================  Init code  ======================
+
+
+address stor0;
+mapping of uint256 stor2;
+uint256 stor4;
+uint256 stor5;
+uint256 stor6;
+address stor7;
+uint128 stor8; offset 160
+address stor8;
+
+function _fallback() payable {
+    stor0 = msg.sender
+    stor6 = 0
+    Mask(96, 0, stor8.field_160) = 0
+    require not msg.value
+    stor5 = block.timestamp
+    stor4 = 31000000 * 10^18
+    if code.data[12060 len 32]:
+        require code.data[12060 len 32]
+        require 10^18 * code.data[12060 len 32] / code.data[12060 len 32] == 10^18
+    stor2[address('""""""""""""""""""""')] = 10^18 * code.data[12060 len 32]
+    stor2[0xffffffffffffffffffffffffffffffffffffffff] = 0
+    if stor4:
+        require stor4
+        require 75 * stor4 / stor4 == 75
+    require 75 * stor4 == (100 * 75 * stor4 / 100) + (75 * stor4 % 100)
+    stor2[0x1111111111111111111111111111111111111111] = (75 * stor4 / 100) - (10^18 * code.data[12060 len 32])
+    stor7 = code.data[12008 len 20]
+    address(stor8.field_0) = code.data[12040 len 20]
+    return code.data[949 len 11047]
+}
+
+
+
+// =====================  Runtime code  =====================
+
+
+const name = 'Tokenbox'
+
+const startDate = 1510638353
+
+const duration = (336 * 24 * 3600)
+
+const decimals = 18
+
+const icoAllocation = 0x1111111111111111111111111111111111111111
+
+const foundationReserve = 0xffffffffffffffffffffffffffffffffffffffff
+
+const usdDecimals = 12
+
+const symbol = 'TBX-test'
+
+const vestingDateEnd = (428724 * 3600)
+
+const preIcoAllocation = address('""""""""""""""""""""')
+
+
+address owner;
+address potentialOwner;
+mapping of uint256 balanceOf;
+mapping of uint256 allowance;
+uint256 totalSupply;
+uint256 creationTime;
+uint256 totalPicoUSD;
+address signerAddress;
+uint8 stor8; offset 160
+uint128 stor8; offset 160
+address multisigAddress;
+
+function totalPicoUSD() {
+    return totalPicoUSD
+}
+
+function totalSupply() {
+    return totalSupply
+}
+
+function finalised() {
+    return bool(uint8(stor8.field_160))
+}
+
+function signer() {
+    return signerAddress
+}
+
+function multisig() {
+    return multisigAddress
+}
+
+function balanceOf(address arg1) {
+    return balanceOf[address(arg1)]
+}
+
+function potentialOwner() {
+    return potentialOwner
+}
+
+function owner() {
+    return owner
+}
+
+function creationTime() {
+    return creationTime
+}
+
+function allowance(address arg1, address arg2) {
+    return allowance[address(arg1)][address(arg2)]
+}
+
+function _fallback() payable {
+    revert
+}
+
+function changeSigner(address arg1) {
+    require msg.sender == owner
+    signerAddress = arg1
+}
+
+function changeMultisig(address arg1) {
+    require msg.sender == owner
+    multisigAddress = arg1
+}
+
+function setOwner(address arg1) {
+    require msg.sender == owner
+    emit NewPotentialOwner(owner, arg1);
+    potentialOwner = arg1
+}
+
+function totalUSD() {
+    require totalPicoUSD == (10^12 * totalPicoUSD / 10^12) + (totalPicoUSD % 10^12)
+    return (totalPicoUSD / 10^12)
+}
+
+function approve(address arg1, uint256 arg2) {
+    allowance[address(msg.sender)][address(arg1)] = arg2
+    emit Approval(arg2, msg.sender, arg1);
+    return 1
+}
+
+function confirmOwnership() {
+    require msg.sender == potentialOwner
+    emit NewOwner(owner, potentialOwner);
+    owner = potentialOwner
+    potentialOwner = 0
+}
+
+function allowToWithdrawFromReserve() {
+    require msg.sender == owner
+    require block.timestamp >= 428724 * 3600
+    allowance[0xffffffffffffffffffffffffffffffffffffffff][address(msg.sender)] = balanceOf[0xffffffffffffffffffffffffffffffffffffffff]
+}
+
+function transfer(address arg1, uint256 arg2) {
+    if balanceOf[address(msg.sender)] < arg2:
+        return 0
+    if balanceOf[address(arg1)] + arg2 <= balanceOf[address(arg1)]:
+        return 0
+    balanceOf[address(msg.sender)] -= arg2
+    balanceOf[address(arg1)] += arg2
+    emit Transfer(arg2, msg.sender, arg1);
+    return 1
+}
+
+function transferERC20Token(address arg1) {
+    require msg.sender == owner
+    require ext_code.size(arg1)
+    call arg1.0x70a08231 with:
+         gas gas_remaining - 710 wei
+        args this.address
+    require ext_call.success
+    require ext_code.size(arg1)
+    call arg1.0xa9059cbb with:
+         gas gas_remaining - 710 wei
+        args owner, ext_call.return_data[0]
+    require ext_call.success
+    return bool(ext_call.return_data[0])
+}
+
+function transferFrom(address arg1, address arg2, uint256 arg3) {
+    if balanceOf[address(arg1)] < arg3:
+        return 0
+    if allowance[address(arg1)][address(msg.sender)] < arg3:
+        return 0
+    if balanceOf[address(arg2)] + arg3 <= balanceOf[address(arg2)]:
+        return 0
+    balanceOf[address(arg2)] += arg3
+    balanceOf[address(arg1)] -= arg3
+    allowance[address(arg1)][address(msg.sender)] -= arg3
+    emit Transfer(arg3, arg1, arg2);
+    return 1
+}
+
+function withdrawFromReserve(uint256 arg1) {
+    require msg.sender == owner
+    require block.timestamp >= 428724 * 3600
+    require balanceOf[0xffffffffffffffffffffffffffffffffffffffff] >= arg1
+    require allowance[0xffffffffffffffffffffffffffffffffffffffff][address(msg.sender)] >= arg1
+    require balanceOf[address(stor8.field_0)] + arg1 > balanceOf[address(stor8.field_0)]
+    balanceOf[address(stor8.field_0)] += arg1
+    balanceOf[0xffffffffffffffffffffffffffffffffffffffff] -= arg1
+    allowance[0xffffffffffffffffffffffffffffffffffffffff][address(msg.sender)] -= arg1
+    emit Transfer(arg1, 0xffffffffffffffffffffffffffffffffffffffff, multisigAddress);
+}
+
+function preIcoDistribution(address arg1, uint256 arg2, uint256 arg3) {
+    require msg.sender == owner
+    if arg3:
+        require arg3
+        require 10^18 * arg3 / arg3 == 10^18
+    require balanceOf[address('""""""""""""""""""""')] >= 10^18 * arg3
+    balanceOf[address('""""""""""""""""""""')] += -1 * 10^18 * arg3
+    balanceOf[address(arg1)] += 10^18 * arg3
+    emit Transfer((10^18 * arg3), address('""""""""""""""""""""'), arg1);
+    if arg2:
+        require arg2
+        require 10^10 * arg2 / arg2 == 10^10
+    require totalPicoUSD + (10^10 * arg2) >= totalPicoUSD
+    totalPicoUSD += 10^10 * arg2
+    emit PresaleInvestment(address(arg1), 10^10 * arg2, 10^18 * arg3);
+}
+
+function finaliseICO() {
+    require msg.sender == owner
+    require block.timestamp >= 1511847953
+    require not uint8(stor8.field_160)
+    require balanceOf[0x1111111111111111111111111111111111111111] <= totalSupply
+    totalSupply -= balanceOf[0x1111111111111111111111111111111111111111]
+    if totalSupply:
+        require totalSupply
+        require 10 * totalSupply / totalSupply == 10
+    require 10 * totalSupply == (100 * 10 * totalSupply / 100) + (10 * totalSupply % 100)
+    balanceOf[address(stor8.field_0)] = 10 * totalSupply / 100
+    if totalSupply:
+        require totalSupply
+        require 15 * totalSupply / totalSupply == 15
+    require 15 * totalSupply == (100 * 15 * totalSupply / 100) + (15 * totalSupply % 100)
+    balanceOf[0xffffffffffffffffffffffffffffffffffffffff] = 15 * totalSupply / 100
+    balanceOf[0x1111111111111111111111111111111111111111] = 0
+    Mask(96, 0, stor8.field_160) = 1
+}
+
+function wireInvestInUSD(address arg1, uint256 arg2, uint256 arg3) {
+    require block.timestamp >= 1510638353
+    require block.timestamp < 1511847953
+    if owner != msg.sender:
+        require msg.sender == signerAddress
+    if arg3:
+        require arg3
+        require 10^18 * arg3 / arg3 == 10^18
+    require arg2 > 0
+    require arg2
+    require 10^18 * arg3 == (arg2 * 10^18 * arg3 / arg2) + (10^18 * arg3 % arg2)
+    require balanceOf[0x1111111111111111111111111111111111111111] >= 10^18 * arg3 / arg2
+    if arg3:
+        require arg3
+        require 10^10 * arg3 / arg3 == 10^10
+    if arg2:
+        require arg2
+        require 10^10 * arg2 / arg2 == 10^10
+    require totalPicoUSD + (10^10 * arg3) >= totalPicoUSD
+    totalPicoUSD += 10^10 * arg3
+    balanceOf[0x1111111111111111111111111111111111111111] -= 10^18 * arg3 / arg2
+    balanceOf[address(arg1)] += 10^18 * arg3 / arg2
+    emit Transfer((10^18 * arg3 / arg2), 0x1111111111111111111111111111111111111111, arg1);
+    emit InvestmentInUSD(address(arg1), 10^10 * arg2, 10^10 * arg3, 10^18 * arg3 / arg2);
+}
+
+function investInBTC(address arg1, uint256 arg2, uint256 arg3, string arg4, uint256 arg5) {
+    require block.timestamp >= 1510638353
+    require block.timestamp < 1511847953
+    if owner != msg.sender:
+        require msg.sender == signerAddress
+    if arg3:
+        require arg3
+        require 10^18 * arg3 / arg3 == 10^18
+    require arg2 > 0
+    require arg2
+    require 10^18 * arg3 == (arg2 * 10^18 * arg3 / arg2) + (10^18 * arg3 % arg2)
+    require balanceOf[0x1111111111111111111111111111111111111111] >= 10^18 * arg3 / arg2
+    if arg3:
+        require arg3
+        require 10^12 * arg3 / arg3 == 10^12
+    require arg5 > 0
+    require arg5
+    require 10^12 * arg3 == (arg5 * 10^12 * arg3 / arg5) + (10^12 * arg3 % arg5)
+    require totalPicoUSD + (10^12 * arg3 / arg5) >= totalPicoUSD
+    totalPicoUSD += 10^12 * arg3 / arg5
+    balanceOf[0x1111111111111111111111111111111111111111] -= 10^18 * arg3 / arg2
+    balanceOf[address(arg1)] += 10^18 * arg3 / arg2
+    emit Transfer((10^18 * arg3 / arg2), 0x1111111111111111111111111111111111111111, arg1);
+    emit InvestmentInBTC(address(arg1), arg2, arg3, 10^12 * arg3 / arg5, 10^18 * arg3 / arg2, Array(len=arg4.length, data=arg4[all]));
+}
+
+function invest(address arg1, uint256 arg2, uint256 arg3, bytes32 arg4, uint8 arg5, bytes32 arg6, bytes32 arg7, uint256 arg8) payable {
+    require block.timestamp >= 1510638353
+    require block.timestamp < 1511847953
+    hash = sha256hash(arg1) 
+    require sha256hash.result
+    require hash == arg4
+    signer = erecover(arg4, arg5 << 248, arg6, arg7) 
+    require erecover.result
+    require address(signer) == signerAddress
+    require msg.value <= arg3
+    require arg3 - msg.value <= 5 * 10^15
+    if arg3:
+        require arg3
+        require 10^18 * arg3 / arg3 == 10^18
+    require arg2 > 0
+    require arg2
+    require 10^18 * arg3 == (arg2 * 10^18 * arg3 / arg2) + (10^18 * arg3 % arg2)
+    require balanceOf[0x1111111111111111111111111111111111111111] >= 10^18 * arg3 / arg2
+    call multisigAddress with:
+       value msg.value wei
+         gas 2300 * is_zero(value) wei
+    require ext_call.success
+    if arg3:
+        require arg3
+        require 10^12 * arg3 / arg3 == 10^12
+    require arg8 > 0
+    require arg8
+    require 10^12 * arg3 == (arg8 * 10^12 * arg3 / arg8) + (10^12 * arg3 % arg8)
+    require totalPicoUSD + (10^12 * arg3 / arg8) >= totalPicoUSD
+    totalPicoUSD += 10^12 * arg3 / arg8
+    balanceOf[0x1111111111111111111111111111111111111111] -= 10^18 * arg3 / arg2
+    balanceOf[address(arg1)] += 10^18 * arg3 / arg2
+    emit Transfer((10^18 * arg3 / arg2), 0x1111111111111111111111111111111111111111, arg1);
+    emit InvestmentInETH(address(arg1), arg2, arg3, 10^12 * arg3 / arg8, 10^18 * arg3 / arg2, arg4);
+}
+
+
+
+}
