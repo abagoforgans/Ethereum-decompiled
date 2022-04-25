@@ -1,0 +1,118 @@
+contract main {
+
+
+// =======================  Init code  ======================
+
+
+uint256 stor0;
+address stor1;
+array of uint256 stor3;
+array of uint256 stor4;
+uint256 stor5;
+
+function _fallback() {
+    mem[96 len -3951] = code.data[4471 len -3951]
+    mem[64] = -3855
+    stor1 = msg.sender
+    stor3[] = Array(len=mem[mem[96] + 96], data=mem[mem[96] + 128 len mem[mem[96] + 96]])
+    stor4[] = Array(len=mem[mem[128] + 96], data=mem[mem[128] + 128 len mem[mem[128] + 96]])
+    stor5 = mem[160]
+    stor0 = mem[192]
+    emit Transfer(mem[192], 0, stor1);
+    return code.data[520 len 3951]
+}
+
+
+
+// =====================  Runtime code  =====================
+
+
+uint256 totalSupply;
+address owner;
+address newOwner;
+array of uint256 symbol;
+array of uint256 name;
+uint256 decimals;
+mapping of uint256 balanceOf;
+mapping of uint256 allowance;
+
+function name() {
+    return name[0 len name.length]
+}
+
+function totalSupply() {
+    return totalSupply
+}
+
+function decimals() {
+    return decimals
+}
+
+function balanceOf(address arg1) {
+    return balanceOf[address(arg1)]
+}
+
+function owner() {
+    return owner
+}
+
+function symbol() {
+    return symbol[0 len symbol.length]
+}
+
+function newOwner() {
+    return newOwner
+}
+
+function allowance(address arg1, address arg2) {
+    return allowance[address(arg1)][address(arg2)]
+}
+
+function _fallback() payable {
+    revert
+}
+
+function acceptOwnership() {
+    require msg.sender == newOwner
+    owner = msg.sender
+    emit OwnerChanged(msg.sender);
+    return 1
+}
+
+function transferOwnership(address arg1) {
+    require msg.sender == owner
+    require arg1
+    require arg1 != owner
+    newOwner = arg1
+    return 1
+}
+
+function approve(address arg1, uint256 arg2) {
+    allowance[address(msg.sender)][address(arg1)] = arg2
+    emit Approval(arg2, msg.sender, arg1);
+    return 1
+}
+
+function transfer(address arg1, uint256 arg2) {
+    require arg2 <= balanceOf[address(msg.sender)]
+    balanceOf[address(msg.sender)] -= arg2
+    require balanceOf[address(arg1)] + arg2 >= balanceOf[address(arg1)]
+    balanceOf[address(arg1)] += arg2
+    emit Transfer(arg2, msg.sender, arg1);
+    return 1
+}
+
+function transferFrom(address arg1, address arg2, uint256 arg3) {
+    require arg3 <= balanceOf[address(arg1)]
+    balanceOf[address(arg1)] -= arg3
+    require arg3 <= allowance[address(arg1)][address(msg.sender)]
+    allowance[address(arg1)][address(msg.sender)] -= arg3
+    require balanceOf[address(arg2)] + arg3 >= balanceOf[address(arg2)]
+    balanceOf[address(arg2)] += arg3
+    emit Transfer(arg3, arg1, arg2);
+    return 1
+}
+
+
+
+}
