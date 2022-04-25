@@ -1,0 +1,116 @@
+contract main {
+
+
+// =======================  Init code  ======================
+
+
+uint256 stor0;
+array of uint256 stor1;
+uint8 stor2;
+array of uint256 stor3;
+array of uint256 stor4;
+mapping of uint256 stor5;
+
+function _fallback() {
+    stor0 = 999999999
+    bool(stor1.length) = 0
+    stor1.length.field_1 = 16
+    stor1.length.field_8 = 'LibertyRubleCoin' / 256
+    idx = 0
+    while stor1.length + 31 / 32 > idx:
+        stor1[idx].field_0 = 0
+        idx = idx + 1
+        continue 
+    stor2 = 6
+    bool(stor3.length) = 0
+    stor3.length.field_1 = 3
+    stor3.length.field_8 = 'LRU' / 256
+    idx = 0
+    while stor3.length + 31 / 32 > idx:
+        stor3[idx].field_0 = 0
+        idx = idx + 1
+        continue 
+    bool(stor4.length) = 0
+    stor4.length.field_1 = 3
+    stor4.length.field_8 = '1.0' / 256
+    idx = 0
+    while stor4.length + 31 / 32 > idx:
+        stor4[idx].field_0 = 0
+        idx = idx + 1
+        continue 
+    stor5[address(msg.sender)] = stor0
+    return code.data[537 len 3076]
+}
+
+
+
+// =====================  Runtime code  =====================
+
+
+uint256 totalSupply;
+array of uint256 name;
+uint8 decimals;
+array of uint256 symbol;
+array of uint256 version;
+mapping of uint256 balanceOf;
+mapping of uint256 allowance;
+
+function name() {
+    return name[0 len name.length]
+}
+
+function totalSupply() {
+    return totalSupply
+}
+
+function decimals() {
+    return decimals
+}
+
+function version() {
+    return version[0 len version.length]
+}
+
+function balanceOf(address arg1) {
+    return balanceOf[address(arg1)]
+}
+
+function symbol() {
+    return symbol[0 len symbol.length]
+}
+
+function allowance(address arg1, address arg2) {
+    return allowance[address(arg2)][address(arg1)]
+}
+
+function _fallback() payable {
+    revert
+}
+
+function approve(address arg1, uint256 arg2) {
+    allowance[address(msg.sender)][address(arg1)] = arg2
+    emit Approval(arg2, msg.sender, arg1);
+}
+
+function transfer(address arg1, uint256 arg2) {
+    require calldata.size == 68
+    require balanceOf[address(msg.sender)] >= arg2
+    require arg2 > 0
+    balanceOf[address(msg.sender)] -= arg2
+    balanceOf[address(arg1)] += arg2
+    emit Transfer(arg2, msg.sender, arg1);
+}
+
+function transferFrom(address arg1, address arg2, uint256 arg3) {
+    require balanceOf[address(arg1)] >= arg3
+    require allowance[address(arg1)][address(msg.sender)] >= arg3
+    require arg3 > 0
+    balanceOf[address(arg2)] += arg3
+    balanceOf[address(arg1)] -= arg3
+    allowance[address(arg1)][address(msg.sender)] -= arg3
+    emit Transfer(arg3, arg1, arg2);
+}
+
+
+
+}
