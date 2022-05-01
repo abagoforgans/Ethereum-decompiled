@@ -1,0 +1,547 @@
+contract main {
+
+
+// =======================  Init code  ======================
+
+
+address stor0;
+array of uint256 stor1;
+array of uint256 stor2;
+uint8 stor3;
+uint256 stor4;
+mapping of uint256 stor5;
+
+function _fallback() {
+    mem[96 len -10486] = code.data[10997 len -10486]
+    mem[64] = -10390
+    stor0 = msg.sender
+    stor4 = mem[96] * 10^mem[223 len 1]
+    stor5[address(msg.sender)] = stor4
+    stor1[] = Array(len=mem[mem[128] + 96], data=mem[mem[128] + 128 len mem[mem[128] + 96]])
+    stor2[] = Array(len=mem[mem[160] + 96], data=mem[mem[160] + 128 len mem[mem[160] + 96]])
+    stor3 = mem[223 len 1]
+    return code.data[511 len 10486]
+}
+
+
+
+// =====================  Runtime code  =====================
+
+
+address owner;
+array of uint256 tokenName;
+array of uint256 tokenSymbol;
+uint8 specifiedDecimal;
+uint256 totalSupply;
+mapping of uint256 balanceOf;
+mapping of uint256 allowance;
+uint256 sellPrice;
+uint256 buyPrice;
+array of address stor9;
+array of address stor10;
+array of struct stor11;
+array of struct stor12;
+uint256 readSellTokenAmount;
+uint8 stor14;
+mapping of uint8 stor15;
+mapping of address tokenUsers;
+
+function name() {
+    return tokenName[0 len tokenName.length]
+}
+
+function totalSupply() {
+    return totalSupply
+}
+
+function decimals() {
+    return specifiedDecimal
+}
+
+function sellPrice() {
+    return sellPrice
+}
+
+function getSpecifiedDecimal() {
+    return specifiedDecimal
+}
+
+function balanceOf(address arg1) {
+    return balanceOf[arg1]
+}
+
+function tokenUsers(uint256 arg1) {
+    return tokenUsers[arg1]
+}
+
+function buyPrice() {
+    return buyPrice
+}
+
+function getTokenName() {
+    return tokenName[0 len tokenName.length]
+}
+
+function readSellTokenAmount() {
+    return readSellTokenAmount
+}
+
+function owner() {
+    return owner
+}
+
+function symbol() {
+    return tokenSymbol[0 len tokenSymbol.length]
+}
+
+function frozenAccount(address arg1) {
+    return bool(stor15[arg1])
+}
+
+function getTotalSupply() {
+    return totalSupply
+}
+
+function allowance(address arg1, address arg2) {
+    return allowance[arg1][arg2]
+}
+
+function getTokenSymbol() {
+    return tokenSymbol[0 len tokenSymbol.length]
+}
+
+function _fallback() payable {
+    revert
+}
+
+function transferOwnership(address arg1) {
+    require msg.sender == owner
+    owner = arg1
+}
+
+function freezeAllAccountInEmergency(bool arg1) {
+    require msg.sender == owner
+    stor14 = uint8(arg1)
+}
+
+function approve(address arg1, uint256 arg2) {
+    allowance[address(msg.sender)][address(arg1)] = arg2
+    return 1
+}
+
+function burn(uint256 arg1) {
+    require balanceOf[address(msg.sender)] >= arg1
+    balanceOf[address(msg.sender)] -= arg1
+    totalSupply -= arg1
+    emit Burn(arg1, msg.sender);
+    return 1
+}
+
+function setPrices(uint256 arg1, uint256 arg2) {
+    require msg.sender == owner
+    if not arg1:
+        require sellPrice
+    if not arg2:
+        require buyPrice
+    if arg1:
+        sellPrice = arg1
+    if arg2:
+        buyPrice = arg2
+}
+
+function burnFrom(address arg1, uint256 arg2) {
+    require balanceOf[address(arg1)] >= arg2
+    require arg2 <= allowance[address(arg1)][address(msg.sender)]
+    balanceOf[address(arg1)] -= arg2
+    allowance[address(arg1)][address(msg.sender)] -= arg2
+    totalSupply -= arg2
+    emit Burn(arg2, arg1);
+    return 1
+}
+
+function approveAndCall(address arg1, uint256 arg2, bytes arg3) {
+    allowance[address(msg.sender)][address(arg1)] = arg2
+    require ext_code.size(arg1)
+    call arg1.receiveApproval(address arg1, uint256 arg2, address arg3, bytes arg4) with:
+         gas gas_remaining - 710 wei
+        args msg.sender, arg2, address(this.address), Array(len=arg3.length, data=arg3[all])
+    require ext_call.success
+    return 1
+}
+
+function freezeAccount(address arg1, bool arg2) {
+    require msg.sender == owner
+    stor15[address(arg1)] = uint8(arg2)
+    emit FrozenFunds(address(arg1), arg2);
+    if stor9.length <= 0:
+        stor9.length++
+        if not stor9.length <= stor9.length + 1:
+            idx = stor9.length + 1
+            while stor9.length > idx:
+                uint256(stor9[idx]) = 0
+                idx = idx + 1
+                continue 
+        address(stor9[stor9.length]) = arg1
+    else:
+        idx = 0
+        s = 0
+        while idx < stor9.length:
+            mem[0] = 9
+            if address(stor9[idx]) != arg1:
+                idx = idx + 1
+                s = s
+                continue 
+            idx = idx + 1
+            s = s + 1
+            continue 
+        if not s:
+            stor9.length++
+            if not stor9.length <= stor9.length + 1:
+                idx = stor9.length + 1
+                while stor9.length > idx:
+                    uint256(stor9[idx]) = 0
+                    idx = idx + 1
+                    continue 
+            address(stor9[stor9.length]) = arg1
+}
+
+function mintToken(address arg1, uint256 arg2) {
+    require msg.sender == owner
+    balanceOf[address(arg1)] += arg2
+    totalSupply += arg2
+    emit Transfer(arg2, 0, this.address);
+    emit Transfer(arg2, this.address, arg1);
+    readSellTokenAmount += arg2
+    if stor10.length <= 0:
+        stor10.length++
+        if not stor10.length <= stor10.length + 1:
+            idx = stor10.length + 1
+            while stor10.length > idx:
+                uint256(stor10[idx]) = 0
+                idx = idx + 1
+                continue 
+        address(stor10[stor10.length]) = arg1
+    else:
+        idx = 0
+        s = 0
+        while idx < stor10.length:
+            mem[0] = 10
+            if address(stor10[idx]) != arg1:
+                idx = idx + 1
+                s = s
+                continue 
+            idx = idx + 1
+            s = s + 1
+            continue 
+        if not s:
+            stor10.length++
+            if not stor10.length <= stor10.length + 1:
+                idx = stor10.length + 1
+                while stor10.length > idx:
+                    uint256(stor10[idx]) = 0
+                    idx = idx + 1
+                    continue 
+            address(stor10[stor10.length]) = arg1
+}
+
+function transfer(address arg1, uint256 arg2) {
+    require arg1
+    require balanceOf[address(msg.sender)] >= arg2
+    require balanceOf[address(arg1)] + arg2 > balanceOf[address(arg1)]
+    require not stor15[address(msg.sender)]
+    require not stor15[address(arg1)]
+    require not stor14
+    balanceOf[address(msg.sender)] -= arg2
+    balanceOf[address(arg1)] += arg2
+    emit Transfer(arg2, msg.sender, arg1);
+    readSellTokenAmount += arg2
+    if stor10.length <= 0:
+        stor10.length++
+        if not stor10.length <= stor10.length + 1:
+            idx = stor10.length + 1
+            while stor10.length > idx:
+                uint256(stor10[idx]) = 0
+                idx = idx + 1
+                continue 
+        address(stor10[stor10.length]) = arg1
+    else:
+        idx = 0
+        s = 0
+        while idx < stor10.length:
+            mem[0] = 10
+            if address(stor10[idx]) != arg1:
+                idx = idx + 1
+                s = s
+                continue 
+            idx = idx + 1
+            s = s + 1
+            continue 
+        if not s:
+            stor10.length++
+            if not stor10.length <= stor10.length + 1:
+                idx = stor10.length + 1
+                while stor10.length > idx:
+                    uint256(stor10[idx]) = 0
+                    idx = idx + 1
+                    continue 
+            address(stor10[stor10.length]) = arg1
+}
+
+function readAllUsers() {
+    idx = 0
+    while idx < stor10.length:
+        mem[0] = address(stor10[idx])
+        mem[32] = 5
+        if balanceOf[address(stor10[idx])] > 0:
+            stor12.length++
+            if not stor12.length <= stor12.length + 1:
+                s = sha3(12) + stor12.length + 1
+                while sha3(12) + stor12.length > s:
+                    stor[s] = 0
+                    s = s + 1
+                    continue 
+            require idx < stor10.length
+            mem[0] = 10
+            address(stor12[stor12.length].field_0) = address(stor10[idx])
+        idx = idx + 1
+        continue 
+    if not stor12.length:
+        mem[(32 * stor12.length) + 160] = 32
+        mem[(32 * stor12.length) + 192] = stor12.length
+        mem[(32 * stor12.length) + 224 len floor32(stor12.length)] = mem[160 len floor32(stor12.length)]
+        return memory
+          from (32 * stor12.length) + 160
+           len (96 * stor12.length) + 64
+    mem[160] = address(stor12.field_0)
+    idx = 160
+    s = 0
+    while (32 * stor12.length) + 128 > idx:
+        mem[idx + 32] = address(stor12[s].field_256)
+        idx = idx + 32
+        s = s + 1
+        continue 
+    mem[(32 * stor12.length) + 224 len floor32(stor12.length)] = mem[160 len floor32(stor12.length)]
+    return Array(len=stor12.length, data=mem[160 len floor32(stor12.length)], mem[(32 * stor12.length) + floor32(stor12.length) + 224 len (32 * stor12.length) - floor32(stor12.length)]), 
+}
+
+function readAllFrzAcc() {
+    idx = 0
+    while idx < stor9.length:
+        mem[0] = address(stor9[idx])
+        mem[32] = 15
+        if bool(stor15[address(stor9[idx])]) == 1:
+            stor11.length++
+            if not stor11.length <= stor11.length + 1:
+                s = sha3(11) + stor11.length + 1
+                while sha3(11) + stor11.length > s:
+                    stor[s] = 0
+                    s = s + 1
+                    continue 
+            require idx < stor9.length
+            mem[0] = 9
+            address(stor11[stor11.length].field_0) = address(stor9[idx])
+        idx = idx + 1
+        continue 
+    if not stor11.length:
+        mem[(32 * stor11.length) + 160] = 32
+        mem[(32 * stor11.length) + 192] = stor11.length
+        mem[(32 * stor11.length) + 224 len floor32(stor11.length)] = mem[160 len floor32(stor11.length)]
+        return memory
+          from (32 * stor11.length) + 160
+           len (96 * stor11.length) + 64
+    mem[160] = address(stor11.field_0)
+    idx = 160
+    s = 0
+    while (32 * stor11.length) + 128 > idx:
+        mem[idx + 32] = address(stor11[s].field_256)
+        idx = idx + 32
+        s = s + 1
+        continue 
+    mem[(32 * stor11.length) + 224 len floor32(stor11.length)] = mem[160 len floor32(stor11.length)]
+    return Array(len=stor11.length, data=mem[160 len floor32(stor11.length)], mem[(32 * stor11.length) + floor32(stor11.length) + 224 len (32 * stor11.length) - floor32(stor11.length)]), 
+}
+
+function transferFrom(address arg1, address arg2, uint256 arg3) {
+    require arg3 <= allowance[address(arg1)][address(msg.sender)]
+    allowance[address(arg1)][address(msg.sender)] -= arg3
+    require arg2
+    require balanceOf[address(arg1)] >= arg3
+    require balanceOf[address(arg2)] + arg3 > balanceOf[address(arg2)]
+    require not stor15[address(arg1)]
+    require not stor15[address(arg2)]
+    require not stor14
+    balanceOf[address(arg1)] -= arg3
+    balanceOf[address(arg2)] += arg3
+    emit Transfer(arg3, arg1, arg2);
+    readSellTokenAmount += arg3
+    if stor10.length <= 0:
+        stor10.length++
+        if not stor10.length <= stor10.length + 1:
+            idx = stor10.length + 1
+            while stor10.length > idx:
+                uint256(stor10[idx]) = 0
+                idx = idx + 1
+                continue 
+        address(stor10[stor10.length]) = arg2
+    else:
+        idx = 0
+        s = 0
+        while idx < stor10.length:
+            mem[0] = 10
+            if address(stor10[idx]) != arg2:
+                idx = idx + 1
+                s = s
+                continue 
+            idx = idx + 1
+            s = s + 1
+            continue 
+        if not s:
+            stor10.length++
+            if not stor10.length <= stor10.length + 1:
+                idx = stor10.length + 1
+                while stor10.length > idx:
+                    uint256(stor10[idx]) = 0
+                    idx = idx + 1
+                    continue 
+            address(stor10[stor10.length]) = arg2
+    return 1
+}
+
+function sell(uint256 arg1) {
+    require arg1
+    require sellPrice
+    require 10^specifiedDecimal
+    emit check1((arg1 * sellPrice / 10^specifiedDecimal));
+    require eth.balance(this.address) >= arg1 * sellPrice / 10^specifiedDecimal
+    require this.address
+    require balanceOf[address(msg.sender)] >= arg1
+    require balanceOf[address(this.address)] + arg1 > balanceOf[address(this.address)]
+    require not stor15[address(msg.sender)]
+    require not stor15[address(this.address)]
+    require not stor14
+    balanceOf[address(msg.sender)] -= arg1
+    balanceOf[address(this.address)] += arg1
+    emit Transfer(arg1, msg.sender, this.address);
+    readSellTokenAmount += arg1
+    if stor10.length <= 0:
+        stor10.length++
+        if not stor10.length <= stor10.length + 1:
+            idx = stor10.length + 1
+            while stor10.length > idx:
+                uint256(stor10[idx]) = 0
+                idx = idx + 1
+                continue 
+        address(stor10[stor10.length]) = this.address
+    else:
+        idx = 0
+        s = 0
+        while idx < stor10.length:
+            mem[0] = 10
+            if address(stor10[idx]) != this.address:
+                idx = idx + 1
+                s = s
+                continue 
+            idx = idx + 1
+            s = s + 1
+            continue 
+        if not s:
+            stor10.length++
+            if not stor10.length <= stor10.length + 1:
+                idx = stor10.length + 1
+                while stor10.length > idx:
+                    uint256(stor10[idx]) = 0
+                    idx = idx + 1
+                    continue 
+            address(stor10[stor10.length]) = this.address
+    emit check((arg1 * sellPrice / 10^specifiedDecimal));
+    call msg.sender with:
+       value arg1 * sellPrice / 10^specifiedDecimal wei
+         gas 2300 * is_zero(value) wei
+    require ext_call.success
+}
+
+function buy() payable {
+    require msg.value
+    require buyPrice
+    require buyPrice
+    require 10^specifiedDecimal
+    require msg.value * 10^specifiedDecimal / buyPrice
+    require msg.sender
+    require balanceOf[address(this.address)] >= msg.value * 10^specifiedDecimal / buyPrice
+    require balanceOf[address(msg.sender)] + (msg.value * 10^specifiedDecimal / buyPrice) > balanceOf[address(msg.sender)]
+    require not stor15[address(this.address)]
+    require not stor15[address(msg.sender)]
+    require not stor14
+    balanceOf[address(this.address)] -= msg.value * 10^specifiedDecimal / buyPrice
+    balanceOf[address(msg.sender)] += msg.value * 10^specifiedDecimal / buyPrice
+    emit Transfer((msg.value * 10^specifiedDecimal / buyPrice), this.address, msg.sender);
+    readSellTokenAmount += msg.value * 10^specifiedDecimal / buyPrice
+    if stor10.length <= 0:
+        stor10.length++
+        if not stor10.length <= stor10.length + 1:
+            idx = stor10.length + 1
+            while stor10.length > idx:
+                uint256(stor10[idx]) = 0
+                idx = idx + 1
+                continue 
+        address(stor10[stor10.length]) = msg.sender
+    else:
+        idx = 0
+        s = 0
+        while idx < stor10.length:
+            mem[0] = 10
+            if address(stor10[idx]) != msg.sender:
+                idx = idx + 1
+                s = s
+                continue 
+            idx = idx + 1
+            s = s + 1
+            continue 
+        if not s:
+            stor10.length++
+            if not stor10.length <= stor10.length + 1:
+                idx = stor10.length + 1
+                while stor10.length > idx:
+                    uint256(stor10[idx]) = 0
+                    idx = idx + 1
+                    continue 
+            address(stor10[stor10.length]) = msg.sender
+    call msg.sender with:
+       value msg.value - (msg.value * 10^specifiedDecimal / buyPrice * buyPrice / 10^specifiedDecimal) wei
+         gas 2300 * is_zero(value) wei
+    require ext_call.success
+    if stor10.length <= 0:
+        stor10.length++
+        if not stor10.length <= stor10.length + 1:
+            idx = stor10.length + 1
+            while stor10.length > idx:
+                uint256(stor10[idx]) = 0
+                idx = idx + 1
+                continue 
+        address(stor10[stor10.length]) = msg.sender
+    else:
+        idx = 0
+        s = 0
+        while idx < stor10.length:
+            mem[0] = 10
+            if address(stor10[idx]) != msg.sender:
+                idx = idx + 1
+                s = s
+                continue 
+            idx = idx + 1
+            s = s + 1
+            continue 
+        if not s:
+            stor10.length++
+            if not stor10.length <= stor10.length + 1:
+                idx = stor10.length + 1
+                while stor10.length > idx:
+                    uint256(stor10[idx]) = 0
+                    idx = idx + 1
+                    continue 
+            address(stor10[stor10.length]) = msg.sender
+}
+
+
+
+}
