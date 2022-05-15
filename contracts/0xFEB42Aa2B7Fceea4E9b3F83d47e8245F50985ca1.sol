@@ -1,0 +1,315 @@
+contract main {
+
+
+// =======================  Init code  ======================
+
+
+address stor0;
+uint256 stor1;
+uint256 stor2;
+address stor3;
+uint256 stor4;
+uint16 stor6; offset 160
+address stor6;
+uint256 stor7;
+address stor8;
+uint256 stor9;
+uint256 stor10;
+uint256 stor11;
+
+function _fallback() payable {
+    uint16(stor6.field_160) = 0
+    require not msg.value
+    require code.data[12049 len 32] >= block.timestamp
+    require code.data[12081 len 32] >= code.data[12049 len 32]
+    require code.data[12113 len 32] > 0
+    require code.data[12157 len 20]
+    create contract with 0 wei
+                    code: code.data[8074 len 3975]
+    require create.new_address
+    emit CrowdSaleTokenContractCreation()
+    stor0 = address(create.new_address)
+    stor1 = code.data[12049 len 32]
+    stor2 = code.data[12081 len 32]
+    stor4 = code.data[12113 len 32]
+    stor3 = code.data[12157 len 20]
+    address(stor6.field_0) = msg.sender
+    stor11 = 300000000 * 10^18
+    stor10 = 12500 * 10^18 * 3600
+    stor9 = 0
+    stor7 = 55
+    stor8 = msg.sender
+    return code.data[415 len 7659]
+}
+
+
+
+// =====================  Runtime code  =====================
+
+
+address tokenAddress;
+uint256 startTime;
+uint256 endTime;
+address walletAddress;
+uint256 rate;
+uint256 weiRaised;
+uint8 stor6; offset 160
+uint8 stor6; offset 168
+address owner;
+uint256 restrictedPercent;
+address restrictedAddress;
+uint256 soldTokens;
+uint256 hardCap;
+uint256 totalTokenSupply;
+
+function totalTokenSupply() {
+    return totalTokenSupply
+}
+
+function rate() {
+    return rate
+}
+
+function endTime() {
+    return endTime
+}
+
+function restrictedPercent() {
+    return restrictedPercent
+}
+
+function weiRaised() {
+    return weiRaised
+}
+
+function wallet() {
+    return walletAddress
+}
+
+function paused() {
+    return bool(uint8(stor6.field_168))
+}
+
+function soldTokens() {
+    return soldTokens
+}
+
+function restricted() {
+    return restrictedAddress
+}
+
+function startTime() {
+    return startTime
+}
+
+function isFinalized() {
+    return bool(uint8(stor6.field_160))
+}
+
+function owner() {
+    return owner
+}
+
+function hardCap() {
+    return hardCap
+}
+
+function token() {
+    return tokenAddress
+}
+
+function hasEnded() {
+    return (block.timestamp > endTime)
+}
+
+function unpause() {
+    require owner == msg.sender
+    require uint8(stor6.field_168)
+    uint8(stor6.field_168) = 0
+    emit Unpause()
+}
+
+function pause() {
+    require owner == msg.sender
+    require not uint8(stor6.field_168)
+    uint8(stor6.field_168) = 1
+    emit Pause()
+}
+
+function setWalletAddress(address arg1) {
+    require owner == msg.sender
+    require not uint8(stor6.field_160)
+    walletAddress = arg1
+}
+
+function setRate(uint256 arg1) {
+    require owner == msg.sender
+    require not uint8(stor6.field_160)
+    require arg1 > 0
+    rate = arg1
+}
+
+function transferOwnership(address arg1) {
+    require owner == msg.sender
+    require arg1
+    emit OwnershipTransferred(owner, arg1);
+    owner = arg1
+}
+
+function setHardCap(uint256 arg1) {
+    require owner == msg.sender
+    require not uint8(stor6.field_160)
+    require arg1 >= 0
+    require arg1 <= totalTokenSupply
+    hardCap = arg1
+}
+
+function setSalePeriod(uint256 arg1, uint256 arg2) {
+    require owner == msg.sender
+    require not uint8(stor6.field_160)
+    require arg1 > 0
+    require arg2 > arg1
+    startTime = arg1
+    endTime = arg2
+}
+
+function addPrecommitment(address arg1, uint256 arg2) {
+    require owner == msg.sender
+    require not uint8(stor6.field_160)
+    require arg2 > 0
+    require arg2 + soldTokens >= soldTokens
+    require arg2 + soldTokens <= totalTokenSupply
+    require arg2 + soldTokens >= soldTokens
+    soldTokens += arg2
+    require ext_code.size(tokenAddress)
+    call tokenAddress.0x40c10f19 with:
+         gas gas_remaining - 710 wei
+        args address(arg1), arg2
+    require ext_call.success
+}
+
+function finalize() {
+    require owner == msg.sender
+    require not uint8(stor6.field_160)
+    require block.timestamp > endTime
+    require soldTokens <= totalTokenSupply
+    require ext_code.size(tokenAddress)
+    call tokenAddress.0x40c10f19 with:
+         gas gas_remaining - 710 wei
+        args address(this.address), totalTokenSupply - soldTokens
+    require ext_call.success
+    require ext_code.size(tokenAddress)
+    call tokenAddress.0xa9059cbb with:
+         gas gas_remaining - 710 wei
+        args restrictedAddress, totalTokenSupply - soldTokens
+    require ext_call.success
+    require ext_code.size(tokenAddress)
+    call tokenAddress.0x7d64bcb4 with:
+         gas gas_remaining - 710 wei
+    require ext_call.success
+    require ext_code.size(tokenAddress)
+    call tokenAddress.0xf2fde38b with:
+         gas gas_remaining - 710 wei
+        args owner
+    require ext_call.success
+    emit Finalized()
+    uint8(stor6.field_160) = 1
+}
+
+function buyTokens(address arg1) payable {
+    require not uint8(stor6.field_168)
+    require arg1
+    require not uint8(stor6.field_160)
+    if not msg.value:
+        require soldTokens >= soldTokens
+        if block.timestamp < startTime:
+            require block.timestamp >= startTime
+        else:
+            require block.timestamp <= endTime
+        require msg.value
+        require soldTokens <= hardCap
+        require soldTokens <= totalTokenSupply
+        require soldTokens >= soldTokens
+        require msg.value + weiRaised >= weiRaised
+        weiRaised += msg.value
+        require ext_code.size(tokenAddress)
+        call tokenAddress.0x40c10f19 with:
+             gas gas_remaining - 710 wei
+            args address(arg1), 0
+        require ext_call.success
+        emit TokenPurchase(msg.value, 0, msg.sender, arg1);
+    else:
+        require rate * msg.value / msg.value == rate
+        require (rate * msg.value) + soldTokens >= soldTokens
+        if block.timestamp < startTime:
+            require block.timestamp >= startTime
+        else:
+            require block.timestamp <= endTime
+        require msg.value
+        require (rate * msg.value) + soldTokens <= hardCap
+        require (rate * msg.value) + soldTokens <= totalTokenSupply
+        require (rate * msg.value) + soldTokens >= soldTokens
+        soldTokens += rate * msg.value
+        require msg.value + weiRaised >= weiRaised
+        weiRaised += msg.value
+        require ext_code.size(tokenAddress)
+        call tokenAddress.0x40c10f19 with:
+             gas gas_remaining - 710 wei
+            args address(arg1), rate * msg.value
+        require ext_call.success
+        emit TokenPurchase(msg.value, rate * msg.value, msg.sender, arg1);
+    call walletAddress with:
+       value msg.value wei
+         gas 2300 * is_zero(value) wei
+}
+
+function _fallback() payable {
+    require not uint8(stor6.field_168)
+    require msg.sender
+    require not uint8(stor6.field_160)
+    if not msg.value:
+        require soldTokens >= soldTokens
+        if block.timestamp < startTime:
+            require block.timestamp >= startTime
+        else:
+            require block.timestamp <= endTime
+        require msg.value
+        require soldTokens <= hardCap
+        require soldTokens <= totalTokenSupply
+        require soldTokens >= soldTokens
+        require msg.value + weiRaised >= weiRaised
+        weiRaised += msg.value
+        require ext_code.size(tokenAddress)
+        call tokenAddress.0x40c10f19 with:
+             gas gas_remaining - 710 wei
+            args msg.sender, 0
+        require ext_call.success
+        emit TokenPurchase(msg.value, 0, msg.sender, msg.sender);
+    else:
+        require rate * msg.value / msg.value == rate
+        require (rate * msg.value) + soldTokens >= soldTokens
+        if block.timestamp < startTime:
+            require block.timestamp >= startTime
+        else:
+            require block.timestamp <= endTime
+        require msg.value
+        require (rate * msg.value) + soldTokens <= hardCap
+        require (rate * msg.value) + soldTokens <= totalTokenSupply
+        require (rate * msg.value) + soldTokens >= soldTokens
+        soldTokens += rate * msg.value
+        require msg.value + weiRaised >= weiRaised
+        weiRaised += msg.value
+        require ext_code.size(tokenAddress)
+        call tokenAddress.0x40c10f19 with:
+             gas gas_remaining - 710 wei
+            args msg.sender, rate * msg.value
+        require ext_call.success
+        emit TokenPurchase(msg.value, rate * msg.value, msg.sender, msg.sender);
+    call walletAddress with:
+       value msg.value wei
+         gas 2300 * is_zero(value) wei
+}
+
+
+
+}
