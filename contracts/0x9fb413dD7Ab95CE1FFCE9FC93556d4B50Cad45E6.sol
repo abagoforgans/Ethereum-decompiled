@@ -1,0 +1,1757 @@
+contract main {
+
+
+
+
+// =====================  Runtime code  =====================
+
+
+const INTERFACE_SIGNATURE_ERC165 = Mask(32, 224, sha3(Mask(200, 56, 'supportsInterface(bytes4)') >> 56))
+
+const INTERFACE_SIGNATURE_ERC721 = Mask(32, 224, sha3(Mask(48, 208, 'name()') >> 208) xor sha3(Mask(64, 192, 'symbol()') >> 192) xor sha3(Mask(104, 152, 'totalSupply()') >> 152) xor sha3(Mask(144, 112, 'balanceOf(address)') >> 112) xor sha3(Mask(128, 128, 'ownerOf(uint256)') >> 128) xor sha3('safeTransferFrom(address,address', Mask(120, 136, ',uint256,bytes)') >> 136) xor sha3('safeTransferFrom(address,address', Mask(72, 184, ',uint256)') >> 184) xor sha3('transferFrom(address,address,uin', Mask(40, 216, 't256)') >> 216) xor sha3(Mask(192, 64, 'approve(address,uint256)') >> 64) xor sha3(Mask(248, 8, 'setApprovalForAll(address,bool)') >> 8) xor sha3(Mask(160, 96, 'getApproved(uint256)') >> 96) xor sha3('isApprovedForAll(address,address', Mask(8, 248, ')') >> 248))
+
+
+mapping of address ownerOf;
+mapping of address approved;
+mapping of uint256 balanceOf;
+mapping of uint8 stor3;
+uint8 stor4; offset 160
+uint128 stor4; offset 160
+address owner;
+array of uint256 name;
+array of uint256 symbol;
+address stor7;
+mapping of uint256 sub_d5ae33e2;
+mapping of uint8 stor9;
+mapping of uint256 currentPrice;
+mapping of uint256 sub_901de3d2;
+address stor12;
+mapping of address stor13;
+mapping of uint256 stor14;
+array of uint256 tokenURI;
+mapping of uint8 stor16;
+
+function name() {
+    return name[0 len name.length]
+}
+
+function getApproved(uint256 arg1) {
+    return approved[arg1]
+}
+
+function paused() {
+    return bool(uint8(stor4.field_160))
+}
+
+function ownerOf(uint256 arg1) {
+    require ownerOf[arg1]
+    return ownerOf[arg1]
+}
+
+function balanceOf(address arg1) {
+    require arg1
+    return balanceOf[address(arg1)]
+}
+
+function sub_843dde20(?) {
+    return currentPrice[arg1]
+}
+
+function owner() {
+    return owner
+}
+
+function sub_901de3d2(?) {
+    return sub_901de3d2[arg1]
+}
+
+function symbol() {
+    return symbol[0 len symbol.length]
+}
+
+function getCurrentPrice(uint256 arg1) {
+    require ownerOf[arg1]
+    return currentPrice[arg1]
+}
+
+function tokenURI(uint256 arg1) {
+    return tokenURI[arg1][0 len tokenURI[arg1].length]
+}
+
+function sub_d5ae33e2(?) {
+    return sub_d5ae33e2[arg1]
+}
+
+function isApprovedForAll(address arg1, address arg2) {
+    return bool(stor3[address(arg1)][address(arg2)])
+}
+
+function _fallback() payable {
+  stop
+}
+
+function exists(uint256 arg1) {
+    return not not ownerOf[arg1]
+}
+
+function sub_316b9641(?) {
+    require msg.sender == owner
+    stor7 = arg1
+}
+
+function sub_b1235619(?) {
+    require msg.sender == owner
+    stor12 = arg1
+}
+
+function sub_2a49d9fd(?) {
+    require msg.sender == owner
+    require ownerOf[arg1]
+    stor14[arg1] = arg2
+}
+
+function unpause() {
+    require msg.sender == owner
+    require uint8(stor4.field_160)
+    Mask(96, 0, stor4.field_160) = 0
+    emit Unpause()
+}
+
+function pause() {
+    require msg.sender == owner
+    require not uint8(stor4.field_160)
+    Mask(96, 0, stor4.field_160) = 1
+    emit Pause()
+}
+
+function transferOwnership(address arg1) {
+    require msg.sender == owner
+    require arg1
+    emit OwnershipTransferred(owner, arg1);
+    owner = arg1
+}
+
+function getLatestPrice(uint256 arg1) {
+    require ownerOf[arg1]
+    if currentPrice[arg1]:
+        return currentPrice[arg1]
+    return sub_901de3d2[arg1]
+}
+
+function setTokenUri(uint256 arg1, string arg2) {
+    require msg.sender == owner
+    require ownerOf[arg1]
+    tokenURI[arg1][] = Array(len=arg2.length, data=arg2[all])
+}
+
+function setApprovalForAll(address arg1, bool arg2) {
+    require arg1 != msg.sender
+    stor3[address(msg.sender)][address(arg1)] = uint8(arg2)
+    emit ApprovalForAll(arg2, msg.sender, arg1);
+}
+
+function sub_1c0ca9a0(?) {
+    require msg.sender == owner
+    require ext_code.size(this.address)
+    call this.address.0x4f558e79 with:
+         gas gas_remaining wei
+        args arg1
+    if not ext_call.success:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+    require ext_call.return_data[0]
+    uint8(stor9[arg1]) = 1
+    emit 0x204b669b: arg1, 1
+}
+
+function approve(address arg1, uint256 arg2) {
+    require ownerOf[arg2]
+    require arg1 != ownerOf[arg2]
+    if ownerOf[arg2] != msg.sender:
+        require stor3[stor0[arg2]][address(msg.sender)]
+    if approved[arg2]:
+        approved[arg2] = arg1
+        emit Approval(arg2, ownerOf[arg2], arg1);
+    else:
+        if arg1:
+            approved[arg2] = arg1
+            emit Approval(arg2, ownerOf[arg2], arg1);
+}
+
+function withdrawBalance(address arg1) {
+    require msg.sender == owner
+    if arg1:
+        call arg1 with:
+           value eth.balance(this.address) wei
+             gas 2300 * is_zero(value) wei
+    else:
+        call owner with:
+           value eth.balance(this.address) wei
+             gas 2300 * is_zero(value) wei
+    if not ext_call.success:
+        revert with ext_call.return_data[0 len return_data.size]
+}
+
+function disableToken(uint256 arg1) {
+    require msg.sender == owner
+    require ext_code.size(this.address)
+    call this.address.0x4f558e79 with:
+         gas gas_remaining wei
+        args arg1
+    if not ext_call.success:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+    require ext_call.return_data[0]
+    uint8(stor9[arg1]) = 255
+    emit 0x204b669b: arg1, -1
+}
+
+function getTokenStatus(uint256 arg1) {
+    require ownerOf[arg1]
+    if not ('signextend', 0, ('signextend', 0, ('type', 256, ('stor', ('map', ('param', 'arg1'), ('name', 'stor9', 9)))))):
+        return 'PENDING'
+    if ('signextend', 0, ('signextend', 0, ('type', 256, ('stor', ('map', ('param', 'arg1'), ('name', 'stor9', 9)))))) == 1:
+        return 'ACTIVE'
+    if ('signextend', 0, ('signextend', 0, ('type', 256, ('stor', ('map', ('param', 'arg1'), ('name', 'stor9', 9)))))) != -1:
+        return 'INVALID_STATUS'
+    return 'DISABLED'
+}
+
+function sub_e5ae4946(?) {
+    require msg.sender == owner
+    require arg1
+    require arg2
+    require ownerOf[arg3]
+    require ownerOf[arg3] == arg1
+    if approved[arg3]:
+        approved[arg3] = 0
+        emit Approval(arg3, arg1, 0);
+    require ownerOf[arg3]
+    require ownerOf[arg3] == arg1
+    require 1 <= balanceOf[address(arg1)]
+    balanceOf[address(arg1)]--
+    ownerOf[arg3] = 0
+    require not ownerOf[arg3]
+    ownerOf[arg3] = arg2
+    require balanceOf[address(arg2)] + 1 >= balanceOf[address(arg2)]
+    balanceOf[address(arg2)]++
+    emit Transfer(arg3, arg1, arg2);
+}
+
+function getSaleStatus(uint256 arg1) {
+    require ownerOf[arg1]
+    if stor16[arg1] == 1:
+        if not currentPrice[arg1]:
+            return 'NOT_FOR_SALE'
+        if not stor16[arg1]:
+            return 'SNATCH'
+        if stor16[arg1] == 1:
+            return 'USER'
+    else:
+        require sub_d5ae33e2[arg1] <= block.timestamp
+        if not currentPrice[arg1]:
+            return 'NOT_FOR_SALE'
+        if not stor16[arg1]:
+            return 'SNATCH'
+        if block.timestamp - sub_d5ae33e2[arg1] >= 720 * 24 * 3600:
+            return 'USER'
+    if stor16[arg1] != 2:
+        return ' '
+    return 'AUCTION'
+}
+
+function supportsInterface(bytes4 arg1) {
+    if Mask(32, 224, arg1) == Mask(32, 224, sha3('supportsInterface(bytes4)')):
+        return True
+    return (Mask(32, 224, arg1) == Mask(32, 224, sha3('name()') xor sha3('symbol()') xor sha3('totalSupply()') xor sha3('balanceOf(address)') xor sha3('ownerOf(uint256)') xor sha3('safeTransferFrom(address,address', ',uint256,bytes)') xor sha3('safeTransferFrom(address,address', ',uint256)') xor sha3('transferFrom(address,address,uin', 't256)') xor sha3('approve(address,uint256)') xor sha3('setApprovalForAll(address,bool)') xor sha3('getApproved(uint256)') xor sha3('isApprovedForAll(address,address', ')')))
+}
+
+function sub_9cb0e261(?) {
+    require msg.sender == owner
+    require ownerOf[arg1]
+    currentPrice[arg1] = arg3
+    if arg4:
+        sub_901de3d2[arg1] = arg4
+    if not arg3:
+        emit 0xc3bcb264: arg1, Array(len=12, data='NOT_FOR_SALE')
+    else:
+        if not arg2:
+            stor16[arg1] = 0
+            emit 0xc3bcb264: arg1, Array(len=6, data='SNATCH')
+        else:
+            if arg2 == 1:
+                stor16[arg1] = 1
+                emit 0xc3bcb264: arg1, Array(len=4, data='USER')
+            else:
+                if arg2 == 2:
+                    stor16[arg1] = 2
+                    emit 0xc3bcb264: arg1, Array(len=7, data='AUCTION')
+}
+
+function setPrice(uint256 arg1, uint256 arg2) {
+    require not uint8(stor4.field_160)
+    require ownerOf[arg1]
+    if ownerOf[arg1] != msg.sender:
+        if approved[arg1] != msg.sender:
+            require stor3[stor0[arg1]][address(msg.sender)]
+    require ext_code.size(this.address)
+    call this.address.0x4f558e79 with:
+         gas gas_remaining wei
+        args arg1
+    if not ext_call.success:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+    require ext_call.return_data[0]
+    require ('signextend', 0, ('signextend', 0, ('type', 256, ('stor', ('map', ('param', 'arg1'), ('name', 'stor9', 9)))))) > 0
+    require ext_code.size(this.address)
+    call this.address.0x4f558e79 with:
+         gas gas_remaining wei
+        args arg1
+    if not ext_call.success:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+    require ext_call.return_data[0]
+    require sub_d5ae33e2[arg1] <= block.timestamp
+    if block.timestamp - sub_d5ae33e2[arg1] >= 720 * 24 * 3600:
+        stor16[arg1] = 1
+    require stor16[arg1] == 1
+    currentPrice[arg1] = arg2
+    emit 0xc3bcb264: arg1, Array(len=4, data='USER')
+}
+
+function transferFrom(address arg1, address arg2, uint256 arg3) {
+    require not uint8(stor4.field_160)
+    require ext_code.size(this.address)
+    call this.address.0x4f558e79 with:
+         gas gas_remaining wei
+        args arg3
+    if not ext_call.success:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+    require ext_call.return_data[0]
+    require ('signextend', 0, ('signextend', 0, ('type', 256, ('stor', ('map', ('param', 'arg3'), ('name', 'stor9', 9)))))) > 0
+    require ownerOf[arg3]
+    if ownerOf[arg3] != msg.sender:
+        if approved[arg3] != msg.sender:
+            require stor3[stor0[arg3]][address(msg.sender)]
+    require ext_code.size(this.address)
+    call this.address.0x4f558e79 with:
+         gas gas_remaining wei
+        args arg3
+    if not ext_call.success:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+    require ext_call.return_data[0]
+    require ('signextend', 0, ('signextend', 0, ('type', 256, ('stor', ('map', ('param', 'arg3'), ('name', 'stor9', 9)))))) > 0
+    require ownerOf[arg3]
+    if ownerOf[arg3] != msg.sender:
+        if approved[arg3] != msg.sender:
+            require stor3[stor0[arg3]][address(msg.sender)]
+    require arg1
+    require arg2
+    require ownerOf[arg3]
+    require ownerOf[arg3] == arg1
+    if approved[arg3]:
+        approved[arg3] = 0
+        emit Approval(arg3, arg1, 0);
+    require ownerOf[arg3]
+    require ownerOf[arg3] == arg1
+    require 1 <= balanceOf[address(arg1)]
+    balanceOf[address(arg1)]--
+    ownerOf[arg3] = 0
+    require not ownerOf[arg3]
+    ownerOf[arg3] = arg2
+    require balanceOf[address(arg2)] + 1 >= balanceOf[address(arg2)]
+    balanceOf[address(arg2)]++
+    emit Transfer(arg3, arg1, arg2);
+}
+
+function sub_c2cc7786(?) {
+    if msg.sender == owner:
+        require stor7
+        require not ownerOf[arg1]
+        ownerOf[arg1] = stor7
+        require balanceOf[stor7] + 1 >= balanceOf[stor7]
+        balanceOf[stor7]++
+        emit Transfer(arg1, 0, stor7);
+        require ownerOf[arg1]
+        tokenURI[arg1][] = Array(len=arg2.length, data=arg2[all])
+        currentPrice[arg1] = arg3
+        sub_d5ae33e2[arg1] = block.timestamp
+        uint8(stor9[arg1]) = 1
+        emit TokenCreated(stor7, arg1, block.timestamp);
+        emit 0xc3bcb264: arg1, Array(len=6, data='SNATCH')
+        emit 0x204b669b: arg1, 1
+    else:
+        require msg.sender == stor7
+        if msg.sender == owner:
+            require stor7
+            require not ownerOf[arg1]
+            ownerOf[arg1] = stor7
+            require balanceOf[stor7] + 1 >= balanceOf[stor7]
+            balanceOf[stor7]++
+            emit Transfer(arg1, 0, stor7);
+            require ownerOf[arg1]
+            tokenURI[arg1][] = Array(len=arg2.length, data=arg2[all])
+            currentPrice[arg1] = arg3
+            sub_d5ae33e2[arg1] = block.timestamp
+            uint8(stor9[arg1]) = 1
+            emit TokenCreated(stor7, arg1, block.timestamp);
+            emit 0xc3bcb264: arg1, Array(len=6, data='SNATCH')
+            emit 0x204b669b: arg1, 1
+        else:
+            if msg.sender == stor7:
+                require stor7
+                require not ownerOf[arg1]
+                ownerOf[arg1] = stor7
+                require balanceOf[stor7] + 1 >= balanceOf[stor7]
+                balanceOf[stor7]++
+                emit Transfer(arg1, 0, stor7);
+                require ownerOf[arg1]
+                tokenURI[arg1][] = Array(len=arg2.length, data=arg2[all])
+                currentPrice[arg1] = arg3
+                sub_d5ae33e2[arg1] = block.timestamp
+                uint8(stor9[arg1]) = 0
+                emit TokenCreated(stor7, arg1, block.timestamp);
+                emit 0xc3bcb264: arg1, Array(len=6, data='SNATCH')
+                emit 0x204b669b: arg1, 0
+}
+
+function sub_b614c386(?) {
+    if msg.sender == owner:
+        require stor7
+        require not ownerOf[arg1]
+        ownerOf[arg1] = stor7
+        require balanceOf[stor7] + 1 >= balanceOf[stor7]
+        balanceOf[stor7]++
+        emit Transfer(arg1, 0, stor7);
+        require ownerOf[arg1]
+        tokenURI[arg1][] = Array(len=arg2.length, data=arg2[all])
+        currentPrice[arg1] = arg3
+        sub_d5ae33e2[arg1] = block.timestamp
+        uint8(stor9[arg1]) = 1
+        stor13[arg1] = arg4
+        emit TokenCreated(stor7, arg1, block.timestamp);
+        emit 0xc3bcb264: arg1, Array(len=6, data='SNATCH')
+        emit 0x204b669b: arg1, 1
+    else:
+        require msg.sender == stor7
+        if msg.sender == owner:
+            require stor7
+            require not ownerOf[arg1]
+            ownerOf[arg1] = stor7
+            require balanceOf[stor7] + 1 >= balanceOf[stor7]
+            balanceOf[stor7]++
+            emit Transfer(arg1, 0, stor7);
+            require ownerOf[arg1]
+            tokenURI[arg1][] = Array(len=arg2.length, data=arg2[all])
+            currentPrice[arg1] = arg3
+            sub_d5ae33e2[arg1] = block.timestamp
+            uint8(stor9[arg1]) = 1
+            stor13[arg1] = arg4
+            emit TokenCreated(stor7, arg1, block.timestamp);
+            emit 0xc3bcb264: arg1, Array(len=6, data='SNATCH')
+            emit 0x204b669b: arg1, 1
+        else:
+            if msg.sender == stor7:
+                require stor7
+                require not ownerOf[arg1]
+                ownerOf[arg1] = stor7
+                require balanceOf[stor7] + 1 >= balanceOf[stor7]
+                balanceOf[stor7]++
+                emit Transfer(arg1, 0, stor7);
+                require ownerOf[arg1]
+                tokenURI[arg1][] = Array(len=arg2.length, data=arg2[all])
+                currentPrice[arg1] = arg3
+                sub_d5ae33e2[arg1] = block.timestamp
+                uint8(stor9[arg1]) = 0
+                stor13[arg1] = arg4
+                emit TokenCreated(stor7, arg1, block.timestamp);
+                emit 0xc3bcb264: arg1, Array(len=6, data='SNATCH')
+                emit 0x204b669b: arg1, 0
+}
+
+function safeTransferFrom(address arg1, address arg2, uint256 arg3, bytes arg4) {
+    require not uint8(stor4.field_160)
+    require ext_code.size(this.address)
+    call this.address.0x4f558e79 with:
+         gas gas_remaining wei
+        args arg3
+    if not ext_call.success:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+    require ext_call.return_data[0]
+    require ('signextend', 0, ('signextend', 0, ('type', 256, ('stor', ('map', ('param', 'arg3'), ('name', 'stor9', 9)))))) > 0
+    require ownerOf[arg3]
+    if ownerOf[arg3] != msg.sender:
+        if approved[arg3] != msg.sender:
+            require stor3[stor0[arg3]][address(msg.sender)]
+    require not uint8(stor4.field_160)
+    require ext_code.size(this.address)
+    call this.address.0x4f558e79 with:
+         gas gas_remaining wei
+        args arg3
+    if not ext_call.success:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+    require ext_call.return_data[0]
+    require ('signextend', 0, ('signextend', 0, ('type', 256, ('stor', ('map', ('param', 'arg3'), ('name', 'stor9', 9)))))) > 0
+    require ownerOf[arg3]
+    if ownerOf[arg3] != msg.sender:
+        if approved[arg3] != msg.sender:
+            require stor3[stor0[arg3]][address(msg.sender)]
+    require ext_code.size(this.address)
+    call this.address.0x4f558e79 with:
+         gas gas_remaining wei
+        args arg3
+    if not ext_call.success:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+    require ext_call.return_data[0]
+    require ('signextend', 0, ('signextend', 0, ('type', 256, ('stor', ('map', ('param', 'arg3'), ('name', 'stor9', 9)))))) > 0
+    require ownerOf[arg3]
+    if ownerOf[arg3] != msg.sender:
+        if approved[arg3] != msg.sender:
+            require stor3[stor0[arg3]][address(msg.sender)]
+    require arg1
+    require arg2
+    require ownerOf[arg3]
+    require ownerOf[arg3] == arg1
+    if approved[arg3]:
+        approved[arg3] = 0
+        emit Approval(arg3, arg1, 0);
+    require ownerOf[arg3]
+    require ownerOf[arg3] == arg1
+    require 1 <= balanceOf[address(arg1)]
+    balanceOf[address(arg1)]--
+    ownerOf[arg3] = 0
+    require not ownerOf[arg3]
+    ownerOf[arg3] = arg2
+    require balanceOf[address(arg2)] + 1 >= balanceOf[address(arg2)]
+    balanceOf[address(arg2)]++
+    emit Transfer(arg3, arg1, arg2);
+    if ext_code.size(arg2) > 0:
+        require ext_code.size(arg2)
+        call arg2.onERC721Received(address arg1, uint256 arg2, bytes arg3) with:
+             gas gas_remaining wei
+            args address(arg1), arg3, Array(len=arg4.length, data=arg4[all])
+        if not ext_call.success:
+            revert with ext_call.return_data[0 len return_data.size]
+        require return_data.size >= 32
+        require Mask(32, 224, ext_call.return_data[0]) == 0xf0b9e5ba00000000000000000000000000000000000000000000000000000000
+}
+
+function safeTransferFrom(address arg1, address arg2, uint256 arg3) {
+    require not uint8(stor4.field_160)
+    require ext_code.size(this.address)
+    call this.address.0x4f558e79 with:
+         gas gas_remaining wei
+        args arg3
+    if not ext_call.success:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+    require ext_call.return_data[0]
+    require ('signextend', 0, ('signextend', 0, ('type', 256, ('stor', ('map', ('param', 'arg3'), ('name', 'stor9', 9)))))) > 0
+    require ownerOf[arg3]
+    if ownerOf[arg3] != msg.sender:
+        if approved[arg3] != msg.sender:
+            require stor3[stor0[arg3]][address(msg.sender)]
+    require not uint8(stor4.field_160)
+    require ext_code.size(this.address)
+    call this.address.0x4f558e79 with:
+         gas gas_remaining wei
+        args arg3
+    if not ext_call.success:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+    require ext_call.return_data[0]
+    require ('signextend', 0, ('signextend', 0, ('type', 256, ('stor', ('map', ('param', 'arg3'), ('name', 'stor9', 9)))))) > 0
+    require ownerOf[arg3]
+    if ownerOf[arg3] != msg.sender:
+        if approved[arg3] != msg.sender:
+            require stor3[stor0[arg3]][address(msg.sender)]
+    require not uint8(stor4.field_160)
+    require ext_code.size(this.address)
+    call this.address.0x4f558e79 with:
+         gas gas_remaining wei
+        args arg3
+    if not ext_call.success:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+    require ext_call.return_data[0]
+    require ('signextend', 0, ('signextend', 0, ('type', 256, ('stor', ('map', ('param', 'arg3'), ('name', 'stor9', 9)))))) > 0
+    require ownerOf[arg3]
+    if ownerOf[arg3] != msg.sender:
+        if approved[arg3] != msg.sender:
+            require stor3[stor0[arg3]][address(msg.sender)]
+    require ext_code.size(this.address)
+    call this.address.0x4f558e79 with:
+         gas gas_remaining wei
+        args arg3
+    if not ext_call.success:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+    require ext_call.return_data[0]
+    require ('signextend', 0, ('signextend', 0, ('type', 256, ('stor', ('map', ('param', 'arg3'), ('name', 'stor9', 9)))))) > 0
+    require ownerOf[arg3]
+    if ownerOf[arg3] != msg.sender:
+        if approved[arg3] != msg.sender:
+            require stor3[stor0[arg3]][address(msg.sender)]
+    require arg1
+    require arg2
+    require ownerOf[arg3]
+    require ownerOf[arg3] == arg1
+    if approved[arg3]:
+        approved[arg3] = 0
+        emit Approval(arg3, arg1, 0);
+    require ownerOf[arg3]
+    require ownerOf[arg3] == arg1
+    require 1 <= balanceOf[address(arg1)]
+    balanceOf[address(arg1)]--
+    ownerOf[arg3] = 0
+    require not ownerOf[arg3]
+    ownerOf[arg3] = arg2
+    require balanceOf[address(arg2)] + 1 >= balanceOf[address(arg2)]
+    balanceOf[address(arg2)]++
+    emit Transfer(arg3, arg1, arg2);
+    if ext_code.size(arg2) > 0:
+        require ext_code.size(arg2)
+        call arg2.onERC721Received(address arg1, uint256 arg2, bytes arg3) with:
+             gas gas_remaining wei
+            args address(arg1), arg3, 96, 0
+        if not ext_call.success:
+            revert with ext_call.return_data[0 len return_data.size]
+        require return_data.size >= 32
+        require Mask(32, 224, ext_call.return_data[0]) == 0xf0b9e5ba00000000000000000000000000000000000000000000000000000000
+}
+
+function purchase(uint256 arg1) payable {
+    require not uint8(stor4.field_160)
+    require ext_code.size(this.address)
+    call this.address.0x4f558e79 with:
+         gas gas_remaining wei
+        args arg1
+    if not ext_call.success:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+    require ext_call.return_data[0]
+    require ('signextend', 0, ('signextend', 0, ('type', 256, ('stor', ('map', ('param', 'arg1'), ('name', 'stor9', 9)))))) > 0
+    require ownerOf[arg1]
+    if stor16[arg1]:
+        require stor16[arg1] == 1
+    require currentPrice[arg1] > 0
+    require ownerOf[arg1] != msg.sender
+    require msg.sender
+    require msg.value >= currentPrice[arg1]
+    if stor13[arg1]:
+        if not sub_901de3d2[arg1]:
+            require ext_code.size(stor12)
+            call stor12.0x1be21aa with:
+                 gas gas_remaining wei
+                args currentPrice[arg1], stor14[arg1]
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require return_data.size >= 64
+            require currentPrice[arg1] <= msg.value
+            sub_901de3d2[arg1] = currentPrice[arg1]
+            require ext_code.size(this.address)
+            call this.address.0x4f558e79 with:
+                 gas gas_remaining wei
+                args arg1
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require return_data.size >= 32
+            require ext_call.return_data[0]
+            require sub_d5ae33e2[arg1] <= block.timestamp
+            if block.timestamp - sub_d5ae33e2[arg1] >= 720 * 24 * 3600:
+                stor16[arg1] = 1
+            if stor16[arg1] == 1:
+                currentPrice[arg1] = 0
+                emit 0xc3bcb264: arg1, Array(len=12, data='NOT_FOR_SALE')
+            else:
+                require ext_code.size(stor12)
+                call stor12.computeNextPrice(uint256 arg1) with:
+                     gas gas_remaining wei
+                    args currentPrice[arg1]
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                currentPrice[arg1] = ext_call.return_data[0]
+                emit 0xc3bcb264: arg1, Array(len=6, data='SNATCH')
+            require ownerOf[arg1]
+            require msg.sender
+            require ownerOf[arg1]
+            require ownerOf[arg1] == ownerOf[arg1]
+            if approved[arg1]:
+                approved[arg1] = 0
+                emit Approval(arg1, ownerOf[arg1], 0);
+            require ownerOf[arg1]
+            require ownerOf[arg1] == ownerOf[arg1]
+            require 1 <= balanceOf[stor0[arg1]]
+            balanceOf[stor0[arg1]]--
+            ownerOf[arg1] = 0
+            require not ownerOf[arg1]
+            ownerOf[arg1] = msg.sender
+            require balanceOf[address(msg.sender)] + 1 >= balanceOf[address(msg.sender)]
+            balanceOf[address(msg.sender)]++
+            emit Transfer(arg1, ownerOf[arg1], msg.sender);
+            emit TokenSold(arg1, currentPrice[arg1], ownerOf[arg1], msg.sender);
+            call stor7 with:
+               value ext_call.return_data[0] wei
+                 gas 2300 * is_zero(value) wei
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            if stor13[arg1]:
+                call stor13[arg1] with:
+                   value ext_call.return_data[32] wei
+                     gas 2300 * is_zero(value) wei
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+            if not sub_901de3d2[arg1]:
+                call msg.sender with:
+                   value msg.value - currentPrice[arg1] wei
+                     gas 2300 * is_zero(value) wei
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+            else:
+                call ownerOf[arg1] with:
+                     gas 2300 wei
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                call msg.sender with:
+                   value msg.value - currentPrice[arg1] wei
+                     gas 2300 * is_zero(value) wei
+        else:
+            if not stor13[arg1]:
+                require currentPrice[arg1] <= msg.value
+                sub_901de3d2[arg1] = currentPrice[arg1]
+                require ext_code.size(this.address)
+                call this.address.0x4f558e79 with:
+                     gas gas_remaining wei
+                    args arg1
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                require ext_call.return_data[0]
+                require sub_d5ae33e2[arg1] <= block.timestamp
+                if block.timestamp - sub_d5ae33e2[arg1] >= 720 * 24 * 3600:
+                    stor16[arg1] = 1
+                if stor16[arg1] == 1:
+                    currentPrice[arg1] = 0
+                    emit 0xc3bcb264: arg1, Array(len=12, data='NOT_FOR_SALE')
+                else:
+                    require ext_code.size(stor12)
+                    call stor12.computeNextPrice(uint256 arg1) with:
+                         gas gas_remaining wei
+                        args currentPrice[arg1]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    currentPrice[arg1] = ext_call.return_data[0]
+                    emit 0xc3bcb264: arg1, Array(len=6, data='SNATCH')
+                require ownerOf[arg1]
+                require msg.sender
+                require ownerOf[arg1]
+                require ownerOf[arg1] == ownerOf[arg1]
+                if approved[arg1]:
+                    approved[arg1] = 0
+                    emit Approval(arg1, ownerOf[arg1], 0);
+                require ownerOf[arg1]
+                require ownerOf[arg1] == ownerOf[arg1]
+                require 1 <= balanceOf[stor0[arg1]]
+                balanceOf[stor0[arg1]]--
+                ownerOf[arg1] = 0
+                require not ownerOf[arg1]
+                ownerOf[arg1] = msg.sender
+                require balanceOf[address(msg.sender)] + 1 >= balanceOf[address(msg.sender)]
+                balanceOf[address(msg.sender)]++
+                emit Transfer(arg1, ownerOf[arg1], msg.sender);
+                emit TokenSold(arg1, currentPrice[arg1], ownerOf[arg1], msg.sender);
+                call stor7 with:
+                     gas 2300 wei
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                if stor13[arg1]:
+                    call stor13[arg1] with:
+                         gas 2300 wei
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                if not sub_901de3d2[arg1]:
+                    call msg.sender with:
+                       value msg.value - currentPrice[arg1] wei
+                         gas 2300 * is_zero(value) wei
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                else:
+                    call ownerOf[arg1] with:
+                         gas 2300 wei
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    call msg.sender with:
+                       value msg.value - currentPrice[arg1] wei
+                         gas 2300 * is_zero(value) wei
+            else:
+                if not sub_901de3d2[arg1]:
+                    require currentPrice[arg1] <= msg.value
+                    sub_901de3d2[arg1] = currentPrice[arg1]
+                    require ext_code.size(this.address)
+                    call this.address.0x4f558e79 with:
+                         gas gas_remaining wei
+                        args arg1
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    require ext_call.return_data[0]
+                    require sub_d5ae33e2[arg1] <= block.timestamp
+                    if block.timestamp - sub_d5ae33e2[arg1] >= 720 * 24 * 3600:
+                        stor16[arg1] = 1
+                    if stor16[arg1] == 1:
+                        currentPrice[arg1] = 0
+                        emit 0xc3bcb264: arg1, Array(len=12, data='NOT_FOR_SALE')
+                    else:
+                        require ext_code.size(stor12)
+                        call stor12.computeNextPrice(uint256 arg1) with:
+                             gas gas_remaining wei
+                            args currentPrice[arg1]
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        currentPrice[arg1] = ext_call.return_data[0]
+                        emit 0xc3bcb264: arg1, Array(len=6, data='SNATCH')
+                    require ownerOf[arg1]
+                    require msg.sender
+                    require ownerOf[arg1]
+                    require ownerOf[arg1] == ownerOf[arg1]
+                    if approved[arg1]:
+                        approved[arg1] = 0
+                        emit Approval(arg1, ownerOf[arg1], 0);
+                    require ownerOf[arg1]
+                    require ownerOf[arg1] == ownerOf[arg1]
+                    require 1 <= balanceOf[stor0[arg1]]
+                    balanceOf[stor0[arg1]]--
+                    ownerOf[arg1] = 0
+                    require not ownerOf[arg1]
+                    ownerOf[arg1] = msg.sender
+                    require balanceOf[address(msg.sender)] + 1 >= balanceOf[address(msg.sender)]
+                    balanceOf[address(msg.sender)]++
+                    emit Transfer(arg1, ownerOf[arg1], msg.sender);
+                    emit TokenSold(arg1, currentPrice[arg1], ownerOf[arg1], msg.sender);
+                    call stor7 with:
+                         gas 2300 wei
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    if stor13[arg1]:
+                        call stor13[arg1] with:
+                             gas 2300 wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                    if not sub_901de3d2[arg1]:
+                        call msg.sender with:
+                           value msg.value - currentPrice[arg1] wei
+                             gas 2300 * is_zero(value) wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                    else:
+                        call ownerOf[arg1] with:
+                             gas 2300 wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        call msg.sender with:
+                           value msg.value - currentPrice[arg1] wei
+                             gas 2300 * is_zero(value) wei
+                else:
+                    require ext_code.size(stor12)
+                    call stor12.0xfc59e78 with:
+                         gas gas_remaining wei
+                        args currentPrice[arg1], sub_901de3d2[arg1], stor14[arg1]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 96
+                    require currentPrice[arg1] <= msg.value
+                    sub_901de3d2[arg1] = currentPrice[arg1]
+                    require ext_code.size(this.address)
+                    call this.address.0x4f558e79 with:
+                         gas gas_remaining wei
+                        args arg1
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    require ext_call.return_data[0]
+                    require sub_d5ae33e2[arg1] <= block.timestamp
+                    if block.timestamp - sub_d5ae33e2[arg1] >= 720 * 24 * 3600:
+                        stor16[arg1] = 1
+                    if stor16[arg1] == 1:
+                        currentPrice[arg1] = 0
+                        emit 0xc3bcb264: arg1, Array(len=12, data='NOT_FOR_SALE')
+                    else:
+                        require ext_code.size(stor12)
+                        call stor12.computeNextPrice(uint256 arg1) with:
+                             gas gas_remaining wei
+                            args currentPrice[arg1]
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        currentPrice[arg1] = ext_call.return_data[0]
+                        emit 0xc3bcb264: arg1, Array(len=6, data='SNATCH')
+                    require ownerOf[arg1]
+                    require msg.sender
+                    require ownerOf[arg1]
+                    require ownerOf[arg1] == ownerOf[arg1]
+                    if approved[arg1]:
+                        approved[arg1] = 0
+                        emit Approval(arg1, ownerOf[arg1], 0);
+                    require ownerOf[arg1]
+                    require ownerOf[arg1] == ownerOf[arg1]
+                    require 1 <= balanceOf[stor0[arg1]]
+                    balanceOf[stor0[arg1]]--
+                    ownerOf[arg1] = 0
+                    require not ownerOf[arg1]
+                    ownerOf[arg1] = msg.sender
+                    require balanceOf[address(msg.sender)] + 1 >= balanceOf[address(msg.sender)]
+                    balanceOf[address(msg.sender)]++
+                    emit Transfer(arg1, ownerOf[arg1], msg.sender);
+                    emit TokenSold(arg1, currentPrice[arg1], ownerOf[arg1], msg.sender);
+                    call stor7 with:
+                       value ext_call.return_data[32] wei
+                         gas 2300 * is_zero(value) wei
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    if stor13[arg1]:
+                        call stor13[arg1] with:
+                           value ext_call.return_data[64] wei
+                             gas 2300 * is_zero(value) wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                    if not sub_901de3d2[arg1]:
+                        call msg.sender with:
+                           value msg.value - currentPrice[arg1] wei
+                             gas 2300 * is_zero(value) wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                    else:
+                        call ownerOf[arg1] with:
+                           value ext_call.return_data[0] wei
+                             gas 2300 * is_zero(value) wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        call msg.sender with:
+                           value msg.value - currentPrice[arg1] wei
+                             gas 2300 * is_zero(value) wei
+    else:
+        if not sub_901de3d2[arg1]:
+            require ext_code.size(stor12)
+            call stor12.0x7fff5201 with:
+                 gas gas_remaining wei
+                args currentPrice[arg1], stor14[arg1]
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require return_data.size >= 32
+            require currentPrice[arg1] <= msg.value
+            sub_901de3d2[arg1] = currentPrice[arg1]
+            require ext_code.size(this.address)
+            call this.address.0x4f558e79 with:
+                 gas gas_remaining wei
+                args arg1
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require return_data.size >= 32
+            require ext_call.return_data[0]
+            require sub_d5ae33e2[arg1] <= block.timestamp
+            if block.timestamp - sub_d5ae33e2[arg1] >= 720 * 24 * 3600:
+                stor16[arg1] = 1
+            if stor16[arg1] == 1:
+                currentPrice[arg1] = 0
+                emit 0xc3bcb264: arg1, Array(len=12, data='NOT_FOR_SALE')
+            else:
+                require ext_code.size(stor12)
+                call stor12.computeNextPrice(uint256 arg1) with:
+                     gas gas_remaining wei
+                    args currentPrice[arg1]
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                currentPrice[arg1] = ext_call.return_data[0]
+                emit 0xc3bcb264: arg1, Array(len=6, data='SNATCH')
+            require ownerOf[arg1]
+            require msg.sender
+            require ownerOf[arg1]
+            require ownerOf[arg1] == ownerOf[arg1]
+            if approved[arg1]:
+                approved[arg1] = 0
+                emit Approval(arg1, ownerOf[arg1], 0);
+            require ownerOf[arg1]
+            require ownerOf[arg1] == ownerOf[arg1]
+            require 1 <= balanceOf[stor0[arg1]]
+            balanceOf[stor0[arg1]]--
+            ownerOf[arg1] = 0
+            require not ownerOf[arg1]
+            ownerOf[arg1] = msg.sender
+            require balanceOf[address(msg.sender)] + 1 >= balanceOf[address(msg.sender)]
+            balanceOf[address(msg.sender)]++
+            emit Transfer(arg1, ownerOf[arg1], msg.sender);
+            emit TokenSold(arg1, currentPrice[arg1], ownerOf[arg1], msg.sender);
+            call stor7 with:
+               value ext_call.return_data[0] wei
+                 gas 2300 * is_zero(value) wei
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            if stor13[arg1]:
+                call stor13[arg1] with:
+                     gas 2300 wei
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+            if not sub_901de3d2[arg1]:
+                call msg.sender with:
+                   value msg.value - currentPrice[arg1] wei
+                     gas 2300 * is_zero(value) wei
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+            else:
+                call ownerOf[arg1] with:
+                     gas 2300 wei
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                call msg.sender with:
+                   value msg.value - currentPrice[arg1] wei
+                     gas 2300 * is_zero(value) wei
+        else:
+            if stor13[arg1]:
+                if not sub_901de3d2[arg1]:
+                    require ext_code.size(stor12)
+                    call stor12.0x1be21aa with:
+                         gas gas_remaining wei
+                        args currentPrice[arg1], stor14[arg1]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 64
+                    require currentPrice[arg1] <= msg.value
+                    sub_901de3d2[arg1] = currentPrice[arg1]
+                    require ext_code.size(this.address)
+                    call this.address.0x4f558e79 with:
+                         gas gas_remaining wei
+                        args arg1
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    require ext_call.return_data[0]
+                    require sub_d5ae33e2[arg1] <= block.timestamp
+                    if block.timestamp - sub_d5ae33e2[arg1] >= 720 * 24 * 3600:
+                        stor16[arg1] = 1
+                    if stor16[arg1] == 1:
+                        currentPrice[arg1] = 0
+                        emit 0xc3bcb264: arg1, Array(len=12, data='NOT_FOR_SALE')
+                    else:
+                        require ext_code.size(stor12)
+                        call stor12.computeNextPrice(uint256 arg1) with:
+                             gas gas_remaining wei
+                            args currentPrice[arg1]
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        currentPrice[arg1] = ext_call.return_data[0]
+                        emit 0xc3bcb264: arg1, Array(len=6, data='SNATCH')
+                    require ownerOf[arg1]
+                    require msg.sender
+                    require ownerOf[arg1]
+                    require ownerOf[arg1] == ownerOf[arg1]
+                    if approved[arg1]:
+                        approved[arg1] = 0
+                        emit Approval(arg1, ownerOf[arg1], 0);
+                    require ownerOf[arg1]
+                    require ownerOf[arg1] == ownerOf[arg1]
+                    require 1 <= balanceOf[stor0[arg1]]
+                    balanceOf[stor0[arg1]]--
+                    ownerOf[arg1] = 0
+                    require not ownerOf[arg1]
+                    ownerOf[arg1] = msg.sender
+                    require balanceOf[address(msg.sender)] + 1 >= balanceOf[address(msg.sender)]
+                    balanceOf[address(msg.sender)]++
+                    emit Transfer(arg1, ownerOf[arg1], msg.sender);
+                    emit TokenSold(arg1, currentPrice[arg1], ownerOf[arg1], msg.sender);
+                    call stor7 with:
+                       value ext_call.return_data[0] wei
+                         gas 2300 * is_zero(value) wei
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    if stor13[arg1]:
+                        call stor13[arg1] with:
+                           value ext_call.return_data[32] wei
+                             gas 2300 * is_zero(value) wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                    if not sub_901de3d2[arg1]:
+                        call msg.sender with:
+                           value msg.value - currentPrice[arg1] wei
+                             gas 2300 * is_zero(value) wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                    else:
+                        call ownerOf[arg1] with:
+                             gas 2300 wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        call msg.sender with:
+                           value msg.value - currentPrice[arg1] wei
+                             gas 2300 * is_zero(value) wei
+                else:
+                    if not stor13[arg1]:
+                        require currentPrice[arg1] <= msg.value
+                        sub_901de3d2[arg1] = currentPrice[arg1]
+                        require ext_code.size(this.address)
+                        call this.address.0x4f558e79 with:
+                             gas gas_remaining wei
+                            args arg1
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_call.return_data[0]
+                        require sub_d5ae33e2[arg1] <= block.timestamp
+                        if block.timestamp - sub_d5ae33e2[arg1] >= 720 * 24 * 3600:
+                            stor16[arg1] = 1
+                        if stor16[arg1] == 1:
+                            currentPrice[arg1] = 0
+                            emit 0xc3bcb264: arg1, Array(len=12, data='NOT_FOR_SALE')
+                        else:
+                            require ext_code.size(stor12)
+                            call stor12.computeNextPrice(uint256 arg1) with:
+                                 gas gas_remaining wei
+                                args currentPrice[arg1]
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            currentPrice[arg1] = ext_call.return_data[0]
+                            emit 0xc3bcb264: arg1, Array(len=6, data='SNATCH')
+                        require ownerOf[arg1]
+                        require msg.sender
+                        require ownerOf[arg1]
+                        require ownerOf[arg1] == ownerOf[arg1]
+                        if approved[arg1]:
+                            approved[arg1] = 0
+                            emit Approval(arg1, ownerOf[arg1], 0);
+                        require ownerOf[arg1]
+                        require ownerOf[arg1] == ownerOf[arg1]
+                        require 1 <= balanceOf[stor0[arg1]]
+                        balanceOf[stor0[arg1]]--
+                        ownerOf[arg1] = 0
+                        require not ownerOf[arg1]
+                        ownerOf[arg1] = msg.sender
+                        require balanceOf[address(msg.sender)] + 1 >= balanceOf[address(msg.sender)]
+                        balanceOf[address(msg.sender)]++
+                        emit Transfer(arg1, ownerOf[arg1], msg.sender);
+                        emit TokenSold(arg1, currentPrice[arg1], ownerOf[arg1], msg.sender);
+                        call stor7 with:
+                             gas 2300 wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        if stor13[arg1]:
+                            call stor13[arg1] with:
+                                 gas 2300 wei
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                        if not sub_901de3d2[arg1]:
+                            call msg.sender with:
+                               value msg.value - currentPrice[arg1] wei
+                                 gas 2300 * is_zero(value) wei
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                        else:
+                            call ownerOf[arg1] with:
+                                 gas 2300 wei
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            call msg.sender with:
+                               value msg.value - currentPrice[arg1] wei
+                                 gas 2300 * is_zero(value) wei
+                    else:
+                        if not sub_901de3d2[arg1]:
+                            require currentPrice[arg1] <= msg.value
+                            sub_901de3d2[arg1] = currentPrice[arg1]
+                            require ext_code.size(this.address)
+                            call this.address.0x4f558e79 with:
+                                 gas gas_remaining wei
+                                args arg1
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                            require sub_d5ae33e2[arg1] <= block.timestamp
+                            if block.timestamp - sub_d5ae33e2[arg1] >= 720 * 24 * 3600:
+                                stor16[arg1] = 1
+                            if stor16[arg1] == 1:
+                                currentPrice[arg1] = 0
+                                emit 0xc3bcb264: arg1, Array(len=12, data='NOT_FOR_SALE')
+                            else:
+                                require ext_code.size(stor12)
+                                call stor12.computeNextPrice(uint256 arg1) with:
+                                     gas gas_remaining wei
+                                    args currentPrice[arg1]
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                currentPrice[arg1] = ext_call.return_data[0]
+                                emit 0xc3bcb264: arg1, Array(len=6, data='SNATCH')
+                            require ownerOf[arg1]
+                            require msg.sender
+                            require ownerOf[arg1]
+                            require ownerOf[arg1] == ownerOf[arg1]
+                            if approved[arg1]:
+                                approved[arg1] = 0
+                                emit Approval(arg1, ownerOf[arg1], 0);
+                            require ownerOf[arg1]
+                            require ownerOf[arg1] == ownerOf[arg1]
+                            require 1 <= balanceOf[stor0[arg1]]
+                            balanceOf[stor0[arg1]]--
+                            ownerOf[arg1] = 0
+                            require not ownerOf[arg1]
+                            ownerOf[arg1] = msg.sender
+                            require balanceOf[address(msg.sender)] + 1 >= balanceOf[address(msg.sender)]
+                            balanceOf[address(msg.sender)]++
+                            emit Transfer(arg1, ownerOf[arg1], msg.sender);
+                            emit TokenSold(arg1, currentPrice[arg1], ownerOf[arg1], msg.sender);
+                            call stor7 with:
+                                 gas 2300 wei
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            if stor13[arg1]:
+                                call stor13[arg1] with:
+                                     gas 2300 wei
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                            if not sub_901de3d2[arg1]:
+                                call msg.sender with:
+                                   value msg.value - currentPrice[arg1] wei
+                                     gas 2300 * is_zero(value) wei
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                            else:
+                                call ownerOf[arg1] with:
+                                     gas 2300 wei
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                call msg.sender with:
+                                   value msg.value - currentPrice[arg1] wei
+                                     gas 2300 * is_zero(value) wei
+                        else:
+                            require ext_code.size(stor12)
+                            call stor12.0xfc59e78 with:
+                                 gas gas_remaining wei
+                                args currentPrice[arg1], sub_901de3d2[arg1], stor14[arg1]
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 96
+                            require currentPrice[arg1] <= msg.value
+                            sub_901de3d2[arg1] = currentPrice[arg1]
+                            require ext_code.size(this.address)
+                            call this.address.0x4f558e79 with:
+                                 gas gas_remaining wei
+                                args arg1
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                            require sub_d5ae33e2[arg1] <= block.timestamp
+                            if block.timestamp - sub_d5ae33e2[arg1] >= 720 * 24 * 3600:
+                                stor16[arg1] = 1
+                            if stor16[arg1] == 1:
+                                currentPrice[arg1] = 0
+                                emit 0xc3bcb264: arg1, Array(len=12, data='NOT_FOR_SALE')
+                            else:
+                                require ext_code.size(stor12)
+                                call stor12.computeNextPrice(uint256 arg1) with:
+                                     gas gas_remaining wei
+                                    args currentPrice[arg1]
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                currentPrice[arg1] = ext_call.return_data[0]
+                                emit 0xc3bcb264: arg1, Array(len=6, data='SNATCH')
+                            require ownerOf[arg1]
+                            require msg.sender
+                            require ownerOf[arg1]
+                            require ownerOf[arg1] == ownerOf[arg1]
+                            if approved[arg1]:
+                                approved[arg1] = 0
+                                emit Approval(arg1, ownerOf[arg1], 0);
+                            require ownerOf[arg1]
+                            require ownerOf[arg1] == ownerOf[arg1]
+                            require 1 <= balanceOf[stor0[arg1]]
+                            balanceOf[stor0[arg1]]--
+                            ownerOf[arg1] = 0
+                            require not ownerOf[arg1]
+                            ownerOf[arg1] = msg.sender
+                            require balanceOf[address(msg.sender)] + 1 >= balanceOf[address(msg.sender)]
+                            balanceOf[address(msg.sender)]++
+                            emit Transfer(arg1, ownerOf[arg1], msg.sender);
+                            emit TokenSold(arg1, currentPrice[arg1], ownerOf[arg1], msg.sender);
+                            call stor7 with:
+                               value ext_call.return_data[32] wei
+                                 gas 2300 * is_zero(value) wei
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            if stor13[arg1]:
+                                call stor13[arg1] with:
+                                   value ext_call.return_data[64] wei
+                                     gas 2300 * is_zero(value) wei
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                            if not sub_901de3d2[arg1]:
+                                call msg.sender with:
+                                   value msg.value - currentPrice[arg1] wei
+                                     gas 2300 * is_zero(value) wei
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                            else:
+                                call ownerOf[arg1] with:
+                                   value ext_call.return_data[0] wei
+                                     gas 2300 * is_zero(value) wei
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                call msg.sender with:
+                                   value msg.value - currentPrice[arg1] wei
+                                     gas 2300 * is_zero(value) wei
+            else:
+                if sub_901de3d2[arg1]:
+                    require ext_code.size(stor12)
+                    call stor12.0x1064b9d5 with:
+                         gas gas_remaining wei
+                        args currentPrice[arg1], sub_901de3d2[arg1], stor14[arg1]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 64
+                    require currentPrice[arg1] <= msg.value
+                    sub_901de3d2[arg1] = currentPrice[arg1]
+                    require ext_code.size(this.address)
+                    call this.address.0x4f558e79 with:
+                         gas gas_remaining wei
+                        args arg1
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    require ext_call.return_data[0]
+                    require sub_d5ae33e2[arg1] <= block.timestamp
+                    if block.timestamp - sub_d5ae33e2[arg1] >= 720 * 24 * 3600:
+                        stor16[arg1] = 1
+                    if stor16[arg1] == 1:
+                        currentPrice[arg1] = 0
+                        emit 0xc3bcb264: arg1, Array(len=12, data='NOT_FOR_SALE')
+                    else:
+                        require ext_code.size(stor12)
+                        call stor12.computeNextPrice(uint256 arg1) with:
+                             gas gas_remaining wei
+                            args currentPrice[arg1]
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        currentPrice[arg1] = ext_call.return_data[0]
+                        emit 0xc3bcb264: arg1, Array(len=6, data='SNATCH')
+                    require ownerOf[arg1]
+                    require msg.sender
+                    require ownerOf[arg1]
+                    require ownerOf[arg1] == ownerOf[arg1]
+                    if approved[arg1]:
+                        approved[arg1] = 0
+                        emit Approval(arg1, ownerOf[arg1], 0);
+                    require ownerOf[arg1]
+                    require ownerOf[arg1] == ownerOf[arg1]
+                    require 1 <= balanceOf[stor0[arg1]]
+                    balanceOf[stor0[arg1]]--
+                    ownerOf[arg1] = 0
+                    require not ownerOf[arg1]
+                    ownerOf[arg1] = msg.sender
+                    require balanceOf[address(msg.sender)] + 1 >= balanceOf[address(msg.sender)]
+                    balanceOf[address(msg.sender)]++
+                    emit Transfer(arg1, ownerOf[arg1], msg.sender);
+                    emit TokenSold(arg1, currentPrice[arg1], ownerOf[arg1], msg.sender);
+                    call stor7 with:
+                       value ext_call.return_data[32] wei
+                         gas 2300 * is_zero(value) wei
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    if stor13[arg1]:
+                        call stor13[arg1] with:
+                             gas 2300 wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                    if not sub_901de3d2[arg1]:
+                        call msg.sender with:
+                           value msg.value - currentPrice[arg1] wei
+                             gas 2300 * is_zero(value) wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                    else:
+                        call ownerOf[arg1] with:
+                           value ext_call.return_data[0] wei
+                             gas 2300 * is_zero(value) wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        call msg.sender with:
+                           value msg.value - currentPrice[arg1] wei
+                             gas 2300 * is_zero(value) wei
+                else:
+                    if not stor13[arg1]:
+                        require currentPrice[arg1] <= msg.value
+                        sub_901de3d2[arg1] = currentPrice[arg1]
+                        require ext_code.size(this.address)
+                        call this.address.0x4f558e79 with:
+                             gas gas_remaining wei
+                            args arg1
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_call.return_data[0]
+                        require sub_d5ae33e2[arg1] <= block.timestamp
+                        if block.timestamp - sub_d5ae33e2[arg1] >= 720 * 24 * 3600:
+                            stor16[arg1] = 1
+                        if stor16[arg1] == 1:
+                            currentPrice[arg1] = 0
+                            emit 0xc3bcb264: arg1, Array(len=12, data='NOT_FOR_SALE')
+                        else:
+                            require ext_code.size(stor12)
+                            call stor12.computeNextPrice(uint256 arg1) with:
+                                 gas gas_remaining wei
+                                args currentPrice[arg1]
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            currentPrice[arg1] = ext_call.return_data[0]
+                            emit 0xc3bcb264: arg1, Array(len=6, data='SNATCH')
+                        require ownerOf[arg1]
+                        require msg.sender
+                        require ownerOf[arg1]
+                        require ownerOf[arg1] == ownerOf[arg1]
+                        if approved[arg1]:
+                            approved[arg1] = 0
+                            emit Approval(arg1, ownerOf[arg1], 0);
+                        require ownerOf[arg1]
+                        require ownerOf[arg1] == ownerOf[arg1]
+                        require 1 <= balanceOf[stor0[arg1]]
+                        balanceOf[stor0[arg1]]--
+                        ownerOf[arg1] = 0
+                        require not ownerOf[arg1]
+                        ownerOf[arg1] = msg.sender
+                        require balanceOf[address(msg.sender)] + 1 >= balanceOf[address(msg.sender)]
+                        balanceOf[address(msg.sender)]++
+                        emit Transfer(arg1, ownerOf[arg1], msg.sender);
+                        emit TokenSold(arg1, currentPrice[arg1], ownerOf[arg1], msg.sender);
+                        call stor7 with:
+                             gas 2300 wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        if stor13[arg1]:
+                            call stor13[arg1] with:
+                                 gas 2300 wei
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                        if not sub_901de3d2[arg1]:
+                            call msg.sender with:
+                               value msg.value - currentPrice[arg1] wei
+                                 gas 2300 * is_zero(value) wei
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                        else:
+                            call ownerOf[arg1] with:
+                                 gas 2300 wei
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            call msg.sender with:
+                               value msg.value - currentPrice[arg1] wei
+                                 gas 2300 * is_zero(value) wei
+                    else:
+                        if not sub_901de3d2[arg1]:
+                            require ext_code.size(stor12)
+                            call stor12.0x1be21aa with:
+                                 gas gas_remaining wei
+                                args currentPrice[arg1], stor14[arg1]
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 64
+                            require currentPrice[arg1] <= msg.value
+                            sub_901de3d2[arg1] = currentPrice[arg1]
+                            require ext_code.size(this.address)
+                            call this.address.0x4f558e79 with:
+                                 gas gas_remaining wei
+                                args arg1
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                            require sub_d5ae33e2[arg1] <= block.timestamp
+                            if block.timestamp - sub_d5ae33e2[arg1] >= 720 * 24 * 3600:
+                                stor16[arg1] = 1
+                            if stor16[arg1] == 1:
+                                currentPrice[arg1] = 0
+                                emit 0xc3bcb264: arg1, Array(len=12, data='NOT_FOR_SALE')
+                            else:
+                                require ext_code.size(stor12)
+                                call stor12.computeNextPrice(uint256 arg1) with:
+                                     gas gas_remaining wei
+                                    args currentPrice[arg1]
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                currentPrice[arg1] = ext_call.return_data[0]
+                                emit 0xc3bcb264: arg1, Array(len=6, data='SNATCH')
+                            require ownerOf[arg1]
+                            require msg.sender
+                            require ownerOf[arg1]
+                            require ownerOf[arg1] == ownerOf[arg1]
+                            if approved[arg1]:
+                                approved[arg1] = 0
+                                emit Approval(arg1, ownerOf[arg1], 0);
+                            require ownerOf[arg1]
+                            require ownerOf[arg1] == ownerOf[arg1]
+                            require 1 <= balanceOf[stor0[arg1]]
+                            balanceOf[stor0[arg1]]--
+                            ownerOf[arg1] = 0
+                            require not ownerOf[arg1]
+                            ownerOf[arg1] = msg.sender
+                            require balanceOf[address(msg.sender)] + 1 >= balanceOf[address(msg.sender)]
+                            balanceOf[address(msg.sender)]++
+                            emit Transfer(arg1, ownerOf[arg1], msg.sender);
+                            emit TokenSold(arg1, currentPrice[arg1], ownerOf[arg1], msg.sender);
+                            call stor7 with:
+                               value ext_call.return_data[0] wei
+                                 gas 2300 * is_zero(value) wei
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            if stor13[arg1]:
+                                call stor13[arg1] with:
+                                   value ext_call.return_data[32] wei
+                                     gas 2300 * is_zero(value) wei
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                            if not sub_901de3d2[arg1]:
+                                call msg.sender with:
+                                   value msg.value - currentPrice[arg1] wei
+                                     gas 2300 * is_zero(value) wei
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                            else:
+                                call ownerOf[arg1] with:
+                                     gas 2300 wei
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                call msg.sender with:
+                                   value msg.value - currentPrice[arg1] wei
+                                     gas 2300 * is_zero(value) wei
+                        else:
+                            if not stor13[arg1]:
+                                require currentPrice[arg1] <= msg.value
+                                sub_901de3d2[arg1] = currentPrice[arg1]
+                                require ext_code.size(this.address)
+                                call this.address.0x4f558e79 with:
+                                     gas gas_remaining wei
+                                    args arg1
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                                require sub_d5ae33e2[arg1] <= block.timestamp
+                                if block.timestamp - sub_d5ae33e2[arg1] >= 720 * 24 * 3600:
+                                    stor16[arg1] = 1
+                                if stor16[arg1] == 1:
+                                    currentPrice[arg1] = 0
+                                    emit 0xc3bcb264: arg1, Array(len=12, data='NOT_FOR_SALE')
+                                else:
+                                    require ext_code.size(stor12)
+                                    call stor12.computeNextPrice(uint256 arg1) with:
+                                         gas gas_remaining wei
+                                        args currentPrice[arg1]
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    currentPrice[arg1] = ext_call.return_data[0]
+                                    emit 0xc3bcb264: arg1, Array(len=6, data='SNATCH')
+                                require ownerOf[arg1]
+                                require msg.sender
+                                require ownerOf[arg1]
+                                require ownerOf[arg1] == ownerOf[arg1]
+                                if approved[arg1]:
+                                    approved[arg1] = 0
+                                    emit Approval(arg1, ownerOf[arg1], 0);
+                                require ownerOf[arg1]
+                                require ownerOf[arg1] == ownerOf[arg1]
+                                require 1 <= balanceOf[stor0[arg1]]
+                                balanceOf[stor0[arg1]]--
+                                ownerOf[arg1] = 0
+                                require not ownerOf[arg1]
+                                ownerOf[arg1] = msg.sender
+                                require balanceOf[address(msg.sender)] + 1 >= balanceOf[address(msg.sender)]
+                                balanceOf[address(msg.sender)]++
+                                emit Transfer(arg1, ownerOf[arg1], msg.sender);
+                                emit TokenSold(arg1, currentPrice[arg1], ownerOf[arg1], msg.sender);
+                                call stor7 with:
+                                     gas 2300 wei
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                if stor13[arg1]:
+                                    call stor13[arg1] with:
+                                         gas 2300 wei
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                if not sub_901de3d2[arg1]:
+                                    call msg.sender with:
+                                       value msg.value - currentPrice[arg1] wei
+                                         gas 2300 * is_zero(value) wei
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                else:
+                                    call ownerOf[arg1] with:
+                                         gas 2300 wei
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    call msg.sender with:
+                                       value msg.value - currentPrice[arg1] wei
+                                         gas 2300 * is_zero(value) wei
+                            else:
+                                if not sub_901de3d2[arg1]:
+                                    require currentPrice[arg1] <= msg.value
+                                    sub_901de3d2[arg1] = currentPrice[arg1]
+                                    require ext_code.size(this.address)
+                                    call this.address.0x4f558e79 with:
+                                         gas gas_remaining wei
+                                        args arg1
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    require ext_call.return_data[0]
+                                    require sub_d5ae33e2[arg1] <= block.timestamp
+                                    if block.timestamp - sub_d5ae33e2[arg1] >= 720 * 24 * 3600:
+                                        stor16[arg1] = 1
+                                    if stor16[arg1] == 1:
+                                        currentPrice[arg1] = 0
+                                        emit 0xc3bcb264: arg1, Array(len=12, data='NOT_FOR_SALE')
+                                    else:
+                                        require ext_code.size(stor12)
+                                        call stor12.computeNextPrice(uint256 arg1) with:
+                                             gas gas_remaining wei
+                                            args currentPrice[arg1]
+                                        if not ext_call.success:
+                                            revert with ext_call.return_data[0 len return_data.size]
+                                        require return_data.size >= 32
+                                        currentPrice[arg1] = ext_call.return_data[0]
+                                        emit 0xc3bcb264: arg1, Array(len=6, data='SNATCH')
+                                    require ownerOf[arg1]
+                                    require msg.sender
+                                    require ownerOf[arg1]
+                                    require ownerOf[arg1] == ownerOf[arg1]
+                                    if approved[arg1]:
+                                        approved[arg1] = 0
+                                        emit Approval(arg1, ownerOf[arg1], 0);
+                                    require ownerOf[arg1]
+                                    require ownerOf[arg1] == ownerOf[arg1]
+                                    require 1 <= balanceOf[stor0[arg1]]
+                                    balanceOf[stor0[arg1]]--
+                                    ownerOf[arg1] = 0
+                                    require not ownerOf[arg1]
+                                    ownerOf[arg1] = msg.sender
+                                    require balanceOf[address(msg.sender)] + 1 >= balanceOf[address(msg.sender)]
+                                    balanceOf[address(msg.sender)]++
+                                    emit Transfer(arg1, ownerOf[arg1], msg.sender);
+                                    emit TokenSold(arg1, currentPrice[arg1], ownerOf[arg1], msg.sender);
+                                    call stor7 with:
+                                         gas 2300 wei
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    if stor13[arg1]:
+                                        call stor13[arg1] with:
+                                             gas 2300 wei
+                                        if not ext_call.success:
+                                            revert with ext_call.return_data[0 len return_data.size]
+                                    if not sub_901de3d2[arg1]:
+                                        call msg.sender with:
+                                           value msg.value - currentPrice[arg1] wei
+                                             gas 2300 * is_zero(value) wei
+                                        if not ext_call.success:
+                                            revert with ext_call.return_data[0 len return_data.size]
+                                    else:
+                                        call ownerOf[arg1] with:
+                                             gas 2300 wei
+                                        if not ext_call.success:
+                                            revert with ext_call.return_data[0 len return_data.size]
+                                        call msg.sender with:
+                                           value msg.value - currentPrice[arg1] wei
+                                             gas 2300 * is_zero(value) wei
+                                else:
+                                    require ext_code.size(stor12)
+                                    call stor12.0xfc59e78 with:
+                                         gas gas_remaining wei
+                                        args currentPrice[arg1], sub_901de3d2[arg1], stor14[arg1]
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 96
+                                    require currentPrice[arg1] <= msg.value
+                                    sub_901de3d2[arg1] = currentPrice[arg1]
+                                    require ext_code.size(this.address)
+                                    call this.address.0x4f558e79 with:
+                                         gas gas_remaining wei
+                                        args arg1
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    require ext_call.return_data[0]
+                                    require sub_d5ae33e2[arg1] <= block.timestamp
+                                    if block.timestamp - sub_d5ae33e2[arg1] >= 720 * 24 * 3600:
+                                        stor16[arg1] = 1
+                                    if stor16[arg1] == 1:
+                                        currentPrice[arg1] = 0
+                                        emit 0xc3bcb264: arg1, Array(len=12, data='NOT_FOR_SALE')
+                                    else:
+                                        require ext_code.size(stor12)
+                                        call stor12.computeNextPrice(uint256 arg1) with:
+                                             gas gas_remaining wei
+                                            args currentPrice[arg1]
+                                        if not ext_call.success:
+                                            revert with ext_call.return_data[0 len return_data.size]
+                                        require return_data.size >= 32
+                                        currentPrice[arg1] = ext_call.return_data[0]
+                                        emit 0xc3bcb264: arg1, Array(len=6, data='SNATCH')
+                                    require ownerOf[arg1]
+                                    require msg.sender
+                                    require ownerOf[arg1]
+                                    require ownerOf[arg1] == ownerOf[arg1]
+                                    if approved[arg1]:
+                                        approved[arg1] = 0
+                                        emit Approval(arg1, ownerOf[arg1], 0);
+                                    require ownerOf[arg1]
+                                    require ownerOf[arg1] == ownerOf[arg1]
+                                    require 1 <= balanceOf[stor0[arg1]]
+                                    balanceOf[stor0[arg1]]--
+                                    ownerOf[arg1] = 0
+                                    require not ownerOf[arg1]
+                                    ownerOf[arg1] = msg.sender
+                                    require balanceOf[address(msg.sender)] + 1 >= balanceOf[address(msg.sender)]
+                                    balanceOf[address(msg.sender)]++
+                                    emit Transfer(arg1, ownerOf[arg1], msg.sender);
+                                    emit TokenSold(arg1, currentPrice[arg1], ownerOf[arg1], msg.sender);
+                                    call stor7 with:
+                                       value ext_call.return_data[32] wei
+                                         gas 2300 * is_zero(value) wei
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    if stor13[arg1]:
+                                        call stor13[arg1] with:
+                                           value ext_call.return_data[64] wei
+                                             gas 2300 * is_zero(value) wei
+                                        if not ext_call.success:
+                                            revert with ext_call.return_data[0 len return_data.size]
+                                    if not sub_901de3d2[arg1]:
+                                        call msg.sender with:
+                                           value msg.value - currentPrice[arg1] wei
+                                             gas 2300 * is_zero(value) wei
+                                        if not ext_call.success:
+                                            revert with ext_call.return_data[0 len return_data.size]
+                                    else:
+                                        call ownerOf[arg1] with:
+                                           value ext_call.return_data[0] wei
+                                             gas 2300 * is_zero(value) wei
+                                        if not ext_call.success:
+                                            revert with ext_call.return_data[0 len return_data.size]
+                                        call msg.sender with:
+                                           value msg.value - currentPrice[arg1] wei
+                                             gas 2300 * is_zero(value) wei
+}
+
+
+
+}
