@@ -1,0 +1,762 @@
+contract main {
+
+
+
+
+// =====================  Runtime code  =====================
+
+
+const website = 'www.dappleairdrops.com'
+
+
+address owner;
+mapping of uint256 bonusDropsOf;
+mapping of uint256 ethBalanceOf;
+mapping of uint8 stor3;
+mapping of uint256 trialDrops;
+uint256 rate;
+uint256 dropUnitPrice;
+uint256 bonus;
+uint256 maxDropsPerTx;
+uint256 maxTrialDrops;
+
+function maxDropsPerTx() {
+    return maxDropsPerTx
+}
+
+function rate() {
+    return rate
+}
+
+function getMaxDropsPerTx() {
+    return maxDropsPerTx
+}
+
+function tokenIsBanned(address arg1) {
+    return bool(stor3[arg1])
+}
+
+function trialDrops(address arg1) {
+    return trialDrops[arg1]
+}
+
+function getRate() {
+    return rate
+}
+
+function ethBalanceOf(address arg1) {
+    return ethBalanceOf[arg1]
+}
+
+function bonus() {
+    return bonus
+}
+
+function owner() {
+    return owner
+}
+
+function bonusDropsOf(address arg1) {
+    return bonusDropsOf[arg1]
+}
+
+function getBonusDropsOf(address arg1) {
+    return bonusDropsOf[address(arg1)]
+}
+
+function dropUnitPrice() {
+    return dropUnitPrice
+}
+
+function getEthBalanceOf(address arg1) {
+    return ethBalanceOf[address(arg1)]
+}
+
+function maxTrialDrops() {
+    return maxTrialDrops
+}
+
+function tokenHasFreeTrial(address arg1) {
+    return (trialDrops[address(arg1)] < maxTrialDrops)
+}
+
+function setBonus(uint256 arg1) {
+    require msg.sender == owner
+    require arg1 != bonus
+    emit BonustChanged(bonus, arg1);
+    bonus = arg1
+    return 0
+}
+
+function banToken(address arg1) {
+    require msg.sender == owner
+    require not stor3[address(arg1)]
+    stor3[address(arg1)] = 1
+    emit TokenBanned(arg1);
+    return 1
+}
+
+function unbanToken(address arg1) {
+    require msg.sender == owner
+    require stor3[address(arg1)]
+    stor3[address(arg1)] = 0
+    emit TokenUnbanned(arg1);
+    return 1
+}
+
+function setMaxDrops(uint256 arg1) {
+    require msg.sender == owner
+    require arg1 >= 100
+    emit MaxDropsChanged(maxDropsPerTx, arg1);
+    maxDropsPerTx = arg1
+    return 1
+}
+
+function transferOwnership(address arg1) {
+    require msg.sender == owner
+    require arg1
+    require owner != arg1
+    emit OwnershipTransferred(owner, arg1);
+    owner = arg1
+}
+
+function setRate(uint256 arg1) {
+    require msg.sender == owner
+    require arg1 != rate
+    require arg1 > 0
+    emit RateChanged(rate, arg1);
+    rate = arg1
+    require arg1
+    dropUnitPrice = 10^18 / arg1
+    return 1
+}
+
+function getRemainingTrialDrops(address arg1) {
+    if trialDrops[address(arg1)] >= maxTrialDrops:
+        return 0
+    require trialDrops[address(arg1)] <= maxTrialDrops
+    return (maxTrialDrops - trialDrops[address(arg1)])
+}
+
+function getDropsOf(address arg1) {
+    if not ethBalanceOf[address(arg1)]:
+        return 0
+    require rate * ethBalanceOf[address(arg1)] / ethBalanceOf[address(arg1)] == rate
+    return (rate * ethBalanceOf[address(arg1)] / 10^18)
+}
+
+function grantBonusDrops(address arg1, uint256 arg2) {
+    require msg.sender == owner
+    require arg1
+    require arg2 > 0
+    require arg2 + bonusDropsOf[address(arg1)] >= bonusDropsOf[address(arg1)]
+    bonusDropsOf[address(arg1)] += arg2
+    emit BonusCreditGranted(arg2, arg1);
+    return 1
+}
+
+function revokeBonusCreditOf(address arg1, uint256 arg2) {
+    require msg.sender == owner
+    require arg1
+    require arg2 <= bonusDropsOf[address(arg1)]
+    require arg2 <= bonusDropsOf[address(arg1)]
+    bonusDropsOf[address(arg1)] -= arg2
+    emit BonusCreditRevoked(arg2, arg1);
+    return 1
+}
+
+function getTokenAllowance(address arg1, address arg2) {
+    require ext_code.size(arg2)
+    call arg2.0xdd62ed3e with:
+         gas gas_remaining wei
+        args address(arg1), this.address
+    if not ext_call.success:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+    return ext_call.return_data[0]
+}
+
+function _fallback() payable {
+    require msg.value + ethBalanceOf[msg.sender] >= ethBalanceOf[msg.sender]
+    ethBalanceOf[msg.sender] += msg.value
+    if not msg.value:
+        emit CreditPurchased(msg.value, 0, msg.sender);
+    else:
+        require rate * msg.value / msg.value == rate
+        emit CreditPurchased(msg.value, rate * msg.value, msg.sender);
+}
+
+function withdrawEth(uint256 arg1) {
+    require arg1 <= ethBalanceOf[msg.sender]
+    require arg1 > 0
+    require arg1 <= ethBalanceOf[msg.sender]
+    ethBalanceOf[msg.sender] -= arg1
+    call msg.sender with:
+       value arg1 wei
+         gas 2300 * is_zero(value) wei
+    if not ext_call.success:
+        revert with ext_call.return_data[0 len return_data.size]
+    emit EthWithdrawn(arg1, msg.sender);
+    return 0
+}
+
+function withdrawERC20Tokens(address arg1, address arg2, uint256 arg3) {
+    require msg.sender == owner
+    require arg1
+    require arg2
+    require arg3 > 0
+    require ext_code.size(arg1)
+    call arg1.0xa9059cbb with:
+         gas gas_remaining wei
+        args address(arg2), arg3
+    if not ext_call.success:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+    emit ERC20TokensWithdrawn(address(arg1), address(arg2), arg3);
+    return 1
+}
+
+function getTotalDropsOf(address arg1) {
+    if not ethBalanceOf[address(arg1)]:
+        if bonusDropsOf[address(arg1)] >= 0:
+            return bonusDropsOf[address(arg1)]
+    else:
+        if rate * ethBalanceOf[address(arg1)] / ethBalanceOf[address(arg1)] == rate:
+            if bonusDropsOf[address(arg1)] + (rate * ethBalanceOf[address(arg1)] / 10^18) >= rate * ethBalanceOf[address(arg1)] / 10^18:
+                return (bonusDropsOf[address(arg1)] + (rate * ethBalanceOf[address(arg1)] / 10^18))
+    revert
+}
+
+function issueRefunds(address[] arg1) {
+    mem[128 len 32 * arg1.length] = call.data[arg1 + 36 len 32 * arg1.length]
+    require msg.sender == owner
+    require arg1.length <= maxDropsPerTx
+    s = 0
+    idx = 0
+    while idx < arg1.length:
+        require idx < arg1.length
+        if not mem[(32 * idx) + 140 len 20]:
+            s = s
+            idx = idx + 1
+            continue 
+        require idx < arg1.length
+        mem[0] = mem[(32 * idx) + 140 len 20]
+        mem[32] = 2
+        if ethBalanceOf[mem[(32 * idx) + 140 len 20]] <= 0:
+            s = s
+            idx = idx + 1
+            continue 
+        require idx < arg1.length
+        _35 = sha3(mem[(32 * idx) + 140 len 20], 2)
+        require idx < arg1.length
+        mem[0] = mem[(32 * idx) + 140 len 20]
+        mem[32] = 2
+        ethBalanceOf[mem[(32 * idx) + 140 len 20]] = 0
+        require idx < arg1.length
+        call mem[(32 * idx) + 140 len 20] with:
+           value ethBalanceOf[mem[(32 * idx) + 140 len 20]] wei
+             gas 2300 * is_zero(value) wei
+        if not ext_call.success:
+            revert with ext_call.return_data[0 len return_data.size]
+        require idx < arg1.length
+        _44 = mem[(32 * idx) + 128]
+        mem[(32 * arg1.length) + 128] = ethBalanceOf[mem[(32 * idx) + 140 len 20]]
+        emit RefundIssued(stor[_35], address(_44));
+        s = stor[_35]
+        idx = idx + 1
+        continue 
+    return 0
+}
+
+function singleValueAirdrop(address arg1, address[] arg2, uint256 arg3) {
+    mem[128 len 32 * arg2.length] = call.data[arg2 + 36 len 32 * arg2.length]
+    require arg2.length <= maxDropsPerTx
+    if not ethBalanceOf[address(msg.sender)]:
+        require bonusDropsOf[address(msg.sender)] >= 0
+        if bonusDropsOf[address(msg.sender)] >= arg2.length:
+            require not stor3[address(arg1)]
+            idx = 0
+            while idx < arg2.length:
+                require idx < arg2.length
+                if mem[(32 * idx) + 140 len 20]:
+                    require idx < arg2.length
+                    _1327 = mem[(32 * idx) + 128]
+                    mem[(32 * arg2.length) + 128] = 0x23b872dd00000000000000000000000000000000000000000000000000000000
+                    mem[(32 * arg2.length) + 132] = msg.sender
+                    mem[(32 * arg2.length) + 164] = address(_1327)
+                    mem[(32 * arg2.length) + 196] = arg3
+                    require ext_code.size(arg1)
+                    call arg1.0x23b872dd with:
+                         gas gas_remaining wei
+                        args msg.sender, address(_1327), arg3
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                idx = idx + 1
+                continue 
+        else:
+            require trialDrops[address(arg1)] < maxTrialDrops
+            require not stor3[address(arg1)]
+            idx = 0
+            while idx < arg2.length:
+                require idx < arg2.length
+                if mem[(32 * idx) + 140 len 20]:
+                    require idx < arg2.length
+                    _1333 = mem[(32 * idx) + 128]
+                    mem[(32 * arg2.length) + 128] = 0x23b872dd00000000000000000000000000000000000000000000000000000000
+                    mem[(32 * arg2.length) + 132] = msg.sender
+                    mem[(32 * arg2.length) + 164] = address(_1333)
+                    mem[(32 * arg2.length) + 196] = arg3
+                    require ext_code.size(arg1)
+                    call arg1.0x23b872dd with:
+                         gas gas_remaining wei
+                        args msg.sender, address(_1333), arg3
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                idx = idx + 1
+                continue 
+    else:
+        require rate * ethBalanceOf[address(msg.sender)] / ethBalanceOf[address(msg.sender)] == rate
+        require bonusDropsOf[address(msg.sender)] + (rate * ethBalanceOf[address(msg.sender)] / 10^18) >= rate * ethBalanceOf[address(msg.sender)] / 10^18
+        if bonusDropsOf[address(msg.sender)] + (rate * ethBalanceOf[address(msg.sender)] / 10^18) >= arg2.length:
+            require not stor3[address(arg1)]
+            idx = 0
+            while idx < arg2.length:
+                require idx < arg2.length
+                if mem[(32 * idx) + 140 len 20]:
+                    require idx < arg2.length
+                    _1315 = mem[(32 * idx) + 128]
+                    mem[(32 * arg2.length) + 128] = 0x23b872dd00000000000000000000000000000000000000000000000000000000
+                    mem[(32 * arg2.length) + 132] = msg.sender
+                    mem[(32 * arg2.length) + 164] = address(_1315)
+                    mem[(32 * arg2.length) + 196] = arg3
+                    require ext_code.size(arg1)
+                    call arg1.0x23b872dd with:
+                         gas gas_remaining wei
+                        args msg.sender, address(_1315), arg3
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                idx = idx + 1
+                continue 
+        else:
+            require trialDrops[address(arg1)] < maxTrialDrops
+            require not stor3[address(arg1)]
+            idx = 0
+            while idx < arg2.length:
+                require idx < arg2.length
+                if mem[(32 * idx) + 140 len 20]:
+                    require idx < arg2.length
+                    _1321 = mem[(32 * idx) + 128]
+                    mem[(32 * arg2.length) + 128] = 0x23b872dd00000000000000000000000000000000000000000000000000000000
+                    mem[(32 * arg2.length) + 132] = msg.sender
+                    mem[(32 * arg2.length) + 164] = address(_1321)
+                    mem[(32 * arg2.length) + 196] = arg3
+                    require ext_code.size(arg1)
+                    call arg1.0x23b872dd with:
+                         gas gas_remaining wei
+                        args msg.sender, address(_1321), arg3
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                idx = idx + 1
+                continue 
+    if trialDrops[address(arg1)] < maxTrialDrops:
+        require arg2.length + trialDrops[address(arg1)] >= trialDrops[address(arg1)]
+        trialDrops[address(arg1)] += arg2.length
+    else:
+        if not ethBalanceOf[address(msg.sender)]:
+            if arg2.length <= 0:
+                if not arg2.length:
+                    require bonusDropsOf[msg.sender] >= bonusDropsOf[msg.sender]
+                else:
+                    require bonus * arg2.length / arg2.length == bonus
+                    require (bonus * arg2.length / 100) + bonusDropsOf[msg.sender] >= bonusDropsOf[msg.sender]
+                    bonusDropsOf[msg.sender] += bonus * arg2.length / 100
+                if not arg2.length:
+                    require 0 <= ethBalanceOf[msg.sender]
+                else:
+                    require dropUnitPrice * arg2.length / arg2.length == dropUnitPrice
+                    require dropUnitPrice * arg2.length <= ethBalanceOf[msg.sender]
+                    ethBalanceOf[msg.sender] += -1 * dropUnitPrice * arg2.length
+                if not arg2.length:
+                    call owner with:
+                         gas 2300 wei
+                else:
+                    require dropUnitPrice * arg2.length / arg2.length == dropUnitPrice
+                    call owner with:
+                       value dropUnitPrice * arg2.length wei
+                         gas 2300 * is_zero(value) wei
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+            else:
+                if not ethBalanceOf[address(msg.sender)]:
+                    require 0 <= arg2.length
+                    if 0 < ethBalanceOf[msg.sender]:
+                        if not ethBalanceOf[address(msg.sender)]:
+                            require bonusDropsOf[msg.sender] >= bonusDropsOf[msg.sender]
+                        else:
+                            require rate * ethBalanceOf[address(msg.sender)] / ethBalanceOf[address(msg.sender)] == rate
+                            if not rate * ethBalanceOf[address(msg.sender)] / 10^18:
+                                require bonusDropsOf[msg.sender] >= bonusDropsOf[msg.sender]
+                            else:
+                                require bonus * rate * ethBalanceOf[address(msg.sender)] / 10^18 / rate * ethBalanceOf[address(msg.sender)] / 10^18 == bonus
+                                require (bonus * rate * ethBalanceOf[address(msg.sender)] / 10^18 / 100) + bonusDropsOf[msg.sender] >= bonusDropsOf[msg.sender]
+                                bonusDropsOf[msg.sender] += bonus * rate * ethBalanceOf[address(msg.sender)] / 10^18 / 100
+                        call owner with:
+                           value ethBalanceOf[msg.sender] wei
+                             gas 2300 * is_zero(value) wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        ethBalanceOf[msg.sender] = 0
+                    require arg2.length <= bonusDropsOf[msg.sender]
+                    bonusDropsOf[msg.sender] -= arg2.length
+                else:
+                    require rate * ethBalanceOf[address(msg.sender)] / ethBalanceOf[address(msg.sender)] == rate
+                    require rate * ethBalanceOf[address(msg.sender)] / 10^18 <= arg2.length
+                    if 0 < ethBalanceOf[msg.sender]:
+                        if not ethBalanceOf[address(msg.sender)]:
+                            require bonusDropsOf[msg.sender] >= bonusDropsOf[msg.sender]
+                        else:
+                            require rate * ethBalanceOf[address(msg.sender)] / ethBalanceOf[address(msg.sender)] == rate
+                            if not rate * ethBalanceOf[address(msg.sender)] / 10^18:
+                                require bonusDropsOf[msg.sender] >= bonusDropsOf[msg.sender]
+                            else:
+                                require bonus * rate * ethBalanceOf[address(msg.sender)] / 10^18 / rate * ethBalanceOf[address(msg.sender)] / 10^18 == bonus
+                                require (bonus * rate * ethBalanceOf[address(msg.sender)] / 10^18 / 100) + bonusDropsOf[msg.sender] >= bonusDropsOf[msg.sender]
+                                bonusDropsOf[msg.sender] += bonus * rate * ethBalanceOf[address(msg.sender)] / 10^18 / 100
+                        call owner with:
+                           value ethBalanceOf[msg.sender] wei
+                             gas 2300 * is_zero(value) wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        ethBalanceOf[msg.sender] = 0
+                    require arg2.length - (rate * ethBalanceOf[address(msg.sender)] / 10^18) <= bonusDropsOf[msg.sender]
+                    bonusDropsOf[msg.sender] = bonusDropsOf[msg.sender] - arg2.length + (rate * ethBalanceOf[address(msg.sender)] / 10^18)
+        else:
+            require rate * ethBalanceOf[address(msg.sender)] / ethBalanceOf[address(msg.sender)] == rate
+            if arg2.length <= rate * ethBalanceOf[address(msg.sender)] / 10^18:
+                if not arg2.length:
+                    require bonusDropsOf[msg.sender] >= bonusDropsOf[msg.sender]
+                else:
+                    require bonus * arg2.length / arg2.length == bonus
+                    require (bonus * arg2.length / 100) + bonusDropsOf[msg.sender] >= bonusDropsOf[msg.sender]
+                    bonusDropsOf[msg.sender] += bonus * arg2.length / 100
+                if not arg2.length:
+                    require 0 <= ethBalanceOf[msg.sender]
+                else:
+                    require dropUnitPrice * arg2.length / arg2.length == dropUnitPrice
+                    require dropUnitPrice * arg2.length <= ethBalanceOf[msg.sender]
+                    ethBalanceOf[msg.sender] += -1 * dropUnitPrice * arg2.length
+                if not arg2.length:
+                    call owner with:
+                         gas 2300 wei
+                else:
+                    require dropUnitPrice * arg2.length / arg2.length == dropUnitPrice
+                    call owner with:
+                       value dropUnitPrice * arg2.length wei
+                         gas 2300 * is_zero(value) wei
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+            else:
+                if not ethBalanceOf[address(msg.sender)]:
+                    require 0 <= arg2.length
+                    if 0 < ethBalanceOf[msg.sender]:
+                        if not ethBalanceOf[address(msg.sender)]:
+                            require bonusDropsOf[msg.sender] >= bonusDropsOf[msg.sender]
+                        else:
+                            require rate * ethBalanceOf[address(msg.sender)] / ethBalanceOf[address(msg.sender)] == rate
+                            if not rate * ethBalanceOf[address(msg.sender)] / 10^18:
+                                require bonusDropsOf[msg.sender] >= bonusDropsOf[msg.sender]
+                            else:
+                                require bonus * rate * ethBalanceOf[address(msg.sender)] / 10^18 / rate * ethBalanceOf[address(msg.sender)] / 10^18 == bonus
+                                require (bonus * rate * ethBalanceOf[address(msg.sender)] / 10^18 / 100) + bonusDropsOf[msg.sender] >= bonusDropsOf[msg.sender]
+                                bonusDropsOf[msg.sender] += bonus * rate * ethBalanceOf[address(msg.sender)] / 10^18 / 100
+                        call owner with:
+                           value ethBalanceOf[msg.sender] wei
+                             gas 2300 * is_zero(value) wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        ethBalanceOf[msg.sender] = 0
+                    require arg2.length <= bonusDropsOf[msg.sender]
+                    bonusDropsOf[msg.sender] -= arg2.length
+                else:
+                    require rate * ethBalanceOf[address(msg.sender)] / ethBalanceOf[address(msg.sender)] == rate
+                    require rate * ethBalanceOf[address(msg.sender)] / 10^18 <= arg2.length
+                    if 0 < ethBalanceOf[msg.sender]:
+                        if not ethBalanceOf[address(msg.sender)]:
+                            require bonusDropsOf[msg.sender] >= bonusDropsOf[msg.sender]
+                        else:
+                            require rate * ethBalanceOf[address(msg.sender)] / ethBalanceOf[address(msg.sender)] == rate
+                            if not rate * ethBalanceOf[address(msg.sender)] / 10^18:
+                                require bonusDropsOf[msg.sender] >= bonusDropsOf[msg.sender]
+                            else:
+                                require bonus * rate * ethBalanceOf[address(msg.sender)] / 10^18 / rate * ethBalanceOf[address(msg.sender)] / 10^18 == bonus
+                                require (bonus * rate * ethBalanceOf[address(msg.sender)] / 10^18 / 100) + bonusDropsOf[msg.sender] >= bonusDropsOf[msg.sender]
+                                bonusDropsOf[msg.sender] += bonus * rate * ethBalanceOf[address(msg.sender)] / 10^18 / 100
+                        call owner with:
+                           value ethBalanceOf[msg.sender] wei
+                             gas 2300 * is_zero(value) wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        ethBalanceOf[msg.sender] = 0
+                    require arg2.length - (rate * ethBalanceOf[address(msg.sender)] / 10^18) <= bonusDropsOf[msg.sender]
+                    bonusDropsOf[msg.sender] = bonusDropsOf[msg.sender] - arg2.length + (rate * ethBalanceOf[address(msg.sender)] / 10^18)
+    emit AirdropInvoked(arg2.length, msg.sender);
+    return 1
+}
+
+function multiValueAirdrop(address arg1, address[] arg2, uint256[] arg3) {
+    mem[128 len 32 * arg2.length] = call.data[arg2 + 36 len 32 * arg2.length]
+    mem[(32 * arg2.length) + 128] = arg3.length
+    mem[(32 * arg2.length) + 160 len 32 * arg3.length] = call.data[arg3 + 36 len 32 * arg3.length]
+    require arg2.length <= maxDropsPerTx
+    require arg2.length == arg3.length
+    if not ethBalanceOf[address(msg.sender)]:
+        require bonusDropsOf[address(msg.sender)] >= 0
+        if bonusDropsOf[address(msg.sender)] >= arg2.length:
+            require not stor3[address(arg1)]
+            idx = 0
+            while idx < arg2.length:
+                require idx < arg2.length
+                if mem[(32 * idx) + 140 len 20]:
+                    require idx < arg3.length
+                    if mem[(32 * idx) + (32 * arg2.length) + 160] > 0:
+                        require idx < arg2.length
+                        _1362 = mem[(32 * idx) + 128]
+                        require idx < arg3.length
+                        _1382 = mem[(32 * idx) + (32 * arg2.length) + 160]
+                        mem[(32 * arg3.length) + (32 * arg2.length) + 160] = 0x23b872dd00000000000000000000000000000000000000000000000000000000
+                        mem[(32 * arg3.length) + (32 * arg2.length) + 164] = msg.sender
+                        mem[(32 * arg3.length) + (32 * arg2.length) + 196] = address(_1362)
+                        mem[(32 * arg3.length) + (32 * arg2.length) + 228] = _1382
+                        require ext_code.size(arg1)
+                        call arg1.0x23b872dd with:
+                             gas gas_remaining wei
+                            args msg.sender, address(_1362), _1382
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                idx = idx + 1
+                continue 
+        else:
+            require trialDrops[address(arg1)] < maxTrialDrops
+            require not stor3[address(arg1)]
+            idx = 0
+            while idx < arg2.length:
+                require idx < arg2.length
+                if mem[(32 * idx) + 140 len 20]:
+                    require idx < arg3.length
+                    if mem[(32 * idx) + (32 * arg2.length) + 160] > 0:
+                        require idx < arg2.length
+                        _1365 = mem[(32 * idx) + 128]
+                        require idx < arg3.length
+                        _1388 = mem[(32 * idx) + (32 * arg2.length) + 160]
+                        mem[(32 * arg3.length) + (32 * arg2.length) + 160] = 0x23b872dd00000000000000000000000000000000000000000000000000000000
+                        mem[(32 * arg3.length) + (32 * arg2.length) + 164] = msg.sender
+                        mem[(32 * arg3.length) + (32 * arg2.length) + 196] = address(_1365)
+                        mem[(32 * arg3.length) + (32 * arg2.length) + 228] = _1388
+                        require ext_code.size(arg1)
+                        call arg1.0x23b872dd with:
+                             gas gas_remaining wei
+                            args msg.sender, address(_1365), _1388
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                idx = idx + 1
+                continue 
+    else:
+        require rate * ethBalanceOf[address(msg.sender)] / ethBalanceOf[address(msg.sender)] == rate
+        require bonusDropsOf[address(msg.sender)] + (rate * ethBalanceOf[address(msg.sender)] / 10^18) >= rate * ethBalanceOf[address(msg.sender)] / 10^18
+        if bonusDropsOf[address(msg.sender)] + (rate * ethBalanceOf[address(msg.sender)] / 10^18) >= arg2.length:
+            require not stor3[address(arg1)]
+            idx = 0
+            while idx < arg2.length:
+                require idx < arg2.length
+                if mem[(32 * idx) + 140 len 20]:
+                    require idx < arg3.length
+                    if mem[(32 * idx) + (32 * arg2.length) + 160] > 0:
+                        require idx < arg2.length
+                        _1356 = mem[(32 * idx) + 128]
+                        require idx < arg3.length
+                        _1370 = mem[(32 * idx) + (32 * arg2.length) + 160]
+                        mem[(32 * arg3.length) + (32 * arg2.length) + 160] = 0x23b872dd00000000000000000000000000000000000000000000000000000000
+                        mem[(32 * arg3.length) + (32 * arg2.length) + 164] = msg.sender
+                        mem[(32 * arg3.length) + (32 * arg2.length) + 196] = address(_1356)
+                        mem[(32 * arg3.length) + (32 * arg2.length) + 228] = _1370
+                        require ext_code.size(arg1)
+                        call arg1.0x23b872dd with:
+                             gas gas_remaining wei
+                            args msg.sender, address(_1356), _1370
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                idx = idx + 1
+                continue 
+        else:
+            require trialDrops[address(arg1)] < maxTrialDrops
+            require not stor3[address(arg1)]
+            idx = 0
+            while idx < arg2.length:
+                require idx < arg2.length
+                if mem[(32 * idx) + 140 len 20]:
+                    require idx < arg3.length
+                    if mem[(32 * idx) + (32 * arg2.length) + 160] > 0:
+                        require idx < arg2.length
+                        _1359 = mem[(32 * idx) + 128]
+                        require idx < arg3.length
+                        _1376 = mem[(32 * idx) + (32 * arg2.length) + 160]
+                        mem[(32 * arg3.length) + (32 * arg2.length) + 160] = 0x23b872dd00000000000000000000000000000000000000000000000000000000
+                        mem[(32 * arg3.length) + (32 * arg2.length) + 164] = msg.sender
+                        mem[(32 * arg3.length) + (32 * arg2.length) + 196] = address(_1359)
+                        mem[(32 * arg3.length) + (32 * arg2.length) + 228] = _1376
+                        require ext_code.size(arg1)
+                        call arg1.0x23b872dd with:
+                             gas gas_remaining wei
+                            args msg.sender, address(_1359), _1376
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                idx = idx + 1
+                continue 
+    if trialDrops[address(arg1)] < maxTrialDrops:
+        require arg2.length + trialDrops[address(arg1)] >= trialDrops[address(arg1)]
+        trialDrops[address(arg1)] += arg2.length
+    else:
+        if not ethBalanceOf[address(msg.sender)]:
+            if arg2.length <= 0:
+                if not arg2.length:
+                    require bonusDropsOf[msg.sender] >= bonusDropsOf[msg.sender]
+                else:
+                    require bonus * arg2.length / arg2.length == bonus
+                    require (bonus * arg2.length / 100) + bonusDropsOf[msg.sender] >= bonusDropsOf[msg.sender]
+                    bonusDropsOf[msg.sender] += bonus * arg2.length / 100
+                if not arg2.length:
+                    require 0 <= ethBalanceOf[msg.sender]
+                else:
+                    require dropUnitPrice * arg2.length / arg2.length == dropUnitPrice
+                    require dropUnitPrice * arg2.length <= ethBalanceOf[msg.sender]
+                    ethBalanceOf[msg.sender] += -1 * dropUnitPrice * arg2.length
+                if not arg2.length:
+                    call owner with:
+                         gas 2300 wei
+                else:
+                    require dropUnitPrice * arg2.length / arg2.length == dropUnitPrice
+                    call owner with:
+                       value dropUnitPrice * arg2.length wei
+                         gas 2300 * is_zero(value) wei
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+            else:
+                if not ethBalanceOf[address(msg.sender)]:
+                    require 0 <= arg2.length
+                    if 0 < ethBalanceOf[msg.sender]:
+                        if not ethBalanceOf[address(msg.sender)]:
+                            require bonusDropsOf[msg.sender] >= bonusDropsOf[msg.sender]
+                        else:
+                            require rate * ethBalanceOf[address(msg.sender)] / ethBalanceOf[address(msg.sender)] == rate
+                            if not rate * ethBalanceOf[address(msg.sender)] / 10^18:
+                                require bonusDropsOf[msg.sender] >= bonusDropsOf[msg.sender]
+                            else:
+                                require bonus * rate * ethBalanceOf[address(msg.sender)] / 10^18 / rate * ethBalanceOf[address(msg.sender)] / 10^18 == bonus
+                                require (bonus * rate * ethBalanceOf[address(msg.sender)] / 10^18 / 100) + bonusDropsOf[msg.sender] >= bonusDropsOf[msg.sender]
+                                bonusDropsOf[msg.sender] += bonus * rate * ethBalanceOf[address(msg.sender)] / 10^18 / 100
+                        call owner with:
+                           value ethBalanceOf[msg.sender] wei
+                             gas 2300 * is_zero(value) wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        ethBalanceOf[msg.sender] = 0
+                    require arg2.length <= bonusDropsOf[msg.sender]
+                    bonusDropsOf[msg.sender] -= arg2.length
+                else:
+                    require rate * ethBalanceOf[address(msg.sender)] / ethBalanceOf[address(msg.sender)] == rate
+                    require rate * ethBalanceOf[address(msg.sender)] / 10^18 <= arg2.length
+                    if 0 < ethBalanceOf[msg.sender]:
+                        if not ethBalanceOf[address(msg.sender)]:
+                            require bonusDropsOf[msg.sender] >= bonusDropsOf[msg.sender]
+                        else:
+                            require rate * ethBalanceOf[address(msg.sender)] / ethBalanceOf[address(msg.sender)] == rate
+                            if not rate * ethBalanceOf[address(msg.sender)] / 10^18:
+                                require bonusDropsOf[msg.sender] >= bonusDropsOf[msg.sender]
+                            else:
+                                require bonus * rate * ethBalanceOf[address(msg.sender)] / 10^18 / rate * ethBalanceOf[address(msg.sender)] / 10^18 == bonus
+                                require (bonus * rate * ethBalanceOf[address(msg.sender)] / 10^18 / 100) + bonusDropsOf[msg.sender] >= bonusDropsOf[msg.sender]
+                                bonusDropsOf[msg.sender] += bonus * rate * ethBalanceOf[address(msg.sender)] / 10^18 / 100
+                        call owner with:
+                           value ethBalanceOf[msg.sender] wei
+                             gas 2300 * is_zero(value) wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        ethBalanceOf[msg.sender] = 0
+                    require arg2.length - (rate * ethBalanceOf[address(msg.sender)] / 10^18) <= bonusDropsOf[msg.sender]
+                    bonusDropsOf[msg.sender] = bonusDropsOf[msg.sender] - arg2.length + (rate * ethBalanceOf[address(msg.sender)] / 10^18)
+        else:
+            require rate * ethBalanceOf[address(msg.sender)] / ethBalanceOf[address(msg.sender)] == rate
+            if arg2.length <= rate * ethBalanceOf[address(msg.sender)] / 10^18:
+                if not arg2.length:
+                    require bonusDropsOf[msg.sender] >= bonusDropsOf[msg.sender]
+                else:
+                    require bonus * arg2.length / arg2.length == bonus
+                    require (bonus * arg2.length / 100) + bonusDropsOf[msg.sender] >= bonusDropsOf[msg.sender]
+                    bonusDropsOf[msg.sender] += bonus * arg2.length / 100
+                if not arg2.length:
+                    require 0 <= ethBalanceOf[msg.sender]
+                else:
+                    require dropUnitPrice * arg2.length / arg2.length == dropUnitPrice
+                    require dropUnitPrice * arg2.length <= ethBalanceOf[msg.sender]
+                    ethBalanceOf[msg.sender] += -1 * dropUnitPrice * arg2.length
+                if not arg2.length:
+                    call owner with:
+                         gas 2300 wei
+                else:
+                    require dropUnitPrice * arg2.length / arg2.length == dropUnitPrice
+                    call owner with:
+                       value dropUnitPrice * arg2.length wei
+                         gas 2300 * is_zero(value) wei
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+            else:
+                if not ethBalanceOf[address(msg.sender)]:
+                    require 0 <= arg2.length
+                    if 0 < ethBalanceOf[msg.sender]:
+                        if not ethBalanceOf[address(msg.sender)]:
+                            require bonusDropsOf[msg.sender] >= bonusDropsOf[msg.sender]
+                        else:
+                            require rate * ethBalanceOf[address(msg.sender)] / ethBalanceOf[address(msg.sender)] == rate
+                            if not rate * ethBalanceOf[address(msg.sender)] / 10^18:
+                                require bonusDropsOf[msg.sender] >= bonusDropsOf[msg.sender]
+                            else:
+                                require bonus * rate * ethBalanceOf[address(msg.sender)] / 10^18 / rate * ethBalanceOf[address(msg.sender)] / 10^18 == bonus
+                                require (bonus * rate * ethBalanceOf[address(msg.sender)] / 10^18 / 100) + bonusDropsOf[msg.sender] >= bonusDropsOf[msg.sender]
+                                bonusDropsOf[msg.sender] += bonus * rate * ethBalanceOf[address(msg.sender)] / 10^18 / 100
+                        call owner with:
+                           value ethBalanceOf[msg.sender] wei
+                             gas 2300 * is_zero(value) wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        ethBalanceOf[msg.sender] = 0
+                    require arg2.length <= bonusDropsOf[msg.sender]
+                    bonusDropsOf[msg.sender] -= arg2.length
+                else:
+                    require rate * ethBalanceOf[address(msg.sender)] / ethBalanceOf[address(msg.sender)] == rate
+                    require rate * ethBalanceOf[address(msg.sender)] / 10^18 <= arg2.length
+                    if 0 < ethBalanceOf[msg.sender]:
+                        if not ethBalanceOf[address(msg.sender)]:
+                            require bonusDropsOf[msg.sender] >= bonusDropsOf[msg.sender]
+                        else:
+                            require rate * ethBalanceOf[address(msg.sender)] / ethBalanceOf[address(msg.sender)] == rate
+                            if not rate * ethBalanceOf[address(msg.sender)] / 10^18:
+                                require bonusDropsOf[msg.sender] >= bonusDropsOf[msg.sender]
+                            else:
+                                require bonus * rate * ethBalanceOf[address(msg.sender)] / 10^18 / rate * ethBalanceOf[address(msg.sender)] / 10^18 == bonus
+                                require (bonus * rate * ethBalanceOf[address(msg.sender)] / 10^18 / 100) + bonusDropsOf[msg.sender] >= bonusDropsOf[msg.sender]
+                                bonusDropsOf[msg.sender] += bonus * rate * ethBalanceOf[address(msg.sender)] / 10^18 / 100
+                        call owner with:
+                           value ethBalanceOf[msg.sender] wei
+                             gas 2300 * is_zero(value) wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        ethBalanceOf[msg.sender] = 0
+                    require arg2.length - (rate * ethBalanceOf[address(msg.sender)] / 10^18) <= bonusDropsOf[msg.sender]
+                    bonusDropsOf[msg.sender] = bonusDropsOf[msg.sender] - arg2.length + (rate * ethBalanceOf[address(msg.sender)] / 10^18)
+    emit AirdropInvoked(arg2.length, msg.sender);
+    return 1
+}
+
+
+
+}
