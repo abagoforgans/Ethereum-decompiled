@@ -1,0 +1,543 @@
+contract main {
+
+
+
+
+// =====================  Runtime code  =====================
+
+
+#
+#  - update(string arg1)
+#
+address stor0;
+uint256 stor0;
+address stor1;
+array of uint256 stor2;
+
+function _fallback() payable {
+    revert
+}
+
+function __callback(bytes32 arg1, string arg2) {
+    require calldata.size - 4 >= 64
+    require arg2 <= 4294967296
+    require arg2 + 36 <= calldata.size
+    require arg2.length <= 4294967296 and arg2 + arg2.length + 36 <= calldata.size
+    if not stor1:
+        if ext_code.size(0x1d3b2638a7cc9f2cb3d298a3da7a90b67e5506ed) > 0:
+            stor1 = 0x1d3b2638a7cc9f2cb3d298a3da7a90b67e5506ed
+            bool(stor2.length) = 0
+            stor2.length.field_1 = 11
+            stor2.length.field_8 = 'eth_mainnet' / 256
+            idx = 0
+            while stor2.length + 31 / 32 > idx:
+                stor2[idx].field_0 = 0
+                idx = idx + 1
+                continue 
+        else:
+            if ext_code.size(0xc03a2615d5efaf5f49f60b7bb6583eaec212fdf1) > 0:
+                stor1 = 0xc03a2615d5efaf5f49f60b7bb6583eaec212fdf1
+                bool(stor2.length) = 0
+                stor2.length.field_1 = 12
+                stor2.length.field_8 = 'eth_ropsten3' / 256
+                idx = 0
+                while stor2.length + 31 / 32 > idx:
+                    stor2[idx].field_0 = 0
+                    idx = idx + 1
+                    continue 
+            else:
+                if ext_code.size(0xb7a07bcf2ba2f2703b24c0691b5278999c59ac7e) > 0:
+                    stor1 = 0xb7a07bcf2ba2f2703b24c0691b5278999c59ac7e
+                    bool(stor2.length) = 0
+                    stor2.length.field_1 = 9
+                    stor2.length.field_8 = 'eth_kovan' / 256
+                    idx = 0
+                    while stor2.length + 31 / 32 > idx:
+                        stor2[idx].field_0 = 0
+                        idx = idx + 1
+                        continue 
+                else:
+                    if ext_code.size(0x146500cfd35b22e4a392fe0adc06de1a1368ed48) <= 0:
+                        if ext_code.size(0x6f485c8bf6fc43ea212e93bbf8ce046c7f1cb475) > 0:
+                            stor1 = 0x6f485c8bf6fc43ea212e93bbf8ce046c7f1cb475
+                        else:
+                            if ext_code.size(0x20e12a1f859b3feae5fb2a0a32c18f5a65555bbf) > 0:
+                                stor1 = 0x20e12a1f859b3feae5fb2a0a32c18f5a65555bbf
+                            else:
+                                if ext_code.size(0x51efaf4c8b3c9afbd5ab9f4bbc82784ab6ef8faa) > 0:
+                                    stor1 = 0x51efaf4c8b3c9afbd5ab9f4bbc82784ab6ef8faa
+                    else:
+                        stor1 = 0x146500cfd35b22e4a392fe0adc06de1a1368ed48
+                        bool(stor2.length) = 0
+                        stor2.length.field_1 = 11
+                        stor2.length.field_8 = 'eth_rinkeby' / 256
+                        idx = 0
+                        while stor2.length + 31 / 32 > idx:
+                            stor2[idx].field_0 = 0
+                            idx = idx + 1
+                            continue 
+    else:
+        if not ext_code.size(stor1):
+            if ext_code.size(0x1d3b2638a7cc9f2cb3d298a3da7a90b67e5506ed) > 0:
+                stor1 = 0x1d3b2638a7cc9f2cb3d298a3da7a90b67e5506ed
+                bool(stor2.length) = 0
+                stor2.length.field_1 = 11
+                stor2.length.field_8 = 'eth_mainnet' / 256
+                idx = 0
+                while stor2.length + 31 / 32 > idx:
+                    stor2[idx].field_0 = 0
+                    idx = idx + 1
+                    continue 
+            else:
+                if ext_code.size(0xc03a2615d5efaf5f49f60b7bb6583eaec212fdf1) > 0:
+                    stor1 = 0xc03a2615d5efaf5f49f60b7bb6583eaec212fdf1
+                    bool(stor2.length) = 0
+                    stor2.length.field_1 = 12
+                    stor2.length.field_8 = 'eth_ropsten3' / 256
+                    idx = 0
+                    while stor2.length + 31 / 32 > idx:
+                        stor2[idx].field_0 = 0
+                        idx = idx + 1
+                        continue 
+                else:
+                    if ext_code.size(0xb7a07bcf2ba2f2703b24c0691b5278999c59ac7e) > 0:
+                        stor1 = 0xb7a07bcf2ba2f2703b24c0691b5278999c59ac7e
+                        bool(stor2.length) = 0
+                        stor2.length.field_1 = 9
+                        stor2.length.field_8 = 'eth_kovan' / 256
+                        idx = 0
+                        while stor2.length + 31 / 32 > idx:
+                            stor2[idx].field_0 = 0
+                            idx = idx + 1
+                            continue 
+                    else:
+                        if ext_code.size(0x146500cfd35b22e4a392fe0adc06de1a1368ed48) <= 0:
+                            if ext_code.size(0x6f485c8bf6fc43ea212e93bbf8ce046c7f1cb475) > 0:
+                                stor1 = 0x6f485c8bf6fc43ea212e93bbf8ce046c7f1cb475
+                            else:
+                                if ext_code.size(0x20e12a1f859b3feae5fb2a0a32c18f5a65555bbf) > 0:
+                                    stor1 = 0x20e12a1f859b3feae5fb2a0a32c18f5a65555bbf
+                                else:
+                                    if ext_code.size(0x51efaf4c8b3c9afbd5ab9f4bbc82784ab6ef8faa) > 0:
+                                        stor1 = 0x51efaf4c8b3c9afbd5ab9f4bbc82784ab6ef8faa
+                        else:
+                            stor1 = 0x146500cfd35b22e4a392fe0adc06de1a1368ed48
+                            bool(stor2.length) = 0
+                            stor2.length.field_1 = 11
+                            stor2.length.field_8 = 'eth_rinkeby' / 256
+                            idx = 0
+                            while stor2.length + 31 / 32 > idx:
+                                stor2[idx].field_0 = 0
+                                idx = idx + 1
+                                continue 
+    require ext_code.size(stor1)
+    call stor1.getAddress() with:
+         gas gas_remaining wei
+    if not ext_call.success:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+    if address(stor0) != ext_call.return_data[12 len 20]:
+        require ext_code.size(stor1)
+        call stor1.getAddress() with:
+             gas gas_remaining wei
+        if not ext_call.success:
+            revert with ext_call.return_data[0 len return_data.size]
+        require return_data.size >= 32
+        uint256(stor0) = ext_call.return_data[12 len 20] or Mask(96, 160, uint256(stor0))
+    require ext_code.size(address(stor0))
+    staticcall address(stor0).cbAddress() with:
+            gas gas_remaining wei
+    if not ext_call.success:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+    require msg.sender == ext_call.return_data[12 len 20]
+    emit 0xe459cf2e: Array(len=arg2.length, data=arg2[all])
+}
+
+function __callback(bytes32 arg1, string arg2, bytes arg3) {
+    require calldata.size - 4 >= 96
+    require arg2 <= 4294967296
+    require arg2 + 36 <= calldata.size
+    require arg2.length <= 4294967296 and arg2 + arg2.length + 36 <= calldata.size
+    mem[128 len arg2.length] = arg2[all]
+    mem[arg2.length + 128] = 0
+    require arg3 <= 4294967296
+    require arg3 + 36 <= calldata.size
+    require arg3.length <= 4294967296 and arg3 + arg3.length + 36 <= calldata.size
+    mem[ceil32(arg2.length) + 128] = arg3.length
+    if not stor1:
+        if ext_code.size(0x1d3b2638a7cc9f2cb3d298a3da7a90b67e5506ed) > 0:
+            stor1 = 0x1d3b2638a7cc9f2cb3d298a3da7a90b67e5506ed
+            bool(stor2.length) = 0
+            stor2.length.field_1 = 11
+            stor2.length.field_8 = 'eth_mainnet' / 256
+            idx = 0
+            while stor2.length + 31 / 32 > idx:
+                stor2[idx].field_0 = 0
+                idx = idx + 1
+                continue 
+            require ext_code.size(stor1)
+            call stor1.getAddress() with:
+                 gas gas_remaining wei
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require return_data.size >= 32
+            if address(stor0) != ext_call.return_data[12 len 20]:
+                require ext_code.size(stor1)
+                call stor1.getAddress() with:
+                     gas gas_remaining wei
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                uint256(stor0) = ext_call.return_data[12 len 20] or Mask(96, 160, uint256(stor0))
+            require ext_code.size(address(stor0))
+            staticcall address(stor0).cbAddress() with:
+                    gas gas_remaining wei
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require return_data.size >= 32
+            require msg.sender == ext_call.return_data[12 len 20]
+            emit 0xe459cf2e: Array(len=arg2.length, data=arg2[all])
+        else:
+            if ext_code.size(0xc03a2615d5efaf5f49f60b7bb6583eaec212fdf1) > 0:
+                stor1 = 0xc03a2615d5efaf5f49f60b7bb6583eaec212fdf1
+                bool(stor2.length) = 0
+                stor2.length.field_1 = 12
+                stor2.length.field_8 = 'eth_ropsten3' / 256
+                idx = 0
+                while stor2.length + 31 / 32 > idx:
+                    stor2[idx].field_0 = 0
+                    idx = idx + 1
+                    continue 
+                require ext_code.size(stor1)
+                call stor1.getAddress() with:
+                     gas gas_remaining wei
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                if address(stor0) != ext_call.return_data[12 len 20]:
+                    require ext_code.size(stor1)
+                    call stor1.getAddress() with:
+                         gas gas_remaining wei
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    uint256(stor0) = ext_call.return_data[12 len 20] or Mask(96, 160, uint256(stor0))
+                require ext_code.size(address(stor0))
+                staticcall address(stor0).cbAddress() with:
+                        gas gas_remaining wei
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                require msg.sender == ext_call.return_data[12 len 20]
+                emit 0xe459cf2e: Array(len=arg2.length, data=arg2[all])
+            else:
+                if ext_code.size(0xb7a07bcf2ba2f2703b24c0691b5278999c59ac7e) > 0:
+                    stor1 = 0xb7a07bcf2ba2f2703b24c0691b5278999c59ac7e
+                    bool(stor2.length) = 0
+                    stor2.length.field_1 = 9
+                    stor2.length.field_8 = 'eth_kovan' / 256
+                    idx = 0
+                    while stor2.length + 31 / 32 > idx:
+                        stor2[idx].field_0 = 0
+                        idx = idx + 1
+                        continue 
+                    require ext_code.size(stor1)
+                    call stor1.getAddress() with:
+                         gas gas_remaining wei
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    if address(stor0) != ext_call.return_data[12 len 20]:
+                        require ext_code.size(stor1)
+                        call stor1.getAddress() with:
+                             gas gas_remaining wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        uint256(stor0) = ext_call.return_data[12 len 20] or Mask(96, 160, uint256(stor0))
+                    require ext_code.size(address(stor0))
+                    staticcall address(stor0).cbAddress() with:
+                            gas gas_remaining wei
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    require msg.sender == ext_call.return_data[12 len 20]
+                    emit 0xe459cf2e: Array(len=arg2.length, data=arg2[all])
+                else:
+                    if ext_code.size(0x146500cfd35b22e4a392fe0adc06de1a1368ed48) > 0:
+                        stor1 = 0x146500cfd35b22e4a392fe0adc06de1a1368ed48
+                        bool(stor2.length) = 0
+                        stor2.length.field_1 = 11
+                        stor2.length.field_8 = 'eth_rinkeby' / 256
+                        idx = 0
+                        while stor2.length + 31 / 32 > idx:
+                            stor2[idx].field_0 = 0
+                            idx = idx + 1
+                            continue 
+                        require ext_code.size(stor1)
+                        call stor1.getAddress() with:
+                             gas gas_remaining wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if address(stor0) != ext_call.return_data[12 len 20]:
+                            require ext_code.size(stor1)
+                            call stor1.getAddress() with:
+                                 gas gas_remaining wei
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            uint256(stor0) = ext_call.return_data[12 len 20] or Mask(96, 160, uint256(stor0))
+                        require ext_code.size(address(stor0))
+                        staticcall address(stor0).cbAddress() with:
+                                gas gas_remaining wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require msg.sender == ext_call.return_data[12 len 20]
+                        emit 0xe459cf2e: Array(len=arg2.length, data=arg2[all])
+                    else:
+                        if ext_code.size(0x6f485c8bf6fc43ea212e93bbf8ce046c7f1cb475) > 0:
+                            stor1 = 0x6f485c8bf6fc43ea212e93bbf8ce046c7f1cb475
+                        else:
+                            if ext_code.size(0x20e12a1f859b3feae5fb2a0a32c18f5a65555bbf) > 0:
+                                stor1 = 0x20e12a1f859b3feae5fb2a0a32c18f5a65555bbf
+                            else:
+                                if ext_code.size(0x51efaf4c8b3c9afbd5ab9f4bbc82784ab6ef8faa) > 0:
+                                    stor1 = 0x51efaf4c8b3c9afbd5ab9f4bbc82784ab6ef8faa
+                        require ext_code.size(stor1)
+                        call stor1.getAddress() with:
+                             gas gas_remaining wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if address(stor0) != ext_call.return_data[12 len 20]:
+                            require ext_code.size(stor1)
+                            call stor1.getAddress() with:
+                                 gas gas_remaining wei
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            uint256(stor0) = ext_call.return_data[12 len 20] or Mask(96, 160, uint256(stor0))
+                        require ext_code.size(address(stor0))
+                        staticcall address(stor0).cbAddress() with:
+                                gas gas_remaining wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require msg.sender == ext_call.return_data[12 len 20]
+                        mem[ceil32(arg2.length) + ceil32(arg3.length) + 160] = 32
+                        mem[ceil32(arg2.length) + ceil32(arg3.length) + 192] = arg2.length
+                        mem[ceil32(arg2.length) + ceil32(arg3.length) + 224 len ceil32(arg2.length)] = arg2[all], mem[arg2.length + 128 len ceil32(arg2.length) - arg2.length]
+                        if not arg2.length % 32:
+                            emit 0xe459cf2e: Mask(8 * -ceil32(arg3.length) + arg3.length + 32, 0, 0), mem[ceil32(arg2.length) + arg3.length + 192 len ceil32(arg3.length) + -arg3.length + 32], Mask(8 * arg2.length, -(8 * arg2.length) + 256, arg2[all], mem[arg2.length + 128 len ceil32(arg2.length) - arg2.length]) << (8 * arg2.length) - 256
+                        else:
+                            mem[floor32(arg2.length) + ceil32(arg2.length) + ceil32(arg3.length) + 224] = mem[floor32(arg2.length) + ceil32(arg2.length) + ceil32(arg3.length) + -(arg2.length % 32) + 256 len arg2.length % 32]
+                            emit 0xe459cf2e: Mask(8 * -ceil32(arg3.length) + arg3.length + 32, 0, 0), mem[ceil32(arg2.length) + arg3.length + 192 len ceil32(arg3.length) + -arg3.length + 32], Mask(8 * ceil32(arg2.length), -(8 * ceil32(arg2.length)) + 256, arg2[all], mem[arg2.length + 128 len ceil32(arg2.length) - arg2.length]) << (8 * ceil32(arg2.length)) - 256, mem[(2 * ceil32(arg2.length)) + ceil32(arg3.length) + 224 len floor32(arg2.length) + -ceil32(arg2.length) + 32]
+    else:
+        if ext_code.size(stor1):
+            require ext_code.size(stor1)
+            call stor1.getAddress() with:
+                 gas gas_remaining wei
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require return_data.size >= 32
+            if address(stor0) != ext_call.return_data[12 len 20]:
+                require ext_code.size(stor1)
+                call stor1.getAddress() with:
+                     gas gas_remaining wei
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                uint256(stor0) = ext_call.return_data[12 len 20] or Mask(96, 160, uint256(stor0))
+            require ext_code.size(address(stor0))
+            staticcall address(stor0).cbAddress() with:
+                    gas gas_remaining wei
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require return_data.size >= 32
+            require msg.sender == ext_call.return_data[12 len 20]
+            mem[ceil32(arg2.length) + ceil32(arg3.length) + 160] = 32
+            mem[ceil32(arg2.length) + ceil32(arg3.length) + 192] = arg2.length
+            mem[ceil32(arg2.length) + ceil32(arg3.length) + 224 len ceil32(arg2.length)] = arg2[all], mem[arg2.length + 128 len ceil32(arg2.length) - arg2.length]
+            if not arg2.length % 32:
+                emit 0xe459cf2e: Mask(8 * -ceil32(arg3.length) + arg3.length + 32, 0, 0), mem[ceil32(arg2.length) + arg3.length + 192 len ceil32(arg3.length) + -arg3.length + 32], Mask(8 * arg2.length, -(8 * arg2.length) + 256, arg2[all], mem[arg2.length + 128 len ceil32(arg2.length) - arg2.length]) << (8 * arg2.length) - 256
+            else:
+                mem[floor32(arg2.length) + ceil32(arg2.length) + ceil32(arg3.length) + 224] = mem[floor32(arg2.length) + ceil32(arg2.length) + ceil32(arg3.length) + -(arg2.length % 32) + 256 len arg2.length % 32]
+                emit 0xe459cf2e: Mask(8 * -ceil32(arg3.length) + arg3.length + 32, 0, 0), mem[ceil32(arg2.length) + arg3.length + 192 len ceil32(arg3.length) + -arg3.length + 32], Mask(8 * ceil32(arg2.length), -(8 * ceil32(arg2.length)) + 256, arg2[all], mem[arg2.length + 128 len ceil32(arg2.length) - arg2.length]) << (8 * ceil32(arg2.length)) - 256, mem[(2 * ceil32(arg2.length)) + ceil32(arg3.length) + 224 len floor32(arg2.length) + -ceil32(arg2.length) + 32]
+        else:
+            if ext_code.size(0x1d3b2638a7cc9f2cb3d298a3da7a90b67e5506ed) > 0:
+                stor1 = 0x1d3b2638a7cc9f2cb3d298a3da7a90b67e5506ed
+                bool(stor2.length) = 0
+                stor2.length.field_1 = 11
+                stor2.length.field_8 = 'eth_mainnet' / 256
+                idx = 0
+                while stor2.length + 31 / 32 > idx:
+                    stor2[idx].field_0 = 0
+                    idx = idx + 1
+                    continue 
+                require ext_code.size(stor1)
+                call stor1.getAddress() with:
+                     gas gas_remaining wei
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                if address(stor0) != ext_call.return_data[12 len 20]:
+                    require ext_code.size(stor1)
+                    call stor1.getAddress() with:
+                         gas gas_remaining wei
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    uint256(stor0) = ext_call.return_data[12 len 20] or Mask(96, 160, uint256(stor0))
+                require ext_code.size(address(stor0))
+                staticcall address(stor0).cbAddress() with:
+                        gas gas_remaining wei
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                require msg.sender == ext_call.return_data[12 len 20]
+                emit 0xe459cf2e: Array(len=arg2.length, data=arg2[all])
+            else:
+                if ext_code.size(0xc03a2615d5efaf5f49f60b7bb6583eaec212fdf1) > 0:
+                    stor1 = 0xc03a2615d5efaf5f49f60b7bb6583eaec212fdf1
+                    bool(stor2.length) = 0
+                    stor2.length.field_1 = 12
+                    stor2.length.field_8 = 'eth_ropsten3' / 256
+                    idx = 0
+                    while stor2.length + 31 / 32 > idx:
+                        stor2[idx].field_0 = 0
+                        idx = idx + 1
+                        continue 
+                    require ext_code.size(stor1)
+                    call stor1.getAddress() with:
+                         gas gas_remaining wei
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    if address(stor0) != ext_call.return_data[12 len 20]:
+                        require ext_code.size(stor1)
+                        call stor1.getAddress() with:
+                             gas gas_remaining wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        uint256(stor0) = ext_call.return_data[12 len 20] or Mask(96, 160, uint256(stor0))
+                    require ext_code.size(address(stor0))
+                    staticcall address(stor0).cbAddress() with:
+                            gas gas_remaining wei
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    require msg.sender == ext_call.return_data[12 len 20]
+                    emit 0xe459cf2e: Array(len=arg2.length, data=arg2[all])
+                else:
+                    if ext_code.size(0xb7a07bcf2ba2f2703b24c0691b5278999c59ac7e) > 0:
+                        stor1 = 0xb7a07bcf2ba2f2703b24c0691b5278999c59ac7e
+                        bool(stor2.length) = 0
+                        stor2.length.field_1 = 9
+                        stor2.length.field_8 = 'eth_kovan' / 256
+                        idx = 0
+                        while stor2.length + 31 / 32 > idx:
+                            stor2[idx].field_0 = 0
+                            idx = idx + 1
+                            continue 
+                        require ext_code.size(stor1)
+                        call stor1.getAddress() with:
+                             gas gas_remaining wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if address(stor0) != ext_call.return_data[12 len 20]:
+                            require ext_code.size(stor1)
+                            call stor1.getAddress() with:
+                                 gas gas_remaining wei
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            uint256(stor0) = ext_call.return_data[12 len 20] or Mask(96, 160, uint256(stor0))
+                        require ext_code.size(address(stor0))
+                        staticcall address(stor0).cbAddress() with:
+                                gas gas_remaining wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require msg.sender == ext_call.return_data[12 len 20]
+                        emit 0xe459cf2e: Array(len=arg2.length, data=arg2[all])
+                    else:
+                        if ext_code.size(0x146500cfd35b22e4a392fe0adc06de1a1368ed48) > 0:
+                            stor1 = 0x146500cfd35b22e4a392fe0adc06de1a1368ed48
+                            bool(stor2.length) = 0
+                            stor2.length.field_1 = 11
+                            stor2.length.field_8 = 'eth_rinkeby' / 256
+                            idx = 0
+                            while stor2.length + 31 / 32 > idx:
+                                stor2[idx].field_0 = 0
+                                idx = idx + 1
+                                continue 
+                            require ext_code.size(stor1)
+                            call stor1.getAddress() with:
+                                 gas gas_remaining wei
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if address(stor0) != ext_call.return_data[12 len 20]:
+                                require ext_code.size(stor1)
+                                call stor1.getAddress() with:
+                                     gas gas_remaining wei
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                uint256(stor0) = ext_call.return_data[12 len 20] or Mask(96, 160, uint256(stor0))
+                            require ext_code.size(address(stor0))
+                            staticcall address(stor0).cbAddress() with:
+                                    gas gas_remaining wei
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require msg.sender == ext_call.return_data[12 len 20]
+                            emit 0xe459cf2e: Array(len=arg2.length, data=arg2[all])
+                        else:
+                            if ext_code.size(0x6f485c8bf6fc43ea212e93bbf8ce046c7f1cb475) > 0:
+                                stor1 = 0x6f485c8bf6fc43ea212e93bbf8ce046c7f1cb475
+                            else:
+                                if ext_code.size(0x20e12a1f859b3feae5fb2a0a32c18f5a65555bbf) > 0:
+                                    stor1 = 0x20e12a1f859b3feae5fb2a0a32c18f5a65555bbf
+                                else:
+                                    if ext_code.size(0x51efaf4c8b3c9afbd5ab9f4bbc82784ab6ef8faa) > 0:
+                                        stor1 = 0x51efaf4c8b3c9afbd5ab9f4bbc82784ab6ef8faa
+                            require ext_code.size(stor1)
+                            call stor1.getAddress() with:
+                                 gas gas_remaining wei
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if address(stor0) != ext_call.return_data[12 len 20]:
+                                require ext_code.size(stor1)
+                                call stor1.getAddress() with:
+                                     gas gas_remaining wei
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                uint256(stor0) = ext_call.return_data[12 len 20] or Mask(96, 160, uint256(stor0))
+                            require ext_code.size(address(stor0))
+                            staticcall address(stor0).cbAddress() with:
+                                    gas gas_remaining wei
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require msg.sender == ext_call.return_data[12 len 20]
+                            mem[ceil32(arg2.length) + ceil32(arg3.length) + 160] = 32
+                            mem[ceil32(arg2.length) + ceil32(arg3.length) + 192] = arg2.length
+                            mem[ceil32(arg2.length) + ceil32(arg3.length) + 224 len ceil32(arg2.length)] = arg2[all], mem[arg2.length + 128 len ceil32(arg2.length) - arg2.length]
+                            if not arg2.length % 32:
+                                emit 0xe459cf2e: Mask(8 * -ceil32(arg3.length) + arg3.length + 32, 0, 0), mem[ceil32(arg2.length) + arg3.length + 192 len ceil32(arg3.length) + -arg3.length + 32], Mask(8 * arg2.length, -(8 * arg2.length) + 256, arg2[all], mem[arg2.length + 128 len ceil32(arg2.length) - arg2.length]) << (8 * arg2.length) - 256
+                            else:
+                                mem[floor32(arg2.length) + ceil32(arg2.length) + ceil32(arg3.length) + 224] = mem[floor32(arg2.length) + ceil32(arg2.length) + ceil32(arg3.length) + -(arg2.length % 32) + 256 len arg2.length % 32]
+                                emit 0xe459cf2e: Mask(8 * -ceil32(arg3.length) + arg3.length + 32, 0, 0), mem[ceil32(arg2.length) + arg3.length + 192 len ceil32(arg3.length) + -arg3.length + 32], Mask(8 * ceil32(arg2.length), -(8 * ceil32(arg2.length)) + 256, arg2[all], mem[arg2.length + 128 len ceil32(arg2.length) - arg2.length]) << (8 * ceil32(arg2.length)) - 256, mem[(2 * ceil32(arg2.length)) + ceil32(arg3.length) + 224 len floor32(arg2.length) + -ceil32(arg2.length) + 32]
+}
+
+
+
+}
