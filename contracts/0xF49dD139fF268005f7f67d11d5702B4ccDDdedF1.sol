@@ -1,0 +1,70 @@
+contract main {
+
+
+
+
+// =====================  Runtime code  =====================
+
+
+array of uint256 name;
+array of uint256 symbol;
+uint256 decimals;
+uint256 totalSupply;
+address founderAddress;
+mapping of uint256 balances;
+
+function supply() {
+    return totalSupply
+}
+
+function name() {
+    return name[0 len name.length]
+}
+
+function totalSupply() {
+    return totalSupply
+}
+
+function balances(address arg1) {
+    return balances[arg1]
+}
+
+function decimals() {
+    return decimals
+}
+
+function founder() {
+    return founderAddress
+}
+
+function balanceOf(address arg1) {
+    return balances[address(arg1)]
+}
+
+function symbol() {
+    return symbol[0 len symbol.length]
+}
+
+function _fallback() payable {
+    revert
+}
+
+function burn(uint256 arg1) {
+    require balances[stor4] >= arg1
+    balances[stor4] -= arg1
+    totalSupply -= arg1
+    return 1
+}
+
+function transfer(address arg1, uint256 arg2) {
+    require balances[address(msg.sender)] >= arg2
+    require arg2 > 0
+    balances[address(arg1)] += arg2
+    balances[address(msg.sender)] -= arg2
+    emit Transfer(arg2, msg.sender, arg1);
+    return 1
+}
+
+
+
+}
