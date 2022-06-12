@@ -1,0 +1,1113 @@
+contract main {
+
+
+// =======================  Init code  ======================
+
+
+address stor0;
+address stor7;
+address stor8;
+uint256 stor9;
+uint8 stor11;
+
+function _fallback() payable {
+    stor9 = 25
+    stor11 = 1
+    require not msg.value
+    stor0 = msg.sender
+    require code.data[7488 len 20]
+    require code.data[7520 len 20]
+    require code.data[7552 len 20]
+    stor7 = code.data[7488 len 20]
+    stor0 = code.data[7520 len 20]
+    stor8 = code.data[7552 len 20]
+    return code.data[235 len 7241]
+}
+
+
+
+// =====================  Runtime code  =====================
+
+
+const DEFAULT_FEE_BPS = 25
+
+
+address adminAddress;
+address pendingAdminAddress;
+mapping of uint8 stor2;
+mapping of uint8 stor3;
+array of struct stor4;
+array of struct stor5;
+mapping of uint256 stor6;
+address uniswapFactoryAddress;
+address kyberNetworkAddress;
+uint256 feeBps;
+mapping of address tokenExchange;
+uint8 tradeEnabled;
+
+function tokenExchange(address arg1) {
+    return tokenExchange[arg1]
+}
+
+function feeBps() {
+    return feeBps
+}
+
+function pendingAdmin() {
+    return pendingAdminAddress
+}
+
+function uniswapFactory() {
+    return uniswapFactoryAddress
+}
+
+function kyberNetwork() {
+    return kyberNetworkAddress
+}
+
+function tradeEnabled() {
+    return bool(tradeEnabled)
+}
+
+function admin() {
+    return adminAddress
+}
+
+function _fallback() payable {
+  stop
+}
+
+function enableTrade() {
+    require adminAddress == msg.sender
+    tradeEnabled = 1
+    emit TradeEnabled(1);
+    return 1
+}
+
+function disableTrade() {
+    require stor3[address(msg.sender)]
+    tradeEnabled = 0
+    emit TradeEnabled(0);
+    return 1
+}
+
+function setFee(uint256 arg1) {
+    require adminAddress == msg.sender
+    require arg1 <= 10000
+    feeBps = arg1
+    emit FeeUpdated(arg1);
+}
+
+function setKyberNetwork(address arg1) {
+    require adminAddress == msg.sender
+    require arg1
+    kyberNetworkAddress = arg1
+    emit KyberNetworkSet(arg1);
+}
+
+function transferAdmin(address arg1) {
+    require adminAddress == msg.sender
+    require arg1
+    emit TransferAdminPending(pendingAdminAddress);
+    pendingAdminAddress = arg1
+}
+
+function delistToken(address arg1) {
+    require adminAddress == msg.sender
+    require tokenExchange[address(arg1)]
+    tokenExchange[address(arg1)] = 0
+    emit 0x6621c4ef: arg1
+}
+
+function claimAdmin() {
+    require pendingAdminAddress == msg.sender
+    emit AdminClaimed(pendingAdminAddress, adminAddress);
+    adminAddress = pendingAdminAddress
+    pendingAdminAddress = 0
+}
+
+function transferAdminQuickly(address arg1) {
+    require adminAddress == msg.sender
+    require arg1
+    emit TransferAdminPending(arg1);
+    emit AdminClaimed(address(arg1), adminAddress);
+    adminAddress = arg1
+}
+
+function withdrawEther(uint256 arg1, address arg2) {
+    require adminAddress == msg.sender
+    call arg2 with:
+       value arg1 wei
+         gas 2300 * is_zero(value) wei
+    require ext_call.success
+    emit EtherWithdraw(arg1, arg2);
+}
+
+function getBalance(address arg1, address arg2) {
+    if 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee == arg1:
+        return eth.balance(arg2)
+    require ext_code.size(arg1)
+    call arg1.0x70a08231 with:
+         gas gas_remaining - 710 wei
+        args arg2
+    require ext_call.success
+    return ext_call.return_data[0]
+}
+
+function withdrawToken(address arg1, uint256 arg2, address arg3) {
+    require adminAddress == msg.sender
+    require ext_code.size(arg1)
+    call arg1.0xa9059cbb with:
+         gas gas_remaining - 710 wei
+        args address(arg3), arg2
+    require ext_call.success
+    require ext_call.return_data[0]
+    emit TokenWithdraw(address(arg1), arg2, arg3);
+}
+
+function isValidTokens(address arg1, address arg2) {
+    if 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee == arg1:
+        if tokenExchange[address(arg2)]:
+            return bool(tokenExchange[address(arg2)])
+    if not tokenExchange[address(arg1)]:
+        return bool(tokenExchange[address(arg1)])
+    return (0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee == arg2)
+}
+
+function addAlerter(address arg1) {
+    require adminAddress == msg.sender
+    require not stor3[address(arg1)]
+    require stor5.length < 50
+    emit AlerterAdded(address(arg1), 1);
+    stor3[address(arg1)] = 1
+    stor5.length++
+    if not stor5.length <= stor5.length + 1:
+        idx = stor5.length + 1
+        while stor5.length > idx:
+            stor5[idx].field_0 = 0
+            idx = idx + 1
+            continue 
+    address(stor5[stor5.length].field_0) = arg1
+}
+
+function addOperator(address arg1) {
+    require adminAddress == msg.sender
+    require not stor2[address(arg1)]
+    require stor4.length < 50
+    emit OperatorAdded(address(arg1), 1);
+    stor2[address(arg1)] = 1
+    stor4.length++
+    if not stor4.length <= stor4.length + 1:
+        idx = stor4.length + 1
+        while stor4.length > idx:
+            stor4[idx].field_0 = 0
+            idx = idx + 1
+            continue 
+    address(stor4[stor4.length].field_0) = arg1
+}
+
+function getAlerters() {
+    if stor5.length:
+        mem[160] = address(stor5.field_0)
+        if (32 * stor5.length) + 32 > 64:
+            mem[192] = address(stor5.field_256)
+            idx = 192
+            s = 1
+            while (32 * stor5.length) + 128 > idx:
+                mem[idx + 32] = address(stor5[s].field_256)
+                idx = idx + 32
+                s = s + 1
+                continue 
+    mem[(32 * stor5.length) + 160] = 32
+    mem[(32 * stor5.length) + 192] = stor5.length
+    mem[(32 * stor5.length) + 224 len floor32(stor5.length)] = mem[160 len floor32(stor5.length)]
+    return memory
+      from (32 * stor5.length) + 160
+       len (96 * stor5.length) + 64
+}
+
+function removeAlerter(address arg1) {
+    require adminAddress == msg.sender
+    require stor3[address(arg1)]
+    stor3[address(arg1)] = 0
+    idx = 0
+    while idx < stor5.length:
+        mem[0] = 5
+        if address(stor5[idx].field_0) != arg1:
+            idx = idx + 1
+            continue 
+        require stor5.length - 1 < stor5.length
+        require idx < stor5.length
+        address(stor5[idx].field_0) = address(stor5[stor5.length].field_0)
+        stor5.length--
+        if not stor5.length <= stor5.length - 1:
+            idx = stor5.length + sha3(5) - 1
+            while sha3(5) + stor5.length > idx:
+                stor[idx] = 0
+                idx = idx + 1
+                continue 
+        emit AlerterAdded(address(arg1), 0);
+}
+
+function removeOperator(address arg1) {
+    require adminAddress == msg.sender
+    require stor2[address(arg1)]
+    stor2[address(arg1)] = 0
+    idx = 0
+    while idx < stor4.length:
+        mem[0] = 4
+        if address(stor4[idx].field_0) != arg1:
+            idx = idx + 1
+            continue 
+        require stor4.length - 1 < stor4.length
+        require idx < stor4.length
+        address(stor4[idx].field_0) = address(stor4[stor4.length].field_0)
+        stor4.length--
+        if not stor4.length <= stor4.length - 1:
+            idx = stor4.length + sha3(4) - 1
+            while sha3(4) + stor4.length > idx:
+                stor[idx] = 0
+                idx = idx + 1
+                continue 
+        emit OperatorAdded(address(arg1), 0);
+}
+
+function getOperators() {
+    if not stor4.length:
+        mem[(32 * stor4.length) + 160] = 32
+        mem[(32 * stor4.length) + 192] = stor4.length
+        mem[(32 * stor4.length) + 224 len floor32(stor4.length)] = mem[160 len floor32(stor4.length)]
+        return memory
+          from (32 * stor4.length) + 160
+           len (96 * stor4.length) + 64
+    mem[160] = address(stor4.field_0)
+    idx = 160
+    s = 0
+    while (32 * stor4.length) + 128 > idx:
+        mem[idx + 32] = address(stor4[s].field_256)
+        idx = idx + 32
+        s = s + 1
+        continue 
+    mem[(32 * stor4.length) + 224 len floor32(stor4.length)] = mem[160 len floor32(stor4.length)]
+    return Array(len=stor4.length, data=mem[160 len floor32(stor4.length)], mem[(32 * stor4.length) + floor32(stor4.length) + 224 len (32 * stor4.length) - floor32(stor4.length)]), 
+}
+
+function listToken(address arg1) {
+    require adminAddress == msg.sender
+    require arg1
+    require ext_code.size(uniswapFactoryAddress)
+    call uniswapFactoryAddress.getExchange(address arg1) with:
+         gas gas_remaining - 710 wei
+        args arg1
+    require ext_call.success
+    tokenExchange[address(arg1)] = address(ext_call.return_data[0])
+    if 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee == arg1:
+        stor6[address(arg1)] = 18
+    else:
+        require ext_code.size(arg1)
+        call arg1.0x313ce567 with:
+             gas gas_remaining - 710 wei
+        require ext_call.success
+        stor6[address(arg1)] = ext_call.return_data[0]
+    require ext_code.size(arg1)
+    call arg1.approve(address arg1, uint256 arg2) with:
+         gas gas_remaining - 710 wei
+        args address(ext_call.return_data[0]), 0x8000000000000000000000000000000000000000000000000000000000000000
+    require ext_call.success
+    require ext_call.return_data[0]
+    emit 0x99d2b755: address(arg1), address(ext_call.return_data[0])
+}
+
+function getConversionRate(address arg1, address arg2, uint256 arg3, uint256 arg4) {
+    if arg1 != 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee:
+        require tokenExchange[address(arg1)]
+        require 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee == arg2
+    else:
+        if not tokenExchange[address(arg2)]:
+            require tokenExchange[address(arg1)]
+            require 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee == arg2
+    if not tradeEnabled:
+        return 0
+    if 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee == arg1:
+        require ext_code.size(tokenExchange[address(arg2)])
+        call tokenExchange[address(arg2)].getEthToTokenInputPrice(uint256 arg1) with:
+             gas gas_remaining - 710 wei
+            args ((10000 * arg3) - (feeBps * arg3) / 10000)
+        require ext_call.success
+        if 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee == arg1:
+            if 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee == arg2:
+                require arg3 <= 10000000000 * 10^18
+                require ext_call.return_data[0] <= 10000000000 * 10^18
+                if arg3:
+                    return (10^18 * ext_call.return_data[0] / arg3)
+            else:
+                if stor6[address(arg2)]:
+                    require arg3 <= 10000000000 * 10^18
+                    require ext_call.return_data[0] <= 10000000000 * 10^18
+                    if stor6[address(arg2)] < 18:
+                        require -stor6[address(arg2)] + 18 <= 18
+                        if arg3:
+                            return (10^18 * ext_call.return_data[0] * 10^(-stor6[address(arg2)] + 18) / arg3)
+                    else:
+                        require stor6[address(arg2)] - 18 <= 18
+                        if 10^(stor6[address(arg2)] - 18) * arg3:
+                            return (10^18 * ext_call.return_data[0] / 10^(stor6[address(arg2)] - 18) * arg3)
+                else:
+                    require ext_code.size(arg2)
+                    call arg2.0x313ce567 with:
+                         gas gas_remaining - 710 wei
+                    require ext_call.success
+                    require arg3 <= 10000000000 * 10^18
+                    require ext_call.return_data[0] <= 10000000000 * 10^18
+                    if ext_call.return_data[0] < 18:
+                        require -ext_call.return_data[0] + 18 <= 18
+                        if arg3:
+                            return (10^18 * ext_call.return_data[0] * 10^(-ext_call.return_data[0] + 18) / arg3)
+                    else:
+                        require ext_call.return_data[0] - 18 <= 18
+                        if 10^(ext_call.return_data[0] - 18) * arg3:
+                            return (10^18 * ext_call.return_data[0] / 10^(ext_call.return_data[0] - 18) * arg3)
+        else:
+            if stor6[address(arg1)]:
+                if 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee == arg2:
+                    require arg3 <= 10000000000 * 10^18
+                    require ext_call.return_data[0] <= 10000000000 * 10^18
+                    if 18 < stor6[address(arg1)]:
+                        require stor6[address(arg1)] - 18 <= 18
+                        if arg3:
+                            return (10^18 * ext_call.return_data[0] * 10^(stor6[address(arg1)] - 18) / arg3)
+                    else:
+                        require -stor6[address(arg1)] + 18 <= 18
+                        if 10^(-stor6[address(arg1)] + 18) * arg3:
+                            return (10^18 * ext_call.return_data[0] / 10^(-stor6[address(arg1)] + 18) * arg3)
+                else:
+                    if stor6[address(arg2)]:
+                        require arg3 <= 10000000000 * 10^18
+                        require ext_call.return_data[0] <= 10000000000 * 10^18
+                        if stor6[address(arg2)] < stor6[address(arg1)]:
+                            require stor6[address(arg1)] - stor6[address(arg2)] <= 18
+                            if arg3:
+                                return (10^18 * ext_call.return_data[0] * 10^(stor6[address(arg1)] - stor6[address(arg2)]) / arg3)
+                        else:
+                            require stor6[address(arg2)] - stor6[address(arg1)] <= 18
+                            if 10^(stor6[address(arg2)] - stor6[address(arg1)]) * arg3:
+                                return (10^18 * ext_call.return_data[0] / 10^(stor6[address(arg2)] - stor6[address(arg1)]) * arg3)
+                    else:
+                        require ext_code.size(arg2)
+                        call arg2.0x313ce567 with:
+                             gas gas_remaining - 710 wei
+                        require ext_call.success
+                        require arg3 <= 10000000000 * 10^18
+                        require ext_call.return_data[0] <= 10000000000 * 10^18
+                        if ext_call.return_data[0] < stor6[address(arg1)]:
+                            require stor6[address(arg1)] - ext_call.return_data[0] <= 18
+                            if arg3:
+                                return (10^18 * ext_call.return_data[0] * 10^(stor6[address(arg1)] - ext_call.return_data[0]) / arg3)
+                        else:
+                            require ext_call.return_data[0] - stor6[address(arg1)] <= 18
+                            if 10^(ext_call.return_data[0] - stor6[address(arg1)]) * arg3:
+                                return (10^18 * ext_call.return_data[0] / 10^(ext_call.return_data[0] - stor6[address(arg1)]) * arg3)
+            else:
+                require ext_code.size(arg1)
+                call arg1.0x313ce567 with:
+                     gas gas_remaining - 710 wei
+                require ext_call.success
+                if 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee == arg2:
+                    require arg3 <= 10000000000 * 10^18
+                    require ext_call.return_data[0] <= 10000000000 * 10^18
+                    if 18 < ext_call.return_data[0]:
+                        require ext_call.return_data[0] - 18 <= 18
+                        if arg3:
+                            return (10^18 * ext_call.return_data[0] * 10^(ext_call.return_data[0] - 18) / arg3)
+                    else:
+                        require -ext_call.return_data[0] + 18 <= 18
+                        if 10^(-ext_call.return_data[0] + 18) * arg3:
+                            return (10^18 * ext_call.return_data[0] / 10^(-ext_call.return_data[0] + 18) * arg3)
+                else:
+                    if stor6[address(arg2)]:
+                        require arg3 <= 10000000000 * 10^18
+                        require ext_call.return_data[0] <= 10000000000 * 10^18
+                        if stor6[address(arg2)] < ext_call.return_data[0]:
+                            require ext_call.return_data[0] - stor6[address(arg2)] <= 18
+                            if arg3:
+                                return (10^18 * ext_call.return_data[0] * 10^(ext_call.return_data[0] - stor6[address(arg2)]) / arg3)
+                        else:
+                            require stor6[address(arg2)] - ext_call.return_data[0] <= 18
+                            if 10^(stor6[address(arg2)] - ext_call.return_data[0]) * arg3:
+                                return (10^18 * ext_call.return_data[0] / 10^(stor6[address(arg2)] - ext_call.return_data[0]) * arg3)
+                    else:
+                        require ext_code.size(arg2)
+                        call arg2.0x313ce567 with:
+                             gas gas_remaining - 710 wei
+                        require ext_call.success
+                        require arg3 <= 10000000000 * 10^18
+                        require ext_call.return_data[0] <= 10000000000 * 10^18
+                        if ext_call.return_data[0] < ext_call.return_data[0]:
+                            if arg3:
+                                return (10^18 * ext_call.return_data[0] / arg3)
+                        else:
+                            if 10^0 * arg3:
+                                return (10^18 * ext_call.return_data[0] / arg3)
+    else:
+        require 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee == arg2
+        require ext_code.size(tokenExchange[address(arg1)])
+        if arg1 != 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee:
+            call tokenExchange[address(arg1)].getTokenToEthInputPrice(uint256 arg1) with:
+                 gas gas_remaining - 710 wei
+                args arg3
+            require ext_call.success
+            if 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee == arg1:
+                if 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee == arg2:
+                    require arg3 <= 10000000000 * 10^18
+                    require (10000 * ext_call.return_data[0]) - (feeBps * ext_call.return_data[0]) / 10000 <= 10000000000 * 10^18
+                    if arg3:
+                        return (10^18 * (10000 * ext_call.return_data[0]) - (feeBps * ext_call.return_data[0]) / 10000 / arg3)
+                else:
+                    if stor6[address(arg2)]:
+                        require arg3 <= 10000000000 * 10^18
+                        require (10000 * ext_call.return_data[0]) - (feeBps * ext_call.return_data[0]) / 10000 <= 10000000000 * 10^18
+                        if stor6[address(arg2)] < 18:
+                            require -stor6[address(arg2)] + 18 <= 18
+                            if arg3:
+                                return (10^18 * (10000 * ext_call.return_data[0]) - (feeBps * ext_call.return_data[0]) / 10000 * 10^(-stor6[address(arg2)] + 18) / arg3)
+                        else:
+                            require stor6[address(arg2)] - 18 <= 18
+                            if 10^(stor6[address(arg2)] - 18) * arg3:
+                                return (10^18 * (10000 * ext_call.return_data[0]) - (feeBps * ext_call.return_data[0]) / 10000 / 10^(stor6[address(arg2)] - 18) * arg3)
+                    else:
+                        require ext_code.size(arg2)
+                        call arg2.0x313ce567 with:
+                             gas gas_remaining - 710 wei
+                        require ext_call.success
+                        require arg3 <= 10000000000 * 10^18
+                        require (10000 * ext_call.return_data[0]) - (feeBps * ext_call.return_data[0]) / 10000 <= 10000000000 * 10^18
+                        if ext_call.return_data[0] < 18:
+                            require -ext_call.return_data[0] + 18 <= 18
+                            if arg3:
+                                return (10^18 * (10000 * ext_call.return_data[0]) - (feeBps * ext_call.return_data[0]) / 10000 * 10^(-ext_call.return_data[0] + 18) / arg3)
+                        else:
+                            require ext_call.return_data[0] - 18 <= 18
+                            if 10^(ext_call.return_data[0] - 18) * arg3:
+                                return (10^18 * (10000 * ext_call.return_data[0]) - (feeBps * ext_call.return_data[0]) / 10000 / 10^(ext_call.return_data[0] - 18) * arg3)
+            else:
+                if stor6[address(arg1)]:
+                    if 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee == arg2:
+                        require arg3 <= 10000000000 * 10^18
+                        require (10000 * ext_call.return_data[0]) - (feeBps * ext_call.return_data[0]) / 10000 <= 10000000000 * 10^18
+                        if 18 < stor6[address(arg1)]:
+                            require stor6[address(arg1)] - 18 <= 18
+                            if arg3:
+                                return (10^18 * (10000 * ext_call.return_data[0]) - (feeBps * ext_call.return_data[0]) / 10000 * 10^(stor6[address(arg1)] - 18) / arg3)
+                        else:
+                            require -stor6[address(arg1)] + 18 <= 18
+                            if 10^(-stor6[address(arg1)] + 18) * arg3:
+                                return (10^18 * (10000 * ext_call.return_data[0]) - (feeBps * ext_call.return_data[0]) / 10000 / 10^(-stor6[address(arg1)] + 18) * arg3)
+                    else:
+                        if stor6[address(arg2)]:
+                            require arg3 <= 10000000000 * 10^18
+                            require (10000 * ext_call.return_data[0]) - (feeBps * ext_call.return_data[0]) / 10000 <= 10000000000 * 10^18
+                            if stor6[address(arg2)] < stor6[address(arg1)]:
+                                require stor6[address(arg1)] - stor6[address(arg2)] <= 18
+                                if arg3:
+                                    return (10^18 * (10000 * ext_call.return_data[0]) - (feeBps * ext_call.return_data[0]) / 10000 * 10^(stor6[address(arg1)] - stor6[address(arg2)]) / arg3)
+                            else:
+                                require stor6[address(arg2)] - stor6[address(arg1)] <= 18
+                                if 10^(stor6[address(arg2)] - stor6[address(arg1)]) * arg3:
+                                    return (10^18 * (10000 * ext_call.return_data[0]) - (feeBps * ext_call.return_data[0]) / 10000 / 10^(stor6[address(arg2)] - stor6[address(arg1)]) * arg3)
+                        else:
+                            require ext_code.size(arg2)
+                            call arg2.0x313ce567 with:
+                                 gas gas_remaining - 710 wei
+                            require ext_call.success
+                            require arg3 <= 10000000000 * 10^18
+                            require (10000 * ext_call.return_data[0]) - (feeBps * ext_call.return_data[0]) / 10000 <= 10000000000 * 10^18
+                            if ext_call.return_data[0] < stor6[address(arg1)]:
+                                require stor6[address(arg1)] - ext_call.return_data[0] <= 18
+                                if arg3:
+                                    return (10^18 * (10000 * ext_call.return_data[0]) - (feeBps * ext_call.return_data[0]) / 10000 * 10^(stor6[address(arg1)] - ext_call.return_data[0]) / arg3)
+                            else:
+                                require ext_call.return_data[0] - stor6[address(arg1)] <= 18
+                                if 10^(ext_call.return_data[0] - stor6[address(arg1)]) * arg3:
+                                    return (10^18 * (10000 * ext_call.return_data[0]) - (feeBps * ext_call.return_data[0]) / 10000 / 10^(ext_call.return_data[0] - stor6[address(arg1)]) * arg3)
+                else:
+                    require ext_code.size(arg1)
+                    call arg1.0x313ce567 with:
+                         gas gas_remaining - 710 wei
+                    require ext_call.success
+                    if 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee == arg2:
+                        require arg3 <= 10000000000 * 10^18
+                        require (10000 * ext_call.return_data[0]) - (feeBps * ext_call.return_data[0]) / 10000 <= 10000000000 * 10^18
+                        if 18 < ext_call.return_data[0]:
+                            require ext_call.return_data[0] - 18 <= 18
+                            if arg3:
+                                return (10^18 * (10000 * ext_call.return_data[0]) - (feeBps * ext_call.return_data[0]) / 10000 * 10^(ext_call.return_data[0] - 18) / arg3)
+                        else:
+                            require -ext_call.return_data[0] + 18 <= 18
+                            if 10^(-ext_call.return_data[0] + 18) * arg3:
+                                return (10^18 * (10000 * ext_call.return_data[0]) - (feeBps * ext_call.return_data[0]) / 10000 / 10^(-ext_call.return_data[0] + 18) * arg3)
+                    else:
+                        if stor6[address(arg2)]:
+                            require arg3 <= 10000000000 * 10^18
+                            require (10000 * ext_call.return_data[0]) - (feeBps * ext_call.return_data[0]) / 10000 <= 10000000000 * 10^18
+                            if stor6[address(arg2)] < ext_call.return_data[0]:
+                                require ext_call.return_data[0] - stor6[address(arg2)] <= 18
+                                if arg3:
+                                    return (10^18 * (10000 * ext_call.return_data[0]) - (feeBps * ext_call.return_data[0]) / 10000 * 10^(ext_call.return_data[0] - stor6[address(arg2)]) / arg3)
+                            else:
+                                require stor6[address(arg2)] - ext_call.return_data[0] <= 18
+                                if 10^(stor6[address(arg2)] - ext_call.return_data[0]) * arg3:
+                                    return (10^18 * (10000 * ext_call.return_data[0]) - (feeBps * ext_call.return_data[0]) / 10000 / 10^(stor6[address(arg2)] - ext_call.return_data[0]) * arg3)
+                        else:
+                            require ext_code.size(arg2)
+                            call arg2.0x313ce567 with:
+                                 gas gas_remaining - 710 wei
+                            require ext_call.success
+                            require arg3 <= 10000000000 * 10^18
+                            require (10000 * ext_call.return_data[0]) - (feeBps * ext_call.return_data[0]) / 10000 <= 10000000000 * 10^18
+                            if ext_call.return_data[0] < ext_call.return_data[0]:
+                                if arg3:
+                                    return (10^18 * (10000 * ext_call.return_data[0]) - (feeBps * ext_call.return_data[0]) / 10000 / arg3)
+                            else:
+                                if 10^0 * arg3:
+                                    return (10^18 * (10000 * ext_call.return_data[0]) - (feeBps * ext_call.return_data[0]) / 10000 / arg3)
+        else:
+            call tokenExchange[address(arg1)].getEthToTokenInputPrice(uint256 arg1) with:
+                 gas gas_remaining - 710 wei
+                args ((10000 * arg3) - (feeBps * arg3) / 10000)
+            require ext_call.success
+            if 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee == arg1:
+                if 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee == arg2:
+                    require arg3 <= 10000000000 * 10^18
+                    require ext_call.return_data[0] <= 10000000000 * 10^18
+                    if arg3:
+                        return (10^18 * ext_call.return_data[0] / arg3)
+                else:
+                    if stor6[address(arg2)]:
+                        require arg3 <= 10000000000 * 10^18
+                        require ext_call.return_data[0] <= 10000000000 * 10^18
+                        if stor6[address(arg2)] < 18:
+                            require -stor6[address(arg2)] + 18 <= 18
+                            if arg3:
+                                return (10^18 * ext_call.return_data[0] * 10^(-stor6[address(arg2)] + 18) / arg3)
+                        else:
+                            require stor6[address(arg2)] - 18 <= 18
+                            if 10^(stor6[address(arg2)] - 18) * arg3:
+                                return (10^18 * ext_call.return_data[0] / 10^(stor6[address(arg2)] - 18) * arg3)
+                    else:
+                        require ext_code.size(arg2)
+                        call arg2.0x313ce567 with:
+                             gas gas_remaining - 710 wei
+                        require ext_call.success
+                        require arg3 <= 10000000000 * 10^18
+                        require ext_call.return_data[0] <= 10000000000 * 10^18
+                        if ext_call.return_data[0] < 18:
+                            require -ext_call.return_data[0] + 18 <= 18
+                            if arg3:
+                                return (10^18 * ext_call.return_data[0] * 10^(-ext_call.return_data[0] + 18) / arg3)
+                        else:
+                            require ext_call.return_data[0] - 18 <= 18
+                            if 10^(ext_call.return_data[0] - 18) * arg3:
+                                return (10^18 * ext_call.return_data[0] / 10^(ext_call.return_data[0] - 18) * arg3)
+            else:
+                if stor6[address(arg1)]:
+                    if 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee == arg2:
+                        require arg3 <= 10000000000 * 10^18
+                        require ext_call.return_data[0] <= 10000000000 * 10^18
+                        if 18 < stor6[address(arg1)]:
+                            require stor6[address(arg1)] - 18 <= 18
+                            if arg3:
+                                return (10^18 * ext_call.return_data[0] * 10^(stor6[address(arg1)] - 18) / arg3)
+                        else:
+                            require -stor6[address(arg1)] + 18 <= 18
+                            if 10^(-stor6[address(arg1)] + 18) * arg3:
+                                return (10^18 * ext_call.return_data[0] / 10^(-stor6[address(arg1)] + 18) * arg3)
+                    else:
+                        if stor6[address(arg2)]:
+                            require arg3 <= 10000000000 * 10^18
+                            require ext_call.return_data[0] <= 10000000000 * 10^18
+                            if stor6[address(arg2)] < stor6[address(arg1)]:
+                                require stor6[address(arg1)] - stor6[address(arg2)] <= 18
+                                if arg3:
+                                    return (10^18 * ext_call.return_data[0] * 10^(stor6[address(arg1)] - stor6[address(arg2)]) / arg3)
+                            else:
+                                require stor6[address(arg2)] - stor6[address(arg1)] <= 18
+                                if 10^(stor6[address(arg2)] - stor6[address(arg1)]) * arg3:
+                                    return (10^18 * ext_call.return_data[0] / 10^(stor6[address(arg2)] - stor6[address(arg1)]) * arg3)
+                        else:
+                            require ext_code.size(arg2)
+                            call arg2.0x313ce567 with:
+                                 gas gas_remaining - 710 wei
+                            require ext_call.success
+                            require arg3 <= 10000000000 * 10^18
+                            require ext_call.return_data[0] <= 10000000000 * 10^18
+                            if ext_call.return_data[0] < stor6[address(arg1)]:
+                                require stor6[address(arg1)] - ext_call.return_data[0] <= 18
+                                if arg3:
+                                    return (10^18 * ext_call.return_data[0] * 10^(stor6[address(arg1)] - ext_call.return_data[0]) / arg3)
+                            else:
+                                require ext_call.return_data[0] - stor6[address(arg1)] <= 18
+                                if 10^(ext_call.return_data[0] - stor6[address(arg1)]) * arg3:
+                                    return (10^18 * ext_call.return_data[0] / 10^(ext_call.return_data[0] - stor6[address(arg1)]) * arg3)
+                else:
+                    require ext_code.size(arg1)
+                    call arg1.0x313ce567 with:
+                         gas gas_remaining - 710 wei
+                    require ext_call.success
+                    if 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee == arg2:
+                        require arg3 <= 10000000000 * 10^18
+                        require ext_call.return_data[0] <= 10000000000 * 10^18
+                        if 18 < ext_call.return_data[0]:
+                            require ext_call.return_data[0] - 18 <= 18
+                            if arg3:
+                                return (10^18 * ext_call.return_data[0] * 10^(ext_call.return_data[0] - 18) / arg3)
+                        else:
+                            require -ext_call.return_data[0] + 18 <= 18
+                            if 10^(-ext_call.return_data[0] + 18) * arg3:
+                                return (10^18 * ext_call.return_data[0] / 10^(-ext_call.return_data[0] + 18) * arg3)
+                    else:
+                        if stor6[address(arg2)]:
+                            require arg3 <= 10000000000 * 10^18
+                            require ext_call.return_data[0] <= 10000000000 * 10^18
+                            if stor6[address(arg2)] < ext_call.return_data[0]:
+                                require ext_call.return_data[0] - stor6[address(arg2)] <= 18
+                                if arg3:
+                                    return (10^18 * ext_call.return_data[0] * 10^(ext_call.return_data[0] - stor6[address(arg2)]) / arg3)
+                            else:
+                                require stor6[address(arg2)] - ext_call.return_data[0] <= 18
+                                if 10^(stor6[address(arg2)] - ext_call.return_data[0]) * arg3:
+                                    return (10^18 * ext_call.return_data[0] / 10^(stor6[address(arg2)] - ext_call.return_data[0]) * arg3)
+                        else:
+                            require ext_code.size(arg2)
+                            call arg2.0x313ce567 with:
+                                 gas gas_remaining - 710 wei
+                            require ext_call.success
+                            require arg3 <= 10000000000 * 10^18
+                            require ext_call.return_data[0] <= 10000000000 * 10^18
+                            if ext_call.return_data[0] < ext_call.return_data[0]:
+                                if arg3:
+                                    return (10^18 * ext_call.return_data[0] / arg3)
+                            else:
+                                if 10^0 * arg3:
+                                    return (10^18 * ext_call.return_data[0] / arg3)
+    revert
+}
+
+function trade(address arg1, uint256 arg2, address arg3, address arg4, uint256 arg5, bool arg6) payable {
+    require tradeEnabled
+    require kyberNetworkAddress == msg.sender
+    if arg1 != 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee:
+        require tokenExchange[address(arg1)]
+        require 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee == arg3
+    else:
+        if not tokenExchange[address(arg3)]:
+            require tokenExchange[address(arg1)]
+            require 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee == arg3
+    if arg1 != 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee:
+        require tokenExchange[address(arg1)]
+        require 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee == arg3
+    else:
+        if not tokenExchange[address(arg3)]:
+            require tokenExchange[address(arg1)]
+            require 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee == arg3
+    if not tradeEnabled:
+        require 0 >= arg5
+    else:
+        if 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee == arg1:
+            require ext_code.size(tokenExchange[address(arg3)])
+            call tokenExchange[address(arg3)].getEthToTokenInputPrice(uint256 arg1) with:
+                 gas gas_remaining - 710 wei
+                args ((10000 * arg2) - (feeBps * arg2) / 10000)
+            require ext_call.success
+            if 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee == arg1:
+                if 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee == arg3:
+                    require arg2 <= 10000000000 * 10^18
+                    require ext_call.return_data[0] <= 10000000000 * 10^18
+                    require arg2
+                    require 10^18 * ext_call.return_data[0] / arg2 >= arg5
+                else:
+                    if stor6[address(arg3)]:
+                        require arg2 <= 10000000000 * 10^18
+                        require ext_call.return_data[0] <= 10000000000 * 10^18
+                        if stor6[address(arg3)] < 18:
+                            require -stor6[address(arg3)] + 18 <= 18
+                            require arg2
+                            require 10^18 * ext_call.return_data[0] * 10^(-stor6[address(arg3)] + 18) / arg2 >= arg5
+                        else:
+                            require stor6[address(arg3)] - 18 <= 18
+                            require 10^(stor6[address(arg3)] - 18) * arg2
+                            require 10^18 * ext_call.return_data[0] / 10^(stor6[address(arg3)] - 18) * arg2 >= arg5
+                    else:
+                        require ext_code.size(arg3)
+                        call arg3.0x313ce567 with:
+                             gas gas_remaining - 710 wei
+                        require ext_call.success
+                        require arg2 <= 10000000000 * 10^18
+                        require ext_call.return_data[0] <= 10000000000 * 10^18
+                        if ext_call.return_data[0] < 18:
+                            require -ext_call.return_data[0] + 18 <= 18
+                            require arg2
+                            require 10^18 * ext_call.return_data[0] * 10^(-ext_call.return_data[0] + 18) / arg2 >= arg5
+                        else:
+                            require ext_call.return_data[0] - 18 <= 18
+                            require 10^(ext_call.return_data[0] - 18) * arg2
+                            require 10^18 * ext_call.return_data[0] / 10^(ext_call.return_data[0] - 18) * arg2 >= arg5
+            else:
+                if stor6[address(arg1)]:
+                    if 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee == arg3:
+                        require arg2 <= 10000000000 * 10^18
+                        require ext_call.return_data[0] <= 10000000000 * 10^18
+                        if 18 < stor6[address(arg1)]:
+                            require stor6[address(arg1)] - 18 <= 18
+                            require arg2
+                            require 10^18 * ext_call.return_data[0] * 10^(stor6[address(arg1)] - 18) / arg2 >= arg5
+                        else:
+                            require -stor6[address(arg1)] + 18 <= 18
+                            require 10^(-stor6[address(arg1)] + 18) * arg2
+                            require 10^18 * ext_call.return_data[0] / 10^(-stor6[address(arg1)] + 18) * arg2 >= arg5
+                    else:
+                        if stor6[address(arg3)]:
+                            require arg2 <= 10000000000 * 10^18
+                            require ext_call.return_data[0] <= 10000000000 * 10^18
+                            if stor6[address(arg3)] < stor6[address(arg1)]:
+                                require stor6[address(arg1)] - stor6[address(arg3)] <= 18
+                                require arg2
+                                require 10^18 * ext_call.return_data[0] * 10^(stor6[address(arg1)] - stor6[address(arg3)]) / arg2 >= arg5
+                            else:
+                                require stor6[address(arg3)] - stor6[address(arg1)] <= 18
+                                require 10^(stor6[address(arg3)] - stor6[address(arg1)]) * arg2
+                                require 10^18 * ext_call.return_data[0] / 10^(stor6[address(arg3)] - stor6[address(arg1)]) * arg2 >= arg5
+                        else:
+                            require ext_code.size(arg3)
+                            call arg3.0x313ce567 with:
+                                 gas gas_remaining - 710 wei
+                            require ext_call.success
+                            require arg2 <= 10000000000 * 10^18
+                            require ext_call.return_data[0] <= 10000000000 * 10^18
+                            if ext_call.return_data[0] < stor6[address(arg1)]:
+                                require stor6[address(arg1)] - ext_call.return_data[0] <= 18
+                                require arg2
+                                require 10^18 * ext_call.return_data[0] * 10^(stor6[address(arg1)] - ext_call.return_data[0]) / arg2 >= arg5
+                            else:
+                                require ext_call.return_data[0] - stor6[address(arg1)] <= 18
+                                require 10^(ext_call.return_data[0] - stor6[address(arg1)]) * arg2
+                                require 10^18 * ext_call.return_data[0] / 10^(ext_call.return_data[0] - stor6[address(arg1)]) * arg2 >= arg5
+                else:
+                    require ext_code.size(arg1)
+                    call arg1.0x313ce567 with:
+                         gas gas_remaining - 710 wei
+                    require ext_call.success
+                    if 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee == arg3:
+                        require arg2 <= 10000000000 * 10^18
+                        require ext_call.return_data[0] <= 10000000000 * 10^18
+                        if 18 < ext_call.return_data[0]:
+                            require ext_call.return_data[0] - 18 <= 18
+                            require arg2
+                            require 10^18 * ext_call.return_data[0] * 10^(ext_call.return_data[0] - 18) / arg2 >= arg5
+                        else:
+                            require -ext_call.return_data[0] + 18 <= 18
+                            require 10^(-ext_call.return_data[0] + 18) * arg2
+                            require 10^18 * ext_call.return_data[0] / 10^(-ext_call.return_data[0] + 18) * arg2 >= arg5
+                    else:
+                        if stor6[address(arg3)]:
+                            require arg2 <= 10000000000 * 10^18
+                            require ext_call.return_data[0] <= 10000000000 * 10^18
+                            if stor6[address(arg3)] < ext_call.return_data[0]:
+                                require ext_call.return_data[0] - stor6[address(arg3)] <= 18
+                                require arg2
+                                require 10^18 * ext_call.return_data[0] * 10^(ext_call.return_data[0] - stor6[address(arg3)]) / arg2 >= arg5
+                            else:
+                                require stor6[address(arg3)] - ext_call.return_data[0] <= 18
+                                require 10^(stor6[address(arg3)] - ext_call.return_data[0]) * arg2
+                                require 10^18 * ext_call.return_data[0] / 10^(stor6[address(arg3)] - ext_call.return_data[0]) * arg2 >= arg5
+                        else:
+                            require ext_code.size(arg3)
+                            call arg3.0x313ce567 with:
+                                 gas gas_remaining - 710 wei
+                            require ext_call.success
+                            require arg2 <= 10000000000 * 10^18
+                            require ext_call.return_data[0] <= 10000000000 * 10^18
+                            if ext_call.return_data[0] < ext_call.return_data[0]:
+                                require arg2
+                                require 10^18 * ext_call.return_data[0] * 10^0 / arg2 >= arg5
+                            else:
+                                require 10^0 * arg2
+                                require 10^18 * ext_call.return_data[0] / 10^0 * arg2 >= arg5
+        else:
+            require 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee == arg3
+            require ext_code.size(tokenExchange[address(arg1)])
+            if arg1 != 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee:
+                call tokenExchange[address(arg1)].getTokenToEthInputPrice(uint256 arg1) with:
+                     gas gas_remaining - 710 wei
+                    args arg2
+                require ext_call.success
+                if 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee == arg1:
+                    if 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee == arg3:
+                        require arg2 <= 10000000000 * 10^18
+                        require (10000 * ext_call.return_data[0]) - (feeBps * ext_call.return_data[0]) / 10000 <= 10000000000 * 10^18
+                        require arg2
+                        require 10^18 * (10000 * ext_call.return_data[0]) - (feeBps * ext_call.return_data[0]) / 10000 / arg2 >= arg5
+                    else:
+                        if stor6[address(arg3)]:
+                            require arg2 <= 10000000000 * 10^18
+                            require (10000 * ext_call.return_data[0]) - (feeBps * ext_call.return_data[0]) / 10000 <= 10000000000 * 10^18
+                            if stor6[address(arg3)] < 18:
+                                require -stor6[address(arg3)] + 18 <= 18
+                                require arg2
+                                require 10^18 * (10000 * ext_call.return_data[0]) - (feeBps * ext_call.return_data[0]) / 10000 * 10^(-stor6[address(arg3)] + 18) / arg2 >= arg5
+                            else:
+                                require stor6[address(arg3)] - 18 <= 18
+                                require 10^(stor6[address(arg3)] - 18) * arg2
+                                require 10^18 * (10000 * ext_call.return_data[0]) - (feeBps * ext_call.return_data[0]) / 10000 / 10^(stor6[address(arg3)] - 18) * arg2 >= arg5
+                        else:
+                            require ext_code.size(arg3)
+                            call arg3.0x313ce567 with:
+                                 gas gas_remaining - 710 wei
+                            require ext_call.success
+                            require arg2 <= 10000000000 * 10^18
+                            require (10000 * ext_call.return_data[0]) - (feeBps * ext_call.return_data[0]) / 10000 <= 10000000000 * 10^18
+                            if ext_call.return_data[0] < 18:
+                                require -ext_call.return_data[0] + 18 <= 18
+                                require arg2
+                                require 10^18 * (10000 * ext_call.return_data[0]) - (feeBps * ext_call.return_data[0]) / 10000 * 10^(-ext_call.return_data[0] + 18) / arg2 >= arg5
+                            else:
+                                require ext_call.return_data[0] - 18 <= 18
+                                require 10^(ext_call.return_data[0] - 18) * arg2
+                                require 10^18 * (10000 * ext_call.return_data[0]) - (feeBps * ext_call.return_data[0]) / 10000 / 10^(ext_call.return_data[0] - 18) * arg2 >= arg5
+                else:
+                    if stor6[address(arg1)]:
+                        if 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee == arg3:
+                            require arg2 <= 10000000000 * 10^18
+                            require (10000 * ext_call.return_data[0]) - (feeBps * ext_call.return_data[0]) / 10000 <= 10000000000 * 10^18
+                            if 18 < stor6[address(arg1)]:
+                                require stor6[address(arg1)] - 18 <= 18
+                                require arg2
+                                require 10^18 * (10000 * ext_call.return_data[0]) - (feeBps * ext_call.return_data[0]) / 10000 * 10^(stor6[address(arg1)] - 18) / arg2 >= arg5
+                            else:
+                                require -stor6[address(arg1)] + 18 <= 18
+                                require 10^(-stor6[address(arg1)] + 18) * arg2
+                                require 10^18 * (10000 * ext_call.return_data[0]) - (feeBps * ext_call.return_data[0]) / 10000 / 10^(-stor6[address(arg1)] + 18) * arg2 >= arg5
+                        else:
+                            if stor6[address(arg3)]:
+                                require arg2 <= 10000000000 * 10^18
+                                require (10000 * ext_call.return_data[0]) - (feeBps * ext_call.return_data[0]) / 10000 <= 10000000000 * 10^18
+                                if stor6[address(arg3)] < stor6[address(arg1)]:
+                                    require stor6[address(arg1)] - stor6[address(arg3)] <= 18
+                                    require arg2
+                                    require 10^18 * (10000 * ext_call.return_data[0]) - (feeBps * ext_call.return_data[0]) / 10000 * 10^(stor6[address(arg1)] - stor6[address(arg3)]) / arg2 >= arg5
+                                else:
+                                    require stor6[address(arg3)] - stor6[address(arg1)] <= 18
+                                    require 10^(stor6[address(arg3)] - stor6[address(arg1)]) * arg2
+                                    require 10^18 * (10000 * ext_call.return_data[0]) - (feeBps * ext_call.return_data[0]) / 10000 / 10^(stor6[address(arg3)] - stor6[address(arg1)]) * arg2 >= arg5
+                            else:
+                                require ext_code.size(arg3)
+                                call arg3.0x313ce567 with:
+                                     gas gas_remaining - 710 wei
+                                require ext_call.success
+                                require arg2 <= 10000000000 * 10^18
+                                require (10000 * ext_call.return_data[0]) - (feeBps * ext_call.return_data[0]) / 10000 <= 10000000000 * 10^18
+                                if ext_call.return_data[0] < stor6[address(arg1)]:
+                                    require stor6[address(arg1)] - ext_call.return_data[0] <= 18
+                                    require arg2
+                                    require 10^18 * (10000 * ext_call.return_data[0]) - (feeBps * ext_call.return_data[0]) / 10000 * 10^(stor6[address(arg1)] - ext_call.return_data[0]) / arg2 >= arg5
+                                else:
+                                    require ext_call.return_data[0] - stor6[address(arg1)] <= 18
+                                    require 10^(ext_call.return_data[0] - stor6[address(arg1)]) * arg2
+                                    require 10^18 * (10000 * ext_call.return_data[0]) - (feeBps * ext_call.return_data[0]) / 10000 / 10^(ext_call.return_data[0] - stor6[address(arg1)]) * arg2 >= arg5
+                    else:
+                        require ext_code.size(arg1)
+                        call arg1.0x313ce567 with:
+                             gas gas_remaining - 710 wei
+                        require ext_call.success
+                        if 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee == arg3:
+                            require arg2 <= 10000000000 * 10^18
+                            require (10000 * ext_call.return_data[0]) - (feeBps * ext_call.return_data[0]) / 10000 <= 10000000000 * 10^18
+                            if 18 < ext_call.return_data[0]:
+                                require ext_call.return_data[0] - 18 <= 18
+                                require arg2
+                                require 10^18 * (10000 * ext_call.return_data[0]) - (feeBps * ext_call.return_data[0]) / 10000 * 10^(ext_call.return_data[0] - 18) / arg2 >= arg5
+                            else:
+                                require -ext_call.return_data[0] + 18 <= 18
+                                require 10^(-ext_call.return_data[0] + 18) * arg2
+                                require 10^18 * (10000 * ext_call.return_data[0]) - (feeBps * ext_call.return_data[0]) / 10000 / 10^(-ext_call.return_data[0] + 18) * arg2 >= arg5
+                        else:
+                            if stor6[address(arg3)]:
+                                require arg2 <= 10000000000 * 10^18
+                                require (10000 * ext_call.return_data[0]) - (feeBps * ext_call.return_data[0]) / 10000 <= 10000000000 * 10^18
+                                if stor6[address(arg3)] < ext_call.return_data[0]:
+                                    require ext_call.return_data[0] - stor6[address(arg3)] <= 18
+                                    require arg2
+                                    require 10^18 * (10000 * ext_call.return_data[0]) - (feeBps * ext_call.return_data[0]) / 10000 * 10^(ext_call.return_data[0] - stor6[address(arg3)]) / arg2 >= arg5
+                                else:
+                                    require stor6[address(arg3)] - ext_call.return_data[0] <= 18
+                                    require 10^(stor6[address(arg3)] - ext_call.return_data[0]) * arg2
+                                    require 10^18 * (10000 * ext_call.return_data[0]) - (feeBps * ext_call.return_data[0]) / 10000 / 10^(stor6[address(arg3)] - ext_call.return_data[0]) * arg2 >= arg5
+                            else:
+                                require ext_code.size(arg3)
+                                call arg3.0x313ce567 with:
+                                     gas gas_remaining - 710 wei
+                                require ext_call.success
+                                require arg2 <= 10000000000 * 10^18
+                                require (10000 * ext_call.return_data[0]) - (feeBps * ext_call.return_data[0]) / 10000 <= 10000000000 * 10^18
+                                if ext_call.return_data[0] < ext_call.return_data[0]:
+                                    require arg2
+                                    require 10^18 * (10000 * ext_call.return_data[0]) - (feeBps * ext_call.return_data[0]) / 10000 * 10^0 / arg2 >= arg5
+                                else:
+                                    require 10^0 * arg2
+                                    require 10^18 * (10000 * ext_call.return_data[0]) - (feeBps * ext_call.return_data[0]) / 10000 / 10^0 * arg2 >= arg5
+            else:
+                call tokenExchange[address(arg1)].getEthToTokenInputPrice(uint256 arg1) with:
+                     gas gas_remaining - 710 wei
+                    args ((10000 * arg2) - (feeBps * arg2) / 10000)
+                require ext_call.success
+                if 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee == arg1:
+                    if 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee == arg3:
+                        require arg2 <= 10000000000 * 10^18
+                        require ext_call.return_data[0] <= 10000000000 * 10^18
+                        require arg2
+                        require 10^18 * ext_call.return_data[0] / arg2 >= arg5
+                    else:
+                        if stor6[address(arg3)]:
+                            require arg2 <= 10000000000 * 10^18
+                            require ext_call.return_data[0] <= 10000000000 * 10^18
+                            if stor6[address(arg3)] < 18:
+                                require -stor6[address(arg3)] + 18 <= 18
+                                require arg2
+                                require 10^18 * ext_call.return_data[0] * 10^(-stor6[address(arg3)] + 18) / arg2 >= arg5
+                            else:
+                                require stor6[address(arg3)] - 18 <= 18
+                                require 10^(stor6[address(arg3)] - 18) * arg2
+                                require 10^18 * ext_call.return_data[0] / 10^(stor6[address(arg3)] - 18) * arg2 >= arg5
+                        else:
+                            require ext_code.size(arg3)
+                            call arg3.0x313ce567 with:
+                                 gas gas_remaining - 710 wei
+                            require ext_call.success
+                            require arg2 <= 10000000000 * 10^18
+                            require ext_call.return_data[0] <= 10000000000 * 10^18
+                            if ext_call.return_data[0] < 18:
+                                require -ext_call.return_data[0] + 18 <= 18
+                                require arg2
+                                require 10^18 * ext_call.return_data[0] * 10^(-ext_call.return_data[0] + 18) / arg2 >= arg5
+                            else:
+                                require ext_call.return_data[0] - 18 <= 18
+                                require 10^(ext_call.return_data[0] - 18) * arg2
+                                require 10^18 * ext_call.return_data[0] / 10^(ext_call.return_data[0] - 18) * arg2 >= arg5
+                else:
+                    if stor6[address(arg1)]:
+                        if 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee == arg3:
+                            require arg2 <= 10000000000 * 10^18
+                            require ext_call.return_data[0] <= 10000000000 * 10^18
+                            if 18 < stor6[address(arg1)]:
+                                require stor6[address(arg1)] - 18 <= 18
+                                require arg2
+                                require 10^18 * ext_call.return_data[0] * 10^(stor6[address(arg1)] - 18) / arg2 >= arg5
+                            else:
+                                require -stor6[address(arg1)] + 18 <= 18
+                                require 10^(-stor6[address(arg1)] + 18) * arg2
+                                require 10^18 * ext_call.return_data[0] / 10^(-stor6[address(arg1)] + 18) * arg2 >= arg5
+                        else:
+                            if stor6[address(arg3)]:
+                                require arg2 <= 10000000000 * 10^18
+                                require ext_call.return_data[0] <= 10000000000 * 10^18
+                                if stor6[address(arg3)] < stor6[address(arg1)]:
+                                    require stor6[address(arg1)] - stor6[address(arg3)] <= 18
+                                    require arg2
+                                    require 10^18 * ext_call.return_data[0] * 10^(stor6[address(arg1)] - stor6[address(arg3)]) / arg2 >= arg5
+                                else:
+                                    require stor6[address(arg3)] - stor6[address(arg1)] <= 18
+                                    require 10^(stor6[address(arg3)] - stor6[address(arg1)]) * arg2
+                                    require 10^18 * ext_call.return_data[0] / 10^(stor6[address(arg3)] - stor6[address(arg1)]) * arg2 >= arg5
+                            else:
+                                require ext_code.size(arg3)
+                                call arg3.0x313ce567 with:
+                                     gas gas_remaining - 710 wei
+                                require ext_call.success
+                                require arg2 <= 10000000000 * 10^18
+                                require ext_call.return_data[0] <= 10000000000 * 10^18
+                                if ext_call.return_data[0] < stor6[address(arg1)]:
+                                    require stor6[address(arg1)] - ext_call.return_data[0] <= 18
+                                    require arg2
+                                    require 10^18 * ext_call.return_data[0] * 10^(stor6[address(arg1)] - ext_call.return_data[0]) / arg2 >= arg5
+                                else:
+                                    require ext_call.return_data[0] - stor6[address(arg1)] <= 18
+                                    require 10^(ext_call.return_data[0] - stor6[address(arg1)]) * arg2
+                                    require 10^18 * ext_call.return_data[0] / 10^(ext_call.return_data[0] - stor6[address(arg1)]) * arg2 >= arg5
+                    else:
+                        require ext_code.size(arg1)
+                        call arg1.0x313ce567 with:
+                             gas gas_remaining - 710 wei
+                        require ext_call.success
+                        if 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee == arg3:
+                            require arg2 <= 10000000000 * 10^18
+                            require ext_call.return_data[0] <= 10000000000 * 10^18
+                            if 18 < ext_call.return_data[0]:
+                                require ext_call.return_data[0] - 18 <= 18
+                                require arg2
+                                require 10^18 * ext_call.return_data[0] * 10^(ext_call.return_data[0] - 18) / arg2 >= arg5
+                            else:
+                                require -ext_call.return_data[0] + 18 <= 18
+                                require 10^(-ext_call.return_data[0] + 18) * arg2
+                                require 10^18 * ext_call.return_data[0] / 10^(-ext_call.return_data[0] + 18) * arg2 >= arg5
+                        else:
+                            if stor6[address(arg3)]:
+                                require arg2 <= 10000000000 * 10^18
+                                require ext_call.return_data[0] <= 10000000000 * 10^18
+                                if stor6[address(arg3)] < ext_call.return_data[0]:
+                                    require ext_call.return_data[0] - stor6[address(arg3)] <= 18
+                                    require arg2
+                                    require 10^18 * ext_call.return_data[0] * 10^(ext_call.return_data[0] - stor6[address(arg3)]) / arg2 >= arg5
+                                else:
+                                    require stor6[address(arg3)] - ext_call.return_data[0] <= 18
+                                    require 10^(stor6[address(arg3)] - ext_call.return_data[0]) * arg2
+                                    require 10^18 * ext_call.return_data[0] / 10^(stor6[address(arg3)] - ext_call.return_data[0]) * arg2 >= arg5
+                            else:
+                                require ext_code.size(arg3)
+                                call arg3.0x313ce567 with:
+                                     gas gas_remaining - 710 wei
+                                require ext_call.success
+                                require arg2 <= 10000000000 * 10^18
+                                require ext_call.return_data[0] <= 10000000000 * 10^18
+                                if ext_call.return_data[0] < ext_call.return_data[0]:
+                                    require arg2
+                                    require 10^18 * ext_call.return_data[0] * 10^0 / arg2 >= arg5
+                                else:
+                                    require 10^0 * arg2
+                                    require 10^18 * ext_call.return_data[0] / 10^0 * arg2 >= arg5
+    if 0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee == arg1:
+        require arg2 == msg.value
+        require ext_code.size(tokenExchange[address(arg3)])
+        call tokenExchange[address(arg3)].ethToTokenSwapInput(uint256 arg1, uint256 arg2) with:
+           value (10000 * arg2) - (feeBps * arg2) / 10000 wei
+             gas gas_remaining - 9710 wei
+            args 1, 0x8000000000000000000000000000000000000000000000000000000000000000
+        require ext_call.success
+        require ext_code.size(arg3)
+        call arg3.0xa9059cbb with:
+             gas gas_remaining - 710 wei
+            args address(arg4), ext_call.return_data[0]
+        require ext_call.success
+        require ext_call.return_data[0]
+        emit TradeExecute(arg1, 0, address(arg3), ext_call.return_data[0], arg4, msg.sender);
+    else:
+        require not msg.value
+        require ext_code.size(arg1)
+        call arg1.0x23b872dd with:
+             gas gas_remaining - 710 wei
+            args msg.sender, address(this.address), arg2
+        require ext_call.success
+        require ext_call.return_data[0]
+        require ext_code.size(tokenExchange[address(arg1)])
+        call tokenExchange[address(arg1)].tokenToEthSwapInput(uint256 arg1, uint256 arg2, uint256 arg3) with:
+             gas gas_remaining - 710 wei
+            args arg2, 1, 0x8000000000000000000000000000000000000000000000000000000000000000
+        require ext_call.success
+        call arg4 with:
+           value (10000 * ext_call.return_data[0]) - (feeBps * ext_call.return_data[0]) / 10000 wei
+             gas 2300 * is_zero(value) wei
+        emit TradeExecute(arg1, 0, address(arg3), (10000 * ext_call.return_data[0]) - (feeBps * ext_call.return_data[0]) / 10000, arg4, msg.sender);
+    return 1
+}
+
+
+
+}
