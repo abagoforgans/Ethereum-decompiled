@@ -218,7 +218,7 @@ def start(tx, creation_code):
 
 if(len(sys.argv) > 1):
     af = open('CURRENT_BLOCK', 'r')
-    new_num = int(af.read()) + 5000
+    new_num = int(af.read()) + 1000
     af.close()
     bf = open('CURRENT_BLOCK', 'w')
     bf.write(str(new_num))
@@ -228,7 +228,7 @@ if(len(sys.argv) > 1):
 w3 = Web3(Web3.HTTPProvider('https://mainnet.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161'))
 
 new_blocknumber = int(open('CURRENT_BLOCK', 'r').read())
-old_blocknumber = new_blocknumber - 5000
+old_blocknumber = new_blocknumber - 1000
 
 
 for blocknumber in range(old_blocknumber, new_blocknumber):
