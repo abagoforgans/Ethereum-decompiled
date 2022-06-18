@@ -1,0 +1,5140 @@
+contract main {
+
+
+
+
+// =====================  Runtime code  =====================
+
+
+#
+#  - receiveApproval(address arg1, uint256 arg2, address arg3, bytes arg4)
+#
+address owner;
+mapping of uint8 stor1;
+uint8 stor2;
+address sub_722d8ff0Address; offset 8
+address sub_1fa4e703Address;
+address sub_3b8d7c15Address;
+array of uint256 name;
+uint8 stor6;
+uint8 stor6; offset 8
+uint8 stor6; offset 16
+uint8 stor6; offset 24
+uint256 stor7;
+uint256 stor8;
+uint256 stor9;
+uint256 stor10;
+uint256 stor11;
+uint256 stor12;
+uint256 stor13;
+uint256 stor14;
+uint256 stor15;
+uint256 stor16;
+uint256 stor17;
+uint256 stor18;
+uint256 stor19;
+uint256 stor20;
+uint256 stor21;
+uint256 stor22;
+uint256 stor23;
+mapping of struct stor24;
+address developmentAddress;
+address foundationAddress;
+mapping of address winners;
+mapping of address bets;
+
+function name() payable {
+    return name[0 len name.length]
+}
+
+function sub_1fa4e703(?) payable {
+    return sub_1fa4e703Address
+}
+
+function isWhitelisted(address arg1) payable {
+    require calldata.size - 4 >= 32
+    if not arg1:
+        revert with 0, 'Invalid address.'
+    return bool(stor1[address(arg1)])
+}
+
+function sub_3b8d7c15(?) payable {
+    return sub_3b8d7c15Address
+}
+
+function foundation() payable {
+    return foundationAddress
+}
+
+function paused() payable {
+    return bool(stor2)
+}
+
+function bets(uint256 arg1, uint256 arg2) payable {
+    require calldata.size - 4 >= 64
+    return bets[arg1][arg2]
+}
+
+function sub_722d8ff0(?) payable {
+    return sub_722d8ff0Address
+}
+
+function development() payable {
+    return developmentAddress
+}
+
+function owner() payable {
+    return owner
+}
+
+function winners(uint256 arg1) payable {
+    require calldata.size - 4 >= 32
+    return winners[arg1]
+}
+
+function _fallback() payable {
+    revert
+}
+
+function isOwner() payable {
+    return (msg.sender == owner)
+}
+
+function gameData() payable {
+    return stor17, stor18, stor19, stor20, stor21, stor22, stor23
+}
+
+function sub_5cd64ac6(?) payable {
+    require calldata.size - 4 >= 32
+    if owner != msg.sender:
+        revert with 0, 32, 22, 0xfe546865206163636f756e74206e6f74206f776e65722e000000000000000000
+    sub_1fa4e703Address = arg1
+}
+
+function sub_a2aec85c(?) payable {
+    require calldata.size - 4 >= 32
+    if owner != msg.sender:
+        revert with 0, 32, 22, 0xfe546865206163636f756e74206e6f74206f776e65722e000000000000000000
+    sub_722d8ff0Address = arg1
+}
+
+function sub_be9085c2(?) payable {
+    require calldata.size - 4 >= 32
+    if owner != msg.sender:
+        revert with 0, 32, 22, 0xfe546865206163636f756e74206e6f74206f776e65722e000000000000000000
+    sub_3b8d7c15Address = arg1
+}
+
+function setFoundation(address arg1) payable {
+    require calldata.size - 4 >= 32
+    if owner != msg.sender:
+        revert with 0, 32, 22, 0xfe546865206163636f756e74206e6f74206f776e65722e000000000000000000
+    foundationAddress = arg1
+}
+
+function setDevelopment(address arg1) payable {
+    require calldata.size - 4 >= 32
+    if owner != msg.sender:
+        revert with 0, 32, 22, 0xfe546865206163636f756e74206e6f74206f776e65722e000000000000000000
+    developmentAddress = arg1
+}
+
+function pause() payable {
+    if owner != msg.sender:
+        revert with 0, 32, 22, 0xfe546865206163636f756e74206e6f74206f776e65722e000000000000000000
+    if stor2:
+        revert with 0, 'The contract is not paused.'
+    stor2 = 1
+    emit Paused(msg.sender);
+}
+
+function renounceOwnership() payable {
+    if owner != msg.sender:
+        revert with 0, 32, 22, 0xfe546865206163636f756e74206e6f74206f776e65722e000000000000000000
+    owner = 0
+    emit OwnershipTransferred(address arg1, address arg2)
+    emit 0x0 
+    emit 0x0 
+}
+
+function unpause() payable {
+    if owner != msg.sender:
+        revert with 0, 32, 22, 0xfe546865206163636f756e74206e6f74206f776e65722e000000000000000000
+    if not stor2:
+        revert with 0, 'The contract is paused.'
+    stor2 = 0
+    emit Unpaused(msg.sender);
+}
+
+function renounceWhitelisted() payable {
+    if not msg.sender:
+        revert with 0, 'Invalid address.'
+    if not stor1[address(msg.sender)]:
+        revert with 0, 'The role does not exist.'
+    stor1[address(msg.sender)] = 0
+    emit WhitelistedRemoved(msg.sender);
+}
+
+function sub_94cff4e4(?) payable {
+    require calldata.size - 4 >= 224
+    if owner != msg.sender:
+        revert with 0, 32, 22, 0xfe546865206163636f756e74206e6f74206f776e65722e000000000000000000
+    stor17 = arg1
+    stor18 = arg2
+    stor19 = arg3
+    stor20 = arg4
+    stor21 = arg5
+    stor22 = arg6
+    stor23 = arg7
+}
+
+function transferOwnership(address arg1) payable {
+    require calldata.size - 4 >= 32
+    if owner != msg.sender:
+        revert with 0, 32, 22, 0xfe546865206163636f756e74206e6f74206f776e65722e000000000000000000
+    if not arg1:
+        revert with 0, 'Invalid address.'
+    owner = arg1
+    emit OwnershipTransferred(arg1, arg1);
+}
+
+function option() payable {
+    return uint8(stor6.field_0), 
+           uint8(stor6.field_0),
+           uint8(stor6.field_0),
+           uint8(stor6.field_0),
+           stor7,
+           stor8,
+           stor9,
+           stor10,
+           stor11,
+           stor12,
+           stor13,
+           stor14,
+           stor15,
+           stor16
+}
+
+function addWhitelisted(address arg1) payable {
+    require calldata.size - 4 >= 32
+    if owner != msg.sender:
+        revert with 0, 32, 22, 0xfe546865206163636f756e74206e6f74206f776e65722e000000000000000000
+    if not arg1:
+        revert with 0, 'Invalid address.'
+    if stor1[address(arg1)]:
+        revert with 0, 'The role already exist.'
+    stor1[address(arg1)] = 1
+    emit WhitelistedAdded(arg1);
+}
+
+function removeWhitelisted(address arg1) payable {
+    require calldata.size - 4 >= 32
+    if owner != msg.sender:
+        revert with 0, 32, 22, 0xfe546865206163636f756e74206e6f74206f776e65722e000000000000000000
+    if not arg1:
+        revert with 0, 'Invalid address.'
+    if not stor1[address(arg1)]:
+        revert with 0, 'The role does not exist.'
+    stor1[address(arg1)] = 0
+    emit WhitelistedRemoved(arg1);
+}
+
+function sub_60286a45(?) payable {
+    require calldata.size - 4 >= 224
+    if owner != msg.sender:
+        revert with 0, 32, 22, 0xfe546865206163636f756e74206e6f74206f776e65722e000000000000000000
+    stor24[address(arg1)].field_0 = arg2
+    stor24[address(arg1)].field_256 = arg3
+    stor24[address(arg1)].field_512 = arg4
+    stor24[address(arg1)].field_768 = arg5
+    stor24[address(arg1)].field_1024 = arg6
+    stor24[address(arg1)].field_1280 = arg7
+}
+
+function sub_ab4cc9f8(?) payable {
+    require calldata.size - 4 >= 448
+    if owner != msg.sender:
+        revert with 0, 32, 22, 0xfe546865206163636f756e74206e6f74206f776e65722e000000000000000000
+    uint8(stor6.field_0) = arg1
+    uint8(stor6.field_8) = arg2
+    uint8(stor6.field_16) = arg3
+    uint8(stor6.field_24) = arg4
+    stor7 = arg5
+    stor8 = arg6
+    stor9 = arg7
+    stor10 = arg8
+    stor11 = arg9
+    stor12 = arg10
+    stor13 = arg11
+    stor14 = arg12
+    stor15 = arg13
+    stor16 = arg14
+}
+
+function users(address arg1) payable {
+    require calldata.size - 4 >= 32
+    if not stor24[address(arg1)].field_0:
+        if stor24[address(arg1)].field_1024 > 0:
+            revert with 0, 'SafeMath sub failed.'
+        if stor24[address(arg1)].field_512 <= block.timestamp:
+            if stor24[address(arg1)].field_1280 > block.timestamp:
+                revert with 0, 'SafeMath sub failed.'
+            if -stor24[address(arg1)].field_1024 <= 0:
+                return stor24[address(arg1)].field_0, 
+                       stor24[address(arg1)].field_256,
+                       stor24[address(arg1)].field_512,
+                       0,
+                       stor24[address(arg1)].field_768,
+                       stor24[address(arg1)].field_1024,
+                       stor24[address(arg1)].field_1280
+            if block.timestamp - stor24[address(arg1)].field_1280 < stor13:
+                return stor24[address(arg1)].field_0, 
+                       stor24[address(arg1)].field_256,
+                       stor24[address(arg1)].field_512,
+                       0,
+                       stor24[address(arg1)].field_768,
+                       stor24[address(arg1)].field_1024,
+                       stor24[address(arg1)].field_1280
+            if stor13 > 0:
+                require stor13
+                if var54002 > block.timestamp - stor24[address(arg1)].field_1280 / stor13:
+                    if not -stor24[address(arg1)].field_1024:
+                        if 0 > -stor24[address(arg1)].field_1024:
+                            revert with 0, 'SafeMath sub failed.'
+                        return stor24[address(arg1)].field_0, 
+                               stor24[address(arg1)].field_256,
+                               stor24[address(arg1)].field_512,
+                               -stor24[address(arg1)].field_1024,
+                               stor24[address(arg1)].field_768,
+                               stor24[address(arg1)].field_1024,
+                               stor24[address(arg1)].field_1280
+                    if -1 * var54003 * stor24[address(arg1)].field_1024 / -stor24[address(arg1)].field_1024 != var54003:
+                        revert with 0, 'SafeMath mul failed.'
+                    if -1 * var54003 * stor24[address(arg1)].field_1024 / 10^18 > -stor24[address(arg1)].field_1024:
+                        revert with 0, 'SafeMath sub failed.'
+                    return stor24[address(arg1)].field_0, 
+                           stor24[address(arg1)].field_256,
+                           stor24[address(arg1)].field_512,
+                           -stor24[address(arg1)].field_1024 - (-1 * var54003 * stor24[address(arg1)].field_1024 / 10^18),
+                           stor24[address(arg1)].field_768,
+                           stor24[address(arg1)].field_1024,
+                           stor24[address(arg1)].field_1280
+                if stor8 > 10^18:
+                    revert with 0, 'SafeMath sub failed.'
+                if not var64002:
+                    s = var64002
+                    s = var64006
+                    t = var64007
+                    while stor13 > 0:
+                        require stor13
+                        if s + 1 <= block.timestamp - stor24[address(arg1)].field_1280 / stor13:
+                            if stor8 > 10^18:
+                                revert with 0, 'SafeMath sub failed.'
+                            s = 0
+                            s = s + 1
+                            t = 0
+                            continue 
+                        if -stor24[address(arg1)].field_1024:
+                            if 0 / -stor24[address(arg1)].field_1024:
+                                revert with 0, 'SafeMath mul failed.'
+                        if 0 > -stor24[address(arg1)].field_1024:
+                            revert with 0, 'SafeMath sub failed.'
+                        return stor24[address(arg1)].field_0, 
+                               stor24[address(arg1)].field_256,
+                               stor24[address(arg1)].field_512,
+                               -stor24[address(arg1)].field_1024,
+                               stor24[address(arg1)].field_768,
+                               stor24[address(arg1)].field_1024,
+                               stor24[address(arg1)].field_1280
+                else:
+                    require var67003
+                    if var69001 / var69002 != -stor8 + 10^18:
+                        revert with 0, 'SafeMath mul failed.'
+                    s = var71001
+                    t = var71008
+                    u = var71009
+                    while stor13 > 0:
+                        require stor13
+                        if t + 1 > block.timestamp - stor24[address(arg1)].field_1280 / stor13:
+                            if not -stor24[address(arg1)].field_1024:
+                                if 0 > -stor24[address(arg1)].field_1024:
+                                    revert with 0, 'SafeMath sub failed.'
+                                return stor24[address(arg1)].field_0, 
+                                       stor24[address(arg1)].field_256,
+                                       stor24[address(arg1)].field_512,
+                                       -stor24[address(arg1)].field_1024,
+                                       stor24[address(arg1)].field_768,
+                                       stor24[address(arg1)].field_1024,
+                                       stor24[address(arg1)].field_1280
+                            if -1 * s / 10^18 * stor24[address(arg1)].field_1024 / -stor24[address(arg1)].field_1024 != s / 10^18:
+                                revert with 0, 'SafeMath mul failed.'
+                            if -1 * s / 10^18 * stor24[address(arg1)].field_1024 / 10^18 > -stor24[address(arg1)].field_1024:
+                                revert with 0, 'SafeMath sub failed.'
+                            return stor24[address(arg1)].field_0, 
+                                   stor24[address(arg1)].field_256,
+                                   stor24[address(arg1)].field_512,
+                                   -stor24[address(arg1)].field_1024 - (-1 * s / 10^18 * stor24[address(arg1)].field_1024 / 10^18),
+                                   stor24[address(arg1)].field_768,
+                                   stor24[address(arg1)].field_1024,
+                                   stor24[address(arg1)].field_1280
+                        if stor8 > 10^18:
+                            revert with 0, 'SafeMath sub failed.'
+                        if not s / 10^18:
+                            s = 0
+                            t = t + 1
+                            u = s / 10^18
+                            continue 
+                        if (10^18 * s / 10^18) - (stor8 * s / 10^18) / s / 10^18 != -stor8 + 10^18:
+                            revert with 0, 'SafeMath mul failed.'
+                        s = (10^18 * s / 10^18) - (stor8 * s / 10^18)
+                        t = t + 1
+                        u = s / 10^18
+                        continue 
+        else:
+            if not stor24[address(arg1)].field_256:
+                if 0 > -stor24[address(arg1)].field_1024:
+                    revert with 0, 'SafeMath sub failed.'
+                if stor24[address(arg1)].field_1280 > block.timestamp:
+                    revert with 0, 'SafeMath sub failed.'
+                if -stor24[address(arg1)].field_1024 <= 0:
+                    return stor24[address(arg1)].field_0, 
+                           stor24[address(arg1)].field_256,
+                           stor24[address(arg1)].field_512,
+                           0,
+                           stor24[address(arg1)].field_768,
+                           stor24[address(arg1)].field_1024,
+                           stor24[address(arg1)].field_1280
+                if block.timestamp - stor24[address(arg1)].field_1280 < stor13:
+                    return stor24[address(arg1)].field_0, 
+                           stor24[address(arg1)].field_256,
+                           stor24[address(arg1)].field_512,
+                           0,
+                           stor24[address(arg1)].field_768,
+                           stor24[address(arg1)].field_1024,
+                           stor24[address(arg1)].field_1280
+                if stor13 > 0:
+                    require stor13
+                    if var66002 > block.timestamp - stor24[address(arg1)].field_1280 / stor13:
+                        if not -stor24[address(arg1)].field_1024:
+                            if 0 > -stor24[address(arg1)].field_1024:
+                                revert with 0, 'SafeMath sub failed.'
+                            return stor24[address(arg1)].field_0, 
+                                   stor24[address(arg1)].field_256,
+                                   stor24[address(arg1)].field_512,
+                                   -stor24[address(arg1)].field_1024,
+                                   stor24[address(arg1)].field_768,
+                                   stor24[address(arg1)].field_1024,
+                                   stor24[address(arg1)].field_1280
+                        if -1 * var66003 * stor24[address(arg1)].field_1024 / -stor24[address(arg1)].field_1024 != var66003:
+                            revert with 0, 'SafeMath mul failed.'
+                        if -1 * var66003 * stor24[address(arg1)].field_1024 / 10^18 > -stor24[address(arg1)].field_1024:
+                            revert with 0, 'SafeMath sub failed.'
+                        return stor24[address(arg1)].field_0, 
+                               stor24[address(arg1)].field_256,
+                               stor24[address(arg1)].field_512,
+                               -stor24[address(arg1)].field_1024 - (-1 * var66003 * stor24[address(arg1)].field_1024 / 10^18),
+                               stor24[address(arg1)].field_768,
+                               stor24[address(arg1)].field_1024,
+                               stor24[address(arg1)].field_1280
+                    if stor8 > 10^18:
+                        revert with 0, 'SafeMath sub failed.'
+                    if not var76002:
+                        s = var76002
+                        s = var76006
+                        t = var76007
+                        while stor13 > 0:
+                            require stor13
+                            if s + 1 <= block.timestamp - stor24[address(arg1)].field_1280 / stor13:
+                                if stor8 > 10^18:
+                                    revert with 0, 'SafeMath sub failed.'
+                                s = 0
+                                s = s + 1
+                                t = 0
+                                continue 
+                            if -stor24[address(arg1)].field_1024:
+                                if 0 / -stor24[address(arg1)].field_1024:
+                                    revert with 0, 'SafeMath mul failed.'
+                            if 0 > -stor24[address(arg1)].field_1024:
+                                revert with 0, 'SafeMath sub failed.'
+                            return stor24[address(arg1)].field_0, 
+                                   stor24[address(arg1)].field_256,
+                                   stor24[address(arg1)].field_512,
+                                   -stor24[address(arg1)].field_1024,
+                                   stor24[address(arg1)].field_768,
+                                   stor24[address(arg1)].field_1024,
+                                   stor24[address(arg1)].field_1280
+                    else:
+                        require var79003
+                        if var81001 / var81002 != -stor8 + 10^18:
+                            revert with 0, 'SafeMath mul failed.'
+                        s = var83001
+                        t = var83008
+                        u = var83009
+                        while stor13 > 0:
+                            require stor13
+                            if t + 1 > block.timestamp - stor24[address(arg1)].field_1280 / stor13:
+                                if not -stor24[address(arg1)].field_1024:
+                                    if 0 > -stor24[address(arg1)].field_1024:
+                                        revert with 0, 'SafeMath sub failed.'
+                                    return stor24[address(arg1)].field_0, 
+                                           stor24[address(arg1)].field_256,
+                                           stor24[address(arg1)].field_512,
+                                           -stor24[address(arg1)].field_1024,
+                                           stor24[address(arg1)].field_768,
+                                           stor24[address(arg1)].field_1024,
+                                           stor24[address(arg1)].field_1280
+                                if -1 * s / 10^18 * stor24[address(arg1)].field_1024 / -stor24[address(arg1)].field_1024 != s / 10^18:
+                                    revert with 0, 'SafeMath mul failed.'
+                                if -1 * s / 10^18 * stor24[address(arg1)].field_1024 / 10^18 > -stor24[address(arg1)].field_1024:
+                                    revert with 0, 'SafeMath sub failed.'
+                                return stor24[address(arg1)].field_0, 
+                                       stor24[address(arg1)].field_256,
+                                       stor24[address(arg1)].field_512,
+                                       -stor24[address(arg1)].field_1024 - (-1 * s / 10^18 * stor24[address(arg1)].field_1024 / 10^18),
+                                       stor24[address(arg1)].field_768,
+                                       stor24[address(arg1)].field_1024,
+                                       stor24[address(arg1)].field_1280
+                            if stor8 > 10^18:
+                                revert with 0, 'SafeMath sub failed.'
+                            if not s / 10^18:
+                                s = 0
+                                t = t + 1
+                                u = s / 10^18
+                                continue 
+                            if (10^18 * s / 10^18) - (stor8 * s / 10^18) / s / 10^18 != -stor8 + 10^18:
+                                revert with 0, 'SafeMath mul failed.'
+                            s = (10^18 * s / 10^18) - (stor8 * s / 10^18)
+                            t = t + 1
+                            u = s / 10^18
+                            continue 
+            else:
+                if stor7 * stor24[address(arg1)].field_256 / stor24[address(arg1)].field_256 != stor7:
+                    revert with 0, 'SafeMath mul failed.'
+                if stor7 * stor24[address(arg1)].field_256 / 10^18 > -stor24[address(arg1)].field_1024:
+                    revert with 0, 'SafeMath sub failed.'
+                if stor24[address(arg1)].field_1280 > block.timestamp:
+                    revert with 0, 'SafeMath sub failed.'
+                if -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) <= 0:
+                    return stor24[address(arg1)].field_0, 
+                           stor24[address(arg1)].field_256,
+                           stor24[address(arg1)].field_512,
+                           0,
+                           stor24[address(arg1)].field_768,
+                           stor24[address(arg1)].field_1024,
+                           stor24[address(arg1)].field_1280
+                if block.timestamp - stor24[address(arg1)].field_1280 < stor13:
+                    return stor24[address(arg1)].field_0, 
+                           stor24[address(arg1)].field_256,
+                           stor24[address(arg1)].field_512,
+                           0,
+                           stor24[address(arg1)].field_768,
+                           stor24[address(arg1)].field_1024,
+                           stor24[address(arg1)].field_1280
+                if stor13 > 0:
+                    require stor13
+                    if var67002 > block.timestamp - stor24[address(arg1)].field_1280 / stor13:
+                        if not -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18):
+                            if 0 > -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18):
+                                revert with 0, 'SafeMath sub failed.'
+                            return stor24[address(arg1)].field_0, 
+                                   stor24[address(arg1)].field_256,
+                                   stor24[address(arg1)].field_512,
+                                   -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18),
+                                   stor24[address(arg1)].field_768,
+                                   stor24[address(arg1)].field_1024,
+                                   stor24[address(arg1)].field_1280
+                        if (-1 * stor24[address(arg1)].field_1024 * var67003) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * var67003) / -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) != var67003:
+                            revert with 0, 'SafeMath mul failed.'
+                        if (-1 * stor24[address(arg1)].field_1024 * var67003) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * var67003) / 10^18 > -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18):
+                            revert with 0, 'SafeMath sub failed.'
+                        return stor24[address(arg1)].field_0, 
+                               stor24[address(arg1)].field_256,
+                               stor24[address(arg1)].field_512,
+                               -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) - ((-1 * stor24[address(arg1)].field_1024 * var67003) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * var67003) / 10^18),
+                               stor24[address(arg1)].field_768,
+                               stor24[address(arg1)].field_1024,
+                               stor24[address(arg1)].field_1280
+                    if stor8 > 10^18:
+                        revert with 0, 'SafeMath sub failed.'
+                    if not var77002:
+                        s = var77002
+                        s = var77006
+                        t = var77007
+                        while stor13 > 0:
+                            require stor13
+                            if s + 1 <= block.timestamp - stor24[address(arg1)].field_1280 / stor13:
+                                if stor8 > 10^18:
+                                    revert with 0, 'SafeMath sub failed.'
+                                s = 0
+                                s = s + 1
+                                t = 0
+                                continue 
+                            if -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18):
+                                if 0 / -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18):
+                                    revert with 0, 'SafeMath mul failed.'
+                            if 0 > -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18):
+                                revert with 0, 'SafeMath sub failed.'
+                            return stor24[address(arg1)].field_0, 
+                                   stor24[address(arg1)].field_256,
+                                   stor24[address(arg1)].field_512,
+                                   -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18),
+                                   stor24[address(arg1)].field_768,
+                                   stor24[address(arg1)].field_1024,
+                                   stor24[address(arg1)].field_1280
+                    else:
+                        require var80003
+                        if var82001 / var82002 != -stor8 + 10^18:
+                            revert with 0, 'SafeMath mul failed.'
+                        s = var84001
+                        t = var84008
+                        u = var84009
+                        while stor13 > 0:
+                            require stor13
+                            if t + 1 > block.timestamp - stor24[address(arg1)].field_1280 / stor13:
+                                if not -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18):
+                                    if 0 > -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18):
+                                        revert with 0, 'SafeMath sub failed.'
+                                    return stor24[address(arg1)].field_0, 
+                                           stor24[address(arg1)].field_256,
+                                           stor24[address(arg1)].field_512,
+                                           -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18),
+                                           stor24[address(arg1)].field_768,
+                                           stor24[address(arg1)].field_1024,
+                                           stor24[address(arg1)].field_1280
+                                if (-1 * stor24[address(arg1)].field_1024 * s / 10^18) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * s / 10^18) / -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) != s / 10^18:
+                                    revert with 0, 'SafeMath mul failed.'
+                                if (-1 * stor24[address(arg1)].field_1024 * s / 10^18) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * s / 10^18) / 10^18 > -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18):
+                                    revert with 0, 'SafeMath sub failed.'
+                                return stor24[address(arg1)].field_0, 
+                                       stor24[address(arg1)].field_256,
+                                       stor24[address(arg1)].field_512,
+                                       -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) - ((-1 * stor24[address(arg1)].field_1024 * s / 10^18) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * s / 10^18) / 10^18),
+                                       stor24[address(arg1)].field_768,
+                                       stor24[address(arg1)].field_1024,
+                                       stor24[address(arg1)].field_1280
+                            if stor8 > 10^18:
+                                revert with 0, 'SafeMath sub failed.'
+                            if not s / 10^18:
+                                s = 0
+                                t = t + 1
+                                u = s / 10^18
+                                continue 
+                            if (10^18 * s / 10^18) - (stor8 * s / 10^18) / s / 10^18 != -stor8 + 10^18:
+                                revert with 0, 'SafeMath mul failed.'
+                            s = (10^18 * s / 10^18) - (stor8 * s / 10^18)
+                            t = t + 1
+                            u = s / 10^18
+                            continue 
+    else:
+        if stor7 * stor24[address(arg1)].field_0 / stor24[address(arg1)].field_0 != stor7:
+            revert with 0, 'SafeMath mul failed.'
+        if stor24[address(arg1)].field_1024 > stor7 * stor24[address(arg1)].field_0 / 10^18:
+            revert with 0, 'SafeMath sub failed.'
+        if stor24[address(arg1)].field_512 <= block.timestamp:
+            if stor24[address(arg1)].field_1280 > block.timestamp:
+                revert with 0, 'SafeMath sub failed.'
+            if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 <= 0:
+                return stor24[address(arg1)].field_0, 
+                       stor24[address(arg1)].field_256,
+                       stor24[address(arg1)].field_512,
+                       0,
+                       stor24[address(arg1)].field_768,
+                       stor24[address(arg1)].field_1024,
+                       stor24[address(arg1)].field_1280
+            if block.timestamp - stor24[address(arg1)].field_1280 < stor13:
+                return stor24[address(arg1)].field_0, 
+                       stor24[address(arg1)].field_256,
+                       stor24[address(arg1)].field_512,
+                       0,
+                       stor24[address(arg1)].field_768,
+                       stor24[address(arg1)].field_1024,
+                       stor24[address(arg1)].field_1280
+            if stor13 > 0:
+                require stor13
+                if var55002 > block.timestamp - stor24[address(arg1)].field_1280 / stor13:
+                    if not (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024:
+                        if 0 > (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024:
+                            revert with 0, 'SafeMath sub failed.'
+                        return stor24[address(arg1)].field_0, 
+                               stor24[address(arg1)].field_256,
+                               stor24[address(arg1)].field_512,
+                               (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024,
+                               stor24[address(arg1)].field_768,
+                               stor24[address(arg1)].field_1024,
+                               stor24[address(arg1)].field_1280
+                    if (stor7 * stor24[address(arg1)].field_0 / 10^18 * var55003) - (stor24[address(arg1)].field_1024 * var55003) / (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 != var55003:
+                        revert with 0, 'SafeMath mul failed.'
+                    if (stor7 * stor24[address(arg1)].field_0 / 10^18 * var55003) - (stor24[address(arg1)].field_1024 * var55003) / 10^18 > (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024:
+                        revert with 0, 'SafeMath sub failed.'
+                    return stor24[address(arg1)].field_0, 
+                           stor24[address(arg1)].field_256,
+                           stor24[address(arg1)].field_512,
+                           (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * var55003) - (stor24[address(arg1)].field_1024 * var55003) / 10^18),
+                           stor24[address(arg1)].field_768,
+                           stor24[address(arg1)].field_1024,
+                           stor24[address(arg1)].field_1280
+                if stor8 > 10^18:
+                    revert with 0, 'SafeMath sub failed.'
+                if not var65002:
+                    s = var65002
+                    s = var65006
+                    t = var65007
+                    while stor13 > 0:
+                        require stor13
+                        if s + 1 <= block.timestamp - stor24[address(arg1)].field_1280 / stor13:
+                            if stor8 > 10^18:
+                                revert with 0, 'SafeMath sub failed.'
+                            s = 0
+                            s = s + 1
+                            t = 0
+                            continue 
+                        if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024:
+                            if 0 / (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024:
+                                revert with 0, 'SafeMath mul failed.'
+                        if 0 > (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024:
+                            revert with 0, 'SafeMath sub failed.'
+                        return stor24[address(arg1)].field_0, 
+                               stor24[address(arg1)].field_256,
+                               stor24[address(arg1)].field_512,
+                               (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024,
+                               stor24[address(arg1)].field_768,
+                               stor24[address(arg1)].field_1024,
+                               stor24[address(arg1)].field_1280
+                else:
+                    require var68003
+                    if var70001 / var70002 != -stor8 + 10^18:
+                        revert with 0, 'SafeMath mul failed.'
+                    s = var72001
+                    t = var72008
+                    u = var72009
+                    while stor13 > 0:
+                        require stor13
+                        if t + 1 > block.timestamp - stor24[address(arg1)].field_1280 / stor13:
+                            if not (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024:
+                                if 0 > (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024:
+                                    revert with 0, 'SafeMath sub failed.'
+                                return stor24[address(arg1)].field_0, 
+                                       stor24[address(arg1)].field_256,
+                                       stor24[address(arg1)].field_512,
+                                       (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024,
+                                       stor24[address(arg1)].field_768,
+                                       stor24[address(arg1)].field_1024,
+                                       stor24[address(arg1)].field_1280
+                            if (stor7 * stor24[address(arg1)].field_0 / 10^18 * s / 10^18) - (stor24[address(arg1)].field_1024 * s / 10^18) / (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 != s / 10^18:
+                                revert with 0, 'SafeMath mul failed.'
+                            if (stor7 * stor24[address(arg1)].field_0 / 10^18 * s / 10^18) - (stor24[address(arg1)].field_1024 * s / 10^18) / 10^18 > (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024:
+                                revert with 0, 'SafeMath sub failed.'
+                            return stor24[address(arg1)].field_0, 
+                                   stor24[address(arg1)].field_256,
+                                   stor24[address(arg1)].field_512,
+                                   (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * s / 10^18) - (stor24[address(arg1)].field_1024 * s / 10^18) / 10^18),
+                                   stor24[address(arg1)].field_768,
+                                   stor24[address(arg1)].field_1024,
+                                   stor24[address(arg1)].field_1280
+                        if stor8 > 10^18:
+                            revert with 0, 'SafeMath sub failed.'
+                        if not s / 10^18:
+                            s = 0
+                            t = t + 1
+                            u = s / 10^18
+                            continue 
+                        if (10^18 * s / 10^18) - (stor8 * s / 10^18) / s / 10^18 != -stor8 + 10^18:
+                            revert with 0, 'SafeMath mul failed.'
+                        s = (10^18 * s / 10^18) - (stor8 * s / 10^18)
+                        t = t + 1
+                        u = s / 10^18
+                        continue 
+        else:
+            if not stor24[address(arg1)].field_256:
+                if 0 > (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024:
+                    revert with 0, 'SafeMath sub failed.'
+                if stor24[address(arg1)].field_1280 > block.timestamp:
+                    revert with 0, 'SafeMath sub failed.'
+                if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 <= 0:
+                    return stor24[address(arg1)].field_0, 
+                           stor24[address(arg1)].field_256,
+                           stor24[address(arg1)].field_512,
+                           0,
+                           stor24[address(arg1)].field_768,
+                           stor24[address(arg1)].field_1024,
+                           stor24[address(arg1)].field_1280
+                if block.timestamp - stor24[address(arg1)].field_1280 < stor13:
+                    return stor24[address(arg1)].field_0, 
+                           stor24[address(arg1)].field_256,
+                           stor24[address(arg1)].field_512,
+                           0,
+                           stor24[address(arg1)].field_768,
+                           stor24[address(arg1)].field_1024,
+                           stor24[address(arg1)].field_1280
+                if stor13 > 0:
+                    require stor13
+                    if var67002 > block.timestamp - stor24[address(arg1)].field_1280 / stor13:
+                        if not (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024:
+                            if 0 > (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024:
+                                revert with 0, 'SafeMath sub failed.'
+                            return stor24[address(arg1)].field_0, 
+                                   stor24[address(arg1)].field_256,
+                                   stor24[address(arg1)].field_512,
+                                   (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024,
+                                   stor24[address(arg1)].field_768,
+                                   stor24[address(arg1)].field_1024,
+                                   stor24[address(arg1)].field_1280
+                        if (stor7 * stor24[address(arg1)].field_0 / 10^18 * var67003) - (stor24[address(arg1)].field_1024 * var67003) / (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 != var67003:
+                            revert with 0, 'SafeMath mul failed.'
+                        if (stor7 * stor24[address(arg1)].field_0 / 10^18 * var67003) - (stor24[address(arg1)].field_1024 * var67003) / 10^18 > (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024:
+                            revert with 0, 'SafeMath sub failed.'
+                        return stor24[address(arg1)].field_0, 
+                               stor24[address(arg1)].field_256,
+                               stor24[address(arg1)].field_512,
+                               (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * var67003) - (stor24[address(arg1)].field_1024 * var67003) / 10^18),
+                               stor24[address(arg1)].field_768,
+                               stor24[address(arg1)].field_1024,
+                               stor24[address(arg1)].field_1280
+                    if stor8 > 10^18:
+                        revert with 0, 'SafeMath sub failed.'
+                    if not var77002:
+                        s = var77002
+                        s = var77006
+                        t = var77007
+                        while stor13 > 0:
+                            require stor13
+                            if s + 1 <= block.timestamp - stor24[address(arg1)].field_1280 / stor13:
+                                if stor8 > 10^18:
+                                    revert with 0, 'SafeMath sub failed.'
+                                s = 0
+                                s = s + 1
+                                t = 0
+                                continue 
+                            if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024:
+                                if 0 / (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024:
+                                    revert with 0, 'SafeMath mul failed.'
+                            if 0 > (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024:
+                                revert with 0, 'SafeMath sub failed.'
+                            return stor24[address(arg1)].field_0, 
+                                   stor24[address(arg1)].field_256,
+                                   stor24[address(arg1)].field_512,
+                                   (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024,
+                                   stor24[address(arg1)].field_768,
+                                   stor24[address(arg1)].field_1024,
+                                   stor24[address(arg1)].field_1280
+                    else:
+                        require var80003
+                        if var82001 / var82002 != -stor8 + 10^18:
+                            revert with 0, 'SafeMath mul failed.'
+                        s = var84001
+                        t = var84008
+                        u = var84009
+                        while stor13 > 0:
+                            require stor13
+                            if t + 1 > block.timestamp - stor24[address(arg1)].field_1280 / stor13:
+                                if not (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024:
+                                    if 0 > (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024:
+                                        revert with 0, 'SafeMath sub failed.'
+                                    return stor24[address(arg1)].field_0, 
+                                           stor24[address(arg1)].field_256,
+                                           stor24[address(arg1)].field_512,
+                                           (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024,
+                                           stor24[address(arg1)].field_768,
+                                           stor24[address(arg1)].field_1024,
+                                           stor24[address(arg1)].field_1280
+                                if (stor7 * stor24[address(arg1)].field_0 / 10^18 * s / 10^18) - (stor24[address(arg1)].field_1024 * s / 10^18) / (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 != s / 10^18:
+                                    revert with 0, 'SafeMath mul failed.'
+                                if (stor7 * stor24[address(arg1)].field_0 / 10^18 * s / 10^18) - (stor24[address(arg1)].field_1024 * s / 10^18) / 10^18 > (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024:
+                                    revert with 0, 'SafeMath sub failed.'
+                                return stor24[address(arg1)].field_0, 
+                                       stor24[address(arg1)].field_256,
+                                       stor24[address(arg1)].field_512,
+                                       (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * s / 10^18) - (stor24[address(arg1)].field_1024 * s / 10^18) / 10^18),
+                                       stor24[address(arg1)].field_768,
+                                       stor24[address(arg1)].field_1024,
+                                       stor24[address(arg1)].field_1280
+                            if stor8 > 10^18:
+                                revert with 0, 'SafeMath sub failed.'
+                            if not s / 10^18:
+                                s = 0
+                                t = t + 1
+                                u = s / 10^18
+                                continue 
+                            if (10^18 * s / 10^18) - (stor8 * s / 10^18) / s / 10^18 != -stor8 + 10^18:
+                                revert with 0, 'SafeMath mul failed.'
+                            s = (10^18 * s / 10^18) - (stor8 * s / 10^18)
+                            t = t + 1
+                            u = s / 10^18
+                            continue 
+            else:
+                if stor7 * stor24[address(arg1)].field_256 / stor24[address(arg1)].field_256 != stor7:
+                    revert with 0, 'SafeMath mul failed.'
+                if stor7 * stor24[address(arg1)].field_256 / 10^18 > (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024:
+                    revert with 0, 'SafeMath sub failed.'
+                if stor24[address(arg1)].field_1280 > block.timestamp:
+                    revert with 0, 'SafeMath sub failed.'
+                if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) <= 0:
+                    return stor24[address(arg1)].field_0, 
+                           stor24[address(arg1)].field_256,
+                           stor24[address(arg1)].field_512,
+                           0,
+                           stor24[address(arg1)].field_768,
+                           stor24[address(arg1)].field_1024,
+                           stor24[address(arg1)].field_1280
+                if block.timestamp - stor24[address(arg1)].field_1280 < stor13:
+                    return stor24[address(arg1)].field_0, 
+                           stor24[address(arg1)].field_256,
+                           stor24[address(arg1)].field_512,
+                           0,
+                           stor24[address(arg1)].field_768,
+                           stor24[address(arg1)].field_1024,
+                           stor24[address(arg1)].field_1280
+                if stor13 > 0:
+                    require stor13
+                    if var68002 > block.timestamp - stor24[address(arg1)].field_1280 / stor13:
+                        if not (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18):
+                            if 0 > (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18):
+                                revert with 0, 'SafeMath sub failed.'
+                            return stor24[address(arg1)].field_0, 
+                                   stor24[address(arg1)].field_256,
+                                   stor24[address(arg1)].field_512,
+                                   (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18),
+                                   stor24[address(arg1)].field_768,
+                                   stor24[address(arg1)].field_1024,
+                                   stor24[address(arg1)].field_1280
+                        if (stor7 * stor24[address(arg1)].field_0 / 10^18 * var68003) - (stor24[address(arg1)].field_1024 * var68003) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * var68003) / (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) != var68003:
+                            revert with 0, 'SafeMath mul failed.'
+                        if (stor7 * stor24[address(arg1)].field_0 / 10^18 * var68003) - (stor24[address(arg1)].field_1024 * var68003) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * var68003) / 10^18 > (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18):
+                            revert with 0, 'SafeMath sub failed.'
+                        return stor24[address(arg1)].field_0, 
+                               stor24[address(arg1)].field_256,
+                               stor24[address(arg1)].field_512,
+                               (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * var68003) - (stor24[address(arg1)].field_1024 * var68003) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * var68003) / 10^18),
+                               stor24[address(arg1)].field_768,
+                               stor24[address(arg1)].field_1024,
+                               stor24[address(arg1)].field_1280
+                    if stor8 > 10^18:
+                        revert with 0, 'SafeMath sub failed.'
+                    if not var78002:
+                        s = var78002
+                        s = var78006
+                        t = var78007
+                        while stor13 > 0:
+                            require stor13
+                            if s + 1 <= block.timestamp - stor24[address(arg1)].field_1280 / stor13:
+                                if stor8 > 10^18:
+                                    revert with 0, 'SafeMath sub failed.'
+                                s = 0
+                                s = s + 1
+                                t = 0
+                                continue 
+                            if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18):
+                                if 0 / (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18):
+                                    revert with 0, 'SafeMath mul failed.'
+                            if 0 > (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18):
+                                revert with 0, 'SafeMath sub failed.'
+                            return stor24[address(arg1)].field_0, 
+                                   stor24[address(arg1)].field_256,
+                                   stor24[address(arg1)].field_512,
+                                   (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18),
+                                   stor24[address(arg1)].field_768,
+                                   stor24[address(arg1)].field_1024,
+                                   stor24[address(arg1)].field_1280
+                    else:
+                        require var81003
+                        if var83001 / var83002 != -stor8 + 10^18:
+                            revert with 0, 'SafeMath mul failed.'
+                        s = var85001
+                        t = var85008
+                        u = var85009
+                        while stor13 > 0:
+                            require stor13
+                            if t + 1 > block.timestamp - stor24[address(arg1)].field_1280 / stor13:
+                                if not (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18):
+                                    if 0 > (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18):
+                                        revert with 0, 'SafeMath sub failed.'
+                                    return stor24[address(arg1)].field_0, 
+                                           stor24[address(arg1)].field_256,
+                                           stor24[address(arg1)].field_512,
+                                           (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18),
+                                           stor24[address(arg1)].field_768,
+                                           stor24[address(arg1)].field_1024,
+                                           stor24[address(arg1)].field_1280
+                                if (stor7 * stor24[address(arg1)].field_0 / 10^18 * s / 10^18) - (stor24[address(arg1)].field_1024 * s / 10^18) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * s / 10^18) / (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) != s / 10^18:
+                                    revert with 0, 'SafeMath mul failed.'
+                                if (stor7 * stor24[address(arg1)].field_0 / 10^18 * s / 10^18) - (stor24[address(arg1)].field_1024 * s / 10^18) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * s / 10^18) / 10^18 > (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18):
+                                    revert with 0, 'SafeMath sub failed.'
+                                return stor24[address(arg1)].field_0, 
+                                       stor24[address(arg1)].field_256,
+                                       stor24[address(arg1)].field_512,
+                                       (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * s / 10^18) - (stor24[address(arg1)].field_1024 * s / 10^18) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * s / 10^18) / 10^18),
+                                       stor24[address(arg1)].field_768,
+                                       stor24[address(arg1)].field_1024,
+                                       stor24[address(arg1)].field_1280
+                            if stor8 > 10^18:
+                                revert with 0, 'SafeMath sub failed.'
+                            if not s / 10^18:
+                                s = 0
+                                t = t + 1
+                                u = s / 10^18
+                                continue 
+                            if (10^18 * s / 10^18) - (stor8 * s / 10^18) / s / 10^18 != -stor8 + 10^18:
+                                revert with 0, 'SafeMath mul failed.'
+                            s = (10^18 * s / 10^18) - (stor8 * s / 10^18)
+                            t = t + 1
+                            u = s / 10^18
+                            continue 
+    revert with 0, 'SafeMath div failed.'
+}
+
+function withdraw(address arg1) payable {
+    require calldata.size - 4 >= 32
+    if stor2:
+        revert with 0, 'The contract is not paused.'
+    if stor24[address(arg1)].field_512 > block.timestamp:
+        if not stor24[address(arg1)].field_0:
+            if stor24[address(arg1)].field_1024 > 0:
+                revert with 0, 'SafeMath sub failed.'
+            if stor24[address(arg1)].field_512 <= block.timestamp:
+                if stor24[address(arg1)].field_1280 > block.timestamp:
+                    revert with 0, 'SafeMath sub failed.'
+                if -stor24[address(arg1)].field_1024 <= 0:
+                    if 0 < stor16:
+                        if stor24[address(arg1)].field_768 <= 0:
+                            require ext_code.size(sub_722d8ff0Address)
+                            call sub_722d8ff0Address.0xa9059cbb with:
+                                 gas gas_remaining wei
+                                args address(arg1), 0
+                        else:
+                            if stor24[address(arg1)].field_768 < 0:
+                                revert with 0, 'SafeMath add failed.'
+                            stor24[address(arg1)].field_768 = 0
+                            require ext_code.size(sub_722d8ff0Address)
+                            call sub_722d8ff0Address.0xa9059cbb with:
+                                 gas gas_remaining wei
+                                args address(arg1), stor24[address(arg1)].field_768
+                    else:
+                        if stor16 > 0:
+                            if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                revert with 0, 'SafeMath add failed.'
+                            stor24[address(arg1)].field_1024 += stor16
+                            stor24[address(arg1)].field_1280 = block.timestamp
+                        if stor24[address(arg1)].field_768 <= 0:
+                            require ext_code.size(sub_722d8ff0Address)
+                            call sub_722d8ff0Address.0xa9059cbb with:
+                                 gas gas_remaining wei
+                                args address(arg1), stor16
+                        else:
+                            if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                revert with 0, 'SafeMath add failed.'
+                            stor24[address(arg1)].field_768 = 0
+                            require ext_code.size(sub_722d8ff0Address)
+                            call sub_722d8ff0Address.0xa9059cbb with:
+                                 gas gas_remaining wei
+                                args address(arg1), stor24[address(arg1)].field_768 + stor16
+                else:
+                    if block.timestamp - stor24[address(arg1)].field_1280 < stor13:
+                        if 0 < stor16:
+                            if stor24[address(arg1)].field_768 <= 0:
+                                require ext_code.size(sub_722d8ff0Address)
+                                call sub_722d8ff0Address.0xa9059cbb with:
+                                     gas gas_remaining wei
+                                    args address(arg1), 0
+                            else:
+                                if stor24[address(arg1)].field_768 < 0:
+                                    revert with 0, 'SafeMath add failed.'
+                                stor24[address(arg1)].field_768 = 0
+                                require ext_code.size(sub_722d8ff0Address)
+                                call sub_722d8ff0Address.0xa9059cbb with:
+                                     gas gas_remaining wei
+                                    args address(arg1), stor24[address(arg1)].field_768
+                        else:
+                            if stor16 > 0:
+                                if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                    revert with 0, 'SafeMath add failed.'
+                                stor24[address(arg1)].field_1024 += stor16
+                                stor24[address(arg1)].field_1280 = block.timestamp
+                            if stor24[address(arg1)].field_768 <= 0:
+                                require ext_code.size(sub_722d8ff0Address)
+                                call sub_722d8ff0Address.0xa9059cbb with:
+                                     gas gas_remaining wei
+                                    args address(arg1), stor16
+                            else:
+                                if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                    revert with 0, 'SafeMath add failed.'
+                                stor24[address(arg1)].field_768 = 0
+                                require ext_code.size(sub_722d8ff0Address)
+                                call sub_722d8ff0Address.0xa9059cbb with:
+                                     gas gas_remaining wei
+                                    args address(arg1), stor24[address(arg1)].field_768 + stor16
+                    else:
+                        if stor13 <= 0:
+                            revert with 0, 'SafeMath div failed.'
+                        require stor13
+                        if var58002 <= block.timestamp - stor24[address(arg1)].field_1280 / stor13:
+                            if stor8 > 10^18:
+                                revert with 0, 'SafeMath sub failed.'
+                            if not var68002:
+                                s = var68002
+                                s = var68006
+                                t = var68007
+                                while stor13 > 0:
+                                    require stor13
+                                    if s + 1 <= block.timestamp - stor24[address(arg1)].field_1280 / stor13:
+                                        if stor8 > 10^18:
+                                            revert with 0, 'SafeMath sub failed.'
+                                        s = 0
+                                        s = s + 1
+                                        t = 0
+                                        continue 
+                                    if -stor24[address(arg1)].field_1024:
+                                        if 0 / -stor24[address(arg1)].field_1024:
+                                            revert with 0, 'SafeMath mul failed.'
+                                    if 0 > -stor24[address(arg1)].field_1024:
+                                        revert with 0, 'SafeMath sub failed.'
+                                    if -stor24[address(arg1)].field_1024 >= stor16:
+                                        if stor16 > 0:
+                                            if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                                revert with 0, 'SafeMath add failed.'
+                                            stor24[address(arg1)].field_1024 += stor16
+                                            stor24[address(arg1)].field_1280 = block.timestamp
+                                        if stor24[address(arg1)].field_768 <= 0:
+                                            require ext_code.size(sub_722d8ff0Address)
+                                            call sub_722d8ff0Address.0xa9059cbb with:
+                                                 gas gas_remaining wei
+                                                args address(arg1), stor16
+                                        else:
+                                            if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                                revert with 0, 'SafeMath add failed.'
+                                            stor24[address(arg1)].field_768 = 0
+                                            require ext_code.size(sub_722d8ff0Address)
+                                            call sub_722d8ff0Address.0xa9059cbb with:
+                                                 gas gas_remaining wei
+                                                args address(arg1), stor24[address(arg1)].field_768 + stor16
+                                    else:
+                                        if -stor24[address(arg1)].field_1024 > 0:
+                                            if 0 < stor24[address(arg1)].field_1024:
+                                                revert with 0, 'SafeMath add failed.'
+                                            stor24[address(arg1)].field_1024 = 0
+                                            stor24[address(arg1)].field_1280 = block.timestamp
+                                        if stor24[address(arg1)].field_768 <= 0:
+                                            require ext_code.size(sub_722d8ff0Address)
+                                            call sub_722d8ff0Address.0xa9059cbb with:
+                                                 gas gas_remaining wei
+                                                args address(arg1), -stor24[address(arg1)].field_1024
+                                        else:
+                                            if stor24[address(arg1)].field_768 - stor24[address(arg1)].field_1024 < -stor24[address(arg1)].field_1024:
+                                                revert with 0, 'SafeMath add failed.'
+                                            stor24[address(arg1)].field_768 = 0
+                                            require ext_code.size(sub_722d8ff0Address)
+                                            call sub_722d8ff0Address.0xa9059cbb with:
+                                                 gas gas_remaining wei
+                                                args address(arg1), stor24[address(arg1)].field_768 - stor24[address(arg1)].field_1024
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    if not ext_call.return_data[0]:
+                                        revert with 0, 'Withdrawal failed.'
+                                    else:
+                                        return 0
+                            else:
+                                require var71003
+                                if var73001 / var73002 != -stor8 + 10^18:
+                                    revert with 0, 'SafeMath mul failed.'
+                                s = var75001
+                                t = var75008
+                                u = var75009
+                                while stor13 > 0:
+                                    require stor13
+                                    if t + 1 <= block.timestamp - stor24[address(arg1)].field_1280 / stor13:
+                                        if stor8 > 10^18:
+                                            revert with 0, 'SafeMath sub failed.'
+                                        if not s / 10^18:
+                                            s = 0
+                                            t = t + 1
+                                            u = s / 10^18
+                                            continue 
+                                        if (10^18 * s / 10^18) - (stor8 * s / 10^18) / s / 10^18 != -stor8 + 10^18:
+                                            revert with 0, 'SafeMath mul failed.'
+                                        s = (10^18 * s / 10^18) - (stor8 * s / 10^18)
+                                        t = t + 1
+                                        u = s / 10^18
+                                        continue 
+                                    if not -stor24[address(arg1)].field_1024:
+                                        if 0 > -stor24[address(arg1)].field_1024:
+                                            revert with 0, 'SafeMath sub failed.'
+                                        if -stor24[address(arg1)].field_1024 >= stor16:
+                                            if stor16 > 0:
+                                                if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_1024 += stor16
+                                                stor24[address(arg1)].field_1280 = block.timestamp
+                                            if stor24[address(arg1)].field_768 <= 0:
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), stor16
+                                            else:
+                                                if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_768 = 0
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), stor24[address(arg1)].field_768 + stor16
+                                        else:
+                                            if -stor24[address(arg1)].field_1024 > 0:
+                                                if 0 < stor24[address(arg1)].field_1024:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_1024 = 0
+                                                stor24[address(arg1)].field_1280 = block.timestamp
+                                            if stor24[address(arg1)].field_768 <= 0:
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), -stor24[address(arg1)].field_1024
+                                            else:
+                                                if stor24[address(arg1)].field_768 - stor24[address(arg1)].field_1024 < -stor24[address(arg1)].field_1024:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_768 = 0
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), stor24[address(arg1)].field_768 - stor24[address(arg1)].field_1024
+                                    else:
+                                        if -1 * s / 10^18 * stor24[address(arg1)].field_1024 / -stor24[address(arg1)].field_1024 != s / 10^18:
+                                            revert with 0, 'SafeMath mul failed.'
+                                        if -1 * s / 10^18 * stor24[address(arg1)].field_1024 / 10^18 > -stor24[address(arg1)].field_1024:
+                                            revert with 0, 'SafeMath sub failed.'
+                                        if -stor24[address(arg1)].field_1024 - (-1 * s / 10^18 * stor24[address(arg1)].field_1024 / 10^18) >= stor16:
+                                            if stor16 > 0:
+                                                if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_1024 += stor16
+                                                stor24[address(arg1)].field_1280 = block.timestamp
+                                            if stor24[address(arg1)].field_768 <= 0:
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), stor16
+                                            else:
+                                                if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_768 = 0
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), stor24[address(arg1)].field_768 + stor16
+                                        else:
+                                            if -stor24[address(arg1)].field_1024 - (-1 * s / 10^18 * stor24[address(arg1)].field_1024 / 10^18) > 0:
+                                                if --1 * s / 10^18 * stor24[address(arg1)].field_1024 / 10^18 < stor24[address(arg1)].field_1024:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_1024 = --1 * s / 10^18 * stor24[address(arg1)].field_1024 / 10^18
+                                                stor24[address(arg1)].field_1280 = block.timestamp
+                                            if stor24[address(arg1)].field_768 <= 0:
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), -stor24[address(arg1)].field_1024 - (-1 * s / 10^18 * stor24[address(arg1)].field_1024 / 10^18)
+                                            else:
+                                                if stor24[address(arg1)].field_768 < 0:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_768 = 0
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), stor24[address(arg1)].field_768 - stor24[address(arg1)].field_1024 - (-1 * s / 10^18 * stor24[address(arg1)].field_1024 / 10^18)
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    if not ext_call.return_data[0]:
+                                        revert with 0, 'Withdrawal failed.'
+                                    else:
+                                        return 0
+                            revert with 0, 'SafeMath div failed.'
+                        if not -stor24[address(arg1)].field_1024:
+                            if 0 > -stor24[address(arg1)].field_1024:
+                                revert with 0, 'SafeMath sub failed.'
+                            if -stor24[address(arg1)].field_1024 >= stor16:
+                                if stor16 > 0:
+                                    if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                        revert with 0, 'SafeMath add failed.'
+                                    stor24[address(arg1)].field_1024 += stor16
+                                    stor24[address(arg1)].field_1280 = block.timestamp
+                                if stor24[address(arg1)].field_768 <= 0:
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), stor16
+                                else:
+                                    if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                        revert with 0, 'SafeMath add failed.'
+                                    stor24[address(arg1)].field_768 = 0
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), stor24[address(arg1)].field_768 + stor16
+                            else:
+                                if -stor24[address(arg1)].field_1024 > 0:
+                                    if 0 < stor24[address(arg1)].field_1024:
+                                        revert with 0, 'SafeMath add failed.'
+                                    stor24[address(arg1)].field_1024 = 0
+                                    stor24[address(arg1)].field_1280 = block.timestamp
+                                if stor24[address(arg1)].field_768 <= 0:
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), -stor24[address(arg1)].field_1024
+                                else:
+                                    if stor24[address(arg1)].field_768 - stor24[address(arg1)].field_1024 < -stor24[address(arg1)].field_1024:
+                                        revert with 0, 'SafeMath add failed.'
+                                    stor24[address(arg1)].field_768 = 0
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), stor24[address(arg1)].field_768 - stor24[address(arg1)].field_1024
+                        else:
+                            if -1 * var58003 * stor24[address(arg1)].field_1024 / -stor24[address(arg1)].field_1024 != var58003:
+                                revert with 0, 'SafeMath mul failed.'
+                            if -1 * var58003 * stor24[address(arg1)].field_1024 / 10^18 > -stor24[address(arg1)].field_1024:
+                                revert with 0, 'SafeMath sub failed.'
+                            if -stor24[address(arg1)].field_1024 - (-1 * var58003 * stor24[address(arg1)].field_1024 / 10^18) >= stor16:
+                                if stor16 > 0:
+                                    if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                        revert with 0, 'SafeMath add failed.'
+                                    stor24[address(arg1)].field_1024 += stor16
+                                    stor24[address(arg1)].field_1280 = block.timestamp
+                                if stor24[address(arg1)].field_768 <= 0:
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), stor16
+                                else:
+                                    if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                        revert with 0, 'SafeMath add failed.'
+                                    stor24[address(arg1)].field_768 = 0
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), stor24[address(arg1)].field_768 + stor16
+                            else:
+                                if -stor24[address(arg1)].field_1024 - (-1 * var58003 * stor24[address(arg1)].field_1024 / 10^18) > 0:
+                                    if --1 * var58003 * stor24[address(arg1)].field_1024 / 10^18 < stor24[address(arg1)].field_1024:
+                                        revert with 0, 'SafeMath add failed.'
+                                    stor24[address(arg1)].field_1024 = --1 * var58003 * stor24[address(arg1)].field_1024 / 10^18
+                                    stor24[address(arg1)].field_1280 = block.timestamp
+                                if stor24[address(arg1)].field_768 <= 0:
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), -stor24[address(arg1)].field_1024 - (-1 * var58003 * stor24[address(arg1)].field_1024 / 10^18)
+                                else:
+                                    if stor24[address(arg1)].field_768 < 0:
+                                        revert with 0, 'SafeMath add failed.'
+                                    stor24[address(arg1)].field_768 = 0
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), stor24[address(arg1)].field_768 - stor24[address(arg1)].field_1024 - (-1 * var58003 * stor24[address(arg1)].field_1024 / 10^18)
+            else:
+                if not stor24[address(arg1)].field_256:
+                    if 0 > -stor24[address(arg1)].field_1024:
+                        revert with 0, 'SafeMath sub failed.'
+                    if stor24[address(arg1)].field_1280 > block.timestamp:
+                        revert with 0, 'SafeMath sub failed.'
+                    if -stor24[address(arg1)].field_1024 <= 0:
+                        if 0 < stor16:
+                            if stor24[address(arg1)].field_768 <= 0:
+                                require ext_code.size(sub_722d8ff0Address)
+                                call sub_722d8ff0Address.0xa9059cbb with:
+                                     gas gas_remaining wei
+                                    args address(arg1), 0
+                            else:
+                                if stor24[address(arg1)].field_768 < 0:
+                                    revert with 0, 'SafeMath add failed.'
+                                stor24[address(arg1)].field_768 = 0
+                                require ext_code.size(sub_722d8ff0Address)
+                                call sub_722d8ff0Address.0xa9059cbb with:
+                                     gas gas_remaining wei
+                                    args address(arg1), stor24[address(arg1)].field_768
+                        else:
+                            if stor16 > 0:
+                                if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                    revert with 0, 'SafeMath add failed.'
+                                stor24[address(arg1)].field_1024 += stor16
+                                stor24[address(arg1)].field_1280 = block.timestamp
+                            if stor24[address(arg1)].field_768 <= 0:
+                                require ext_code.size(sub_722d8ff0Address)
+                                call sub_722d8ff0Address.0xa9059cbb with:
+                                     gas gas_remaining wei
+                                    args address(arg1), stor16
+                            else:
+                                if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                    revert with 0, 'SafeMath add failed.'
+                                stor24[address(arg1)].field_768 = 0
+                                require ext_code.size(sub_722d8ff0Address)
+                                call sub_722d8ff0Address.0xa9059cbb with:
+                                     gas gas_remaining wei
+                                    args address(arg1), stor24[address(arg1)].field_768 + stor16
+                    else:
+                        if block.timestamp - stor24[address(arg1)].field_1280 < stor13:
+                            if 0 < stor16:
+                                if stor24[address(arg1)].field_768 <= 0:
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), 0
+                                else:
+                                    if stor24[address(arg1)].field_768 < 0:
+                                        revert with 0, 'SafeMath add failed.'
+                                    stor24[address(arg1)].field_768 = 0
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), stor24[address(arg1)].field_768
+                            else:
+                                if stor16 > 0:
+                                    if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                        revert with 0, 'SafeMath add failed.'
+                                    stor24[address(arg1)].field_1024 += stor16
+                                    stor24[address(arg1)].field_1280 = block.timestamp
+                                if stor24[address(arg1)].field_768 <= 0:
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), stor16
+                                else:
+                                    if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                        revert with 0, 'SafeMath add failed.'
+                                    stor24[address(arg1)].field_768 = 0
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), stor24[address(arg1)].field_768 + stor16
+                        else:
+                            if stor13 <= 0:
+                                revert with 0, 'SafeMath div failed.'
+                            require stor13
+                            if var70002 <= block.timestamp - stor24[address(arg1)].field_1280 / stor13:
+                                if stor8 > 10^18:
+                                    revert with 0, 'SafeMath sub failed.'
+                                if not var80002:
+                                    s = var80002
+                                    s = var80006
+                                    t = var80007
+                                    while stor13 > 0:
+                                        require stor13
+                                        if s + 1 <= block.timestamp - stor24[address(arg1)].field_1280 / stor13:
+                                            if stor8 > 10^18:
+                                                revert with 0, 'SafeMath sub failed.'
+                                            s = 0
+                                            s = s + 1
+                                            t = 0
+                                            continue 
+                                        if -stor24[address(arg1)].field_1024:
+                                            if 0 / -stor24[address(arg1)].field_1024:
+                                                revert with 0, 'SafeMath mul failed.'
+                                        if 0 > -stor24[address(arg1)].field_1024:
+                                            revert with 0, 'SafeMath sub failed.'
+                                        if -stor24[address(arg1)].field_1024 >= stor16:
+                                            if stor16 > 0:
+                                                if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_1024 += stor16
+                                                stor24[address(arg1)].field_1280 = block.timestamp
+                                            if stor24[address(arg1)].field_768 <= 0:
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), stor16
+                                            else:
+                                                if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_768 = 0
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), stor24[address(arg1)].field_768 + stor16
+                                        else:
+                                            if -stor24[address(arg1)].field_1024 > 0:
+                                                if 0 < stor24[address(arg1)].field_1024:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_1024 = 0
+                                                stor24[address(arg1)].field_1280 = block.timestamp
+                                            if stor24[address(arg1)].field_768 <= 0:
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), -stor24[address(arg1)].field_1024
+                                            else:
+                                                if stor24[address(arg1)].field_768 - stor24[address(arg1)].field_1024 < -stor24[address(arg1)].field_1024:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_768 = 0
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), stor24[address(arg1)].field_768 - stor24[address(arg1)].field_1024
+                                        if not ext_call.success:
+                                            revert with ext_call.return_data[0 len return_data.size]
+                                        require return_data.size >= 32
+                                        if not ext_call.return_data[0]:
+                                            revert with 0, 'Withdrawal failed.'
+                                        else:
+                                            return 0
+                                else:
+                                    require var83003
+                                    if var85001 / var85002 != -stor8 + 10^18:
+                                        revert with 0, 'SafeMath mul failed.'
+                                    s = var87001
+                                    t = var87008
+                                    u = var87009
+                                    while stor13 > 0:
+                                        require stor13
+                                        if t + 1 <= block.timestamp - stor24[address(arg1)].field_1280 / stor13:
+                                            if stor8 > 10^18:
+                                                revert with 0, 'SafeMath sub failed.'
+                                            if not s / 10^18:
+                                                s = 0
+                                                t = t + 1
+                                                u = s / 10^18
+                                                continue 
+                                            if (10^18 * s / 10^18) - (stor8 * s / 10^18) / s / 10^18 != -stor8 + 10^18:
+                                                revert with 0, 'SafeMath mul failed.'
+                                            s = (10^18 * s / 10^18) - (stor8 * s / 10^18)
+                                            t = t + 1
+                                            u = s / 10^18
+                                            continue 
+                                        if not -stor24[address(arg1)].field_1024:
+                                            if 0 > -stor24[address(arg1)].field_1024:
+                                                revert with 0, 'SafeMath sub failed.'
+                                            if -stor24[address(arg1)].field_1024 >= stor16:
+                                                if stor16 > 0:
+                                                    if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_1024 += stor16
+                                                    stor24[address(arg1)].field_1280 = block.timestamp
+                                                if stor24[address(arg1)].field_768 <= 0:
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), stor16
+                                                else:
+                                                    if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_768 = 0
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), stor24[address(arg1)].field_768 + stor16
+                                            else:
+                                                if -stor24[address(arg1)].field_1024 > 0:
+                                                    if 0 < stor24[address(arg1)].field_1024:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_1024 = 0
+                                                    stor24[address(arg1)].field_1280 = block.timestamp
+                                                if stor24[address(arg1)].field_768 <= 0:
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), -stor24[address(arg1)].field_1024
+                                                else:
+                                                    if stor24[address(arg1)].field_768 - stor24[address(arg1)].field_1024 < -stor24[address(arg1)].field_1024:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_768 = 0
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), stor24[address(arg1)].field_768 - stor24[address(arg1)].field_1024
+                                        else:
+                                            if -1 * s / 10^18 * stor24[address(arg1)].field_1024 / -stor24[address(arg1)].field_1024 != s / 10^18:
+                                                revert with 0, 'SafeMath mul failed.'
+                                            if -1 * s / 10^18 * stor24[address(arg1)].field_1024 / 10^18 > -stor24[address(arg1)].field_1024:
+                                                revert with 0, 'SafeMath sub failed.'
+                                            if -stor24[address(arg1)].field_1024 - (-1 * s / 10^18 * stor24[address(arg1)].field_1024 / 10^18) >= stor16:
+                                                if stor16 > 0:
+                                                    if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_1024 += stor16
+                                                    stor24[address(arg1)].field_1280 = block.timestamp
+                                                if stor24[address(arg1)].field_768 <= 0:
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), stor16
+                                                else:
+                                                    if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_768 = 0
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), stor24[address(arg1)].field_768 + stor16
+                                            else:
+                                                if -stor24[address(arg1)].field_1024 - (-1 * s / 10^18 * stor24[address(arg1)].field_1024 / 10^18) > 0:
+                                                    if --1 * s / 10^18 * stor24[address(arg1)].field_1024 / 10^18 < stor24[address(arg1)].field_1024:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_1024 = --1 * s / 10^18 * stor24[address(arg1)].field_1024 / 10^18
+                                                    stor24[address(arg1)].field_1280 = block.timestamp
+                                                if stor24[address(arg1)].field_768 <= 0:
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), -stor24[address(arg1)].field_1024 - (-1 * s / 10^18 * stor24[address(arg1)].field_1024 / 10^18)
+                                                else:
+                                                    if stor24[address(arg1)].field_768 < 0:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_768 = 0
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), stor24[address(arg1)].field_768 - stor24[address(arg1)].field_1024 - (-1 * s / 10^18 * stor24[address(arg1)].field_1024 / 10^18)
+                                        if not ext_call.success:
+                                            revert with ext_call.return_data[0 len return_data.size]
+                                        require return_data.size >= 32
+                                        if not ext_call.return_data[0]:
+                                            revert with 0, 'Withdrawal failed.'
+                                        else:
+                                            return 0
+                                revert with 0, 'SafeMath div failed.'
+                            if not -stor24[address(arg1)].field_1024:
+                                if 0 > -stor24[address(arg1)].field_1024:
+                                    revert with 0, 'SafeMath sub failed.'
+                                if -stor24[address(arg1)].field_1024 >= stor16:
+                                    if stor16 > 0:
+                                        if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_1024 += stor16
+                                        stor24[address(arg1)].field_1280 = block.timestamp
+                                    if stor24[address(arg1)].field_768 <= 0:
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), stor16
+                                    else:
+                                        if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_768 = 0
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), stor24[address(arg1)].field_768 + stor16
+                                else:
+                                    if -stor24[address(arg1)].field_1024 > 0:
+                                        if 0 < stor24[address(arg1)].field_1024:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_1024 = 0
+                                        stor24[address(arg1)].field_1280 = block.timestamp
+                                    if stor24[address(arg1)].field_768 <= 0:
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), -stor24[address(arg1)].field_1024
+                                    else:
+                                        if stor24[address(arg1)].field_768 - stor24[address(arg1)].field_1024 < -stor24[address(arg1)].field_1024:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_768 = 0
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), stor24[address(arg1)].field_768 - stor24[address(arg1)].field_1024
+                            else:
+                                if -1 * var70003 * stor24[address(arg1)].field_1024 / -stor24[address(arg1)].field_1024 != var70003:
+                                    revert with 0, 'SafeMath mul failed.'
+                                if -1 * var70003 * stor24[address(arg1)].field_1024 / 10^18 > -stor24[address(arg1)].field_1024:
+                                    revert with 0, 'SafeMath sub failed.'
+                                if -stor24[address(arg1)].field_1024 - (-1 * var70003 * stor24[address(arg1)].field_1024 / 10^18) >= stor16:
+                                    if stor16 > 0:
+                                        if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_1024 += stor16
+                                        stor24[address(arg1)].field_1280 = block.timestamp
+                                    if stor24[address(arg1)].field_768 <= 0:
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), stor16
+                                    else:
+                                        if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_768 = 0
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), stor24[address(arg1)].field_768 + stor16
+                                else:
+                                    if -stor24[address(arg1)].field_1024 - (-1 * var70003 * stor24[address(arg1)].field_1024 / 10^18) > 0:
+                                        if --1 * var70003 * stor24[address(arg1)].field_1024 / 10^18 < stor24[address(arg1)].field_1024:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_1024 = --1 * var70003 * stor24[address(arg1)].field_1024 / 10^18
+                                        stor24[address(arg1)].field_1280 = block.timestamp
+                                    if stor24[address(arg1)].field_768 <= 0:
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), -stor24[address(arg1)].field_1024 - (-1 * var70003 * stor24[address(arg1)].field_1024 / 10^18)
+                                    else:
+                                        if stor24[address(arg1)].field_768 < 0:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_768 = 0
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), stor24[address(arg1)].field_768 - stor24[address(arg1)].field_1024 - (-1 * var70003 * stor24[address(arg1)].field_1024 / 10^18)
+                else:
+                    if stor7 * stor24[address(arg1)].field_256 / stor24[address(arg1)].field_256 != stor7:
+                        revert with 0, 'SafeMath mul failed.'
+                    if stor7 * stor24[address(arg1)].field_256 / 10^18 > -stor24[address(arg1)].field_1024:
+                        revert with 0, 'SafeMath sub failed.'
+                    if stor24[address(arg1)].field_1280 > block.timestamp:
+                        revert with 0, 'SafeMath sub failed.'
+                    if -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) <= 0:
+                        if 0 < stor16:
+                            if stor24[address(arg1)].field_768 <= 0:
+                                require ext_code.size(sub_722d8ff0Address)
+                                call sub_722d8ff0Address.0xa9059cbb with:
+                                     gas gas_remaining wei
+                                    args address(arg1), 0
+                            else:
+                                if stor24[address(arg1)].field_768 < 0:
+                                    revert with 0, 'SafeMath add failed.'
+                                stor24[address(arg1)].field_768 = 0
+                                require ext_code.size(sub_722d8ff0Address)
+                                call sub_722d8ff0Address.0xa9059cbb with:
+                                     gas gas_remaining wei
+                                    args address(arg1), stor24[address(arg1)].field_768
+                        else:
+                            if stor16 > 0:
+                                if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                    revert with 0, 'SafeMath add failed.'
+                                stor24[address(arg1)].field_1024 += stor16
+                                stor24[address(arg1)].field_1280 = block.timestamp
+                            if stor24[address(arg1)].field_768 <= 0:
+                                require ext_code.size(sub_722d8ff0Address)
+                                call sub_722d8ff0Address.0xa9059cbb with:
+                                     gas gas_remaining wei
+                                    args address(arg1), stor16
+                            else:
+                                if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                    revert with 0, 'SafeMath add failed.'
+                                stor24[address(arg1)].field_768 = 0
+                                require ext_code.size(sub_722d8ff0Address)
+                                call sub_722d8ff0Address.0xa9059cbb with:
+                                     gas gas_remaining wei
+                                    args address(arg1), stor24[address(arg1)].field_768 + stor16
+                    else:
+                        if block.timestamp - stor24[address(arg1)].field_1280 < stor13:
+                            if 0 < stor16:
+                                if stor24[address(arg1)].field_768 <= 0:
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), 0
+                                else:
+                                    if stor24[address(arg1)].field_768 < 0:
+                                        revert with 0, 'SafeMath add failed.'
+                                    stor24[address(arg1)].field_768 = 0
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), stor24[address(arg1)].field_768
+                            else:
+                                if stor16 > 0:
+                                    if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                        revert with 0, 'SafeMath add failed.'
+                                    stor24[address(arg1)].field_1024 += stor16
+                                    stor24[address(arg1)].field_1280 = block.timestamp
+                                if stor24[address(arg1)].field_768 <= 0:
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), stor16
+                                else:
+                                    if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                        revert with 0, 'SafeMath add failed.'
+                                    stor24[address(arg1)].field_768 = 0
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), stor24[address(arg1)].field_768 + stor16
+                        else:
+                            if stor13 <= 0:
+                                revert with 0, 'SafeMath div failed.'
+                            require stor13
+                            if var71002 <= block.timestamp - stor24[address(arg1)].field_1280 / stor13:
+                                if stor8 > 10^18:
+                                    revert with 0, 'SafeMath sub failed.'
+                                if not var81002:
+                                    s = var81002
+                                    s = var81006
+                                    t = var81007
+                                    while stor13 > 0:
+                                        require stor13
+                                        if s + 1 <= block.timestamp - stor24[address(arg1)].field_1280 / stor13:
+                                            if stor8 > 10^18:
+                                                revert with 0, 'SafeMath sub failed.'
+                                            s = 0
+                                            s = s + 1
+                                            t = 0
+                                            continue 
+                                        if -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18):
+                                            if 0 / -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18):
+                                                revert with 0, 'SafeMath mul failed.'
+                                        if 0 > -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18):
+                                            revert with 0, 'SafeMath sub failed.'
+                                        if -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) >= stor16:
+                                            if stor16 > 0:
+                                                if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_1024 += stor16
+                                                stor24[address(arg1)].field_1280 = block.timestamp
+                                            if stor24[address(arg1)].field_768 <= 0:
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), stor16
+                                            else:
+                                                if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_768 = 0
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), stor24[address(arg1)].field_768 + stor16
+                                        else:
+                                            if -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) > 0:
+                                                if -stor7 * stor24[address(arg1)].field_256 / 10^18 < stor24[address(arg1)].field_1024:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_1024 = -stor7 * stor24[address(arg1)].field_256 / 10^18
+                                                stor24[address(arg1)].field_1280 = block.timestamp
+                                            if stor24[address(arg1)].field_768 <= 0:
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18)
+                                            else:
+                                                if stor24[address(arg1)].field_768 < 0:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_768 = 0
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), stor24[address(arg1)].field_768 - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18)
+                                        if not ext_call.success:
+                                            revert with ext_call.return_data[0 len return_data.size]
+                                        require return_data.size >= 32
+                                        if not ext_call.return_data[0]:
+                                            revert with 0, 'Withdrawal failed.'
+                                        else:
+                                            return 0
+                                else:
+                                    require var84003
+                                    if var86001 / var86002 != -stor8 + 10^18:
+                                        revert with 0, 'SafeMath mul failed.'
+                                    s = var88001
+                                    t = var88008
+                                    u = var88009
+                                    while stor13 > 0:
+                                        require stor13
+                                        if t + 1 <= block.timestamp - stor24[address(arg1)].field_1280 / stor13:
+                                            if stor8 > 10^18:
+                                                revert with 0, 'SafeMath sub failed.'
+                                            if not s / 10^18:
+                                                s = 0
+                                                t = t + 1
+                                                u = s / 10^18
+                                                continue 
+                                            if (10^18 * s / 10^18) - (stor8 * s / 10^18) / s / 10^18 != -stor8 + 10^18:
+                                                revert with 0, 'SafeMath mul failed.'
+                                            s = (10^18 * s / 10^18) - (stor8 * s / 10^18)
+                                            t = t + 1
+                                            u = s / 10^18
+                                            continue 
+                                        if not -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18):
+                                            if 0 > -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18):
+                                                revert with 0, 'SafeMath sub failed.'
+                                            if -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) >= stor16:
+                                                if stor16 > 0:
+                                                    if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_1024 += stor16
+                                                    stor24[address(arg1)].field_1280 = block.timestamp
+                                                if stor24[address(arg1)].field_768 <= 0:
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), stor16
+                                                else:
+                                                    if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_768 = 0
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), stor24[address(arg1)].field_768 + stor16
+                                            else:
+                                                if -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) > 0:
+                                                    if -stor7 * stor24[address(arg1)].field_256 / 10^18 < stor24[address(arg1)].field_1024:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_1024 = -stor7 * stor24[address(arg1)].field_256 / 10^18
+                                                    stor24[address(arg1)].field_1280 = block.timestamp
+                                                if stor24[address(arg1)].field_768 <= 0:
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18)
+                                                else:
+                                                    if stor24[address(arg1)].field_768 < 0:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_768 = 0
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), stor24[address(arg1)].field_768 - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18)
+                                        else:
+                                            if (-1 * stor24[address(arg1)].field_1024 * s / 10^18) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * s / 10^18) / -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) != s / 10^18:
+                                                revert with 0, 'SafeMath mul failed.'
+                                            if (-1 * stor24[address(arg1)].field_1024 * s / 10^18) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * s / 10^18) / 10^18 > -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18):
+                                                revert with 0, 'SafeMath sub failed.'
+                                            if -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) - ((-1 * stor24[address(arg1)].field_1024 * s / 10^18) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * s / 10^18) / 10^18) >= stor16:
+                                                if stor16 > 0:
+                                                    if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_1024 += stor16
+                                                    stor24[address(arg1)].field_1280 = block.timestamp
+                                                if stor24[address(arg1)].field_768 <= 0:
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), stor16
+                                                else:
+                                                    if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_768 = 0
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), stor24[address(arg1)].field_768 + stor16
+                                            else:
+                                                if -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) - ((-1 * stor24[address(arg1)].field_1024 * s / 10^18) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * s / 10^18) / 10^18) > 0:
+                                                    if -(stor7 * stor24[address(arg1)].field_256 / 10^18) - ((-1 * stor24[address(arg1)].field_1024 * s / 10^18) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * s / 10^18) / 10^18) < stor24[address(arg1)].field_1024:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_1024 = -(stor7 * stor24[address(arg1)].field_256 / 10^18) - ((-1 * stor24[address(arg1)].field_1024 * s / 10^18) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * s / 10^18) / 10^18)
+                                                    stor24[address(arg1)].field_1280 = block.timestamp
+                                                if stor24[address(arg1)].field_768 <= 0:
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) - ((-1 * stor24[address(arg1)].field_1024 * s / 10^18) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * s / 10^18) / 10^18)
+                                                else:
+                                                    if stor24[address(arg1)].field_768 < 0:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_768 = 0
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), stor24[address(arg1)].field_768 - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) - ((-1 * stor24[address(arg1)].field_1024 * s / 10^18) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * s / 10^18) / 10^18)
+                                        if not ext_call.success:
+                                            revert with ext_call.return_data[0 len return_data.size]
+                                        require return_data.size >= 32
+                                        if not ext_call.return_data[0]:
+                                            revert with 0, 'Withdrawal failed.'
+                                        else:
+                                            return 0
+                                revert with 0, 'SafeMath div failed.'
+                            if not -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18):
+                                if 0 > -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18):
+                                    revert with 0, 'SafeMath sub failed.'
+                                if -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) >= stor16:
+                                    if stor16 > 0:
+                                        if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_1024 += stor16
+                                        stor24[address(arg1)].field_1280 = block.timestamp
+                                    if stor24[address(arg1)].field_768 <= 0:
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), stor16
+                                    else:
+                                        if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_768 = 0
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), stor24[address(arg1)].field_768 + stor16
+                                else:
+                                    if -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) > 0:
+                                        if -stor7 * stor24[address(arg1)].field_256 / 10^18 < stor24[address(arg1)].field_1024:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_1024 = -stor7 * stor24[address(arg1)].field_256 / 10^18
+                                        stor24[address(arg1)].field_1280 = block.timestamp
+                                    if stor24[address(arg1)].field_768 <= 0:
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18)
+                                    else:
+                                        if stor24[address(arg1)].field_768 < 0:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_768 = 0
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), stor24[address(arg1)].field_768 - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18)
+                            else:
+                                if (-1 * stor24[address(arg1)].field_1024 * var71003) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * var71003) / -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) != var71003:
+                                    revert with 0, 'SafeMath mul failed.'
+                                if (-1 * stor24[address(arg1)].field_1024 * var71003) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * var71003) / 10^18 > -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18):
+                                    revert with 0, 'SafeMath sub failed.'
+                                if -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) - ((-1 * stor24[address(arg1)].field_1024 * var71003) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * var71003) / 10^18) >= stor16:
+                                    if stor16 > 0:
+                                        if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_1024 += stor16
+                                        stor24[address(arg1)].field_1280 = block.timestamp
+                                    if stor24[address(arg1)].field_768 <= 0:
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), stor16
+                                    else:
+                                        if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_768 = 0
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), stor24[address(arg1)].field_768 + stor16
+                                else:
+                                    if -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) - ((-1 * stor24[address(arg1)].field_1024 * var71003) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * var71003) / 10^18) > 0:
+                                        if -(stor7 * stor24[address(arg1)].field_256 / 10^18) - ((-1 * stor24[address(arg1)].field_1024 * var71003) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * var71003) / 10^18) < stor24[address(arg1)].field_1024:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_1024 = -(stor7 * stor24[address(arg1)].field_256 / 10^18) - ((-1 * stor24[address(arg1)].field_1024 * var71003) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * var71003) / 10^18)
+                                        stor24[address(arg1)].field_1280 = block.timestamp
+                                    if stor24[address(arg1)].field_768 <= 0:
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) - ((-1 * stor24[address(arg1)].field_1024 * var71003) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * var71003) / 10^18)
+                                    else:
+                                        if stor24[address(arg1)].field_768 < 0:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_768 = 0
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), stor24[address(arg1)].field_768 - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) - ((-1 * stor24[address(arg1)].field_1024 * var71003) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * var71003) / 10^18)
+        else:
+            if stor7 * stor24[address(arg1)].field_0 / stor24[address(arg1)].field_0 != stor7:
+                revert with 0, 'SafeMath mul failed.'
+            if stor24[address(arg1)].field_1024 > stor7 * stor24[address(arg1)].field_0 / 10^18:
+                revert with 0, 'SafeMath sub failed.'
+            if stor24[address(arg1)].field_512 <= block.timestamp:
+                if stor24[address(arg1)].field_1280 > block.timestamp:
+                    revert with 0, 'SafeMath sub failed.'
+                if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 <= 0:
+                    if 0 < stor16:
+                        if stor24[address(arg1)].field_768 <= 0:
+                            require ext_code.size(sub_722d8ff0Address)
+                            call sub_722d8ff0Address.0xa9059cbb with:
+                                 gas gas_remaining wei
+                                args address(arg1), 0
+                        else:
+                            if stor24[address(arg1)].field_768 < 0:
+                                revert with 0, 'SafeMath add failed.'
+                            stor24[address(arg1)].field_768 = 0
+                            require ext_code.size(sub_722d8ff0Address)
+                            call sub_722d8ff0Address.0xa9059cbb with:
+                                 gas gas_remaining wei
+                                args address(arg1), stor24[address(arg1)].field_768
+                    else:
+                        if stor16 > 0:
+                            if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                revert with 0, 'SafeMath add failed.'
+                            stor24[address(arg1)].field_1024 += stor16
+                            stor24[address(arg1)].field_1280 = block.timestamp
+                        if stor24[address(arg1)].field_768 <= 0:
+                            require ext_code.size(sub_722d8ff0Address)
+                            call sub_722d8ff0Address.0xa9059cbb with:
+                                 gas gas_remaining wei
+                                args address(arg1), stor16
+                        else:
+                            if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                revert with 0, 'SafeMath add failed.'
+                            stor24[address(arg1)].field_768 = 0
+                            require ext_code.size(sub_722d8ff0Address)
+                            call sub_722d8ff0Address.0xa9059cbb with:
+                                 gas gas_remaining wei
+                                args address(arg1), stor24[address(arg1)].field_768 + stor16
+                else:
+                    if block.timestamp - stor24[address(arg1)].field_1280 < stor13:
+                        if 0 < stor16:
+                            if stor24[address(arg1)].field_768 <= 0:
+                                require ext_code.size(sub_722d8ff0Address)
+                                call sub_722d8ff0Address.0xa9059cbb with:
+                                     gas gas_remaining wei
+                                    args address(arg1), 0
+                            else:
+                                if stor24[address(arg1)].field_768 < 0:
+                                    revert with 0, 'SafeMath add failed.'
+                                stor24[address(arg1)].field_768 = 0
+                                require ext_code.size(sub_722d8ff0Address)
+                                call sub_722d8ff0Address.0xa9059cbb with:
+                                     gas gas_remaining wei
+                                    args address(arg1), stor24[address(arg1)].field_768
+                        else:
+                            if stor16 > 0:
+                                if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                    revert with 0, 'SafeMath add failed.'
+                                stor24[address(arg1)].field_1024 += stor16
+                                stor24[address(arg1)].field_1280 = block.timestamp
+                            if stor24[address(arg1)].field_768 <= 0:
+                                require ext_code.size(sub_722d8ff0Address)
+                                call sub_722d8ff0Address.0xa9059cbb with:
+                                     gas gas_remaining wei
+                                    args address(arg1), stor16
+                            else:
+                                if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                    revert with 0, 'SafeMath add failed.'
+                                stor24[address(arg1)].field_768 = 0
+                                require ext_code.size(sub_722d8ff0Address)
+                                call sub_722d8ff0Address.0xa9059cbb with:
+                                     gas gas_remaining wei
+                                    args address(arg1), stor24[address(arg1)].field_768 + stor16
+                    else:
+                        if stor13 <= 0:
+                            revert with 0, 'SafeMath div failed.'
+                        require stor13
+                        if var59002 <= block.timestamp - stor24[address(arg1)].field_1280 / stor13:
+                            if stor8 > 10^18:
+                                revert with 0, 'SafeMath sub failed.'
+                            if not var69002:
+                                s = var69002
+                                s = var69006
+                                t = var69007
+                                while stor13 > 0:
+                                    require stor13
+                                    if s + 1 <= block.timestamp - stor24[address(arg1)].field_1280 / stor13:
+                                        if stor8 > 10^18:
+                                            revert with 0, 'SafeMath sub failed.'
+                                        s = 0
+                                        s = s + 1
+                                        t = 0
+                                        continue 
+                                    if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024:
+                                        if 0 / (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024:
+                                            revert with 0, 'SafeMath mul failed.'
+                                    if 0 > (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024:
+                                        revert with 0, 'SafeMath sub failed.'
+                                    if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 >= stor16:
+                                        if stor16 > 0:
+                                            if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                                revert with 0, 'SafeMath add failed.'
+                                            stor24[address(arg1)].field_1024 += stor16
+                                            stor24[address(arg1)].field_1280 = block.timestamp
+                                        if stor24[address(arg1)].field_768 <= 0:
+                                            require ext_code.size(sub_722d8ff0Address)
+                                            call sub_722d8ff0Address.0xa9059cbb with:
+                                                 gas gas_remaining wei
+                                                args address(arg1), stor16
+                                        else:
+                                            if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                                revert with 0, 'SafeMath add failed.'
+                                            stor24[address(arg1)].field_768 = 0
+                                            require ext_code.size(sub_722d8ff0Address)
+                                            call sub_722d8ff0Address.0xa9059cbb with:
+                                                 gas gas_remaining wei
+                                                args address(arg1), stor24[address(arg1)].field_768 + stor16
+                                    else:
+                                        if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 > 0:
+                                            if stor7 * stor24[address(arg1)].field_0 / 10^18 < stor24[address(arg1)].field_1024:
+                                                revert with 0, 'SafeMath add failed.'
+                                            stor24[address(arg1)].field_1024 = stor7 * stor24[address(arg1)].field_0 / 10^18
+                                            stor24[address(arg1)].field_1280 = block.timestamp
+                                        if stor24[address(arg1)].field_768 <= 0:
+                                            require ext_code.size(sub_722d8ff0Address)
+                                            call sub_722d8ff0Address.0xa9059cbb with:
+                                                 gas gas_remaining wei
+                                                args address(arg1), (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024
+                                        else:
+                                            if stor24[address(arg1)].field_768 < 0:
+                                                revert with 0, 'SafeMath add failed.'
+                                            stor24[address(arg1)].field_768 = 0
+                                            require ext_code.size(sub_722d8ff0Address)
+                                            call sub_722d8ff0Address.0xa9059cbb with:
+                                                 gas gas_remaining wei
+                                                args address(arg1), stor24[address(arg1)].field_768 + (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    if not ext_call.return_data[0]:
+                                        revert with 0, 'Withdrawal failed.'
+                                    else:
+                                        return 0
+                            else:
+                                require var72003
+                                if var74001 / var74002 != -stor8 + 10^18:
+                                    revert with 0, 'SafeMath mul failed.'
+                                s = var76001
+                                t = var76008
+                                u = var76009
+                                while stor13 > 0:
+                                    require stor13
+                                    if t + 1 <= block.timestamp - stor24[address(arg1)].field_1280 / stor13:
+                                        if stor8 > 10^18:
+                                            revert with 0, 'SafeMath sub failed.'
+                                        if not s / 10^18:
+                                            s = 0
+                                            t = t + 1
+                                            u = s / 10^18
+                                            continue 
+                                        if (10^18 * s / 10^18) - (stor8 * s / 10^18) / s / 10^18 != -stor8 + 10^18:
+                                            revert with 0, 'SafeMath mul failed.'
+                                        s = (10^18 * s / 10^18) - (stor8 * s / 10^18)
+                                        t = t + 1
+                                        u = s / 10^18
+                                        continue 
+                                    if not (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024:
+                                        if 0 > (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024:
+                                            revert with 0, 'SafeMath sub failed.'
+                                        if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 >= stor16:
+                                            if stor16 > 0:
+                                                if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_1024 += stor16
+                                                stor24[address(arg1)].field_1280 = block.timestamp
+                                            if stor24[address(arg1)].field_768 <= 0:
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), stor16
+                                            else:
+                                                if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_768 = 0
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), stor24[address(arg1)].field_768 + stor16
+                                        else:
+                                            if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 > 0:
+                                                if stor7 * stor24[address(arg1)].field_0 / 10^18 < stor24[address(arg1)].field_1024:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_1024 = stor7 * stor24[address(arg1)].field_0 / 10^18
+                                                stor24[address(arg1)].field_1280 = block.timestamp
+                                            if stor24[address(arg1)].field_768 <= 0:
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024
+                                            else:
+                                                if stor24[address(arg1)].field_768 < 0:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_768 = 0
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), stor24[address(arg1)].field_768 + (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024
+                                    else:
+                                        if (stor7 * stor24[address(arg1)].field_0 / 10^18 * s / 10^18) - (stor24[address(arg1)].field_1024 * s / 10^18) / (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 != s / 10^18:
+                                            revert with 0, 'SafeMath mul failed.'
+                                        if (stor7 * stor24[address(arg1)].field_0 / 10^18 * s / 10^18) - (stor24[address(arg1)].field_1024 * s / 10^18) / 10^18 > (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024:
+                                            revert with 0, 'SafeMath sub failed.'
+                                        if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * s / 10^18) - (stor24[address(arg1)].field_1024 * s / 10^18) / 10^18) >= stor16:
+                                            if stor16 > 0:
+                                                if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_1024 += stor16
+                                                stor24[address(arg1)].field_1280 = block.timestamp
+                                            if stor24[address(arg1)].field_768 <= 0:
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), stor16
+                                            else:
+                                                if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_768 = 0
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), stor24[address(arg1)].field_768 + stor16
+                                        else:
+                                            if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * s / 10^18) - (stor24[address(arg1)].field_1024 * s / 10^18) / 10^18) > 0:
+                                                if (stor7 * stor24[address(arg1)].field_0 / 10^18) - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * s / 10^18) - (stor24[address(arg1)].field_1024 * s / 10^18) / 10^18) < stor24[address(arg1)].field_1024:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_1024 = (stor7 * stor24[address(arg1)].field_0 / 10^18) - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * s / 10^18) - (stor24[address(arg1)].field_1024 * s / 10^18) / 10^18)
+                                                stor24[address(arg1)].field_1280 = block.timestamp
+                                            if stor24[address(arg1)].field_768 <= 0:
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * s / 10^18) - (stor24[address(arg1)].field_1024 * s / 10^18) / 10^18)
+                                            else:
+                                                if stor24[address(arg1)].field_768 < 0:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_768 = 0
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), stor24[address(arg1)].field_768 + (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * s / 10^18) - (stor24[address(arg1)].field_1024 * s / 10^18) / 10^18)
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    if not ext_call.return_data[0]:
+                                        revert with 0, 'Withdrawal failed.'
+                                    else:
+                                        return 0
+                            revert with 0, 'SafeMath div failed.'
+                        if not (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024:
+                            if 0 > (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024:
+                                revert with 0, 'SafeMath sub failed.'
+                            if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 >= stor16:
+                                if stor16 > 0:
+                                    if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                        revert with 0, 'SafeMath add failed.'
+                                    stor24[address(arg1)].field_1024 += stor16
+                                    stor24[address(arg1)].field_1280 = block.timestamp
+                                if stor24[address(arg1)].field_768 <= 0:
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), stor16
+                                else:
+                                    if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                        revert with 0, 'SafeMath add failed.'
+                                    stor24[address(arg1)].field_768 = 0
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), stor24[address(arg1)].field_768 + stor16
+                            else:
+                                if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 > 0:
+                                    if stor7 * stor24[address(arg1)].field_0 / 10^18 < stor24[address(arg1)].field_1024:
+                                        revert with 0, 'SafeMath add failed.'
+                                    stor24[address(arg1)].field_1024 = stor7 * stor24[address(arg1)].field_0 / 10^18
+                                    stor24[address(arg1)].field_1280 = block.timestamp
+                                if stor24[address(arg1)].field_768 <= 0:
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024
+                                else:
+                                    if stor24[address(arg1)].field_768 < 0:
+                                        revert with 0, 'SafeMath add failed.'
+                                    stor24[address(arg1)].field_768 = 0
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), stor24[address(arg1)].field_768 + (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024
+                        else:
+                            if (stor7 * stor24[address(arg1)].field_0 / 10^18 * var59003) - (stor24[address(arg1)].field_1024 * var59003) / (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 != var59003:
+                                revert with 0, 'SafeMath mul failed.'
+                            if (stor7 * stor24[address(arg1)].field_0 / 10^18 * var59003) - (stor24[address(arg1)].field_1024 * var59003) / 10^18 > (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024:
+                                revert with 0, 'SafeMath sub failed.'
+                            if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * var59003) - (stor24[address(arg1)].field_1024 * var59003) / 10^18) >= stor16:
+                                if stor16 > 0:
+                                    if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                        revert with 0, 'SafeMath add failed.'
+                                    stor24[address(arg1)].field_1024 += stor16
+                                    stor24[address(arg1)].field_1280 = block.timestamp
+                                if stor24[address(arg1)].field_768 <= 0:
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), stor16
+                                else:
+                                    if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                        revert with 0, 'SafeMath add failed.'
+                                    stor24[address(arg1)].field_768 = 0
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), stor24[address(arg1)].field_768 + stor16
+                            else:
+                                if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * var59003) - (stor24[address(arg1)].field_1024 * var59003) / 10^18) > 0:
+                                    if (stor7 * stor24[address(arg1)].field_0 / 10^18) - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * var59003) - (stor24[address(arg1)].field_1024 * var59003) / 10^18) < stor24[address(arg1)].field_1024:
+                                        revert with 0, 'SafeMath add failed.'
+                                    stor24[address(arg1)].field_1024 = (stor7 * stor24[address(arg1)].field_0 / 10^18) - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * var59003) - (stor24[address(arg1)].field_1024 * var59003) / 10^18)
+                                    stor24[address(arg1)].field_1280 = block.timestamp
+                                if stor24[address(arg1)].field_768 <= 0:
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * var59003) - (stor24[address(arg1)].field_1024 * var59003) / 10^18)
+                                else:
+                                    if stor24[address(arg1)].field_768 < 0:
+                                        revert with 0, 'SafeMath add failed.'
+                                    stor24[address(arg1)].field_768 = 0
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), stor24[address(arg1)].field_768 + (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * var59003) - (stor24[address(arg1)].field_1024 * var59003) / 10^18)
+            else:
+                if not stor24[address(arg1)].field_256:
+                    if 0 > (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024:
+                        revert with 0, 'SafeMath sub failed.'
+                    if stor24[address(arg1)].field_1280 > block.timestamp:
+                        revert with 0, 'SafeMath sub failed.'
+                    if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 <= 0:
+                        if 0 < stor16:
+                            if stor24[address(arg1)].field_768 <= 0:
+                                require ext_code.size(sub_722d8ff0Address)
+                                call sub_722d8ff0Address.0xa9059cbb with:
+                                     gas gas_remaining wei
+                                    args address(arg1), 0
+                            else:
+                                if stor24[address(arg1)].field_768 < 0:
+                                    revert with 0, 'SafeMath add failed.'
+                                stor24[address(arg1)].field_768 = 0
+                                require ext_code.size(sub_722d8ff0Address)
+                                call sub_722d8ff0Address.0xa9059cbb with:
+                                     gas gas_remaining wei
+                                    args address(arg1), stor24[address(arg1)].field_768
+                        else:
+                            if stor16 > 0:
+                                if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                    revert with 0, 'SafeMath add failed.'
+                                stor24[address(arg1)].field_1024 += stor16
+                                stor24[address(arg1)].field_1280 = block.timestamp
+                            if stor24[address(arg1)].field_768 <= 0:
+                                require ext_code.size(sub_722d8ff0Address)
+                                call sub_722d8ff0Address.0xa9059cbb with:
+                                     gas gas_remaining wei
+                                    args address(arg1), stor16
+                            else:
+                                if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                    revert with 0, 'SafeMath add failed.'
+                                stor24[address(arg1)].field_768 = 0
+                                require ext_code.size(sub_722d8ff0Address)
+                                call sub_722d8ff0Address.0xa9059cbb with:
+                                     gas gas_remaining wei
+                                    args address(arg1), stor24[address(arg1)].field_768 + stor16
+                    else:
+                        if block.timestamp - stor24[address(arg1)].field_1280 < stor13:
+                            if 0 < stor16:
+                                if stor24[address(arg1)].field_768 <= 0:
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), 0
+                                else:
+                                    if stor24[address(arg1)].field_768 < 0:
+                                        revert with 0, 'SafeMath add failed.'
+                                    stor24[address(arg1)].field_768 = 0
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), stor24[address(arg1)].field_768
+                            else:
+                                if stor16 > 0:
+                                    if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                        revert with 0, 'SafeMath add failed.'
+                                    stor24[address(arg1)].field_1024 += stor16
+                                    stor24[address(arg1)].field_1280 = block.timestamp
+                                if stor24[address(arg1)].field_768 <= 0:
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), stor16
+                                else:
+                                    if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                        revert with 0, 'SafeMath add failed.'
+                                    stor24[address(arg1)].field_768 = 0
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), stor24[address(arg1)].field_768 + stor16
+                        else:
+                            if stor13 <= 0:
+                                revert with 0, 'SafeMath div failed.'
+                            require stor13
+                            if var71002 <= block.timestamp - stor24[address(arg1)].field_1280 / stor13:
+                                if stor8 > 10^18:
+                                    revert with 0, 'SafeMath sub failed.'
+                                if not var81002:
+                                    s = var81002
+                                    s = var81006
+                                    t = var81007
+                                    while stor13 > 0:
+                                        require stor13
+                                        if s + 1 <= block.timestamp - stor24[address(arg1)].field_1280 / stor13:
+                                            if stor8 > 10^18:
+                                                revert with 0, 'SafeMath sub failed.'
+                                            s = 0
+                                            s = s + 1
+                                            t = 0
+                                            continue 
+                                        if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024:
+                                            if 0 / (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024:
+                                                revert with 0, 'SafeMath mul failed.'
+                                        if 0 > (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024:
+                                            revert with 0, 'SafeMath sub failed.'
+                                        if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 >= stor16:
+                                            if stor16 > 0:
+                                                if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_1024 += stor16
+                                                stor24[address(arg1)].field_1280 = block.timestamp
+                                            if stor24[address(arg1)].field_768 <= 0:
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), stor16
+                                            else:
+                                                if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_768 = 0
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), stor24[address(arg1)].field_768 + stor16
+                                        else:
+                                            if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 > 0:
+                                                if stor7 * stor24[address(arg1)].field_0 / 10^18 < stor24[address(arg1)].field_1024:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_1024 = stor7 * stor24[address(arg1)].field_0 / 10^18
+                                                stor24[address(arg1)].field_1280 = block.timestamp
+                                            if stor24[address(arg1)].field_768 <= 0:
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024
+                                            else:
+                                                if stor24[address(arg1)].field_768 < 0:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_768 = 0
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), stor24[address(arg1)].field_768 + (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024
+                                        if not ext_call.success:
+                                            revert with ext_call.return_data[0 len return_data.size]
+                                        require return_data.size >= 32
+                                        if not ext_call.return_data[0]:
+                                            revert with 0, 'Withdrawal failed.'
+                                        else:
+                                            return 0
+                                else:
+                                    require var84003
+                                    if var86001 / var86002 != -stor8 + 10^18:
+                                        revert with 0, 'SafeMath mul failed.'
+                                    s = var88001
+                                    t = var88008
+                                    u = var88009
+                                    while stor13 > 0:
+                                        require stor13
+                                        if t + 1 <= block.timestamp - stor24[address(arg1)].field_1280 / stor13:
+                                            if stor8 > 10^18:
+                                                revert with 0, 'SafeMath sub failed.'
+                                            if not s / 10^18:
+                                                s = 0
+                                                t = t + 1
+                                                u = s / 10^18
+                                                continue 
+                                            if (10^18 * s / 10^18) - (stor8 * s / 10^18) / s / 10^18 != -stor8 + 10^18:
+                                                revert with 0, 'SafeMath mul failed.'
+                                            s = (10^18 * s / 10^18) - (stor8 * s / 10^18)
+                                            t = t + 1
+                                            u = s / 10^18
+                                            continue 
+                                        if not (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024:
+                                            if 0 > (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024:
+                                                revert with 0, 'SafeMath sub failed.'
+                                            if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 >= stor16:
+                                                if stor16 > 0:
+                                                    if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_1024 += stor16
+                                                    stor24[address(arg1)].field_1280 = block.timestamp
+                                                if stor24[address(arg1)].field_768 <= 0:
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), stor16
+                                                else:
+                                                    if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_768 = 0
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), stor24[address(arg1)].field_768 + stor16
+                                            else:
+                                                if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 > 0:
+                                                    if stor7 * stor24[address(arg1)].field_0 / 10^18 < stor24[address(arg1)].field_1024:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_1024 = stor7 * stor24[address(arg1)].field_0 / 10^18
+                                                    stor24[address(arg1)].field_1280 = block.timestamp
+                                                if stor24[address(arg1)].field_768 <= 0:
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024
+                                                else:
+                                                    if stor24[address(arg1)].field_768 < 0:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_768 = 0
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), stor24[address(arg1)].field_768 + (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024
+                                        else:
+                                            if (stor7 * stor24[address(arg1)].field_0 / 10^18 * s / 10^18) - (stor24[address(arg1)].field_1024 * s / 10^18) / (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 != s / 10^18:
+                                                revert with 0, 'SafeMath mul failed.'
+                                            if (stor7 * stor24[address(arg1)].field_0 / 10^18 * s / 10^18) - (stor24[address(arg1)].field_1024 * s / 10^18) / 10^18 > (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024:
+                                                revert with 0, 'SafeMath sub failed.'
+                                            if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * s / 10^18) - (stor24[address(arg1)].field_1024 * s / 10^18) / 10^18) >= stor16:
+                                                if stor16 > 0:
+                                                    if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_1024 += stor16
+                                                    stor24[address(arg1)].field_1280 = block.timestamp
+                                                if stor24[address(arg1)].field_768 <= 0:
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), stor16
+                                                else:
+                                                    if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_768 = 0
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), stor24[address(arg1)].field_768 + stor16
+                                            else:
+                                                if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * s / 10^18) - (stor24[address(arg1)].field_1024 * s / 10^18) / 10^18) > 0:
+                                                    if (stor7 * stor24[address(arg1)].field_0 / 10^18) - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * s / 10^18) - (stor24[address(arg1)].field_1024 * s / 10^18) / 10^18) < stor24[address(arg1)].field_1024:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_1024 = (stor7 * stor24[address(arg1)].field_0 / 10^18) - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * s / 10^18) - (stor24[address(arg1)].field_1024 * s / 10^18) / 10^18)
+                                                    stor24[address(arg1)].field_1280 = block.timestamp
+                                                if stor24[address(arg1)].field_768 <= 0:
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * s / 10^18) - (stor24[address(arg1)].field_1024 * s / 10^18) / 10^18)
+                                                else:
+                                                    if stor24[address(arg1)].field_768 < 0:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_768 = 0
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), stor24[address(arg1)].field_768 + (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * s / 10^18) - (stor24[address(arg1)].field_1024 * s / 10^18) / 10^18)
+                                        if not ext_call.success:
+                                            revert with ext_call.return_data[0 len return_data.size]
+                                        require return_data.size >= 32
+                                        if not ext_call.return_data[0]:
+                                            revert with 0, 'Withdrawal failed.'
+                                        else:
+                                            return 0
+                                revert with 0, 'SafeMath div failed.'
+                            if not (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024:
+                                if 0 > (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024:
+                                    revert with 0, 'SafeMath sub failed.'
+                                if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 >= stor16:
+                                    if stor16 > 0:
+                                        if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_1024 += stor16
+                                        stor24[address(arg1)].field_1280 = block.timestamp
+                                    if stor24[address(arg1)].field_768 <= 0:
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), stor16
+                                    else:
+                                        if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_768 = 0
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), stor24[address(arg1)].field_768 + stor16
+                                else:
+                                    if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 > 0:
+                                        if stor7 * stor24[address(arg1)].field_0 / 10^18 < stor24[address(arg1)].field_1024:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_1024 = stor7 * stor24[address(arg1)].field_0 / 10^18
+                                        stor24[address(arg1)].field_1280 = block.timestamp
+                                    if stor24[address(arg1)].field_768 <= 0:
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024
+                                    else:
+                                        if stor24[address(arg1)].field_768 < 0:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_768 = 0
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), stor24[address(arg1)].field_768 + (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024
+                            else:
+                                if (stor7 * stor24[address(arg1)].field_0 / 10^18 * var71003) - (stor24[address(arg1)].field_1024 * var71003) / (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 != var71003:
+                                    revert with 0, 'SafeMath mul failed.'
+                                if (stor7 * stor24[address(arg1)].field_0 / 10^18 * var71003) - (stor24[address(arg1)].field_1024 * var71003) / 10^18 > (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024:
+                                    revert with 0, 'SafeMath sub failed.'
+                                if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * var71003) - (stor24[address(arg1)].field_1024 * var71003) / 10^18) >= stor16:
+                                    if stor16 > 0:
+                                        if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_1024 += stor16
+                                        stor24[address(arg1)].field_1280 = block.timestamp
+                                    if stor24[address(arg1)].field_768 <= 0:
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), stor16
+                                    else:
+                                        if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_768 = 0
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), stor24[address(arg1)].field_768 + stor16
+                                else:
+                                    if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * var71003) - (stor24[address(arg1)].field_1024 * var71003) / 10^18) > 0:
+                                        if (stor7 * stor24[address(arg1)].field_0 / 10^18) - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * var71003) - (stor24[address(arg1)].field_1024 * var71003) / 10^18) < stor24[address(arg1)].field_1024:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_1024 = (stor7 * stor24[address(arg1)].field_0 / 10^18) - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * var71003) - (stor24[address(arg1)].field_1024 * var71003) / 10^18)
+                                        stor24[address(arg1)].field_1280 = block.timestamp
+                                    if stor24[address(arg1)].field_768 <= 0:
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * var71003) - (stor24[address(arg1)].field_1024 * var71003) / 10^18)
+                                    else:
+                                        if stor24[address(arg1)].field_768 < 0:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_768 = 0
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), stor24[address(arg1)].field_768 + (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * var71003) - (stor24[address(arg1)].field_1024 * var71003) / 10^18)
+                else:
+                    if stor7 * stor24[address(arg1)].field_256 / stor24[address(arg1)].field_256 != stor7:
+                        revert with 0, 'SafeMath mul failed.'
+                    if stor7 * stor24[address(arg1)].field_256 / 10^18 > (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024:
+                        revert with 0, 'SafeMath sub failed.'
+                    if stor24[address(arg1)].field_1280 > block.timestamp:
+                        revert with 0, 'SafeMath sub failed.'
+                    if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) <= 0:
+                        if 0 < stor16:
+                            if stor24[address(arg1)].field_768 <= 0:
+                                require ext_code.size(sub_722d8ff0Address)
+                                call sub_722d8ff0Address.0xa9059cbb with:
+                                     gas gas_remaining wei
+                                    args address(arg1), 0
+                            else:
+                                if stor24[address(arg1)].field_768 < 0:
+                                    revert with 0, 'SafeMath add failed.'
+                                stor24[address(arg1)].field_768 = 0
+                                require ext_code.size(sub_722d8ff0Address)
+                                call sub_722d8ff0Address.0xa9059cbb with:
+                                     gas gas_remaining wei
+                                    args address(arg1), stor24[address(arg1)].field_768
+                        else:
+                            if stor16 > 0:
+                                if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                    revert with 0, 'SafeMath add failed.'
+                                stor24[address(arg1)].field_1024 += stor16
+                                stor24[address(arg1)].field_1280 = block.timestamp
+                            if stor24[address(arg1)].field_768 <= 0:
+                                require ext_code.size(sub_722d8ff0Address)
+                                call sub_722d8ff0Address.0xa9059cbb with:
+                                     gas gas_remaining wei
+                                    args address(arg1), stor16
+                            else:
+                                if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                    revert with 0, 'SafeMath add failed.'
+                                stor24[address(arg1)].field_768 = 0
+                                require ext_code.size(sub_722d8ff0Address)
+                                call sub_722d8ff0Address.0xa9059cbb with:
+                                     gas gas_remaining wei
+                                    args address(arg1), stor24[address(arg1)].field_768 + stor16
+                    else:
+                        if block.timestamp - stor24[address(arg1)].field_1280 < stor13:
+                            if 0 < stor16:
+                                if stor24[address(arg1)].field_768 <= 0:
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), 0
+                                else:
+                                    if stor24[address(arg1)].field_768 < 0:
+                                        revert with 0, 'SafeMath add failed.'
+                                    stor24[address(arg1)].field_768 = 0
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), stor24[address(arg1)].field_768
+                            else:
+                                if stor16 > 0:
+                                    if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                        revert with 0, 'SafeMath add failed.'
+                                    stor24[address(arg1)].field_1024 += stor16
+                                    stor24[address(arg1)].field_1280 = block.timestamp
+                                if stor24[address(arg1)].field_768 <= 0:
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), stor16
+                                else:
+                                    if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                        revert with 0, 'SafeMath add failed.'
+                                    stor24[address(arg1)].field_768 = 0
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), stor24[address(arg1)].field_768 + stor16
+                        else:
+                            if stor13 <= 0:
+                                revert with 0, 'SafeMath div failed.'
+                            require stor13
+                            if var72002 <= block.timestamp - stor24[address(arg1)].field_1280 / stor13:
+                                if stor8 > 10^18:
+                                    revert with 0, 'SafeMath sub failed.'
+                                if not var82002:
+                                    s = var82002
+                                    s = var82006
+                                    t = var82007
+                                    while stor13 > 0:
+                                        require stor13
+                                        if s + 1 <= block.timestamp - stor24[address(arg1)].field_1280 / stor13:
+                                            if stor8 > 10^18:
+                                                revert with 0, 'SafeMath sub failed.'
+                                            s = 0
+                                            s = s + 1
+                                            t = 0
+                                            continue 
+                                        if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18):
+                                            if 0 / (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18):
+                                                revert with 0, 'SafeMath mul failed.'
+                                        if 0 > (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18):
+                                            revert with 0, 'SafeMath sub failed.'
+                                        if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) >= stor16:
+                                            if stor16 > 0:
+                                                if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_1024 += stor16
+                                                stor24[address(arg1)].field_1280 = block.timestamp
+                                            if stor24[address(arg1)].field_768 <= 0:
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), stor16
+                                            else:
+                                                if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_768 = 0
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), stor24[address(arg1)].field_768 + stor16
+                                        else:
+                                            if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) > 0:
+                                                if (stor7 * stor24[address(arg1)].field_0 / 10^18) - (stor7 * stor24[address(arg1)].field_256 / 10^18) < stor24[address(arg1)].field_1024:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_1024 = (stor7 * stor24[address(arg1)].field_0 / 10^18) - (stor7 * stor24[address(arg1)].field_256 / 10^18)
+                                                stor24[address(arg1)].field_1280 = block.timestamp
+                                            if stor24[address(arg1)].field_768 <= 0:
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18)
+                                            else:
+                                                if stor24[address(arg1)].field_768 < 0:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_768 = 0
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), stor24[address(arg1)].field_768 + (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18)
+                                        if not ext_call.success:
+                                            revert with ext_call.return_data[0 len return_data.size]
+                                        require return_data.size >= 32
+                                        if not ext_call.return_data[0]:
+                                            revert with 0, 'Withdrawal failed.'
+                                        else:
+                                            return 0
+                                else:
+                                    require var85003
+                                    if var87001 / var87002 != -stor8 + 10^18:
+                                        revert with 0, 'SafeMath mul failed.'
+                                    s = var89001
+                                    t = var89008
+                                    u = var89009
+                                    while stor13 > 0:
+                                        require stor13
+                                        if t + 1 <= block.timestamp - stor24[address(arg1)].field_1280 / stor13:
+                                            if stor8 > 10^18:
+                                                revert with 0, 'SafeMath sub failed.'
+                                            if not s / 10^18:
+                                                s = 0
+                                                t = t + 1
+                                                u = s / 10^18
+                                                continue 
+                                            if (10^18 * s / 10^18) - (stor8 * s / 10^18) / s / 10^18 != -stor8 + 10^18:
+                                                revert with 0, 'SafeMath mul failed.'
+                                            s = (10^18 * s / 10^18) - (stor8 * s / 10^18)
+                                            t = t + 1
+                                            u = s / 10^18
+                                            continue 
+                                        if not (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18):
+                                            if 0 > (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18):
+                                                revert with 0, 'SafeMath sub failed.'
+                                            if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) >= stor16:
+                                                if stor16 > 0:
+                                                    if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_1024 += stor16
+                                                    stor24[address(arg1)].field_1280 = block.timestamp
+                                                if stor24[address(arg1)].field_768 <= 0:
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), stor16
+                                                else:
+                                                    if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_768 = 0
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), stor24[address(arg1)].field_768 + stor16
+                                            else:
+                                                if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) > 0:
+                                                    if (stor7 * stor24[address(arg1)].field_0 / 10^18) - (stor7 * stor24[address(arg1)].field_256 / 10^18) < stor24[address(arg1)].field_1024:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_1024 = (stor7 * stor24[address(arg1)].field_0 / 10^18) - (stor7 * stor24[address(arg1)].field_256 / 10^18)
+                                                    stor24[address(arg1)].field_1280 = block.timestamp
+                                                if stor24[address(arg1)].field_768 <= 0:
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18)
+                                                else:
+                                                    if stor24[address(arg1)].field_768 < 0:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_768 = 0
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), stor24[address(arg1)].field_768 + (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18)
+                                        else:
+                                            if (stor7 * stor24[address(arg1)].field_0 / 10^18 * s / 10^18) - (stor24[address(arg1)].field_1024 * s / 10^18) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * s / 10^18) / (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) != s / 10^18:
+                                                revert with 0, 'SafeMath mul failed.'
+                                            if (stor7 * stor24[address(arg1)].field_0 / 10^18 * s / 10^18) - (stor24[address(arg1)].field_1024 * s / 10^18) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * s / 10^18) / 10^18 > (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18):
+                                                revert with 0, 'SafeMath sub failed.'
+                                            if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * s / 10^18) - (stor24[address(arg1)].field_1024 * s / 10^18) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * s / 10^18) / 10^18) >= stor16:
+                                                if stor16 > 0:
+                                                    if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_1024 += stor16
+                                                    stor24[address(arg1)].field_1280 = block.timestamp
+                                                if stor24[address(arg1)].field_768 <= 0:
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), stor16
+                                                else:
+                                                    if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_768 = 0
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), stor24[address(arg1)].field_768 + stor16
+                                            else:
+                                                if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * s / 10^18) - (stor24[address(arg1)].field_1024 * s / 10^18) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * s / 10^18) / 10^18) > 0:
+                                                    if (stor7 * stor24[address(arg1)].field_0 / 10^18) - (stor7 * stor24[address(arg1)].field_256 / 10^18) - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * s / 10^18) - (stor24[address(arg1)].field_1024 * s / 10^18) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * s / 10^18) / 10^18) < stor24[address(arg1)].field_1024:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_1024 = (stor7 * stor24[address(arg1)].field_0 / 10^18) - (stor7 * stor24[address(arg1)].field_256 / 10^18) - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * s / 10^18) - (stor24[address(arg1)].field_1024 * s / 10^18) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * s / 10^18) / 10^18)
+                                                    stor24[address(arg1)].field_1280 = block.timestamp
+                                                if stor24[address(arg1)].field_768 <= 0:
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * s / 10^18) - (stor24[address(arg1)].field_1024 * s / 10^18) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * s / 10^18) / 10^18)
+                                                else:
+                                                    if stor24[address(arg1)].field_768 < 0:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_768 = 0
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), stor24[address(arg1)].field_768 + (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * s / 10^18) - (stor24[address(arg1)].field_1024 * s / 10^18) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * s / 10^18) / 10^18)
+                                        if not ext_call.success:
+                                            revert with ext_call.return_data[0 len return_data.size]
+                                        require return_data.size >= 32
+                                        if not ext_call.return_data[0]:
+                                            revert with 0, 'Withdrawal failed.'
+                                        else:
+                                            return 0
+                                revert with 0, 'SafeMath div failed.'
+                            if not (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18):
+                                if 0 > (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18):
+                                    revert with 0, 'SafeMath sub failed.'
+                                if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) >= stor16:
+                                    if stor16 > 0:
+                                        if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_1024 += stor16
+                                        stor24[address(arg1)].field_1280 = block.timestamp
+                                    if stor24[address(arg1)].field_768 <= 0:
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), stor16
+                                    else:
+                                        if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_768 = 0
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), stor24[address(arg1)].field_768 + stor16
+                                else:
+                                    if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) > 0:
+                                        if (stor7 * stor24[address(arg1)].field_0 / 10^18) - (stor7 * stor24[address(arg1)].field_256 / 10^18) < stor24[address(arg1)].field_1024:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_1024 = (stor7 * stor24[address(arg1)].field_0 / 10^18) - (stor7 * stor24[address(arg1)].field_256 / 10^18)
+                                        stor24[address(arg1)].field_1280 = block.timestamp
+                                    if stor24[address(arg1)].field_768 <= 0:
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18)
+                                    else:
+                                        if stor24[address(arg1)].field_768 < 0:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_768 = 0
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), stor24[address(arg1)].field_768 + (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18)
+                            else:
+                                if (stor7 * stor24[address(arg1)].field_0 / 10^18 * var72003) - (stor24[address(arg1)].field_1024 * var72003) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * var72003) / (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) != var72003:
+                                    revert with 0, 'SafeMath mul failed.'
+                                if (stor7 * stor24[address(arg1)].field_0 / 10^18 * var72003) - (stor24[address(arg1)].field_1024 * var72003) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * var72003) / 10^18 > (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18):
+                                    revert with 0, 'SafeMath sub failed.'
+                                if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * var72003) - (stor24[address(arg1)].field_1024 * var72003) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * var72003) / 10^18) >= stor16:
+                                    if stor16 > 0:
+                                        if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_1024 += stor16
+                                        stor24[address(arg1)].field_1280 = block.timestamp
+                                    if stor24[address(arg1)].field_768 <= 0:
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), stor16
+                                    else:
+                                        if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_768 = 0
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), stor24[address(arg1)].field_768 + stor16
+                                else:
+                                    if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * var72003) - (stor24[address(arg1)].field_1024 * var72003) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * var72003) / 10^18) > 0:
+                                        if (stor7 * stor24[address(arg1)].field_0 / 10^18) - (stor7 * stor24[address(arg1)].field_256 / 10^18) - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * var72003) - (stor24[address(arg1)].field_1024 * var72003) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * var72003) / 10^18) < stor24[address(arg1)].field_1024:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_1024 = (stor7 * stor24[address(arg1)].field_0 / 10^18) - (stor7 * stor24[address(arg1)].field_256 / 10^18) - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * var72003) - (stor24[address(arg1)].field_1024 * var72003) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * var72003) / 10^18)
+                                        stor24[address(arg1)].field_1280 = block.timestamp
+                                    if stor24[address(arg1)].field_768 <= 0:
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * var72003) - (stor24[address(arg1)].field_1024 * var72003) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * var72003) / 10^18)
+                                    else:
+                                        if stor24[address(arg1)].field_768 < 0:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_768 = 0
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), stor24[address(arg1)].field_768 + (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * var72003) - (stor24[address(arg1)].field_1024 * var72003) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * var72003) / 10^18)
+    else:
+        stor24[address(arg1)].field_256 = 0
+        stor24[address(arg1)].field_512 = block.timestamp
+        if not stor24[address(arg1)].field_0:
+            if stor24[address(arg1)].field_1024 > 0:
+                revert with 0, 'SafeMath sub failed.'
+            if stor24[address(arg1)].field_512 <= block.timestamp:
+                if stor24[address(arg1)].field_1280 > block.timestamp:
+                    revert with 0, 'SafeMath sub failed.'
+                if -stor24[address(arg1)].field_1024 <= 0:
+                    if 0 < stor16:
+                        if stor24[address(arg1)].field_768 <= 0:
+                            require ext_code.size(sub_722d8ff0Address)
+                            call sub_722d8ff0Address.0xa9059cbb with:
+                                 gas gas_remaining wei
+                                args address(arg1), 0
+                        else:
+                            if stor24[address(arg1)].field_768 < 0:
+                                revert with 0, 'SafeMath add failed.'
+                            stor24[address(arg1)].field_768 = 0
+                            require ext_code.size(sub_722d8ff0Address)
+                            call sub_722d8ff0Address.0xa9059cbb with:
+                                 gas gas_remaining wei
+                                args address(arg1), stor24[address(arg1)].field_768
+                    else:
+                        if stor16 > 0:
+                            if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                revert with 0, 'SafeMath add failed.'
+                            stor24[address(arg1)].field_1024 += stor16
+                            stor24[address(arg1)].field_1280 = block.timestamp
+                        if stor24[address(arg1)].field_768 <= 0:
+                            require ext_code.size(sub_722d8ff0Address)
+                            call sub_722d8ff0Address.0xa9059cbb with:
+                                 gas gas_remaining wei
+                                args address(arg1), stor16
+                        else:
+                            if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                revert with 0, 'SafeMath add failed.'
+                            stor24[address(arg1)].field_768 = 0
+                            require ext_code.size(sub_722d8ff0Address)
+                            call sub_722d8ff0Address.0xa9059cbb with:
+                                 gas gas_remaining wei
+                                args address(arg1), stor24[address(arg1)].field_768 + stor16
+                else:
+                    if block.timestamp - stor24[address(arg1)].field_1280 < stor13:
+                        if 0 < stor16:
+                            if stor24[address(arg1)].field_768 <= 0:
+                                require ext_code.size(sub_722d8ff0Address)
+                                call sub_722d8ff0Address.0xa9059cbb with:
+                                     gas gas_remaining wei
+                                    args address(arg1), 0
+                            else:
+                                if stor24[address(arg1)].field_768 < 0:
+                                    revert with 0, 'SafeMath add failed.'
+                                stor24[address(arg1)].field_768 = 0
+                                require ext_code.size(sub_722d8ff0Address)
+                                call sub_722d8ff0Address.0xa9059cbb with:
+                                     gas gas_remaining wei
+                                    args address(arg1), stor24[address(arg1)].field_768
+                        else:
+                            if stor16 > 0:
+                                if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                    revert with 0, 'SafeMath add failed.'
+                                stor24[address(arg1)].field_1024 += stor16
+                                stor24[address(arg1)].field_1280 = block.timestamp
+                            if stor24[address(arg1)].field_768 <= 0:
+                                require ext_code.size(sub_722d8ff0Address)
+                                call sub_722d8ff0Address.0xa9059cbb with:
+                                     gas gas_remaining wei
+                                    args address(arg1), stor16
+                            else:
+                                if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                    revert with 0, 'SafeMath add failed.'
+                                stor24[address(arg1)].field_768 = 0
+                                require ext_code.size(sub_722d8ff0Address)
+                                call sub_722d8ff0Address.0xa9059cbb with:
+                                     gas gas_remaining wei
+                                    args address(arg1), stor24[address(arg1)].field_768 + stor16
+                    else:
+                        if stor13 <= 0:
+                            revert with 0, 'SafeMath div failed.'
+                        require stor13
+                        if var61002 <= block.timestamp - stor24[address(arg1)].field_1280 / stor13:
+                            if stor8 > 10^18:
+                                revert with 0, 'SafeMath sub failed.'
+                            if not var71002:
+                                s = var71002
+                                s = var71006
+                                t = var71007
+                                while stor13 > 0:
+                                    require stor13
+                                    if s + 1 <= block.timestamp - stor24[address(arg1)].field_1280 / stor13:
+                                        if stor8 > 10^18:
+                                            revert with 0, 'SafeMath sub failed.'
+                                        s = 0
+                                        s = s + 1
+                                        t = 0
+                                        continue 
+                                    if -stor24[address(arg1)].field_1024:
+                                        if 0 / -stor24[address(arg1)].field_1024:
+                                            revert with 0, 'SafeMath mul failed.'
+                                    if 0 > -stor24[address(arg1)].field_1024:
+                                        revert with 0, 'SafeMath sub failed.'
+                                    if -stor24[address(arg1)].field_1024 >= stor16:
+                                        if stor16 > 0:
+                                            if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                                revert with 0, 'SafeMath add failed.'
+                                            stor24[address(arg1)].field_1024 += stor16
+                                            stor24[address(arg1)].field_1280 = block.timestamp
+                                        if stor24[address(arg1)].field_768 <= 0:
+                                            require ext_code.size(sub_722d8ff0Address)
+                                            call sub_722d8ff0Address.0xa9059cbb with:
+                                                 gas gas_remaining wei
+                                                args address(arg1), stor16
+                                        else:
+                                            if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                                revert with 0, 'SafeMath add failed.'
+                                            stor24[address(arg1)].field_768 = 0
+                                            require ext_code.size(sub_722d8ff0Address)
+                                            call sub_722d8ff0Address.0xa9059cbb with:
+                                                 gas gas_remaining wei
+                                                args address(arg1), stor24[address(arg1)].field_768 + stor16
+                                    else:
+                                        if -stor24[address(arg1)].field_1024 > 0:
+                                            if 0 < stor24[address(arg1)].field_1024:
+                                                revert with 0, 'SafeMath add failed.'
+                                            stor24[address(arg1)].field_1024 = 0
+                                            stor24[address(arg1)].field_1280 = block.timestamp
+                                        if stor24[address(arg1)].field_768 <= 0:
+                                            require ext_code.size(sub_722d8ff0Address)
+                                            call sub_722d8ff0Address.0xa9059cbb with:
+                                                 gas gas_remaining wei
+                                                args address(arg1), -stor24[address(arg1)].field_1024
+                                        else:
+                                            if stor24[address(arg1)].field_768 - stor24[address(arg1)].field_1024 < -stor24[address(arg1)].field_1024:
+                                                revert with 0, 'SafeMath add failed.'
+                                            stor24[address(arg1)].field_768 = 0
+                                            require ext_code.size(sub_722d8ff0Address)
+                                            call sub_722d8ff0Address.0xa9059cbb with:
+                                                 gas gas_remaining wei
+                                                args address(arg1), stor24[address(arg1)].field_768 - stor24[address(arg1)].field_1024
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    if not ext_call.return_data[0]:
+                                        revert with 0, 'Withdrawal failed.'
+                                    else:
+                                        return 0
+                            else:
+                                require var74003
+                                if var76001 / var76002 != -stor8 + 10^18:
+                                    revert with 0, 'SafeMath mul failed.'
+                                s = var78001
+                                t = var78008
+                                u = var78009
+                                while stor13 > 0:
+                                    require stor13
+                                    if t + 1 <= block.timestamp - stor24[address(arg1)].field_1280 / stor13:
+                                        if stor8 > 10^18:
+                                            revert with 0, 'SafeMath sub failed.'
+                                        if not s / 10^18:
+                                            s = 0
+                                            t = t + 1
+                                            u = s / 10^18
+                                            continue 
+                                        if (10^18 * s / 10^18) - (stor8 * s / 10^18) / s / 10^18 != -stor8 + 10^18:
+                                            revert with 0, 'SafeMath mul failed.'
+                                        s = (10^18 * s / 10^18) - (stor8 * s / 10^18)
+                                        t = t + 1
+                                        u = s / 10^18
+                                        continue 
+                                    if not -stor24[address(arg1)].field_1024:
+                                        if 0 > -stor24[address(arg1)].field_1024:
+                                            revert with 0, 'SafeMath sub failed.'
+                                        if -stor24[address(arg1)].field_1024 >= stor16:
+                                            if stor16 > 0:
+                                                if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_1024 += stor16
+                                                stor24[address(arg1)].field_1280 = block.timestamp
+                                            if stor24[address(arg1)].field_768 <= 0:
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), stor16
+                                            else:
+                                                if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_768 = 0
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), stor24[address(arg1)].field_768 + stor16
+                                        else:
+                                            if -stor24[address(arg1)].field_1024 > 0:
+                                                if 0 < stor24[address(arg1)].field_1024:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_1024 = 0
+                                                stor24[address(arg1)].field_1280 = block.timestamp
+                                            if stor24[address(arg1)].field_768 <= 0:
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), -stor24[address(arg1)].field_1024
+                                            else:
+                                                if stor24[address(arg1)].field_768 - stor24[address(arg1)].field_1024 < -stor24[address(arg1)].field_1024:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_768 = 0
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), stor24[address(arg1)].field_768 - stor24[address(arg1)].field_1024
+                                    else:
+                                        if -1 * s / 10^18 * stor24[address(arg1)].field_1024 / -stor24[address(arg1)].field_1024 != s / 10^18:
+                                            revert with 0, 'SafeMath mul failed.'
+                                        if -1 * s / 10^18 * stor24[address(arg1)].field_1024 / 10^18 > -stor24[address(arg1)].field_1024:
+                                            revert with 0, 'SafeMath sub failed.'
+                                        if -stor24[address(arg1)].field_1024 - (-1 * s / 10^18 * stor24[address(arg1)].field_1024 / 10^18) >= stor16:
+                                            if stor16 > 0:
+                                                if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_1024 += stor16
+                                                stor24[address(arg1)].field_1280 = block.timestamp
+                                            if stor24[address(arg1)].field_768 <= 0:
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), stor16
+                                            else:
+                                                if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_768 = 0
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), stor24[address(arg1)].field_768 + stor16
+                                        else:
+                                            if -stor24[address(arg1)].field_1024 - (-1 * s / 10^18 * stor24[address(arg1)].field_1024 / 10^18) > 0:
+                                                if --1 * s / 10^18 * stor24[address(arg1)].field_1024 / 10^18 < stor24[address(arg1)].field_1024:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_1024 = --1 * s / 10^18 * stor24[address(arg1)].field_1024 / 10^18
+                                                stor24[address(arg1)].field_1280 = block.timestamp
+                                            if stor24[address(arg1)].field_768 <= 0:
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), -stor24[address(arg1)].field_1024 - (-1 * s / 10^18 * stor24[address(arg1)].field_1024 / 10^18)
+                                            else:
+                                                if stor24[address(arg1)].field_768 < 0:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_768 = 0
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), stor24[address(arg1)].field_768 - stor24[address(arg1)].field_1024 - (-1 * s / 10^18 * stor24[address(arg1)].field_1024 / 10^18)
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    if not ext_call.return_data[0]:
+                                        revert with 0, 'Withdrawal failed.'
+                                    else:
+                                        return 0
+                            revert with 0, 'SafeMath div failed.'
+                        if not -stor24[address(arg1)].field_1024:
+                            if 0 > -stor24[address(arg1)].field_1024:
+                                revert with 0, 'SafeMath sub failed.'
+                            if -stor24[address(arg1)].field_1024 >= stor16:
+                                if stor16 > 0:
+                                    if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                        revert with 0, 'SafeMath add failed.'
+                                    stor24[address(arg1)].field_1024 += stor16
+                                    stor24[address(arg1)].field_1280 = block.timestamp
+                                if stor24[address(arg1)].field_768 <= 0:
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), stor16
+                                else:
+                                    if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                        revert with 0, 'SafeMath add failed.'
+                                    stor24[address(arg1)].field_768 = 0
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), stor24[address(arg1)].field_768 + stor16
+                            else:
+                                if -stor24[address(arg1)].field_1024 > 0:
+                                    if 0 < stor24[address(arg1)].field_1024:
+                                        revert with 0, 'SafeMath add failed.'
+                                    stor24[address(arg1)].field_1024 = 0
+                                    stor24[address(arg1)].field_1280 = block.timestamp
+                                if stor24[address(arg1)].field_768 <= 0:
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), -stor24[address(arg1)].field_1024
+                                else:
+                                    if stor24[address(arg1)].field_768 - stor24[address(arg1)].field_1024 < -stor24[address(arg1)].field_1024:
+                                        revert with 0, 'SafeMath add failed.'
+                                    stor24[address(arg1)].field_768 = 0
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), stor24[address(arg1)].field_768 - stor24[address(arg1)].field_1024
+                        else:
+                            if -1 * var61003 * stor24[address(arg1)].field_1024 / -stor24[address(arg1)].field_1024 != var61003:
+                                revert with 0, 'SafeMath mul failed.'
+                            if -1 * var61003 * stor24[address(arg1)].field_1024 / 10^18 > -stor24[address(arg1)].field_1024:
+                                revert with 0, 'SafeMath sub failed.'
+                            if -stor24[address(arg1)].field_1024 - (-1 * var61003 * stor24[address(arg1)].field_1024 / 10^18) >= stor16:
+                                if stor16 > 0:
+                                    if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                        revert with 0, 'SafeMath add failed.'
+                                    stor24[address(arg1)].field_1024 += stor16
+                                    stor24[address(arg1)].field_1280 = block.timestamp
+                                if stor24[address(arg1)].field_768 <= 0:
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), stor16
+                                else:
+                                    if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                        revert with 0, 'SafeMath add failed.'
+                                    stor24[address(arg1)].field_768 = 0
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), stor24[address(arg1)].field_768 + stor16
+                            else:
+                                if -stor24[address(arg1)].field_1024 - (-1 * var61003 * stor24[address(arg1)].field_1024 / 10^18) > 0:
+                                    if --1 * var61003 * stor24[address(arg1)].field_1024 / 10^18 < stor24[address(arg1)].field_1024:
+                                        revert with 0, 'SafeMath add failed.'
+                                    stor24[address(arg1)].field_1024 = --1 * var61003 * stor24[address(arg1)].field_1024 / 10^18
+                                    stor24[address(arg1)].field_1280 = block.timestamp
+                                if stor24[address(arg1)].field_768 <= 0:
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), -stor24[address(arg1)].field_1024 - (-1 * var61003 * stor24[address(arg1)].field_1024 / 10^18)
+                                else:
+                                    if stor24[address(arg1)].field_768 < 0:
+                                        revert with 0, 'SafeMath add failed.'
+                                    stor24[address(arg1)].field_768 = 0
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), stor24[address(arg1)].field_768 - stor24[address(arg1)].field_1024 - (-1 * var61003 * stor24[address(arg1)].field_1024 / 10^18)
+            else:
+                if not stor24[address(arg1)].field_256:
+                    if 0 > -stor24[address(arg1)].field_1024:
+                        revert with 0, 'SafeMath sub failed.'
+                    if stor24[address(arg1)].field_1280 > block.timestamp:
+                        revert with 0, 'SafeMath sub failed.'
+                    if -stor24[address(arg1)].field_1024 <= 0:
+                        if 0 < stor16:
+                            if stor24[address(arg1)].field_768 <= 0:
+                                require ext_code.size(sub_722d8ff0Address)
+                                call sub_722d8ff0Address.0xa9059cbb with:
+                                     gas gas_remaining wei
+                                    args address(arg1), 0
+                            else:
+                                if stor24[address(arg1)].field_768 < 0:
+                                    revert with 0, 'SafeMath add failed.'
+                                stor24[address(arg1)].field_768 = 0
+                                require ext_code.size(sub_722d8ff0Address)
+                                call sub_722d8ff0Address.0xa9059cbb with:
+                                     gas gas_remaining wei
+                                    args address(arg1), stor24[address(arg1)].field_768
+                        else:
+                            if stor16 > 0:
+                                if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                    revert with 0, 'SafeMath add failed.'
+                                stor24[address(arg1)].field_1024 += stor16
+                                stor24[address(arg1)].field_1280 = block.timestamp
+                            if stor24[address(arg1)].field_768 <= 0:
+                                require ext_code.size(sub_722d8ff0Address)
+                                call sub_722d8ff0Address.0xa9059cbb with:
+                                     gas gas_remaining wei
+                                    args address(arg1), stor16
+                            else:
+                                if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                    revert with 0, 'SafeMath add failed.'
+                                stor24[address(arg1)].field_768 = 0
+                                require ext_code.size(sub_722d8ff0Address)
+                                call sub_722d8ff0Address.0xa9059cbb with:
+                                     gas gas_remaining wei
+                                    args address(arg1), stor24[address(arg1)].field_768 + stor16
+                    else:
+                        if block.timestamp - stor24[address(arg1)].field_1280 < stor13:
+                            if 0 < stor16:
+                                if stor24[address(arg1)].field_768 <= 0:
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), 0
+                                else:
+                                    if stor24[address(arg1)].field_768 < 0:
+                                        revert with 0, 'SafeMath add failed.'
+                                    stor24[address(arg1)].field_768 = 0
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), stor24[address(arg1)].field_768
+                            else:
+                                if stor16 > 0:
+                                    if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                        revert with 0, 'SafeMath add failed.'
+                                    stor24[address(arg1)].field_1024 += stor16
+                                    stor24[address(arg1)].field_1280 = block.timestamp
+                                if stor24[address(arg1)].field_768 <= 0:
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), stor16
+                                else:
+                                    if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                        revert with 0, 'SafeMath add failed.'
+                                    stor24[address(arg1)].field_768 = 0
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), stor24[address(arg1)].field_768 + stor16
+                        else:
+                            if stor13 <= 0:
+                                revert with 0, 'SafeMath div failed.'
+                            require stor13
+                            if var73002 <= block.timestamp - stor24[address(arg1)].field_1280 / stor13:
+                                if stor8 > 10^18:
+                                    revert with 0, 'SafeMath sub failed.'
+                                if not var83002:
+                                    s = var83002
+                                    s = var83006
+                                    t = var83007
+                                    while stor13 > 0:
+                                        require stor13
+                                        if s + 1 <= block.timestamp - stor24[address(arg1)].field_1280 / stor13:
+                                            if stor8 > 10^18:
+                                                revert with 0, 'SafeMath sub failed.'
+                                            s = 0
+                                            s = s + 1
+                                            t = 0
+                                            continue 
+                                        if -stor24[address(arg1)].field_1024:
+                                            if 0 / -stor24[address(arg1)].field_1024:
+                                                revert with 0, 'SafeMath mul failed.'
+                                        if 0 > -stor24[address(arg1)].field_1024:
+                                            revert with 0, 'SafeMath sub failed.'
+                                        if -stor24[address(arg1)].field_1024 >= stor16:
+                                            if stor16 > 0:
+                                                if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_1024 += stor16
+                                                stor24[address(arg1)].field_1280 = block.timestamp
+                                            if stor24[address(arg1)].field_768 <= 0:
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), stor16
+                                            else:
+                                                if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_768 = 0
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), stor24[address(arg1)].field_768 + stor16
+                                        else:
+                                            if -stor24[address(arg1)].field_1024 > 0:
+                                                if 0 < stor24[address(arg1)].field_1024:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_1024 = 0
+                                                stor24[address(arg1)].field_1280 = block.timestamp
+                                            if stor24[address(arg1)].field_768 <= 0:
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), -stor24[address(arg1)].field_1024
+                                            else:
+                                                if stor24[address(arg1)].field_768 - stor24[address(arg1)].field_1024 < -stor24[address(arg1)].field_1024:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_768 = 0
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), stor24[address(arg1)].field_768 - stor24[address(arg1)].field_1024
+                                        if not ext_call.success:
+                                            revert with ext_call.return_data[0 len return_data.size]
+                                        require return_data.size >= 32
+                                        if not ext_call.return_data[0]:
+                                            revert with 0, 'Withdrawal failed.'
+                                        else:
+                                            return 0
+                                else:
+                                    require var86003
+                                    if var88001 / var88002 != -stor8 + 10^18:
+                                        revert with 0, 'SafeMath mul failed.'
+                                    s = var90001
+                                    t = var90008
+                                    u = var90009
+                                    while stor13 > 0:
+                                        require stor13
+                                        if t + 1 <= block.timestamp - stor24[address(arg1)].field_1280 / stor13:
+                                            if stor8 > 10^18:
+                                                revert with 0, 'SafeMath sub failed.'
+                                            if not s / 10^18:
+                                                s = 0
+                                                t = t + 1
+                                                u = s / 10^18
+                                                continue 
+                                            if (10^18 * s / 10^18) - (stor8 * s / 10^18) / s / 10^18 != -stor8 + 10^18:
+                                                revert with 0, 'SafeMath mul failed.'
+                                            s = (10^18 * s / 10^18) - (stor8 * s / 10^18)
+                                            t = t + 1
+                                            u = s / 10^18
+                                            continue 
+                                        if not -stor24[address(arg1)].field_1024:
+                                            if 0 > -stor24[address(arg1)].field_1024:
+                                                revert with 0, 'SafeMath sub failed.'
+                                            if -stor24[address(arg1)].field_1024 >= stor16:
+                                                if stor16 > 0:
+                                                    if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_1024 += stor16
+                                                    stor24[address(arg1)].field_1280 = block.timestamp
+                                                if stor24[address(arg1)].field_768 <= 0:
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), stor16
+                                                else:
+                                                    if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_768 = 0
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), stor24[address(arg1)].field_768 + stor16
+                                            else:
+                                                if -stor24[address(arg1)].field_1024 > 0:
+                                                    if 0 < stor24[address(arg1)].field_1024:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_1024 = 0
+                                                    stor24[address(arg1)].field_1280 = block.timestamp
+                                                if stor24[address(arg1)].field_768 <= 0:
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), -stor24[address(arg1)].field_1024
+                                                else:
+                                                    if stor24[address(arg1)].field_768 - stor24[address(arg1)].field_1024 < -stor24[address(arg1)].field_1024:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_768 = 0
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), stor24[address(arg1)].field_768 - stor24[address(arg1)].field_1024
+                                        else:
+                                            if -1 * s / 10^18 * stor24[address(arg1)].field_1024 / -stor24[address(arg1)].field_1024 != s / 10^18:
+                                                revert with 0, 'SafeMath mul failed.'
+                                            if -1 * s / 10^18 * stor24[address(arg1)].field_1024 / 10^18 > -stor24[address(arg1)].field_1024:
+                                                revert with 0, 'SafeMath sub failed.'
+                                            if -stor24[address(arg1)].field_1024 - (-1 * s / 10^18 * stor24[address(arg1)].field_1024 / 10^18) >= stor16:
+                                                if stor16 > 0:
+                                                    if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_1024 += stor16
+                                                    stor24[address(arg1)].field_1280 = block.timestamp
+                                                if stor24[address(arg1)].field_768 <= 0:
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), stor16
+                                                else:
+                                                    if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_768 = 0
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), stor24[address(arg1)].field_768 + stor16
+                                            else:
+                                                if -stor24[address(arg1)].field_1024 - (-1 * s / 10^18 * stor24[address(arg1)].field_1024 / 10^18) > 0:
+                                                    if --1 * s / 10^18 * stor24[address(arg1)].field_1024 / 10^18 < stor24[address(arg1)].field_1024:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_1024 = --1 * s / 10^18 * stor24[address(arg1)].field_1024 / 10^18
+                                                    stor24[address(arg1)].field_1280 = block.timestamp
+                                                if stor24[address(arg1)].field_768 <= 0:
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), -stor24[address(arg1)].field_1024 - (-1 * s / 10^18 * stor24[address(arg1)].field_1024 / 10^18)
+                                                else:
+                                                    if stor24[address(arg1)].field_768 < 0:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_768 = 0
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), stor24[address(arg1)].field_768 - stor24[address(arg1)].field_1024 - (-1 * s / 10^18 * stor24[address(arg1)].field_1024 / 10^18)
+                                        if not ext_call.success:
+                                            revert with ext_call.return_data[0 len return_data.size]
+                                        require return_data.size >= 32
+                                        if not ext_call.return_data[0]:
+                                            revert with 0, 'Withdrawal failed.'
+                                        else:
+                                            return 0
+                                revert with 0, 'SafeMath div failed.'
+                            if not -stor24[address(arg1)].field_1024:
+                                if 0 > -stor24[address(arg1)].field_1024:
+                                    revert with 0, 'SafeMath sub failed.'
+                                if -stor24[address(arg1)].field_1024 >= stor16:
+                                    if stor16 > 0:
+                                        if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_1024 += stor16
+                                        stor24[address(arg1)].field_1280 = block.timestamp
+                                    if stor24[address(arg1)].field_768 <= 0:
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), stor16
+                                    else:
+                                        if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_768 = 0
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), stor24[address(arg1)].field_768 + stor16
+                                else:
+                                    if -stor24[address(arg1)].field_1024 > 0:
+                                        if 0 < stor24[address(arg1)].field_1024:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_1024 = 0
+                                        stor24[address(arg1)].field_1280 = block.timestamp
+                                    if stor24[address(arg1)].field_768 <= 0:
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), -stor24[address(arg1)].field_1024
+                                    else:
+                                        if stor24[address(arg1)].field_768 - stor24[address(arg1)].field_1024 < -stor24[address(arg1)].field_1024:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_768 = 0
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), stor24[address(arg1)].field_768 - stor24[address(arg1)].field_1024
+                            else:
+                                if -1 * var73003 * stor24[address(arg1)].field_1024 / -stor24[address(arg1)].field_1024 != var73003:
+                                    revert with 0, 'SafeMath mul failed.'
+                                if -1 * var73003 * stor24[address(arg1)].field_1024 / 10^18 > -stor24[address(arg1)].field_1024:
+                                    revert with 0, 'SafeMath sub failed.'
+                                if -stor24[address(arg1)].field_1024 - (-1 * var73003 * stor24[address(arg1)].field_1024 / 10^18) >= stor16:
+                                    if stor16 > 0:
+                                        if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_1024 += stor16
+                                        stor24[address(arg1)].field_1280 = block.timestamp
+                                    if stor24[address(arg1)].field_768 <= 0:
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), stor16
+                                    else:
+                                        if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_768 = 0
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), stor24[address(arg1)].field_768 + stor16
+                                else:
+                                    if -stor24[address(arg1)].field_1024 - (-1 * var73003 * stor24[address(arg1)].field_1024 / 10^18) > 0:
+                                        if --1 * var73003 * stor24[address(arg1)].field_1024 / 10^18 < stor24[address(arg1)].field_1024:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_1024 = --1 * var73003 * stor24[address(arg1)].field_1024 / 10^18
+                                        stor24[address(arg1)].field_1280 = block.timestamp
+                                    if stor24[address(arg1)].field_768 <= 0:
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), -stor24[address(arg1)].field_1024 - (-1 * var73003 * stor24[address(arg1)].field_1024 / 10^18)
+                                    else:
+                                        if stor24[address(arg1)].field_768 < 0:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_768 = 0
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), stor24[address(arg1)].field_768 - stor24[address(arg1)].field_1024 - (-1 * var73003 * stor24[address(arg1)].field_1024 / 10^18)
+                else:
+                    if stor7 * stor24[address(arg1)].field_256 / stor24[address(arg1)].field_256 != stor7:
+                        revert with 0, 'SafeMath mul failed.'
+                    if stor7 * stor24[address(arg1)].field_256 / 10^18 > -stor24[address(arg1)].field_1024:
+                        revert with 0, 'SafeMath sub failed.'
+                    if stor24[address(arg1)].field_1280 > block.timestamp:
+                        revert with 0, 'SafeMath sub failed.'
+                    if -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) <= 0:
+                        if 0 < stor16:
+                            if stor24[address(arg1)].field_768 <= 0:
+                                require ext_code.size(sub_722d8ff0Address)
+                                call sub_722d8ff0Address.0xa9059cbb with:
+                                     gas gas_remaining wei
+                                    args address(arg1), 0
+                            else:
+                                if stor24[address(arg1)].field_768 < 0:
+                                    revert with 0, 'SafeMath add failed.'
+                                stor24[address(arg1)].field_768 = 0
+                                require ext_code.size(sub_722d8ff0Address)
+                                call sub_722d8ff0Address.0xa9059cbb with:
+                                     gas gas_remaining wei
+                                    args address(arg1), stor24[address(arg1)].field_768
+                        else:
+                            if stor16 > 0:
+                                if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                    revert with 0, 'SafeMath add failed.'
+                                stor24[address(arg1)].field_1024 += stor16
+                                stor24[address(arg1)].field_1280 = block.timestamp
+                            if stor24[address(arg1)].field_768 <= 0:
+                                require ext_code.size(sub_722d8ff0Address)
+                                call sub_722d8ff0Address.0xa9059cbb with:
+                                     gas gas_remaining wei
+                                    args address(arg1), stor16
+                            else:
+                                if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                    revert with 0, 'SafeMath add failed.'
+                                stor24[address(arg1)].field_768 = 0
+                                require ext_code.size(sub_722d8ff0Address)
+                                call sub_722d8ff0Address.0xa9059cbb with:
+                                     gas gas_remaining wei
+                                    args address(arg1), stor24[address(arg1)].field_768 + stor16
+                    else:
+                        if block.timestamp - stor24[address(arg1)].field_1280 < stor13:
+                            if 0 < stor16:
+                                if stor24[address(arg1)].field_768 <= 0:
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), 0
+                                else:
+                                    if stor24[address(arg1)].field_768 < 0:
+                                        revert with 0, 'SafeMath add failed.'
+                                    stor24[address(arg1)].field_768 = 0
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), stor24[address(arg1)].field_768
+                            else:
+                                if stor16 > 0:
+                                    if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                        revert with 0, 'SafeMath add failed.'
+                                    stor24[address(arg1)].field_1024 += stor16
+                                    stor24[address(arg1)].field_1280 = block.timestamp
+                                if stor24[address(arg1)].field_768 <= 0:
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), stor16
+                                else:
+                                    if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                        revert with 0, 'SafeMath add failed.'
+                                    stor24[address(arg1)].field_768 = 0
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), stor24[address(arg1)].field_768 + stor16
+                        else:
+                            if stor13 <= 0:
+                                revert with 0, 'SafeMath div failed.'
+                            require stor13
+                            if var74002 <= block.timestamp - stor24[address(arg1)].field_1280 / stor13:
+                                if stor8 > 10^18:
+                                    revert with 0, 'SafeMath sub failed.'
+                                if not var84002:
+                                    s = var84002
+                                    s = var84006
+                                    t = var84007
+                                    while stor13 > 0:
+                                        require stor13
+                                        if s + 1 <= block.timestamp - stor24[address(arg1)].field_1280 / stor13:
+                                            if stor8 > 10^18:
+                                                revert with 0, 'SafeMath sub failed.'
+                                            s = 0
+                                            s = s + 1
+                                            t = 0
+                                            continue 
+                                        if -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18):
+                                            if 0 / -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18):
+                                                revert with 0, 'SafeMath mul failed.'
+                                        if 0 > -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18):
+                                            revert with 0, 'SafeMath sub failed.'
+                                        if -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) >= stor16:
+                                            if stor16 > 0:
+                                                if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_1024 += stor16
+                                                stor24[address(arg1)].field_1280 = block.timestamp
+                                            if stor24[address(arg1)].field_768 <= 0:
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), stor16
+                                            else:
+                                                if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_768 = 0
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), stor24[address(arg1)].field_768 + stor16
+                                        else:
+                                            if -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) > 0:
+                                                if -stor7 * stor24[address(arg1)].field_256 / 10^18 < stor24[address(arg1)].field_1024:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_1024 = -stor7 * stor24[address(arg1)].field_256 / 10^18
+                                                stor24[address(arg1)].field_1280 = block.timestamp
+                                            if stor24[address(arg1)].field_768 <= 0:
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18)
+                                            else:
+                                                if stor24[address(arg1)].field_768 < 0:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_768 = 0
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), stor24[address(arg1)].field_768 - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18)
+                                        if not ext_call.success:
+                                            revert with ext_call.return_data[0 len return_data.size]
+                                        require return_data.size >= 32
+                                        if not ext_call.return_data[0]:
+                                            revert with 0, 'Withdrawal failed.'
+                                        else:
+                                            return 0
+                                else:
+                                    require var87003
+                                    if var89001 / var89002 != -stor8 + 10^18:
+                                        revert with 0, 'SafeMath mul failed.'
+                                    s = var91001
+                                    t = var91008
+                                    u = var91009
+                                    while stor13 > 0:
+                                        require stor13
+                                        if t + 1 <= block.timestamp - stor24[address(arg1)].field_1280 / stor13:
+                                            if stor8 > 10^18:
+                                                revert with 0, 'SafeMath sub failed.'
+                                            if not s / 10^18:
+                                                s = 0
+                                                t = t + 1
+                                                u = s / 10^18
+                                                continue 
+                                            if (10^18 * s / 10^18) - (stor8 * s / 10^18) / s / 10^18 != -stor8 + 10^18:
+                                                revert with 0, 'SafeMath mul failed.'
+                                            s = (10^18 * s / 10^18) - (stor8 * s / 10^18)
+                                            t = t + 1
+                                            u = s / 10^18
+                                            continue 
+                                        if not -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18):
+                                            if 0 > -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18):
+                                                revert with 0, 'SafeMath sub failed.'
+                                            if -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) >= stor16:
+                                                if stor16 > 0:
+                                                    if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_1024 += stor16
+                                                    stor24[address(arg1)].field_1280 = block.timestamp
+                                                if stor24[address(arg1)].field_768 <= 0:
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), stor16
+                                                else:
+                                                    if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_768 = 0
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), stor24[address(arg1)].field_768 + stor16
+                                            else:
+                                                if -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) > 0:
+                                                    if -stor7 * stor24[address(arg1)].field_256 / 10^18 < stor24[address(arg1)].field_1024:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_1024 = -stor7 * stor24[address(arg1)].field_256 / 10^18
+                                                    stor24[address(arg1)].field_1280 = block.timestamp
+                                                if stor24[address(arg1)].field_768 <= 0:
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18)
+                                                else:
+                                                    if stor24[address(arg1)].field_768 < 0:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_768 = 0
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), stor24[address(arg1)].field_768 - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18)
+                                        else:
+                                            if (-1 * stor24[address(arg1)].field_1024 * s / 10^18) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * s / 10^18) / -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) != s / 10^18:
+                                                revert with 0, 'SafeMath mul failed.'
+                                            if (-1 * stor24[address(arg1)].field_1024 * s / 10^18) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * s / 10^18) / 10^18 > -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18):
+                                                revert with 0, 'SafeMath sub failed.'
+                                            if -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) - ((-1 * stor24[address(arg1)].field_1024 * s / 10^18) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * s / 10^18) / 10^18) >= stor16:
+                                                if stor16 > 0:
+                                                    if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_1024 += stor16
+                                                    stor24[address(arg1)].field_1280 = block.timestamp
+                                                if stor24[address(arg1)].field_768 <= 0:
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), stor16
+                                                else:
+                                                    if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_768 = 0
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), stor24[address(arg1)].field_768 + stor16
+                                            else:
+                                                if -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) - ((-1 * stor24[address(arg1)].field_1024 * s / 10^18) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * s / 10^18) / 10^18) > 0:
+                                                    if -(stor7 * stor24[address(arg1)].field_256 / 10^18) - ((-1 * stor24[address(arg1)].field_1024 * s / 10^18) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * s / 10^18) / 10^18) < stor24[address(arg1)].field_1024:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_1024 = -(stor7 * stor24[address(arg1)].field_256 / 10^18) - ((-1 * stor24[address(arg1)].field_1024 * s / 10^18) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * s / 10^18) / 10^18)
+                                                    stor24[address(arg1)].field_1280 = block.timestamp
+                                                if stor24[address(arg1)].field_768 <= 0:
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) - ((-1 * stor24[address(arg1)].field_1024 * s / 10^18) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * s / 10^18) / 10^18)
+                                                else:
+                                                    if stor24[address(arg1)].field_768 < 0:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_768 = 0
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), stor24[address(arg1)].field_768 - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) - ((-1 * stor24[address(arg1)].field_1024 * s / 10^18) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * s / 10^18) / 10^18)
+                                        if not ext_call.success:
+                                            revert with ext_call.return_data[0 len return_data.size]
+                                        require return_data.size >= 32
+                                        if not ext_call.return_data[0]:
+                                            revert with 0, 'Withdrawal failed.'
+                                        else:
+                                            return 0
+                                revert with 0, 'SafeMath div failed.'
+                            if not -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18):
+                                if 0 > -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18):
+                                    revert with 0, 'SafeMath sub failed.'
+                                if -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) >= stor16:
+                                    if stor16 > 0:
+                                        if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_1024 += stor16
+                                        stor24[address(arg1)].field_1280 = block.timestamp
+                                    if stor24[address(arg1)].field_768 <= 0:
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), stor16
+                                    else:
+                                        if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_768 = 0
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), stor24[address(arg1)].field_768 + stor16
+                                else:
+                                    if -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) > 0:
+                                        if -stor7 * stor24[address(arg1)].field_256 / 10^18 < stor24[address(arg1)].field_1024:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_1024 = -stor7 * stor24[address(arg1)].field_256 / 10^18
+                                        stor24[address(arg1)].field_1280 = block.timestamp
+                                    if stor24[address(arg1)].field_768 <= 0:
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18)
+                                    else:
+                                        if stor24[address(arg1)].field_768 < 0:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_768 = 0
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), stor24[address(arg1)].field_768 - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18)
+                            else:
+                                if (-1 * stor24[address(arg1)].field_1024 * var74003) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * var74003) / -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) != var74003:
+                                    revert with 0, 'SafeMath mul failed.'
+                                if (-1 * stor24[address(arg1)].field_1024 * var74003) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * var74003) / 10^18 > -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18):
+                                    revert with 0, 'SafeMath sub failed.'
+                                if -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) - ((-1 * stor24[address(arg1)].field_1024 * var74003) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * var74003) / 10^18) >= stor16:
+                                    if stor16 > 0:
+                                        if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_1024 += stor16
+                                        stor24[address(arg1)].field_1280 = block.timestamp
+                                    if stor24[address(arg1)].field_768 <= 0:
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), stor16
+                                    else:
+                                        if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_768 = 0
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), stor24[address(arg1)].field_768 + stor16
+                                else:
+                                    if -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) - ((-1 * stor24[address(arg1)].field_1024 * var74003) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * var74003) / 10^18) > 0:
+                                        if -(stor7 * stor24[address(arg1)].field_256 / 10^18) - ((-1 * stor24[address(arg1)].field_1024 * var74003) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * var74003) / 10^18) < stor24[address(arg1)].field_1024:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_1024 = -(stor7 * stor24[address(arg1)].field_256 / 10^18) - ((-1 * stor24[address(arg1)].field_1024 * var74003) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * var74003) / 10^18)
+                                        stor24[address(arg1)].field_1280 = block.timestamp
+                                    if stor24[address(arg1)].field_768 <= 0:
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), -stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) - ((-1 * stor24[address(arg1)].field_1024 * var74003) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * var74003) / 10^18)
+                                    else:
+                                        if stor24[address(arg1)].field_768 < 0:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_768 = 0
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), stor24[address(arg1)].field_768 - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) - ((-1 * stor24[address(arg1)].field_1024 * var74003) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * var74003) / 10^18)
+        else:
+            if stor7 * stor24[address(arg1)].field_0 / stor24[address(arg1)].field_0 != stor7:
+                revert with 0, 'SafeMath mul failed.'
+            if stor24[address(arg1)].field_1024 > stor7 * stor24[address(arg1)].field_0 / 10^18:
+                revert with 0, 'SafeMath sub failed.'
+            if stor24[address(arg1)].field_512 <= block.timestamp:
+                if stor24[address(arg1)].field_1280 > block.timestamp:
+                    revert with 0, 'SafeMath sub failed.'
+                if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 <= 0:
+                    if 0 < stor16:
+                        if stor24[address(arg1)].field_768 <= 0:
+                            require ext_code.size(sub_722d8ff0Address)
+                            call sub_722d8ff0Address.0xa9059cbb with:
+                                 gas gas_remaining wei
+                                args address(arg1), 0
+                        else:
+                            if stor24[address(arg1)].field_768 < 0:
+                                revert with 0, 'SafeMath add failed.'
+                            stor24[address(arg1)].field_768 = 0
+                            require ext_code.size(sub_722d8ff0Address)
+                            call sub_722d8ff0Address.0xa9059cbb with:
+                                 gas gas_remaining wei
+                                args address(arg1), stor24[address(arg1)].field_768
+                    else:
+                        if stor16 > 0:
+                            if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                revert with 0, 'SafeMath add failed.'
+                            stor24[address(arg1)].field_1024 += stor16
+                            stor24[address(arg1)].field_1280 = block.timestamp
+                        if stor24[address(arg1)].field_768 <= 0:
+                            require ext_code.size(sub_722d8ff0Address)
+                            call sub_722d8ff0Address.0xa9059cbb with:
+                                 gas gas_remaining wei
+                                args address(arg1), stor16
+                        else:
+                            if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                revert with 0, 'SafeMath add failed.'
+                            stor24[address(arg1)].field_768 = 0
+                            require ext_code.size(sub_722d8ff0Address)
+                            call sub_722d8ff0Address.0xa9059cbb with:
+                                 gas gas_remaining wei
+                                args address(arg1), stor24[address(arg1)].field_768 + stor16
+                else:
+                    if block.timestamp - stor24[address(arg1)].field_1280 < stor13:
+                        if 0 < stor16:
+                            if stor24[address(arg1)].field_768 <= 0:
+                                require ext_code.size(sub_722d8ff0Address)
+                                call sub_722d8ff0Address.0xa9059cbb with:
+                                     gas gas_remaining wei
+                                    args address(arg1), 0
+                            else:
+                                if stor24[address(arg1)].field_768 < 0:
+                                    revert with 0, 'SafeMath add failed.'
+                                stor24[address(arg1)].field_768 = 0
+                                require ext_code.size(sub_722d8ff0Address)
+                                call sub_722d8ff0Address.0xa9059cbb with:
+                                     gas gas_remaining wei
+                                    args address(arg1), stor24[address(arg1)].field_768
+                        else:
+                            if stor16 > 0:
+                                if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                    revert with 0, 'SafeMath add failed.'
+                                stor24[address(arg1)].field_1024 += stor16
+                                stor24[address(arg1)].field_1280 = block.timestamp
+                            if stor24[address(arg1)].field_768 <= 0:
+                                require ext_code.size(sub_722d8ff0Address)
+                                call sub_722d8ff0Address.0xa9059cbb with:
+                                     gas gas_remaining wei
+                                    args address(arg1), stor16
+                            else:
+                                if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                    revert with 0, 'SafeMath add failed.'
+                                stor24[address(arg1)].field_768 = 0
+                                require ext_code.size(sub_722d8ff0Address)
+                                call sub_722d8ff0Address.0xa9059cbb with:
+                                     gas gas_remaining wei
+                                    args address(arg1), stor24[address(arg1)].field_768 + stor16
+                    else:
+                        if stor13 <= 0:
+                            revert with 0, 'SafeMath div failed.'
+                        require stor13
+                        if var62002 <= block.timestamp - stor24[address(arg1)].field_1280 / stor13:
+                            if stor8 > 10^18:
+                                revert with 0, 'SafeMath sub failed.'
+                            if not var72002:
+                                s = var72002
+                                s = var72006
+                                t = var72007
+                                while stor13 > 0:
+                                    require stor13
+                                    if s + 1 <= block.timestamp - stor24[address(arg1)].field_1280 / stor13:
+                                        if stor8 > 10^18:
+                                            revert with 0, 'SafeMath sub failed.'
+                                        s = 0
+                                        s = s + 1
+                                        t = 0
+                                        continue 
+                                    if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024:
+                                        if 0 / (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024:
+                                            revert with 0, 'SafeMath mul failed.'
+                                    if 0 > (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024:
+                                        revert with 0, 'SafeMath sub failed.'
+                                    if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 >= stor16:
+                                        if stor16 > 0:
+                                            if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                                revert with 0, 'SafeMath add failed.'
+                                            stor24[address(arg1)].field_1024 += stor16
+                                            stor24[address(arg1)].field_1280 = block.timestamp
+                                        if stor24[address(arg1)].field_768 <= 0:
+                                            require ext_code.size(sub_722d8ff0Address)
+                                            call sub_722d8ff0Address.0xa9059cbb with:
+                                                 gas gas_remaining wei
+                                                args address(arg1), stor16
+                                        else:
+                                            if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                                revert with 0, 'SafeMath add failed.'
+                                            stor24[address(arg1)].field_768 = 0
+                                            require ext_code.size(sub_722d8ff0Address)
+                                            call sub_722d8ff0Address.0xa9059cbb with:
+                                                 gas gas_remaining wei
+                                                args address(arg1), stor24[address(arg1)].field_768 + stor16
+                                    else:
+                                        if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 > 0:
+                                            if stor7 * stor24[address(arg1)].field_0 / 10^18 < stor24[address(arg1)].field_1024:
+                                                revert with 0, 'SafeMath add failed.'
+                                            stor24[address(arg1)].field_1024 = stor7 * stor24[address(arg1)].field_0 / 10^18
+                                            stor24[address(arg1)].field_1280 = block.timestamp
+                                        if stor24[address(arg1)].field_768 <= 0:
+                                            require ext_code.size(sub_722d8ff0Address)
+                                            call sub_722d8ff0Address.0xa9059cbb with:
+                                                 gas gas_remaining wei
+                                                args address(arg1), (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024
+                                        else:
+                                            if stor24[address(arg1)].field_768 < 0:
+                                                revert with 0, 'SafeMath add failed.'
+                                            stor24[address(arg1)].field_768 = 0
+                                            require ext_code.size(sub_722d8ff0Address)
+                                            call sub_722d8ff0Address.0xa9059cbb with:
+                                                 gas gas_remaining wei
+                                                args address(arg1), stor24[address(arg1)].field_768 + (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    if not ext_call.return_data[0]:
+                                        revert with 0, 'Withdrawal failed.'
+                                    else:
+                                        return 0
+                            else:
+                                require var75003
+                                if var77001 / var77002 != -stor8 + 10^18:
+                                    revert with 0, 'SafeMath mul failed.'
+                                s = var79001
+                                t = var79008
+                                u = var79009
+                                while stor13 > 0:
+                                    require stor13
+                                    if t + 1 <= block.timestamp - stor24[address(arg1)].field_1280 / stor13:
+                                        if stor8 > 10^18:
+                                            revert with 0, 'SafeMath sub failed.'
+                                        if not s / 10^18:
+                                            s = 0
+                                            t = t + 1
+                                            u = s / 10^18
+                                            continue 
+                                        if (10^18 * s / 10^18) - (stor8 * s / 10^18) / s / 10^18 != -stor8 + 10^18:
+                                            revert with 0, 'SafeMath mul failed.'
+                                        s = (10^18 * s / 10^18) - (stor8 * s / 10^18)
+                                        t = t + 1
+                                        u = s / 10^18
+                                        continue 
+                                    if not (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024:
+                                        if 0 > (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024:
+                                            revert with 0, 'SafeMath sub failed.'
+                                        if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 >= stor16:
+                                            if stor16 > 0:
+                                                if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_1024 += stor16
+                                                stor24[address(arg1)].field_1280 = block.timestamp
+                                            if stor24[address(arg1)].field_768 <= 0:
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), stor16
+                                            else:
+                                                if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_768 = 0
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), stor24[address(arg1)].field_768 + stor16
+                                        else:
+                                            if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 > 0:
+                                                if stor7 * stor24[address(arg1)].field_0 / 10^18 < stor24[address(arg1)].field_1024:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_1024 = stor7 * stor24[address(arg1)].field_0 / 10^18
+                                                stor24[address(arg1)].field_1280 = block.timestamp
+                                            if stor24[address(arg1)].field_768 <= 0:
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024
+                                            else:
+                                                if stor24[address(arg1)].field_768 < 0:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_768 = 0
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), stor24[address(arg1)].field_768 + (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024
+                                    else:
+                                        if (stor7 * stor24[address(arg1)].field_0 / 10^18 * s / 10^18) - (stor24[address(arg1)].field_1024 * s / 10^18) / (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 != s / 10^18:
+                                            revert with 0, 'SafeMath mul failed.'
+                                        if (stor7 * stor24[address(arg1)].field_0 / 10^18 * s / 10^18) - (stor24[address(arg1)].field_1024 * s / 10^18) / 10^18 > (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024:
+                                            revert with 0, 'SafeMath sub failed.'
+                                        if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * s / 10^18) - (stor24[address(arg1)].field_1024 * s / 10^18) / 10^18) >= stor16:
+                                            if stor16 > 0:
+                                                if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_1024 += stor16
+                                                stor24[address(arg1)].field_1280 = block.timestamp
+                                            if stor24[address(arg1)].field_768 <= 0:
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), stor16
+                                            else:
+                                                if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_768 = 0
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), stor24[address(arg1)].field_768 + stor16
+                                        else:
+                                            if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * s / 10^18) - (stor24[address(arg1)].field_1024 * s / 10^18) / 10^18) > 0:
+                                                if (stor7 * stor24[address(arg1)].field_0 / 10^18) - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * s / 10^18) - (stor24[address(arg1)].field_1024 * s / 10^18) / 10^18) < stor24[address(arg1)].field_1024:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_1024 = (stor7 * stor24[address(arg1)].field_0 / 10^18) - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * s / 10^18) - (stor24[address(arg1)].field_1024 * s / 10^18) / 10^18)
+                                                stor24[address(arg1)].field_1280 = block.timestamp
+                                            if stor24[address(arg1)].field_768 <= 0:
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * s / 10^18) - (stor24[address(arg1)].field_1024 * s / 10^18) / 10^18)
+                                            else:
+                                                if stor24[address(arg1)].field_768 < 0:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_768 = 0
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), stor24[address(arg1)].field_768 + (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * s / 10^18) - (stor24[address(arg1)].field_1024 * s / 10^18) / 10^18)
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    if not ext_call.return_data[0]:
+                                        revert with 0, 'Withdrawal failed.'
+                                    else:
+                                        return 0
+                            revert with 0, 'SafeMath div failed.'
+                        if not (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024:
+                            if 0 > (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024:
+                                revert with 0, 'SafeMath sub failed.'
+                            if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 >= stor16:
+                                if stor16 > 0:
+                                    if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                        revert with 0, 'SafeMath add failed.'
+                                    stor24[address(arg1)].field_1024 += stor16
+                                    stor24[address(arg1)].field_1280 = block.timestamp
+                                if stor24[address(arg1)].field_768 <= 0:
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), stor16
+                                else:
+                                    if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                        revert with 0, 'SafeMath add failed.'
+                                    stor24[address(arg1)].field_768 = 0
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), stor24[address(arg1)].field_768 + stor16
+                            else:
+                                if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 > 0:
+                                    if stor7 * stor24[address(arg1)].field_0 / 10^18 < stor24[address(arg1)].field_1024:
+                                        revert with 0, 'SafeMath add failed.'
+                                    stor24[address(arg1)].field_1024 = stor7 * stor24[address(arg1)].field_0 / 10^18
+                                    stor24[address(arg1)].field_1280 = block.timestamp
+                                if stor24[address(arg1)].field_768 <= 0:
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024
+                                else:
+                                    if stor24[address(arg1)].field_768 < 0:
+                                        revert with 0, 'SafeMath add failed.'
+                                    stor24[address(arg1)].field_768 = 0
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), stor24[address(arg1)].field_768 + (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024
+                        else:
+                            if (stor7 * stor24[address(arg1)].field_0 / 10^18 * var62003) - (stor24[address(arg1)].field_1024 * var62003) / (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 != var62003:
+                                revert with 0, 'SafeMath mul failed.'
+                            if (stor7 * stor24[address(arg1)].field_0 / 10^18 * var62003) - (stor24[address(arg1)].field_1024 * var62003) / 10^18 > (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024:
+                                revert with 0, 'SafeMath sub failed.'
+                            if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * var62003) - (stor24[address(arg1)].field_1024 * var62003) / 10^18) >= stor16:
+                                if stor16 > 0:
+                                    if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                        revert with 0, 'SafeMath add failed.'
+                                    stor24[address(arg1)].field_1024 += stor16
+                                    stor24[address(arg1)].field_1280 = block.timestamp
+                                if stor24[address(arg1)].field_768 <= 0:
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), stor16
+                                else:
+                                    if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                        revert with 0, 'SafeMath add failed.'
+                                    stor24[address(arg1)].field_768 = 0
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), stor24[address(arg1)].field_768 + stor16
+                            else:
+                                if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * var62003) - (stor24[address(arg1)].field_1024 * var62003) / 10^18) > 0:
+                                    if (stor7 * stor24[address(arg1)].field_0 / 10^18) - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * var62003) - (stor24[address(arg1)].field_1024 * var62003) / 10^18) < stor24[address(arg1)].field_1024:
+                                        revert with 0, 'SafeMath add failed.'
+                                    stor24[address(arg1)].field_1024 = (stor7 * stor24[address(arg1)].field_0 / 10^18) - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * var62003) - (stor24[address(arg1)].field_1024 * var62003) / 10^18)
+                                    stor24[address(arg1)].field_1280 = block.timestamp
+                                if stor24[address(arg1)].field_768 <= 0:
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * var62003) - (stor24[address(arg1)].field_1024 * var62003) / 10^18)
+                                else:
+                                    if stor24[address(arg1)].field_768 < 0:
+                                        revert with 0, 'SafeMath add failed.'
+                                    stor24[address(arg1)].field_768 = 0
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), stor24[address(arg1)].field_768 + (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * var62003) - (stor24[address(arg1)].field_1024 * var62003) / 10^18)
+            else:
+                if not stor24[address(arg1)].field_256:
+                    if 0 > (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024:
+                        revert with 0, 'SafeMath sub failed.'
+                    if stor24[address(arg1)].field_1280 > block.timestamp:
+                        revert with 0, 'SafeMath sub failed.'
+                    if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 <= 0:
+                        if 0 < stor16:
+                            if stor24[address(arg1)].field_768 <= 0:
+                                require ext_code.size(sub_722d8ff0Address)
+                                call sub_722d8ff0Address.0xa9059cbb with:
+                                     gas gas_remaining wei
+                                    args address(arg1), 0
+                            else:
+                                if stor24[address(arg1)].field_768 < 0:
+                                    revert with 0, 'SafeMath add failed.'
+                                stor24[address(arg1)].field_768 = 0
+                                require ext_code.size(sub_722d8ff0Address)
+                                call sub_722d8ff0Address.0xa9059cbb with:
+                                     gas gas_remaining wei
+                                    args address(arg1), stor24[address(arg1)].field_768
+                        else:
+                            if stor16 > 0:
+                                if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                    revert with 0, 'SafeMath add failed.'
+                                stor24[address(arg1)].field_1024 += stor16
+                                stor24[address(arg1)].field_1280 = block.timestamp
+                            if stor24[address(arg1)].field_768 <= 0:
+                                require ext_code.size(sub_722d8ff0Address)
+                                call sub_722d8ff0Address.0xa9059cbb with:
+                                     gas gas_remaining wei
+                                    args address(arg1), stor16
+                            else:
+                                if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                    revert with 0, 'SafeMath add failed.'
+                                stor24[address(arg1)].field_768 = 0
+                                require ext_code.size(sub_722d8ff0Address)
+                                call sub_722d8ff0Address.0xa9059cbb with:
+                                     gas gas_remaining wei
+                                    args address(arg1), stor24[address(arg1)].field_768 + stor16
+                    else:
+                        if block.timestamp - stor24[address(arg1)].field_1280 < stor13:
+                            if 0 < stor16:
+                                if stor24[address(arg1)].field_768 <= 0:
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), 0
+                                else:
+                                    if stor24[address(arg1)].field_768 < 0:
+                                        revert with 0, 'SafeMath add failed.'
+                                    stor24[address(arg1)].field_768 = 0
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), stor24[address(arg1)].field_768
+                            else:
+                                if stor16 > 0:
+                                    if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                        revert with 0, 'SafeMath add failed.'
+                                    stor24[address(arg1)].field_1024 += stor16
+                                    stor24[address(arg1)].field_1280 = block.timestamp
+                                if stor24[address(arg1)].field_768 <= 0:
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), stor16
+                                else:
+                                    if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                        revert with 0, 'SafeMath add failed.'
+                                    stor24[address(arg1)].field_768 = 0
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), stor24[address(arg1)].field_768 + stor16
+                        else:
+                            if stor13 <= 0:
+                                revert with 0, 'SafeMath div failed.'
+                            require stor13
+                            if var74002 <= block.timestamp - stor24[address(arg1)].field_1280 / stor13:
+                                if stor8 > 10^18:
+                                    revert with 0, 'SafeMath sub failed.'
+                                if not var84002:
+                                    s = var84002
+                                    s = var84006
+                                    t = var84007
+                                    while stor13 > 0:
+                                        require stor13
+                                        if s + 1 <= block.timestamp - stor24[address(arg1)].field_1280 / stor13:
+                                            if stor8 > 10^18:
+                                                revert with 0, 'SafeMath sub failed.'
+                                            s = 0
+                                            s = s + 1
+                                            t = 0
+                                            continue 
+                                        if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024:
+                                            if 0 / (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024:
+                                                revert with 0, 'SafeMath mul failed.'
+                                        if 0 > (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024:
+                                            revert with 0, 'SafeMath sub failed.'
+                                        if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 >= stor16:
+                                            if stor16 > 0:
+                                                if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_1024 += stor16
+                                                stor24[address(arg1)].field_1280 = block.timestamp
+                                            if stor24[address(arg1)].field_768 <= 0:
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), stor16
+                                            else:
+                                                if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_768 = 0
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), stor24[address(arg1)].field_768 + stor16
+                                        else:
+                                            if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 > 0:
+                                                if stor7 * stor24[address(arg1)].field_0 / 10^18 < stor24[address(arg1)].field_1024:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_1024 = stor7 * stor24[address(arg1)].field_0 / 10^18
+                                                stor24[address(arg1)].field_1280 = block.timestamp
+                                            if stor24[address(arg1)].field_768 <= 0:
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024
+                                            else:
+                                                if stor24[address(arg1)].field_768 < 0:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_768 = 0
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), stor24[address(arg1)].field_768 + (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024
+                                        if not ext_call.success:
+                                            revert with ext_call.return_data[0 len return_data.size]
+                                        require return_data.size >= 32
+                                        if not ext_call.return_data[0]:
+                                            revert with 0, 'Withdrawal failed.'
+                                        else:
+                                            return 0
+                                else:
+                                    require var87003
+                                    if var89001 / var89002 != -stor8 + 10^18:
+                                        revert with 0, 'SafeMath mul failed.'
+                                    s = var91001
+                                    t = var91008
+                                    u = var91009
+                                    while stor13 > 0:
+                                        require stor13
+                                        if t + 1 <= block.timestamp - stor24[address(arg1)].field_1280 / stor13:
+                                            if stor8 > 10^18:
+                                                revert with 0, 'SafeMath sub failed.'
+                                            if not s / 10^18:
+                                                s = 0
+                                                t = t + 1
+                                                u = s / 10^18
+                                                continue 
+                                            if (10^18 * s / 10^18) - (stor8 * s / 10^18) / s / 10^18 != -stor8 + 10^18:
+                                                revert with 0, 'SafeMath mul failed.'
+                                            s = (10^18 * s / 10^18) - (stor8 * s / 10^18)
+                                            t = t + 1
+                                            u = s / 10^18
+                                            continue 
+                                        if not (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024:
+                                            if 0 > (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024:
+                                                revert with 0, 'SafeMath sub failed.'
+                                            if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 >= stor16:
+                                                if stor16 > 0:
+                                                    if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_1024 += stor16
+                                                    stor24[address(arg1)].field_1280 = block.timestamp
+                                                if stor24[address(arg1)].field_768 <= 0:
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), stor16
+                                                else:
+                                                    if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_768 = 0
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), stor24[address(arg1)].field_768 + stor16
+                                            else:
+                                                if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 > 0:
+                                                    if stor7 * stor24[address(arg1)].field_0 / 10^18 < stor24[address(arg1)].field_1024:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_1024 = stor7 * stor24[address(arg1)].field_0 / 10^18
+                                                    stor24[address(arg1)].field_1280 = block.timestamp
+                                                if stor24[address(arg1)].field_768 <= 0:
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024
+                                                else:
+                                                    if stor24[address(arg1)].field_768 < 0:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_768 = 0
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), stor24[address(arg1)].field_768 + (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024
+                                        else:
+                                            if (stor7 * stor24[address(arg1)].field_0 / 10^18 * s / 10^18) - (stor24[address(arg1)].field_1024 * s / 10^18) / (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 != s / 10^18:
+                                                revert with 0, 'SafeMath mul failed.'
+                                            if (stor7 * stor24[address(arg1)].field_0 / 10^18 * s / 10^18) - (stor24[address(arg1)].field_1024 * s / 10^18) / 10^18 > (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024:
+                                                revert with 0, 'SafeMath sub failed.'
+                                            if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * s / 10^18) - (stor24[address(arg1)].field_1024 * s / 10^18) / 10^18) >= stor16:
+                                                if stor16 > 0:
+                                                    if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_1024 += stor16
+                                                    stor24[address(arg1)].field_1280 = block.timestamp
+                                                if stor24[address(arg1)].field_768 <= 0:
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), stor16
+                                                else:
+                                                    if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_768 = 0
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), stor24[address(arg1)].field_768 + stor16
+                                            else:
+                                                if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * s / 10^18) - (stor24[address(arg1)].field_1024 * s / 10^18) / 10^18) > 0:
+                                                    if (stor7 * stor24[address(arg1)].field_0 / 10^18) - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * s / 10^18) - (stor24[address(arg1)].field_1024 * s / 10^18) / 10^18) < stor24[address(arg1)].field_1024:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_1024 = (stor7 * stor24[address(arg1)].field_0 / 10^18) - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * s / 10^18) - (stor24[address(arg1)].field_1024 * s / 10^18) / 10^18)
+                                                    stor24[address(arg1)].field_1280 = block.timestamp
+                                                if stor24[address(arg1)].field_768 <= 0:
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * s / 10^18) - (stor24[address(arg1)].field_1024 * s / 10^18) / 10^18)
+                                                else:
+                                                    if stor24[address(arg1)].field_768 < 0:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_768 = 0
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), stor24[address(arg1)].field_768 + (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * s / 10^18) - (stor24[address(arg1)].field_1024 * s / 10^18) / 10^18)
+                                        if not ext_call.success:
+                                            revert with ext_call.return_data[0 len return_data.size]
+                                        require return_data.size >= 32
+                                        if not ext_call.return_data[0]:
+                                            revert with 0, 'Withdrawal failed.'
+                                        else:
+                                            return 0
+                                revert with 0, 'SafeMath div failed.'
+                            if not (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024:
+                                if 0 > (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024:
+                                    revert with 0, 'SafeMath sub failed.'
+                                if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 >= stor16:
+                                    if stor16 > 0:
+                                        if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_1024 += stor16
+                                        stor24[address(arg1)].field_1280 = block.timestamp
+                                    if stor24[address(arg1)].field_768 <= 0:
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), stor16
+                                    else:
+                                        if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_768 = 0
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), stor24[address(arg1)].field_768 + stor16
+                                else:
+                                    if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 > 0:
+                                        if stor7 * stor24[address(arg1)].field_0 / 10^18 < stor24[address(arg1)].field_1024:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_1024 = stor7 * stor24[address(arg1)].field_0 / 10^18
+                                        stor24[address(arg1)].field_1280 = block.timestamp
+                                    if stor24[address(arg1)].field_768 <= 0:
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024
+                                    else:
+                                        if stor24[address(arg1)].field_768 < 0:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_768 = 0
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), stor24[address(arg1)].field_768 + (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024
+                            else:
+                                if (stor7 * stor24[address(arg1)].field_0 / 10^18 * var74003) - (stor24[address(arg1)].field_1024 * var74003) / (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 != var74003:
+                                    revert with 0, 'SafeMath mul failed.'
+                                if (stor7 * stor24[address(arg1)].field_0 / 10^18 * var74003) - (stor24[address(arg1)].field_1024 * var74003) / 10^18 > (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024:
+                                    revert with 0, 'SafeMath sub failed.'
+                                if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * var74003) - (stor24[address(arg1)].field_1024 * var74003) / 10^18) >= stor16:
+                                    if stor16 > 0:
+                                        if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_1024 += stor16
+                                        stor24[address(arg1)].field_1280 = block.timestamp
+                                    if stor24[address(arg1)].field_768 <= 0:
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), stor16
+                                    else:
+                                        if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_768 = 0
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), stor24[address(arg1)].field_768 + stor16
+                                else:
+                                    if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * var74003) - (stor24[address(arg1)].field_1024 * var74003) / 10^18) > 0:
+                                        if (stor7 * stor24[address(arg1)].field_0 / 10^18) - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * var74003) - (stor24[address(arg1)].field_1024 * var74003) / 10^18) < stor24[address(arg1)].field_1024:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_1024 = (stor7 * stor24[address(arg1)].field_0 / 10^18) - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * var74003) - (stor24[address(arg1)].field_1024 * var74003) / 10^18)
+                                        stor24[address(arg1)].field_1280 = block.timestamp
+                                    if stor24[address(arg1)].field_768 <= 0:
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * var74003) - (stor24[address(arg1)].field_1024 * var74003) / 10^18)
+                                    else:
+                                        if stor24[address(arg1)].field_768 < 0:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_768 = 0
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), stor24[address(arg1)].field_768 + (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * var74003) - (stor24[address(arg1)].field_1024 * var74003) / 10^18)
+                else:
+                    if stor7 * stor24[address(arg1)].field_256 / stor24[address(arg1)].field_256 != stor7:
+                        revert with 0, 'SafeMath mul failed.'
+                    if stor7 * stor24[address(arg1)].field_256 / 10^18 > (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024:
+                        revert with 0, 'SafeMath sub failed.'
+                    if stor24[address(arg1)].field_1280 > block.timestamp:
+                        revert with 0, 'SafeMath sub failed.'
+                    if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) <= 0:
+                        if 0 < stor16:
+                            if stor24[address(arg1)].field_768 <= 0:
+                                require ext_code.size(sub_722d8ff0Address)
+                                call sub_722d8ff0Address.0xa9059cbb with:
+                                     gas gas_remaining wei
+                                    args address(arg1), 0
+                            else:
+                                if stor24[address(arg1)].field_768 < 0:
+                                    revert with 0, 'SafeMath add failed.'
+                                stor24[address(arg1)].field_768 = 0
+                                require ext_code.size(sub_722d8ff0Address)
+                                call sub_722d8ff0Address.0xa9059cbb with:
+                                     gas gas_remaining wei
+                                    args address(arg1), stor24[address(arg1)].field_768
+                        else:
+                            if stor16 > 0:
+                                if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                    revert with 0, 'SafeMath add failed.'
+                                stor24[address(arg1)].field_1024 += stor16
+                                stor24[address(arg1)].field_1280 = block.timestamp
+                            if stor24[address(arg1)].field_768 <= 0:
+                                require ext_code.size(sub_722d8ff0Address)
+                                call sub_722d8ff0Address.0xa9059cbb with:
+                                     gas gas_remaining wei
+                                    args address(arg1), stor16
+                            else:
+                                if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                    revert with 0, 'SafeMath add failed.'
+                                stor24[address(arg1)].field_768 = 0
+                                require ext_code.size(sub_722d8ff0Address)
+                                call sub_722d8ff0Address.0xa9059cbb with:
+                                     gas gas_remaining wei
+                                    args address(arg1), stor24[address(arg1)].field_768 + stor16
+                    else:
+                        if block.timestamp - stor24[address(arg1)].field_1280 < stor13:
+                            if 0 < stor16:
+                                if stor24[address(arg1)].field_768 <= 0:
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), 0
+                                else:
+                                    if stor24[address(arg1)].field_768 < 0:
+                                        revert with 0, 'SafeMath add failed.'
+                                    stor24[address(arg1)].field_768 = 0
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), stor24[address(arg1)].field_768
+                            else:
+                                if stor16 > 0:
+                                    if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                        revert with 0, 'SafeMath add failed.'
+                                    stor24[address(arg1)].field_1024 += stor16
+                                    stor24[address(arg1)].field_1280 = block.timestamp
+                                if stor24[address(arg1)].field_768 <= 0:
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), stor16
+                                else:
+                                    if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                        revert with 0, 'SafeMath add failed.'
+                                    stor24[address(arg1)].field_768 = 0
+                                    require ext_code.size(sub_722d8ff0Address)
+                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args address(arg1), stor24[address(arg1)].field_768 + stor16
+                        else:
+                            if stor13 <= 0:
+                                revert with 0, 'SafeMath div failed.'
+                            require stor13
+                            if var75002 <= block.timestamp - stor24[address(arg1)].field_1280 / stor13:
+                                if stor8 > 10^18:
+                                    revert with 0, 'SafeMath sub failed.'
+                                if not var85002:
+                                    s = var85002
+                                    s = var85006
+                                    t = var85007
+                                    while stor13 > 0:
+                                        require stor13
+                                        if s + 1 <= block.timestamp - stor24[address(arg1)].field_1280 / stor13:
+                                            if stor8 > 10^18:
+                                                revert with 0, 'SafeMath sub failed.'
+                                            s = 0
+                                            s = s + 1
+                                            t = 0
+                                            continue 
+                                        if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18):
+                                            if 0 / (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18):
+                                                revert with 0, 'SafeMath mul failed.'
+                                        if 0 > (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18):
+                                            revert with 0, 'SafeMath sub failed.'
+                                        if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) >= stor16:
+                                            if stor16 > 0:
+                                                if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_1024 += stor16
+                                                stor24[address(arg1)].field_1280 = block.timestamp
+                                            if stor24[address(arg1)].field_768 <= 0:
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), stor16
+                                            else:
+                                                if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_768 = 0
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), stor24[address(arg1)].field_768 + stor16
+                                        else:
+                                            if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) > 0:
+                                                if (stor7 * stor24[address(arg1)].field_0 / 10^18) - (stor7 * stor24[address(arg1)].field_256 / 10^18) < stor24[address(arg1)].field_1024:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_1024 = (stor7 * stor24[address(arg1)].field_0 / 10^18) - (stor7 * stor24[address(arg1)].field_256 / 10^18)
+                                                stor24[address(arg1)].field_1280 = block.timestamp
+                                            if stor24[address(arg1)].field_768 <= 0:
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18)
+                                            else:
+                                                if stor24[address(arg1)].field_768 < 0:
+                                                    revert with 0, 'SafeMath add failed.'
+                                                stor24[address(arg1)].field_768 = 0
+                                                require ext_code.size(sub_722d8ff0Address)
+                                                call sub_722d8ff0Address.0xa9059cbb with:
+                                                     gas gas_remaining wei
+                                                    args address(arg1), stor24[address(arg1)].field_768 + (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18)
+                                        if not ext_call.success:
+                                            revert with ext_call.return_data[0 len return_data.size]
+                                        require return_data.size >= 32
+                                        if not ext_call.return_data[0]:
+                                            revert with 0, 'Withdrawal failed.'
+                                        else:
+                                            return 0
+                                else:
+                                    require var88003
+                                    if var90001 / var90002 != -stor8 + 10^18:
+                                        revert with 0, 'SafeMath mul failed.'
+                                    s = var92001
+                                    t = var92008
+                                    u = var92009
+                                    while stor13 > 0:
+                                        require stor13
+                                        if t + 1 <= block.timestamp - stor24[address(arg1)].field_1280 / stor13:
+                                            if stor8 > 10^18:
+                                                revert with 0, 'SafeMath sub failed.'
+                                            if not s / 10^18:
+                                                s = 0
+                                                t = t + 1
+                                                u = s / 10^18
+                                                continue 
+                                            if (10^18 * s / 10^18) - (stor8 * s / 10^18) / s / 10^18 != -stor8 + 10^18:
+                                                revert with 0, 'SafeMath mul failed.'
+                                            s = (10^18 * s / 10^18) - (stor8 * s / 10^18)
+                                            t = t + 1
+                                            u = s / 10^18
+                                            continue 
+                                        if not (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18):
+                                            if 0 > (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18):
+                                                revert with 0, 'SafeMath sub failed.'
+                                            if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) >= stor16:
+                                                if stor16 > 0:
+                                                    if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_1024 += stor16
+                                                    stor24[address(arg1)].field_1280 = block.timestamp
+                                                if stor24[address(arg1)].field_768 <= 0:
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), stor16
+                                                else:
+                                                    if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_768 = 0
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), stor24[address(arg1)].field_768 + stor16
+                                            else:
+                                                if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) > 0:
+                                                    if (stor7 * stor24[address(arg1)].field_0 / 10^18) - (stor7 * stor24[address(arg1)].field_256 / 10^18) < stor24[address(arg1)].field_1024:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_1024 = (stor7 * stor24[address(arg1)].field_0 / 10^18) - (stor7 * stor24[address(arg1)].field_256 / 10^18)
+                                                    stor24[address(arg1)].field_1280 = block.timestamp
+                                                if stor24[address(arg1)].field_768 <= 0:
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18)
+                                                else:
+                                                    if stor24[address(arg1)].field_768 < 0:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_768 = 0
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), stor24[address(arg1)].field_768 + (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18)
+                                        else:
+                                            if (stor7 * stor24[address(arg1)].field_0 / 10^18 * s / 10^18) - (stor24[address(arg1)].field_1024 * s / 10^18) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * s / 10^18) / (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) != s / 10^18:
+                                                revert with 0, 'SafeMath mul failed.'
+                                            if (stor7 * stor24[address(arg1)].field_0 / 10^18 * s / 10^18) - (stor24[address(arg1)].field_1024 * s / 10^18) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * s / 10^18) / 10^18 > (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18):
+                                                revert with 0, 'SafeMath sub failed.'
+                                            if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * s / 10^18) - (stor24[address(arg1)].field_1024 * s / 10^18) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * s / 10^18) / 10^18) >= stor16:
+                                                if stor16 > 0:
+                                                    if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_1024 += stor16
+                                                    stor24[address(arg1)].field_1280 = block.timestamp
+                                                if stor24[address(arg1)].field_768 <= 0:
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), stor16
+                                                else:
+                                                    if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_768 = 0
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), stor24[address(arg1)].field_768 + stor16
+                                            else:
+                                                if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * s / 10^18) - (stor24[address(arg1)].field_1024 * s / 10^18) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * s / 10^18) / 10^18) > 0:
+                                                    if (stor7 * stor24[address(arg1)].field_0 / 10^18) - (stor7 * stor24[address(arg1)].field_256 / 10^18) - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * s / 10^18) - (stor24[address(arg1)].field_1024 * s / 10^18) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * s / 10^18) / 10^18) < stor24[address(arg1)].field_1024:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_1024 = (stor7 * stor24[address(arg1)].field_0 / 10^18) - (stor7 * stor24[address(arg1)].field_256 / 10^18) - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * s / 10^18) - (stor24[address(arg1)].field_1024 * s / 10^18) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * s / 10^18) / 10^18)
+                                                    stor24[address(arg1)].field_1280 = block.timestamp
+                                                if stor24[address(arg1)].field_768 <= 0:
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * s / 10^18) - (stor24[address(arg1)].field_1024 * s / 10^18) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * s / 10^18) / 10^18)
+                                                else:
+                                                    if stor24[address(arg1)].field_768 < 0:
+                                                        revert with 0, 'SafeMath add failed.'
+                                                    stor24[address(arg1)].field_768 = 0
+                                                    require ext_code.size(sub_722d8ff0Address)
+                                                    call sub_722d8ff0Address.0xa9059cbb with:
+                                                         gas gas_remaining wei
+                                                        args address(arg1), stor24[address(arg1)].field_768 + (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * s / 10^18) - (stor24[address(arg1)].field_1024 * s / 10^18) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * s / 10^18) / 10^18)
+                                        if not ext_call.success:
+                                            revert with ext_call.return_data[0 len return_data.size]
+                                        require return_data.size >= 32
+                                        if not ext_call.return_data[0]:
+                                            revert with 0, 'Withdrawal failed.'
+                                        else:
+                                            return 0
+                                revert with 0, 'SafeMath div failed.'
+                            if not (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18):
+                                if 0 > (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18):
+                                    revert with 0, 'SafeMath sub failed.'
+                                if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) >= stor16:
+                                    if stor16 > 0:
+                                        if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_1024 += stor16
+                                        stor24[address(arg1)].field_1280 = block.timestamp
+                                    if stor24[address(arg1)].field_768 <= 0:
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), stor16
+                                    else:
+                                        if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_768 = 0
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), stor24[address(arg1)].field_768 + stor16
+                                else:
+                                    if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) > 0:
+                                        if (stor7 * stor24[address(arg1)].field_0 / 10^18) - (stor7 * stor24[address(arg1)].field_256 / 10^18) < stor24[address(arg1)].field_1024:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_1024 = (stor7 * stor24[address(arg1)].field_0 / 10^18) - (stor7 * stor24[address(arg1)].field_256 / 10^18)
+                                        stor24[address(arg1)].field_1280 = block.timestamp
+                                    if stor24[address(arg1)].field_768 <= 0:
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18)
+                                    else:
+                                        if stor24[address(arg1)].field_768 < 0:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_768 = 0
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), stor24[address(arg1)].field_768 + (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18)
+                            else:
+                                if (stor7 * stor24[address(arg1)].field_0 / 10^18 * var75003) - (stor24[address(arg1)].field_1024 * var75003) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * var75003) / (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) != var75003:
+                                    revert with 0, 'SafeMath mul failed.'
+                                if (stor7 * stor24[address(arg1)].field_0 / 10^18 * var75003) - (stor24[address(arg1)].field_1024 * var75003) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * var75003) / 10^18 > (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18):
+                                    revert with 0, 'SafeMath sub failed.'
+                                if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * var75003) - (stor24[address(arg1)].field_1024 * var75003) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * var75003) / 10^18) >= stor16:
+                                    if stor16 > 0:
+                                        if stor16 + stor24[address(arg1)].field_1024 < stor24[address(arg1)].field_1024:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_1024 += stor16
+                                        stor24[address(arg1)].field_1280 = block.timestamp
+                                    if stor24[address(arg1)].field_768 <= 0:
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), stor16
+                                    else:
+                                        if stor24[address(arg1)].field_768 + stor16 < stor16:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_768 = 0
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), stor24[address(arg1)].field_768 + stor16
+                                else:
+                                    if (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * var75003) - (stor24[address(arg1)].field_1024 * var75003) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * var75003) / 10^18) > 0:
+                                        if (stor7 * stor24[address(arg1)].field_0 / 10^18) - (stor7 * stor24[address(arg1)].field_256 / 10^18) - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * var75003) - (stor24[address(arg1)].field_1024 * var75003) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * var75003) / 10^18) < stor24[address(arg1)].field_1024:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_1024 = (stor7 * stor24[address(arg1)].field_0 / 10^18) - (stor7 * stor24[address(arg1)].field_256 / 10^18) - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * var75003) - (stor24[address(arg1)].field_1024 * var75003) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * var75003) / 10^18)
+                                        stor24[address(arg1)].field_1280 = block.timestamp
+                                    if stor24[address(arg1)].field_768 <= 0:
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * var75003) - (stor24[address(arg1)].field_1024 * var75003) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * var75003) / 10^18)
+                                    else:
+                                        if stor24[address(arg1)].field_768 < 0:
+                                            revert with 0, 'SafeMath add failed.'
+                                        stor24[address(arg1)].field_768 = 0
+                                        require ext_code.size(sub_722d8ff0Address)
+                                        call sub_722d8ff0Address.0xa9059cbb with:
+                                             gas gas_remaining wei
+                                            args address(arg1), stor24[address(arg1)].field_768 + (stor7 * stor24[address(arg1)].field_0 / 10^18) - stor24[address(arg1)].field_1024 - (stor7 * stor24[address(arg1)].field_256 / 10^18) - ((stor7 * stor24[address(arg1)].field_0 / 10^18 * var75003) - (stor24[address(arg1)].field_1024 * var75003) - (stor7 * stor24[address(arg1)].field_256 / 10^18 * var75003) / 10^18)
+    if not ext_call.success:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+    if not ext_call.return_data[0]:
+        revert with 0, 'Withdrawal failed.'
+    else:
+        return 0
+}
+
+
+
+}
