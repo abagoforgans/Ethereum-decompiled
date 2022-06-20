@@ -1,0 +1,318 @@
+contract main {
+
+
+
+
+// =====================  Runtime code  =====================
+
+
+address owner;
+mapping of uint8 stor1;
+mapping of address ownerOf;
+mapping of address approved;
+mapping of uint256 balanceOf;
+mapping of uint8 stor5;
+array of uint256 tokenByIndex;
+mapping of uint256 stor7;
+array of uint256 tokenOfOwnerByIndex;
+mapping of uint256 stor9;
+array of uint256 name;
+array of uint256 symbol;
+mapping of bool tokenURI;
+
+function supportsInterface(bytes4 arg1) {
+    return bool(stor1[Mask(32, 224, arg1)])
+}
+
+function name() {
+    return name[0 len name.length]
+}
+
+function getApproved(uint256 arg1) {
+    require ownerOf[arg1]
+    return approved[arg1]
+}
+
+function totalSupply() {
+    return tokenByIndex.length
+}
+
+function tokenOfOwnerByIndex(address arg1, uint256 arg2) {
+    require arg2 < tokenOfOwnerByIndex[address(arg1)]
+    require arg2 < tokenOfOwnerByIndex[address(arg1)]
+    return tokenOfOwnerByIndex[address(arg1)][arg2]
+}
+
+function tokenByIndex(uint256 arg1) {
+    require arg1 < tokenByIndex.length
+    return tokenByIndex[arg1]
+}
+
+function ownerOf(uint256 arg1) {
+    require ownerOf[arg1]
+    return ownerOf[arg1]
+}
+
+function balanceOf(address arg1) {
+    require arg1
+    return balanceOf[address(arg1)]
+}
+
+function owner() {
+    return owner
+}
+
+function symbol() {
+    return symbol[0 len symbol.length]
+}
+
+function tokenURI(uint256 arg1) {
+    return uint256(tokenURI[arg1][0 len tokenURI[arg1].length])
+}
+
+function isApprovedForAll(address arg1, address arg2) {
+    require arg1
+    require arg2
+    return bool(stor5[address(arg1)][address(arg2)])
+}
+
+function _fallback() payable {
+    revert
+}
+
+function transferOwnership(address arg1) {
+    require msg.sender == owner
+    require arg1
+    emit OwnershipTransferred(owner, arg1);
+    owner = arg1
+}
+
+function setApprovalForAll(address arg1, bool arg2) {
+    require arg1
+    stor5[address(msg.sender)][address(arg1)] = uint8(arg2)
+    emit ApprovalForAll(arg2, msg.sender, arg1);
+}
+
+function approve(address arg1, uint256 arg2) {
+    if ownerOf[arg2] != msg.sender:
+        require stor5[stor2[arg2]][address(msg.sender)]
+    require ownerOf[arg2]
+    require arg1 != ownerOf[arg2]
+    require ownerOf[arg2]
+    if not approved[arg2]:
+        require arg1
+    approved[arg2] = arg1
+    emit Approval(ownerOf[arg2], arg1, arg2);
+}
+
+function mint(address arg1, uint256 arg2, string arg3) {
+    require arg1
+    require arg2
+    require not ownerOf[arg2]
+    require not ownerOf[arg2]
+    ownerOf[arg2] = arg1
+    require balanceOf[address(arg1)] + 1 >= balanceOf[address(arg1)]
+    balanceOf[address(arg1)]++
+    tokenOfOwnerByIndex[address(arg1)]++
+    tokenOfOwnerByIndex[address(arg1)][tokenOfOwnerByIndex[address(arg1)]] = arg2
+    stor9[arg2] = tokenOfOwnerByIndex[address(arg1)]
+    emit Transfer(0, arg1, arg2);
+    tokenByIndex.length++
+    tokenByIndex[tokenByIndex.length] = arg2
+    require ownerOf[arg2]
+    uint256(tokenURI[arg2][]) = Array(len=arg3.length, data=arg3[all])
+}
+
+function transferFrom(address arg1, address arg2, uint256 arg3) {
+    require ownerOf[arg3]
+    if ownerOf[arg3] != msg.sender:
+        if approved[arg3] != msg.sender:
+            require stor5[stor2[arg3]][address(msg.sender)]
+    require ownerOf[arg3] == arg1
+    require arg2
+    approved[arg3] = 0
+    emit Approval(ownerOf[arg3], 0, arg3);
+    require ownerOf[arg3] == ownerOf[arg3]
+    require balanceOf[stor2[arg3]] > 0
+    require 1 <= balanceOf[stor2[arg3]]
+    balanceOf[stor2[arg3]]--
+    ownerOf[arg3] = 0
+    require tokenOfOwnerByIndex[stor2[arg3]] > 0
+    require 1 <= tokenOfOwnerByIndex[stor2[arg3]]
+    require tokenOfOwnerByIndex[stor2[arg3]] - 1 < tokenOfOwnerByIndex[stor2[arg3]]
+    require stor9[arg3] < tokenOfOwnerByIndex[stor2[arg3]]
+    tokenOfOwnerByIndex[stor2[arg3]][stor9[arg3]] = tokenOfOwnerByIndex[stor2[arg3]][tokenOfOwnerByIndex[stor2[arg3]]]
+    require tokenOfOwnerByIndex[stor2[arg3]] - 1 < tokenOfOwnerByIndex[stor2[arg3]]
+    tokenOfOwnerByIndex[stor2[arg3]][tokenOfOwnerByIndex[stor2[arg3]]] = 0
+    tokenOfOwnerByIndex[stor2[arg3]]--
+    if tokenOfOwnerByIndex[stor2[arg3]] > tokenOfOwnerByIndex[stor2[arg3]] - 1:
+        idx = tokenOfOwnerByIndex[stor2[arg3]] - 1
+        while tokenOfOwnerByIndex[stor2[arg3]] > idx:
+            tokenOfOwnerByIndex[stor2[arg3]][idx] = 0
+            idx = idx + 1
+            continue 
+    stor9[arg3] = 0
+    stor9[stor8[stor2[arg3]][stor8[stor2[arg3]]]] = stor9[arg3]
+    require not ownerOf[arg3]
+    ownerOf[arg3] = arg2
+    require balanceOf[address(arg2)] + 1 >= balanceOf[address(arg2)]
+    balanceOf[address(arg2)]++
+    tokenOfOwnerByIndex[address(arg2)]++
+    tokenOfOwnerByIndex[address(arg2)][tokenOfOwnerByIndex[address(arg2)]] = arg3
+    stor9[arg3] = tokenOfOwnerByIndex[address(arg2)]
+    emit Transfer(ownerOf[arg3], arg2, arg3);
+}
+
+function sub_3e23f586(?) {
+    require ownerOf[arg3]
+    if ownerOf[arg3] != msg.sender:
+        if approved[arg3] != msg.sender:
+            require stor5[stor2[arg3]][address(msg.sender)]
+    require ownerOf[arg3] == arg1
+    require arg2
+    approved[arg3] = 0
+    emit Approval(ownerOf[arg3], 0, arg3);
+    require ownerOf[arg3] == ownerOf[arg3]
+    require balanceOf[stor2[arg3]] > 0
+    require 1 <= balanceOf[stor2[arg3]]
+    balanceOf[stor2[arg3]]--
+    ownerOf[arg3] = 0
+    require tokenOfOwnerByIndex[stor2[arg3]] > 0
+    require 1 <= tokenOfOwnerByIndex[stor2[arg3]]
+    require tokenOfOwnerByIndex[stor2[arg3]] - 1 < tokenOfOwnerByIndex[stor2[arg3]]
+    require stor9[arg3] < tokenOfOwnerByIndex[stor2[arg3]]
+    tokenOfOwnerByIndex[stor2[arg3]][stor9[arg3]] = tokenOfOwnerByIndex[stor2[arg3]][tokenOfOwnerByIndex[stor2[arg3]]]
+    require tokenOfOwnerByIndex[stor2[arg3]] - 1 < tokenOfOwnerByIndex[stor2[arg3]]
+    tokenOfOwnerByIndex[stor2[arg3]][tokenOfOwnerByIndex[stor2[arg3]]] = 0
+    tokenOfOwnerByIndex[stor2[arg3]]--
+    if tokenOfOwnerByIndex[stor2[arg3]] > tokenOfOwnerByIndex[stor2[arg3]] - 1:
+        idx = tokenOfOwnerByIndex[stor2[arg3]] - 1
+        while tokenOfOwnerByIndex[stor2[arg3]] > idx:
+            tokenOfOwnerByIndex[stor2[arg3]][idx] = 0
+            idx = idx + 1
+            continue 
+    stor9[arg3] = 0
+    stor9[stor8[stor2[arg3]][stor8[stor2[arg3]]]] = stor9[arg3]
+    require not ownerOf[arg3]
+    ownerOf[arg3] = arg2
+    require balanceOf[address(arg2)] + 1 >= balanceOf[address(arg2)]
+    balanceOf[address(arg2)]++
+    tokenOfOwnerByIndex[address(arg2)]++
+    tokenOfOwnerByIndex[address(arg2)][tokenOfOwnerByIndex[address(arg2)]] = arg3
+    stor9[arg3] = tokenOfOwnerByIndex[address(arg2)]
+    emit Transfer(ownerOf[arg3], arg2, arg3);
+    if ext_code.size(arg2) > 0:
+        require ext_code.size(arg2)
+        call arg2.0xa4dc8ce5 with:
+             gas gas_remaining wei
+            args address(arg1), arg3, Array(len=arg4.length, data=arg4[all])
+        if not ext_call.success:
+            revert with ext_call.return_data[0 len return_data.size]
+        require return_data.size >= 32
+        require Mask(32, 224, ext_call.return_data[0]) == 0xf0b9e5ba00000000000000000000000000000000000000000000000000000000
+}
+
+function safeTransferFrom(address arg1, address arg2, uint256 arg3) {
+    require ownerOf[arg3]
+    if ownerOf[arg3] != msg.sender:
+        if approved[arg3] != msg.sender:
+            require stor5[stor2[arg3]][address(msg.sender)]
+    require ownerOf[arg3] == arg1
+    require arg2
+    approved[arg3] = 0
+    emit Approval(ownerOf[arg3], 0, arg3);
+    require ownerOf[arg3] == ownerOf[arg3]
+    require balanceOf[stor2[arg3]] > 0
+    require 1 <= balanceOf[stor2[arg3]]
+    balanceOf[stor2[arg3]]--
+    ownerOf[arg3] = 0
+    require tokenOfOwnerByIndex[stor2[arg3]] > 0
+    require 1 <= tokenOfOwnerByIndex[stor2[arg3]]
+    require tokenOfOwnerByIndex[stor2[arg3]] - 1 < tokenOfOwnerByIndex[stor2[arg3]]
+    require stor9[arg3] < tokenOfOwnerByIndex[stor2[arg3]]
+    tokenOfOwnerByIndex[stor2[arg3]][stor9[arg3]] = tokenOfOwnerByIndex[stor2[arg3]][tokenOfOwnerByIndex[stor2[arg3]]]
+    require tokenOfOwnerByIndex[stor2[arg3]] - 1 < tokenOfOwnerByIndex[stor2[arg3]]
+    tokenOfOwnerByIndex[stor2[arg3]][tokenOfOwnerByIndex[stor2[arg3]]] = 0
+    tokenOfOwnerByIndex[stor2[arg3]]--
+    if tokenOfOwnerByIndex[stor2[arg3]] > tokenOfOwnerByIndex[stor2[arg3]] - 1:
+        idx = tokenOfOwnerByIndex[stor2[arg3]] - 1
+        while tokenOfOwnerByIndex[stor2[arg3]] > idx:
+            tokenOfOwnerByIndex[stor2[arg3]][idx] = 0
+            idx = idx + 1
+            continue 
+    stor9[arg3] = 0
+    stor9[stor8[stor2[arg3]][stor8[stor2[arg3]]]] = stor9[arg3]
+    require not ownerOf[arg3]
+    ownerOf[arg3] = arg2
+    require balanceOf[address(arg2)] + 1 >= balanceOf[address(arg2)]
+    balanceOf[address(arg2)]++
+    tokenOfOwnerByIndex[address(arg2)]++
+    tokenOfOwnerByIndex[address(arg2)][tokenOfOwnerByIndex[address(arg2)]] = arg3
+    stor9[arg3] = tokenOfOwnerByIndex[address(arg2)]
+    emit Transfer(ownerOf[arg3], arg2, arg3);
+    if ext_code.size(arg2) > 0:
+        require ext_code.size(arg2)
+        call arg2.0xa4dc8ce5 with:
+             gas gas_remaining wei
+            args address(arg1), arg3, 96, 0
+        if not ext_call.success:
+            revert with ext_call.return_data[0 len return_data.size]
+        require return_data.size >= 32
+        require Mask(32, 224, ext_call.return_data[0]) == 0xf0b9e5ba00000000000000000000000000000000000000000000000000000000
+}
+
+function burn(address arg1, uint256 arg2) {
+    require tokenByIndex.length > 0
+    require ownerOf[arg2]
+    approved[arg2] = 0
+    emit Approval(arg1, 0, arg2);
+    require ownerOf[arg2] == arg1
+    require balanceOf[address(arg1)] > 0
+    require 1 <= balanceOf[address(arg1)]
+    balanceOf[address(arg1)]--
+    ownerOf[arg2] = 0
+    require tokenOfOwnerByIndex[address(arg1)] > 0
+    require 1 <= tokenOfOwnerByIndex[address(arg1)]
+    require tokenOfOwnerByIndex[address(arg1)] - 1 < tokenOfOwnerByIndex[address(arg1)]
+    require stor9[arg2] < tokenOfOwnerByIndex[address(arg1)]
+    tokenOfOwnerByIndex[address(arg1)][stor9[arg2]] = tokenOfOwnerByIndex[address(arg1)][tokenOfOwnerByIndex[address(arg1)]]
+    require tokenOfOwnerByIndex[address(arg1)] - 1 < tokenOfOwnerByIndex[address(arg1)]
+    tokenOfOwnerByIndex[address(arg1)][tokenOfOwnerByIndex[address(arg1)]] = 0
+    tokenOfOwnerByIndex[address(arg1)]--
+    if tokenOfOwnerByIndex[address(arg1)] > tokenOfOwnerByIndex[address(arg1)] - 1:
+        idx = tokenOfOwnerByIndex[address(arg1)] - 1
+        while tokenOfOwnerByIndex[address(arg1)] > idx:
+            tokenOfOwnerByIndex[address(arg1)][idx] = 0
+            idx = idx + 1
+            continue 
+    stor9[arg2] = 0
+    stor9[stor8[address(arg1)][stor8[address(arg1)]]] = stor9[arg2]
+    emit Transfer(arg1, 0, arg2);
+    require 1 <= tokenByIndex.length
+    require tokenByIndex.length - 1 < tokenByIndex.length
+    require stor7[arg2] < tokenByIndex.length
+    tokenByIndex[stor7[arg2]] = tokenByIndex[tokenByIndex.length]
+    require tokenByIndex.length - 1 < tokenByIndex.length
+    tokenByIndex[tokenByIndex.length] = 0
+    tokenByIndex.length--
+    if tokenByIndex.length > tokenByIndex.length - 1:
+        idx = tokenByIndex.length - 1
+        while tokenByIndex.length > idx:
+            tokenByIndex[idx] = 0
+            idx = idx + 1
+            continue 
+    stor7[arg2] = 0
+    stor7[stor6[stor6.length]] = stor7[arg2]
+    if Mask(255, 1, (256 * not bool(tokenURI[arg2])) - 1 and uint256(tokenURI[arg2])):
+        uint256(tokenURI[arg2]) = 0
+        if 31 < tokenURI[arg2].length:
+            idx = 0
+            while tokenURI[arg2].length + 31 / 32 > idx:
+                uint256(tokenURI[arg2][idx]) = 0
+                idx = idx + 1
+                continue 
+}
+
+
+
+}
