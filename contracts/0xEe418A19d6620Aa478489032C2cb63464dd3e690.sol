@@ -1,0 +1,1247 @@
+contract main {
+
+
+
+
+// =====================  Runtime code  =====================
+
+
+const name = 'Futereum Markets 1'
+
+const decimals = 18
+
+const sub_382d4fc5(?) = 0xf880d3c6dcda42a7b2f6640703c5748557865b35
+
+const sub_80c9d1ba(?) = 0x30c6fe3ac0260a855c90cab79aa33e76091d4904
+
+const symbol = 'FUTM1'
+
+const ROLE_SUPER = 'super'
+
+const BILLION = 10^9
+
+const ROLE_ADMIN = 'admin'
+
+const CYCLE_CAP = 100000 * 10^18
+
+
+mapping of uint256 balanceOf;
+uint256 totalSupply;
+mapping of uint256 allowance;
+uint8 stor3; offset 160
+uint128 stor3; offset 160
+address owner;
+mapping of uint8 stor4;
+uint256 swapLimit;
+uint256 stor6;
+uint256 sub_1241c449;
+uint256 cycleMintSupply;
+uint8 stor9;
+uint256 CMC;
+uint256 cycleEndTime;
+uint8 stor12;
+mapping of uint256 swapRates;
+mapping of uint8 stor99;
+
+function mintingFinished() {
+    return bool(uint8(stor3.field_160))
+}
+
+function swapRates(address arg1) {
+    return swapRates[arg1]
+}
+
+function sub_1241c449(?) {
+    return sub_1241c449
+}
+
+function totalSupply() {
+    return totalSupply
+}
+
+function cycleMintSupply() {
+    return cycleMintSupply
+}
+
+function swapLimit() {
+    return swapLimit
+}
+
+function balanceOf(address arg1) {
+    return balanceOf[address(arg1)]
+}
+
+function isMiningOpen() {
+    return bool(stor9)
+}
+
+function cycleEndTime() {
+    return cycleEndTime
+}
+
+function owner() {
+    return owner
+}
+
+function CMC() {
+    return CMC
+}
+
+function swapOpen() {
+    return bool(stor12)
+}
+
+function allowance(address arg1, address arg2) {
+    return allowance[address(arg1)][address(arg2)]
+}
+
+function _fallback() payable {
+    revert
+}
+
+function renounceOwnership() {
+    require msg.sender == owner
+    emit OwnershipRenounced(owner);
+    owner = 0
+}
+
+function setIsMiningOpen(bool arg1) {
+    mem[160 len 0] = None
+    require stor4[mem[160 len 5]][address(msg.sender)]
+    stor9 = uint8(arg1)
+}
+
+function transferOwnership(address arg1) {
+    require msg.sender == owner
+    require arg1
+    emit OwnershipTransferred(owner, arg1);
+    owner = arg1
+}
+
+function approve(address arg1, uint256 arg2) {
+    allowance[address(msg.sender)][address(arg1)] = arg2
+    emit Approval(arg2, msg.sender, arg1);
+    return 1
+}
+
+function finishMinting() {
+    require msg.sender == owner
+    require not uint8(stor3.field_160)
+    Mask(96, 0, stor3.field_160) = 1
+    emit MintFinished()
+    return 1
+}
+
+function addAdmin(address arg1) {
+    mem[160 len 0] = None
+    require stor4[mem[160 len 5]][address(msg.sender)]
+    mem[224 len 0] = None
+    stor4[mem[224 len 5]][address(arg1)] = 1
+    emit RoleAdded('admin', arg1);
+}
+
+function removeAdmin(address arg1) {
+    mem[160 len 0] = None
+    require stor4[mem[160 len 5]][address(msg.sender)]
+    mem[224 len 0] = None
+    stor4[mem[224 len 5]][address(arg1)] = 0
+    emit RoleRemoved('admin', arg1);
+}
+
+function burn(uint256 arg1) {
+    require arg1 <= balanceOf[address(msg.sender)]
+    require arg1 <= balanceOf[address(msg.sender)]
+    balanceOf[address(msg.sender)] -= arg1
+    require arg1 <= totalSupply
+    totalSupply -= arg1
+    emit Burn(arg1, msg.sender);
+    emit Transfer(arg1, msg.sender, 0);
+}
+
+function increaseApproval(address arg1, uint256 arg2) {
+    require allowance[address(msg.sender)][address(arg1)] + arg2 >= allowance[address(msg.sender)][address(arg1)]
+    allowance[address(msg.sender)][address(arg1)] += arg2
+    emit Approval(allowance[address(msg.sender)][address(arg1)], msg.sender, arg1);
+    return 1
+}
+
+function changeSuper(address arg1) {
+    mem[160 len 0] = None
+    require stor4[mem[160 len 5]][address(msg.sender)]
+    mem[224 len 0] = None
+    stor4[mem[224 len 5]][address(arg1)] = 1
+    emit RoleAdded('super', arg1);
+    stor4['super' % 1099511627776][address(msg.sender)] = 0
+    emit RoleRemoved('super', msg.sender);
+}
+
+function mint(address arg1, uint256 arg2) {
+    require msg.sender == owner
+    require not uint8(stor3.field_160)
+    require totalSupply + arg2 >= totalSupply
+    totalSupply += arg2
+    require balanceOf[address(arg1)] + arg2 >= balanceOf[address(arg1)]
+    balanceOf[address(arg1)] += arg2
+    emit Mint(arg2, arg1);
+    emit Transfer(arg2, 0, arg1);
+    return 1
+}
+
+function transfer(address arg1, uint256 arg2) {
+    require arg2 <= balanceOf[address(msg.sender)]
+    require arg1
+    require arg2 <= balanceOf[address(msg.sender)]
+    balanceOf[address(msg.sender)] -= arg2
+    require balanceOf[address(arg1)] + arg2 >= balanceOf[address(arg1)]
+    balanceOf[address(arg1)] += arg2
+    emit Transfer(arg2, msg.sender, arg1);
+    return 1
+}
+
+function decreaseApproval(address arg1, uint256 arg2) {
+    if arg2 >= allowance[address(msg.sender)][address(arg1)]:
+        allowance[address(msg.sender)][address(arg1)] = 0
+    else:
+        require arg2 <= allowance[address(msg.sender)][address(arg1)]
+        allowance[address(msg.sender)][address(arg1)] -= arg2
+    emit Approval(allowance[address(msg.sender)][address(arg1)], msg.sender, arg1);
+    return 1
+}
+
+function transferFrom(address arg1, address arg2, uint256 arg3) {
+    require arg3 <= balanceOf[address(arg1)]
+    require arg3 <= allowance[address(arg1)][address(msg.sender)]
+    require arg2
+    require arg3 <= balanceOf[address(arg1)]
+    balanceOf[address(arg1)] -= arg3
+    require balanceOf[address(arg2)] + arg3 >= balanceOf[address(arg2)]
+    balanceOf[address(arg2)] += arg3
+    require arg3 <= allowance[address(arg1)][address(msg.sender)]
+    allowance[address(arg1)][address(msg.sender)] -= arg3
+    emit Transfer(arg3, arg1, arg2);
+    return 1
+}
+
+function checkRole(address arg1, string arg2) {
+    mem[128 len arg2.length] = arg2[all]
+    mem[ceil32(arg2.length) + 128 len floor32(arg2.length)] = call.data[arg2 + 36 len floor32(arg2.length)]
+    mem[ceil32(arg2.length) + floor32(arg2.length) + -(arg2.length % 32) + 160 len arg2.length % 32] = mem[-(arg2.length % 32) + floor32(arg2.length) + 160 len arg2.length % 32]
+    mem[arg2.length + ceil32(arg2.length) + 128] = 4
+    require stor[mem[ceil32(arg2.length) + floor32(arg2.length) + 128 len (arg2.length % 32) + 32]][call.data[arg2 + 36 len floor32(arg2.length)]][address(arg1)]
+}
+
+function hasRole(address arg1, string arg2) {
+    mem[128 len arg2.length] = arg2[all]
+    mem[ceil32(arg2.length) + 128 len floor32(arg2.length)] = call.data[arg2 + 36 len floor32(arg2.length)]
+    mem[ceil32(arg2.length) + floor32(arg2.length) + -(arg2.length % 32) + 160 len arg2.length % 32] = mem[-(arg2.length % 32) + floor32(arg2.length) + 160 len arg2.length % 32]
+    mem[arg2.length + ceil32(arg2.length) + 128] = 4
+    mem[ceil32(arg2.length) + 128] = bool(stor[mem[ceil32(arg2.length) + floor32(arg2.length) + 128 len (arg2.length % 32) + 32]][call.data[arg2 + 36 len floor32(arg2.length)]][address(arg1)])
+    return memory
+      from ceil32(arg2.length) + 128
+       len 32
+}
+
+function sub_f57273a7(?) {
+    mem[160 len 0] = None
+    require stor4[mem[160 len 5]][address(msg.sender)]
+    require arg1 > 0
+    CMC = arg1
+    emit CMCUpdate(Array(len=9, data='TOTAL_CMC'), arg1);
+    if CMC:
+        require CMC
+        require CMC * stor6 / CMC == stor6
+        if stor6:
+            require stor6
+            require stor6 * stor6 / stor6 == stor6
+            require CMC * stor6 / 10^9
+            if stor6 * stor6 / CMC * stor6 / 10^9:
+                require stor6 * stor6 / CMC * stor6 / 10^9
+                require 65 * stor6 * stor6 / CMC * stor6 / 10^9 / stor6 * stor6 / CMC * stor6 / 10^9 == 65
+                sub_1241c449 = 65 * stor6 * stor6 / CMC * stor6 / 10^9 / 100
+            else:
+                sub_1241c449 = 0
+        else:
+            require CMC * stor6 / 10^9
+            if 0 / CMC * stor6 / 10^9:
+                require 0 / CMC * stor6 / 10^9
+                require 65 * 0 / CMC * stor6 / 10^9 / 0 / CMC * stor6 / 10^9 == 65
+                sub_1241c449 = 65 * 0 / CMC * stor6 / 10^9 / 100
+            else:
+                sub_1241c449 = 0
+    else:
+        require stor6
+        require stor6
+        require stor6 * stor6 / stor6 == stor6
+        revert
+}
+
+function swap(uint256 arg1) {
+    require stor12
+    require swapLimit > 0
+    if arg1 <= swapLimit:
+        swapLimit -= arg1
+        require arg1 <= balanceOf[address(msg.sender)]
+        require arg1 <= balanceOf[address(msg.sender)]
+        balanceOf[address(msg.sender)] -= arg1
+        require arg1 <= totalSupply
+        totalSupply -= arg1
+        emit Burn(arg1, msg.sender);
+        emit Transfer(arg1, msg.sender, 0);
+        if arg1:
+            require arg1
+            require arg1 * swapRates[0x30c6fe3ac0260a855c90cab79aa33e76091d4904] / arg1 == swapRates[0x30c6fe3ac0260a855c90cab79aa33e76091d4904]
+            if arg1 * swapRates[0x30c6fe3ac0260a855c90cab79aa33e76091d4904] > 0:
+                if not arg1:
+                    require stor6
+                    require ext_code.size(0x30c6fe3ac0260a855c90cab79aa33e76091d4904)
+                    call 0x30c6fe3ac0260a855c90cab79aa33e76091d4904.0xa9059cbb with:
+                         gas gas_remaining wei
+                        args msg.sender, 0 / stor6
+                else:
+                    require arg1
+                    require arg1 * swapRates[0x30c6fe3ac0260a855c90cab79aa33e76091d4904] / arg1 == swapRates[0x30c6fe3ac0260a855c90cab79aa33e76091d4904]
+                    require stor6
+                    require ext_code.size(0x30c6fe3ac0260a855c90cab79aa33e76091d4904)
+                    call 0x30c6fe3ac0260a855c90cab79aa33e76091d4904.0xa9059cbb with:
+                         gas gas_remaining wei
+                        args msg.sender, arg1 * swapRates[0x30c6fe3ac0260a855c90cab79aa33e76091d4904] / stor6
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+    else:
+        swapLimit = 0
+        require swapLimit <= balanceOf[address(msg.sender)]
+        require swapLimit <= balanceOf[address(msg.sender)]
+        balanceOf[address(msg.sender)] -= swapLimit
+        require swapLimit <= totalSupply
+        totalSupply -= swapLimit
+        emit Burn(swapLimit, msg.sender);
+        emit Transfer(swapLimit, msg.sender, 0);
+        if swapLimit:
+            require swapLimit
+            require swapLimit * swapRates[0x30c6fe3ac0260a855c90cab79aa33e76091d4904] / swapLimit == swapRates[0x30c6fe3ac0260a855c90cab79aa33e76091d4904]
+            if swapLimit * swapRates[0x30c6fe3ac0260a855c90cab79aa33e76091d4904] > 0:
+                if not swapLimit:
+                    require stor6
+                    require ext_code.size(0x30c6fe3ac0260a855c90cab79aa33e76091d4904)
+                    call 0x30c6fe3ac0260a855c90cab79aa33e76091d4904.0xa9059cbb with:
+                         gas gas_remaining wei
+                        args msg.sender, 0 / stor6
+                else:
+                    require swapLimit
+                    require swapLimit * swapRates[0x30c6fe3ac0260a855c90cab79aa33e76091d4904] / swapLimit == swapRates[0x30c6fe3ac0260a855c90cab79aa33e76091d4904]
+                    require stor6
+                    require ext_code.size(0x30c6fe3ac0260a855c90cab79aa33e76091d4904)
+                    call 0x30c6fe3ac0260a855c90cab79aa33e76091d4904.0xa9059cbb with:
+                         gas gas_remaining wei
+                        args msg.sender, swapLimit * swapRates[0x30c6fe3ac0260a855c90cab79aa33e76091d4904] / stor6
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+    if not swapLimit:
+        require stor12
+        require not swapLimit
+        cycleMintSupply = 0
+        stor12 = 0
+        stor9 = 1
+        cycleEndTime = block.timestamp + (2400 * 24 * 3600)
+        emit MiningRestart(cycleEndTime);
+}
+
+function mine(uint256 arg1) {
+    require stor9
+    require arg1 > 0
+    require cycleMintSupply < 100000 * 10^18
+    require ext_code.size(0x30c6fe3ac0260a855c90cab79aa33e76091d4904)
+    call 0x30c6fe3ac0260a855c90cab79aa33e76091d4904.0x23b872dd with:
+         gas gas_remaining wei
+        args msg.sender, address(this.address), arg1
+    if not ext_call.success:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+    require ext_call.return_data[0]
+    require sub_1241c449 > 0
+    if block.timestamp <= cycleEndTime:
+        if not sub_1241c449:
+            require stor6
+            if not 0 / stor6:
+                if (0 / stor6) + cycleMintSupply <= 100000 * 10^18:
+                    cycleMintSupply += 0 / stor6
+                    revert with 0, 'Mining payment too small.'
+                if not (0 / stor6) + cycleMintSupply - 100000 * 10^18:
+                    require sub_1241c449
+                    cycleMintSupply = 100000 * 10^18
+                    if -(0 / stor6) + -cycleMintSupply + 100000 * 10^18 <= 0:
+                        revert with 0, 'Mining payment too small.'
+                    require ext_code.size(this.address)
+                    call this.address.0x40c10f19 with:
+                         gas gas_remaining wei
+                        args msg.sender, 0 / stor6
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    require ext_code.size(this.address)
+                    call this.address.0x40c10f19 with:
+                         gas gas_remaining wei
+                        args 0xf880d3c6dcda42a7b2f6640703c5748557865b35, -(0 / stor6) + -cycleMintSupply + 100000 * 10^18
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    if 0 / sub_1241c449 > 0:
+                        require ext_code.size(0x30c6fe3ac0260a855c90cab79aa33e76091d4904)
+                        call 0x30c6fe3ac0260a855c90cab79aa33e76091d4904.0xa9059cbb with:
+                             gas gas_remaining wei
+                            args msg.sender, 0 / sub_1241c449
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                else:
+                    require (0 / stor6) + cycleMintSupply - 100000 * 10^18
+                    require (65 * 0 / stor6) + (65 * cycleMintSupply) - 6500000 * 10^18 / (0 / stor6) + cycleMintSupply - 100000 * 10^18 == 65
+                    if not (65 * 0 / stor6) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100:
+                        require sub_1241c449
+                        cycleMintSupply = 100000 * 10^18
+                        if -(0 / stor6) + -cycleMintSupply + ((65 * 0 / stor6) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100) + 100000 * 10^18 <= 0:
+                            revert with 0, 'Mining payment too small.'
+                        require ext_code.size(this.address)
+                        call this.address.0x40c10f19 with:
+                             gas gas_remaining wei
+                            args msg.sender, (0 / stor6) - ((65 * 0 / stor6) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100)
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_code.size(this.address)
+                        call this.address.0x40c10f19 with:
+                             gas gas_remaining wei
+                            args 0xf880d3c6dcda42a7b2f6640703c5748557865b35, -(0 / stor6) + -cycleMintSupply + ((65 * 0 / stor6) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100) + 100000 * 10^18
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if 0 / sub_1241c449 > 0:
+                            require ext_code.size(0x30c6fe3ac0260a855c90cab79aa33e76091d4904)
+                            call 0x30c6fe3ac0260a855c90cab79aa33e76091d4904.0xa9059cbb with:
+                                 gas gas_remaining wei
+                                args msg.sender, 0 / sub_1241c449
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                    else:
+                        require (65 * 0 / stor6) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100
+                        require (65 * 0 / stor6) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100 * stor6 / (65 * 0 / stor6) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100 == stor6
+                        require sub_1241c449
+                        cycleMintSupply = 100000 * 10^18
+                        if -(0 / stor6) + -cycleMintSupply + ((65 * 0 / stor6) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100) + 100000 * 10^18 <= 0:
+                            revert with 0, 'Mining payment too small.'
+                        require ext_code.size(this.address)
+                        call this.address.0x40c10f19 with:
+                             gas gas_remaining wei
+                            args msg.sender, (0 / stor6) - ((65 * 0 / stor6) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100)
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_code.size(this.address)
+                        call this.address.0x40c10f19 with:
+                             gas gas_remaining wei
+                            args 0xf880d3c6dcda42a7b2f6640703c5748557865b35, -(0 / stor6) + -cycleMintSupply + ((65 * 0 / stor6) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100) + 100000 * 10^18
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if (65 * 0 / stor6) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100 * stor6 / sub_1241c449 > 0:
+                            require ext_code.size(0x30c6fe3ac0260a855c90cab79aa33e76091d4904)
+                            call 0x30c6fe3ac0260a855c90cab79aa33e76091d4904.0xa9059cbb with:
+                                 gas gas_remaining wei
+                                args msg.sender, (65 * 0 / stor6) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100 * stor6 / sub_1241c449
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+            else:
+                require 0 / stor6
+                require 35 * 0 / stor6 / 0 / stor6 == 35
+                if (0 / stor6) + (35 * 0 / stor6 / 65) + cycleMintSupply <= 100000 * 10^18:
+                    cycleMintSupply = cycleMintSupply + (0 / stor6) + (35 * 0 / stor6 / 65)
+                    if 35 * 0 / stor6 / 65 <= 0:
+                        revert with 0, 'Mining payment too small.'
+                    require ext_code.size(this.address)
+                    call this.address.0x40c10f19 with:
+                         gas gas_remaining wei
+                        args msg.sender, 0 / stor6
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    require ext_code.size(this.address)
+                    call this.address.0x40c10f19 with:
+                         gas gas_remaining wei
+                        args 0xf880d3c6dcda42a7b2f6640703c5748557865b35, 35 * 0 / stor6 / 65
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                else:
+                    if not (0 / stor6) + (35 * 0 / stor6 / 65) + cycleMintSupply - 100000 * 10^18:
+                        require sub_1241c449
+                        cycleMintSupply = 100000 * 10^18
+                        if -(0 / stor6) + -cycleMintSupply + 100000 * 10^18 <= 0:
+                            revert with 0, 'Mining payment too small.'
+                        require ext_code.size(this.address)
+                        call this.address.0x40c10f19 with:
+                             gas gas_remaining wei
+                            args msg.sender, 0 / stor6
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_code.size(this.address)
+                        call this.address.0x40c10f19 with:
+                             gas gas_remaining wei
+                            args 0xf880d3c6dcda42a7b2f6640703c5748557865b35, -(0 / stor6) + -cycleMintSupply + 100000 * 10^18
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if 0 / sub_1241c449 > 0:
+                            require ext_code.size(0x30c6fe3ac0260a855c90cab79aa33e76091d4904)
+                            call 0x30c6fe3ac0260a855c90cab79aa33e76091d4904.0xa9059cbb with:
+                                 gas gas_remaining wei
+                                args msg.sender, 0 / sub_1241c449
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                    else:
+                        require (0 / stor6) + (35 * 0 / stor6 / 65) + cycleMintSupply - 100000 * 10^18
+                        require (65 * 0 / stor6) + (65 * 35 * 0 / stor6 / 65) + (65 * cycleMintSupply) - 6500000 * 10^18 / (0 / stor6) + (35 * 0 / stor6 / 65) + cycleMintSupply - 100000 * 10^18 == 65
+                        if not (65 * 0 / stor6) + (65 * 35 * 0 / stor6 / 65) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100:
+                            require sub_1241c449
+                            cycleMintSupply = 100000 * 10^18
+                            if -(0 / stor6) + -cycleMintSupply + ((65 * 0 / stor6) + (65 * 35 * 0 / stor6 / 65) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100) + 100000 * 10^18 <= 0:
+                                revert with 0, 'Mining payment too small.'
+                            require ext_code.size(this.address)
+                            call this.address.0x40c10f19 with:
+                                 gas gas_remaining wei
+                                args msg.sender, (0 / stor6) - ((65 * 0 / stor6) + (65 * 35 * 0 / stor6 / 65) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100)
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_code.size(this.address)
+                            call this.address.0x40c10f19 with:
+                                 gas gas_remaining wei
+                                args 0xf880d3c6dcda42a7b2f6640703c5748557865b35, -(0 / stor6) + -cycleMintSupply + ((65 * 0 / stor6) + (65 * 35 * 0 / stor6 / 65) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100) + 100000 * 10^18
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if 0 / sub_1241c449 > 0:
+                                require ext_code.size(0x30c6fe3ac0260a855c90cab79aa33e76091d4904)
+                                call 0x30c6fe3ac0260a855c90cab79aa33e76091d4904.0xa9059cbb with:
+                                     gas gas_remaining wei
+                                    args msg.sender, 0 / sub_1241c449
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                        else:
+                            require (65 * 0 / stor6) + (65 * 35 * 0 / stor6 / 65) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100
+                            require (65 * 0 / stor6) + (65 * 35 * 0 / stor6 / 65) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100 * stor6 / (65 * 0 / stor6) + (65 * 35 * 0 / stor6 / 65) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100 == stor6
+                            require sub_1241c449
+                            cycleMintSupply = 100000 * 10^18
+                            if -(0 / stor6) + -cycleMintSupply + ((65 * 0 / stor6) + (65 * 35 * 0 / stor6 / 65) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100) + 100000 * 10^18 <= 0:
+                                revert with 0, 'Mining payment too small.'
+                            require ext_code.size(this.address)
+                            call this.address.0x40c10f19 with:
+                                 gas gas_remaining wei
+                                args msg.sender, (0 / stor6) - ((65 * 0 / stor6) + (65 * 35 * 0 / stor6 / 65) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100)
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_code.size(this.address)
+                            call this.address.0x40c10f19 with:
+                                 gas gas_remaining wei
+                                args 0xf880d3c6dcda42a7b2f6640703c5748557865b35, -(0 / stor6) + -cycleMintSupply + ((65 * 0 / stor6) + (65 * 35 * 0 / stor6 / 65) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100) + 100000 * 10^18
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if (65 * 0 / stor6) + (65 * 35 * 0 / stor6 / 65) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100 * stor6 / sub_1241c449 > 0:
+                                require ext_code.size(0x30c6fe3ac0260a855c90cab79aa33e76091d4904)
+                                call 0x30c6fe3ac0260a855c90cab79aa33e76091d4904.0xa9059cbb with:
+                                     gas gas_remaining wei
+                                    args msg.sender, (65 * 0 / stor6) + (65 * 35 * 0 / stor6 / 65) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100 * stor6 / sub_1241c449
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+        else:
+            require sub_1241c449
+            require sub_1241c449 * arg1 / sub_1241c449 == arg1
+            require stor6
+            if not sub_1241c449 * arg1 / stor6:
+                if (sub_1241c449 * arg1 / stor6) + cycleMintSupply <= 100000 * 10^18:
+                    cycleMintSupply += sub_1241c449 * arg1 / stor6
+                    revert with 0, 'Mining payment too small.'
+                if not (sub_1241c449 * arg1 / stor6) + cycleMintSupply - 100000 * 10^18:
+                    require sub_1241c449
+                    cycleMintSupply = 100000 * 10^18
+                    if -(sub_1241c449 * arg1 / stor6) + -cycleMintSupply + 100000 * 10^18 <= 0:
+                        revert with 0, 'Mining payment too small.'
+                    require ext_code.size(this.address)
+                    call this.address.0x40c10f19 with:
+                         gas gas_remaining wei
+                        args msg.sender, sub_1241c449 * arg1 / stor6
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    require ext_code.size(this.address)
+                    call this.address.0x40c10f19 with:
+                         gas gas_remaining wei
+                        args 0xf880d3c6dcda42a7b2f6640703c5748557865b35, -(sub_1241c449 * arg1 / stor6) + -cycleMintSupply + 100000 * 10^18
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    if 0 / sub_1241c449 > 0:
+                        require ext_code.size(0x30c6fe3ac0260a855c90cab79aa33e76091d4904)
+                        call 0x30c6fe3ac0260a855c90cab79aa33e76091d4904.0xa9059cbb with:
+                             gas gas_remaining wei
+                            args msg.sender, 0 / sub_1241c449
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                else:
+                    require (sub_1241c449 * arg1 / stor6) + cycleMintSupply - 100000 * 10^18
+                    require (65 * sub_1241c449 * arg1 / stor6) + (65 * cycleMintSupply) - 6500000 * 10^18 / (sub_1241c449 * arg1 / stor6) + cycleMintSupply - 100000 * 10^18 == 65
+                    if not (65 * sub_1241c449 * arg1 / stor6) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100:
+                        require sub_1241c449
+                        cycleMintSupply = 100000 * 10^18
+                        if -(sub_1241c449 * arg1 / stor6) + -cycleMintSupply + ((65 * sub_1241c449 * arg1 / stor6) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100) + 100000 * 10^18 <= 0:
+                            revert with 0, 'Mining payment too small.'
+                        require ext_code.size(this.address)
+                        call this.address.0x40c10f19 with:
+                             gas gas_remaining wei
+                            args msg.sender, (sub_1241c449 * arg1 / stor6) - ((65 * sub_1241c449 * arg1 / stor6) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100)
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_code.size(this.address)
+                        call this.address.0x40c10f19 with:
+                             gas gas_remaining wei
+                            args 0xf880d3c6dcda42a7b2f6640703c5748557865b35, -(sub_1241c449 * arg1 / stor6) + -cycleMintSupply + ((65 * sub_1241c449 * arg1 / stor6) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100) + 100000 * 10^18
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if 0 / sub_1241c449 > 0:
+                            require ext_code.size(0x30c6fe3ac0260a855c90cab79aa33e76091d4904)
+                            call 0x30c6fe3ac0260a855c90cab79aa33e76091d4904.0xa9059cbb with:
+                                 gas gas_remaining wei
+                                args msg.sender, 0 / sub_1241c449
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                    else:
+                        require (65 * sub_1241c449 * arg1 / stor6) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100
+                        require (65 * sub_1241c449 * arg1 / stor6) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100 * stor6 / (65 * sub_1241c449 * arg1 / stor6) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100 == stor6
+                        require sub_1241c449
+                        cycleMintSupply = 100000 * 10^18
+                        if -(sub_1241c449 * arg1 / stor6) + -cycleMintSupply + ((65 * sub_1241c449 * arg1 / stor6) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100) + 100000 * 10^18 <= 0:
+                            revert with 0, 'Mining payment too small.'
+                        require ext_code.size(this.address)
+                        call this.address.0x40c10f19 with:
+                             gas gas_remaining wei
+                            args msg.sender, (sub_1241c449 * arg1 / stor6) - ((65 * sub_1241c449 * arg1 / stor6) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100)
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_code.size(this.address)
+                        call this.address.0x40c10f19 with:
+                             gas gas_remaining wei
+                            args 0xf880d3c6dcda42a7b2f6640703c5748557865b35, -(sub_1241c449 * arg1 / stor6) + -cycleMintSupply + ((65 * sub_1241c449 * arg1 / stor6) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100) + 100000 * 10^18
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if (65 * sub_1241c449 * arg1 / stor6) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100 * stor6 / sub_1241c449 > 0:
+                            require ext_code.size(0x30c6fe3ac0260a855c90cab79aa33e76091d4904)
+                            call 0x30c6fe3ac0260a855c90cab79aa33e76091d4904.0xa9059cbb with:
+                                 gas gas_remaining wei
+                                args msg.sender, (65 * sub_1241c449 * arg1 / stor6) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100 * stor6 / sub_1241c449
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+            else:
+                require sub_1241c449 * arg1 / stor6
+                require 35 * sub_1241c449 * arg1 / stor6 / sub_1241c449 * arg1 / stor6 == 35
+                if (sub_1241c449 * arg1 / stor6) + (35 * sub_1241c449 * arg1 / stor6 / 65) + cycleMintSupply <= 100000 * 10^18:
+                    cycleMintSupply = cycleMintSupply + (sub_1241c449 * arg1 / stor6) + (35 * sub_1241c449 * arg1 / stor6 / 65)
+                    if 35 * sub_1241c449 * arg1 / stor6 / 65 <= 0:
+                        revert with 0, 'Mining payment too small.'
+                    require ext_code.size(this.address)
+                    call this.address.0x40c10f19 with:
+                         gas gas_remaining wei
+                        args msg.sender, sub_1241c449 * arg1 / stor6
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    require ext_code.size(this.address)
+                    call this.address.0x40c10f19 with:
+                         gas gas_remaining wei
+                        args 0xf880d3c6dcda42a7b2f6640703c5748557865b35, 35 * sub_1241c449 * arg1 / stor6 / 65
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                else:
+                    if not (sub_1241c449 * arg1 / stor6) + (35 * sub_1241c449 * arg1 / stor6 / 65) + cycleMintSupply - 100000 * 10^18:
+                        require sub_1241c449
+                        cycleMintSupply = 100000 * 10^18
+                        if -(sub_1241c449 * arg1 / stor6) + -cycleMintSupply + 100000 * 10^18 <= 0:
+                            revert with 0, 'Mining payment too small.'
+                        require ext_code.size(this.address)
+                        call this.address.0x40c10f19 with:
+                             gas gas_remaining wei
+                            args msg.sender, sub_1241c449 * arg1 / stor6
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_code.size(this.address)
+                        call this.address.0x40c10f19 with:
+                             gas gas_remaining wei
+                            args 0xf880d3c6dcda42a7b2f6640703c5748557865b35, -(sub_1241c449 * arg1 / stor6) + -cycleMintSupply + 100000 * 10^18
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if 0 / sub_1241c449 > 0:
+                            require ext_code.size(0x30c6fe3ac0260a855c90cab79aa33e76091d4904)
+                            call 0x30c6fe3ac0260a855c90cab79aa33e76091d4904.0xa9059cbb with:
+                                 gas gas_remaining wei
+                                args msg.sender, 0 / sub_1241c449
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                    else:
+                        require (sub_1241c449 * arg1 / stor6) + (35 * sub_1241c449 * arg1 / stor6 / 65) + cycleMintSupply - 100000 * 10^18
+                        require (65 * sub_1241c449 * arg1 / stor6) + (65 * 35 * sub_1241c449 * arg1 / stor6 / 65) + (65 * cycleMintSupply) - 6500000 * 10^18 / (sub_1241c449 * arg1 / stor6) + (35 * sub_1241c449 * arg1 / stor6 / 65) + cycleMintSupply - 100000 * 10^18 == 65
+                        if not (65 * sub_1241c449 * arg1 / stor6) + (65 * 35 * sub_1241c449 * arg1 / stor6 / 65) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100:
+                            require sub_1241c449
+                            cycleMintSupply = 100000 * 10^18
+                            if -(sub_1241c449 * arg1 / stor6) + -cycleMintSupply + ((65 * sub_1241c449 * arg1 / stor6) + (65 * 35 * sub_1241c449 * arg1 / stor6 / 65) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100) + 100000 * 10^18 <= 0:
+                                revert with 0, 'Mining payment too small.'
+                            require ext_code.size(this.address)
+                            call this.address.0x40c10f19 with:
+                                 gas gas_remaining wei
+                                args msg.sender, (sub_1241c449 * arg1 / stor6) - ((65 * sub_1241c449 * arg1 / stor6) + (65 * 35 * sub_1241c449 * arg1 / stor6 / 65) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100)
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_code.size(this.address)
+                            call this.address.0x40c10f19 with:
+                                 gas gas_remaining wei
+                                args 0xf880d3c6dcda42a7b2f6640703c5748557865b35, -(sub_1241c449 * arg1 / stor6) + -cycleMintSupply + ((65 * sub_1241c449 * arg1 / stor6) + (65 * 35 * sub_1241c449 * arg1 / stor6 / 65) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100) + 100000 * 10^18
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if 0 / sub_1241c449 > 0:
+                                require ext_code.size(0x30c6fe3ac0260a855c90cab79aa33e76091d4904)
+                                call 0x30c6fe3ac0260a855c90cab79aa33e76091d4904.0xa9059cbb with:
+                                     gas gas_remaining wei
+                                    args msg.sender, 0 / sub_1241c449
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                        else:
+                            require (65 * sub_1241c449 * arg1 / stor6) + (65 * 35 * sub_1241c449 * arg1 / stor6 / 65) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100
+                            require (65 * sub_1241c449 * arg1 / stor6) + (65 * 35 * sub_1241c449 * arg1 / stor6 / 65) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100 * stor6 / (65 * sub_1241c449 * arg1 / stor6) + (65 * 35 * sub_1241c449 * arg1 / stor6 / 65) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100 == stor6
+                            require sub_1241c449
+                            cycleMintSupply = 100000 * 10^18
+                            if -(sub_1241c449 * arg1 / stor6) + -cycleMintSupply + ((65 * sub_1241c449 * arg1 / stor6) + (65 * 35 * sub_1241c449 * arg1 / stor6 / 65) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100) + 100000 * 10^18 <= 0:
+                                revert with 0, 'Mining payment too small.'
+                            require ext_code.size(this.address)
+                            call this.address.0x40c10f19 with:
+                                 gas gas_remaining wei
+                                args msg.sender, (sub_1241c449 * arg1 / stor6) - ((65 * sub_1241c449 * arg1 / stor6) + (65 * 35 * sub_1241c449 * arg1 / stor6 / 65) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100)
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_code.size(this.address)
+                            call this.address.0x40c10f19 with:
+                                 gas gas_remaining wei
+                                args 0xf880d3c6dcda42a7b2f6640703c5748557865b35, -(sub_1241c449 * arg1 / stor6) + -cycleMintSupply + ((65 * sub_1241c449 * arg1 / stor6) + (65 * 35 * sub_1241c449 * arg1 / stor6 / 65) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100) + 100000 * 10^18
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if (65 * sub_1241c449 * arg1 / stor6) + (65 * 35 * sub_1241c449 * arg1 / stor6 / 65) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100 * stor6 / sub_1241c449 > 0:
+                                require ext_code.size(0x30c6fe3ac0260a855c90cab79aa33e76091d4904)
+                                call 0x30c6fe3ac0260a855c90cab79aa33e76091d4904.0xa9059cbb with:
+                                     gas gas_remaining wei
+                                    args msg.sender, (65 * sub_1241c449 * arg1 / stor6) + (65 * 35 * sub_1241c449 * arg1 / stor6 / 65) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100 * stor6 / sub_1241c449
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+    else:
+        if cycleMintSupply > 0:
+            if arg1 > 0:
+                require ext_code.size(0x30c6fe3ac0260a855c90cab79aa33e76091d4904)
+                call 0x30c6fe3ac0260a855c90cab79aa33e76091d4904.0xa9059cbb with:
+                     gas gas_remaining wei
+                    args msg.sender, arg1
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+        else:
+            if not sub_1241c449:
+                require stor6
+                if not 0 / stor6:
+                    if (0 / stor6) + cycleMintSupply <= 100000 * 10^18:
+                        cycleMintSupply += 0 / stor6
+                        revert with 0, 'Mining payment too small.'
+                    if not (0 / stor6) + cycleMintSupply - 100000 * 10^18:
+                        require sub_1241c449
+                        cycleMintSupply = 100000 * 10^18
+                        if -(0 / stor6) + -cycleMintSupply + 100000 * 10^18 <= 0:
+                            revert with 0, 'Mining payment too small.'
+                        require ext_code.size(this.address)
+                        call this.address.0x40c10f19 with:
+                             gas gas_remaining wei
+                            args msg.sender, 0 / stor6
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_code.size(this.address)
+                        call this.address.0x40c10f19 with:
+                             gas gas_remaining wei
+                            args 0xf880d3c6dcda42a7b2f6640703c5748557865b35, -(0 / stor6) + -cycleMintSupply + 100000 * 10^18
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if 0 / sub_1241c449 > 0:
+                            require ext_code.size(0x30c6fe3ac0260a855c90cab79aa33e76091d4904)
+                            call 0x30c6fe3ac0260a855c90cab79aa33e76091d4904.0xa9059cbb with:
+                                 gas gas_remaining wei
+                                args msg.sender, 0 / sub_1241c449
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                    else:
+                        require (0 / stor6) + cycleMintSupply - 100000 * 10^18
+                        require (65 * 0 / stor6) + (65 * cycleMintSupply) - 6500000 * 10^18 / (0 / stor6) + cycleMintSupply - 100000 * 10^18 == 65
+                        if not (65 * 0 / stor6) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100:
+                            require sub_1241c449
+                            cycleMintSupply = 100000 * 10^18
+                            if -(0 / stor6) + -cycleMintSupply + ((65 * 0 / stor6) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100) + 100000 * 10^18 <= 0:
+                                revert with 0, 'Mining payment too small.'
+                            require ext_code.size(this.address)
+                            call this.address.0x40c10f19 with:
+                                 gas gas_remaining wei
+                                args msg.sender, (0 / stor6) - ((65 * 0 / stor6) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100)
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_code.size(this.address)
+                            call this.address.0x40c10f19 with:
+                                 gas gas_remaining wei
+                                args 0xf880d3c6dcda42a7b2f6640703c5748557865b35, -(0 / stor6) + -cycleMintSupply + ((65 * 0 / stor6) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100) + 100000 * 10^18
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if 0 / sub_1241c449 > 0:
+                                require ext_code.size(0x30c6fe3ac0260a855c90cab79aa33e76091d4904)
+                                call 0x30c6fe3ac0260a855c90cab79aa33e76091d4904.0xa9059cbb with:
+                                     gas gas_remaining wei
+                                    args msg.sender, 0 / sub_1241c449
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                        else:
+                            require (65 * 0 / stor6) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100
+                            require (65 * 0 / stor6) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100 * stor6 / (65 * 0 / stor6) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100 == stor6
+                            require sub_1241c449
+                            cycleMintSupply = 100000 * 10^18
+                            if -(0 / stor6) + -cycleMintSupply + ((65 * 0 / stor6) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100) + 100000 * 10^18 <= 0:
+                                revert with 0, 'Mining payment too small.'
+                            require ext_code.size(this.address)
+                            call this.address.0x40c10f19 with:
+                                 gas gas_remaining wei
+                                args msg.sender, (0 / stor6) - ((65 * 0 / stor6) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100)
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_code.size(this.address)
+                            call this.address.0x40c10f19 with:
+                                 gas gas_remaining wei
+                                args 0xf880d3c6dcda42a7b2f6640703c5748557865b35, -(0 / stor6) + -cycleMintSupply + ((65 * 0 / stor6) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100) + 100000 * 10^18
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if (65 * 0 / stor6) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100 * stor6 / sub_1241c449 > 0:
+                                require ext_code.size(0x30c6fe3ac0260a855c90cab79aa33e76091d4904)
+                                call 0x30c6fe3ac0260a855c90cab79aa33e76091d4904.0xa9059cbb with:
+                                     gas gas_remaining wei
+                                    args msg.sender, (65 * 0 / stor6) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100 * stor6 / sub_1241c449
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                else:
+                    require 0 / stor6
+                    require 35 * 0 / stor6 / 0 / stor6 == 35
+                    if (0 / stor6) + (35 * 0 / stor6 / 65) + cycleMintSupply <= 100000 * 10^18:
+                        cycleMintSupply = cycleMintSupply + (0 / stor6) + (35 * 0 / stor6 / 65)
+                        if 35 * 0 / stor6 / 65 <= 0:
+                            revert with 0, 'Mining payment too small.'
+                        require ext_code.size(this.address)
+                        call this.address.0x40c10f19 with:
+                             gas gas_remaining wei
+                            args msg.sender, 0 / stor6
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_code.size(this.address)
+                        call this.address.0x40c10f19 with:
+                             gas gas_remaining wei
+                            args 0xf880d3c6dcda42a7b2f6640703c5748557865b35, 35 * 0 / stor6 / 65
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                    else:
+                        if not (0 / stor6) + (35 * 0 / stor6 / 65) + cycleMintSupply - 100000 * 10^18:
+                            require sub_1241c449
+                            cycleMintSupply = 100000 * 10^18
+                            if -(0 / stor6) + -cycleMintSupply + 100000 * 10^18 <= 0:
+                                revert with 0, 'Mining payment too small.'
+                            require ext_code.size(this.address)
+                            call this.address.0x40c10f19 with:
+                                 gas gas_remaining wei
+                                args msg.sender, 0 / stor6
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_code.size(this.address)
+                            call this.address.0x40c10f19 with:
+                                 gas gas_remaining wei
+                                args 0xf880d3c6dcda42a7b2f6640703c5748557865b35, -(0 / stor6) + -cycleMintSupply + 100000 * 10^18
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if 0 / sub_1241c449 > 0:
+                                require ext_code.size(0x30c6fe3ac0260a855c90cab79aa33e76091d4904)
+                                call 0x30c6fe3ac0260a855c90cab79aa33e76091d4904.0xa9059cbb with:
+                                     gas gas_remaining wei
+                                    args msg.sender, 0 / sub_1241c449
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                        else:
+                            require (0 / stor6) + (35 * 0 / stor6 / 65) + cycleMintSupply - 100000 * 10^18
+                            require (65 * 0 / stor6) + (65 * 35 * 0 / stor6 / 65) + (65 * cycleMintSupply) - 6500000 * 10^18 / (0 / stor6) + (35 * 0 / stor6 / 65) + cycleMintSupply - 100000 * 10^18 == 65
+                            if not (65 * 0 / stor6) + (65 * 35 * 0 / stor6 / 65) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100:
+                                require sub_1241c449
+                                cycleMintSupply = 100000 * 10^18
+                                if -(0 / stor6) + -cycleMintSupply + ((65 * 0 / stor6) + (65 * 35 * 0 / stor6 / 65) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100) + 100000 * 10^18 <= 0:
+                                    revert with 0, 'Mining payment too small.'
+                                require ext_code.size(this.address)
+                                call this.address.0x40c10f19 with:
+                                     gas gas_remaining wei
+                                    args msg.sender, (0 / stor6) - ((65 * 0 / stor6) + (65 * 35 * 0 / stor6 / 65) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100)
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_code.size(this.address)
+                                call this.address.0x40c10f19 with:
+                                     gas gas_remaining wei
+                                    args 0xf880d3c6dcda42a7b2f6640703c5748557865b35, -(0 / stor6) + -cycleMintSupply + ((65 * 0 / stor6) + (65 * 35 * 0 / stor6 / 65) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100) + 100000 * 10^18
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                if 0 / sub_1241c449 > 0:
+                                    require ext_code.size(0x30c6fe3ac0260a855c90cab79aa33e76091d4904)
+                                    call 0x30c6fe3ac0260a855c90cab79aa33e76091d4904.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args msg.sender, 0 / sub_1241c449
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                            else:
+                                require (65 * 0 / stor6) + (65 * 35 * 0 / stor6 / 65) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100
+                                require (65 * 0 / stor6) + (65 * 35 * 0 / stor6 / 65) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100 * stor6 / (65 * 0 / stor6) + (65 * 35 * 0 / stor6 / 65) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100 == stor6
+                                require sub_1241c449
+                                cycleMintSupply = 100000 * 10^18
+                                if -(0 / stor6) + -cycleMintSupply + ((65 * 0 / stor6) + (65 * 35 * 0 / stor6 / 65) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100) + 100000 * 10^18 <= 0:
+                                    revert with 0, 'Mining payment too small.'
+                                require ext_code.size(this.address)
+                                call this.address.0x40c10f19 with:
+                                     gas gas_remaining wei
+                                    args msg.sender, (0 / stor6) - ((65 * 0 / stor6) + (65 * 35 * 0 / stor6 / 65) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100)
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_code.size(this.address)
+                                call this.address.0x40c10f19 with:
+                                     gas gas_remaining wei
+                                    args 0xf880d3c6dcda42a7b2f6640703c5748557865b35, -(0 / stor6) + -cycleMintSupply + ((65 * 0 / stor6) + (65 * 35 * 0 / stor6 / 65) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100) + 100000 * 10^18
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                if (65 * 0 / stor6) + (65 * 35 * 0 / stor6 / 65) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100 * stor6 / sub_1241c449 > 0:
+                                    require ext_code.size(0x30c6fe3ac0260a855c90cab79aa33e76091d4904)
+                                    call 0x30c6fe3ac0260a855c90cab79aa33e76091d4904.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args msg.sender, (65 * 0 / stor6) + (65 * 35 * 0 / stor6 / 65) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100 * stor6 / sub_1241c449
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+            else:
+                require sub_1241c449
+                require sub_1241c449 * arg1 / sub_1241c449 == arg1
+                require stor6
+                if not sub_1241c449 * arg1 / stor6:
+                    if (sub_1241c449 * arg1 / stor6) + cycleMintSupply <= 100000 * 10^18:
+                        cycleMintSupply += sub_1241c449 * arg1 / stor6
+                        revert with 0, 'Mining payment too small.'
+                    if not (sub_1241c449 * arg1 / stor6) + cycleMintSupply - 100000 * 10^18:
+                        require sub_1241c449
+                        cycleMintSupply = 100000 * 10^18
+                        if -(sub_1241c449 * arg1 / stor6) + -cycleMintSupply + 100000 * 10^18 <= 0:
+                            revert with 0, 'Mining payment too small.'
+                        require ext_code.size(this.address)
+                        call this.address.0x40c10f19 with:
+                             gas gas_remaining wei
+                            args msg.sender, sub_1241c449 * arg1 / stor6
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_code.size(this.address)
+                        call this.address.0x40c10f19 with:
+                             gas gas_remaining wei
+                            args 0xf880d3c6dcda42a7b2f6640703c5748557865b35, -(sub_1241c449 * arg1 / stor6) + -cycleMintSupply + 100000 * 10^18
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if 0 / sub_1241c449 > 0:
+                            require ext_code.size(0x30c6fe3ac0260a855c90cab79aa33e76091d4904)
+                            call 0x30c6fe3ac0260a855c90cab79aa33e76091d4904.0xa9059cbb with:
+                                 gas gas_remaining wei
+                                args msg.sender, 0 / sub_1241c449
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                    else:
+                        require (sub_1241c449 * arg1 / stor6) + cycleMintSupply - 100000 * 10^18
+                        require (65 * sub_1241c449 * arg1 / stor6) + (65 * cycleMintSupply) - 6500000 * 10^18 / (sub_1241c449 * arg1 / stor6) + cycleMintSupply - 100000 * 10^18 == 65
+                        if not (65 * sub_1241c449 * arg1 / stor6) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100:
+                            require sub_1241c449
+                            cycleMintSupply = 100000 * 10^18
+                            if -(sub_1241c449 * arg1 / stor6) + -cycleMintSupply + ((65 * sub_1241c449 * arg1 / stor6) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100) + 100000 * 10^18 <= 0:
+                                revert with 0, 'Mining payment too small.'
+                            require ext_code.size(this.address)
+                            call this.address.0x40c10f19 with:
+                                 gas gas_remaining wei
+                                args msg.sender, (sub_1241c449 * arg1 / stor6) - ((65 * sub_1241c449 * arg1 / stor6) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100)
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_code.size(this.address)
+                            call this.address.0x40c10f19 with:
+                                 gas gas_remaining wei
+                                args 0xf880d3c6dcda42a7b2f6640703c5748557865b35, -(sub_1241c449 * arg1 / stor6) + -cycleMintSupply + ((65 * sub_1241c449 * arg1 / stor6) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100) + 100000 * 10^18
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if 0 / sub_1241c449 > 0:
+                                require ext_code.size(0x30c6fe3ac0260a855c90cab79aa33e76091d4904)
+                                call 0x30c6fe3ac0260a855c90cab79aa33e76091d4904.0xa9059cbb with:
+                                     gas gas_remaining wei
+                                    args msg.sender, 0 / sub_1241c449
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                        else:
+                            require (65 * sub_1241c449 * arg1 / stor6) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100
+                            require (65 * sub_1241c449 * arg1 / stor6) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100 * stor6 / (65 * sub_1241c449 * arg1 / stor6) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100 == stor6
+                            require sub_1241c449
+                            cycleMintSupply = 100000 * 10^18
+                            if -(sub_1241c449 * arg1 / stor6) + -cycleMintSupply + ((65 * sub_1241c449 * arg1 / stor6) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100) + 100000 * 10^18 <= 0:
+                                revert with 0, 'Mining payment too small.'
+                            require ext_code.size(this.address)
+                            call this.address.0x40c10f19 with:
+                                 gas gas_remaining wei
+                                args msg.sender, (sub_1241c449 * arg1 / stor6) - ((65 * sub_1241c449 * arg1 / stor6) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100)
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_code.size(this.address)
+                            call this.address.0x40c10f19 with:
+                                 gas gas_remaining wei
+                                args 0xf880d3c6dcda42a7b2f6640703c5748557865b35, -(sub_1241c449 * arg1 / stor6) + -cycleMintSupply + ((65 * sub_1241c449 * arg1 / stor6) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100) + 100000 * 10^18
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if (65 * sub_1241c449 * arg1 / stor6) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100 * stor6 / sub_1241c449 > 0:
+                                require ext_code.size(0x30c6fe3ac0260a855c90cab79aa33e76091d4904)
+                                call 0x30c6fe3ac0260a855c90cab79aa33e76091d4904.0xa9059cbb with:
+                                     gas gas_remaining wei
+                                    args msg.sender, (65 * sub_1241c449 * arg1 / stor6) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100 * stor6 / sub_1241c449
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                else:
+                    require sub_1241c449 * arg1 / stor6
+                    require 35 * sub_1241c449 * arg1 / stor6 / sub_1241c449 * arg1 / stor6 == 35
+                    if (sub_1241c449 * arg1 / stor6) + (35 * sub_1241c449 * arg1 / stor6 / 65) + cycleMintSupply <= 100000 * 10^18:
+                        cycleMintSupply = cycleMintSupply + (sub_1241c449 * arg1 / stor6) + (35 * sub_1241c449 * arg1 / stor6 / 65)
+                        if 35 * sub_1241c449 * arg1 / stor6 / 65 <= 0:
+                            revert with 0, 'Mining payment too small.'
+                        require ext_code.size(this.address)
+                        call this.address.0x40c10f19 with:
+                             gas gas_remaining wei
+                            args msg.sender, sub_1241c449 * arg1 / stor6
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_code.size(this.address)
+                        call this.address.0x40c10f19 with:
+                             gas gas_remaining wei
+                            args 0xf880d3c6dcda42a7b2f6640703c5748557865b35, 35 * sub_1241c449 * arg1 / stor6 / 65
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                    else:
+                        if not (sub_1241c449 * arg1 / stor6) + (35 * sub_1241c449 * arg1 / stor6 / 65) + cycleMintSupply - 100000 * 10^18:
+                            require sub_1241c449
+                            cycleMintSupply = 100000 * 10^18
+                            if -(sub_1241c449 * arg1 / stor6) + -cycleMintSupply + 100000 * 10^18 <= 0:
+                                revert with 0, 'Mining payment too small.'
+                            require ext_code.size(this.address)
+                            call this.address.0x40c10f19 with:
+                                 gas gas_remaining wei
+                                args msg.sender, sub_1241c449 * arg1 / stor6
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_code.size(this.address)
+                            call this.address.0x40c10f19 with:
+                                 gas gas_remaining wei
+                                args 0xf880d3c6dcda42a7b2f6640703c5748557865b35, -(sub_1241c449 * arg1 / stor6) + -cycleMintSupply + 100000 * 10^18
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if 0 / sub_1241c449 > 0:
+                                require ext_code.size(0x30c6fe3ac0260a855c90cab79aa33e76091d4904)
+                                call 0x30c6fe3ac0260a855c90cab79aa33e76091d4904.0xa9059cbb with:
+                                     gas gas_remaining wei
+                                    args msg.sender, 0 / sub_1241c449
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                        else:
+                            require (sub_1241c449 * arg1 / stor6) + (35 * sub_1241c449 * arg1 / stor6 / 65) + cycleMintSupply - 100000 * 10^18
+                            require (65 * sub_1241c449 * arg1 / stor6) + (65 * 35 * sub_1241c449 * arg1 / stor6 / 65) + (65 * cycleMintSupply) - 6500000 * 10^18 / (sub_1241c449 * arg1 / stor6) + (35 * sub_1241c449 * arg1 / stor6 / 65) + cycleMintSupply - 100000 * 10^18 == 65
+                            if not (65 * sub_1241c449 * arg1 / stor6) + (65 * 35 * sub_1241c449 * arg1 / stor6 / 65) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100:
+                                require sub_1241c449
+                                cycleMintSupply = 100000 * 10^18
+                                if -(sub_1241c449 * arg1 / stor6) + -cycleMintSupply + ((65 * sub_1241c449 * arg1 / stor6) + (65 * 35 * sub_1241c449 * arg1 / stor6 / 65) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100) + 100000 * 10^18 <= 0:
+                                    revert with 0, 'Mining payment too small.'
+                                require ext_code.size(this.address)
+                                call this.address.0x40c10f19 with:
+                                     gas gas_remaining wei
+                                    args msg.sender, (sub_1241c449 * arg1 / stor6) - ((65 * sub_1241c449 * arg1 / stor6) + (65 * 35 * sub_1241c449 * arg1 / stor6 / 65) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100)
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_code.size(this.address)
+                                call this.address.0x40c10f19 with:
+                                     gas gas_remaining wei
+                                    args 0xf880d3c6dcda42a7b2f6640703c5748557865b35, -(sub_1241c449 * arg1 / stor6) + -cycleMintSupply + ((65 * sub_1241c449 * arg1 / stor6) + (65 * 35 * sub_1241c449 * arg1 / stor6 / 65) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100) + 100000 * 10^18
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                if 0 / sub_1241c449 > 0:
+                                    require ext_code.size(0x30c6fe3ac0260a855c90cab79aa33e76091d4904)
+                                    call 0x30c6fe3ac0260a855c90cab79aa33e76091d4904.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args msg.sender, 0 / sub_1241c449
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                            else:
+                                require (65 * sub_1241c449 * arg1 / stor6) + (65 * 35 * sub_1241c449 * arg1 / stor6 / 65) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100
+                                require (65 * sub_1241c449 * arg1 / stor6) + (65 * 35 * sub_1241c449 * arg1 / stor6 / 65) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100 * stor6 / (65 * sub_1241c449 * arg1 / stor6) + (65 * 35 * sub_1241c449 * arg1 / stor6 / 65) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100 == stor6
+                                require sub_1241c449
+                                cycleMintSupply = 100000 * 10^18
+                                if -(sub_1241c449 * arg1 / stor6) + -cycleMintSupply + ((65 * sub_1241c449 * arg1 / stor6) + (65 * 35 * sub_1241c449 * arg1 / stor6 / 65) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100) + 100000 * 10^18 <= 0:
+                                    revert with 0, 'Mining payment too small.'
+                                require ext_code.size(this.address)
+                                call this.address.0x40c10f19 with:
+                                     gas gas_remaining wei
+                                    args msg.sender, (sub_1241c449 * arg1 / stor6) - ((65 * sub_1241c449 * arg1 / stor6) + (65 * 35 * sub_1241c449 * arg1 / stor6 / 65) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100)
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_code.size(this.address)
+                                call this.address.0x40c10f19 with:
+                                     gas gas_remaining wei
+                                    args 0xf880d3c6dcda42a7b2f6640703c5748557865b35, -(sub_1241c449 * arg1 / stor6) + -cycleMintSupply + ((65 * sub_1241c449 * arg1 / stor6) + (65 * 35 * sub_1241c449 * arg1 / stor6 / 65) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100) + 100000 * 10^18
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                if (65 * sub_1241c449 * arg1 / stor6) + (65 * 35 * sub_1241c449 * arg1 / stor6 / 65) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100 * stor6 / sub_1241c449 > 0:
+                                    require ext_code.size(0x30c6fe3ac0260a855c90cab79aa33e76091d4904)
+                                    call 0x30c6fe3ac0260a855c90cab79aa33e76091d4904.0xa9059cbb with:
+                                         gas gas_remaining wei
+                                        args msg.sender, (65 * sub_1241c449 * arg1 / stor6) + (65 * 35 * sub_1241c449 * arg1 / stor6 / 65) + (65 * cycleMintSupply) - 6500000 * 10^18 / 100 * stor6 / sub_1241c449
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+    if cycleMintSupply >= 100000 * 10^18:
+        stor12 = 1
+        stor9 = 0
+        if not cycleMintSupply:
+            swapLimit = 0
+        else:
+            require cycleMintSupply
+            require 35 * cycleMintSupply / cycleMintSupply == 35
+            swapLimit = 35 * cycleMintSupply / 100
+        require ext_code.size(0x30c6fe3ac0260a855c90cab79aa33e76091d4904)
+        call 0x30c6fe3ac0260a855c90cab79aa33e76091d4904.0x70a08231 with:
+             gas gas_remaining wei
+            args this.address
+        if not ext_call.success:
+            revert with ext_call.return_data[0 len return_data.size]
+        require return_data.size >= 32
+        if not ext_call.return_data[0]:
+            require swapLimit
+            swapRates[0x30c6fe3ac0260a855c90cab79aa33e76091d4904] = 0 / swapLimit
+        else:
+            require ext_call.return_data[0]
+            require ext_call.return_data[0] * stor6 / ext_call.return_data[0] == stor6
+            if not ext_call.return_data[0] * stor6:
+                require swapLimit
+                swapRates[0x30c6fe3ac0260a855c90cab79aa33e76091d4904] = 0 / swapLimit
+            else:
+                require ext_call.return_data[0] * stor6
+                require 35 * ext_call.return_data[0] * stor6 / ext_call.return_data[0] * stor6 == 35
+                require swapLimit
+                swapRates[0x30c6fe3ac0260a855c90cab79aa33e76091d4904] = 35 * ext_call.return_data[0] * stor6 / 100 / swapLimit
+        emit SwapStarted(block.timestamp);
+    else:
+        if block.timestamp > cycleEndTime:
+            stor12 = 1
+            stor9 = 0
+            if not cycleMintSupply:
+                swapLimit = 0
+            else:
+                require cycleMintSupply
+                require 35 * cycleMintSupply / cycleMintSupply == 35
+                swapLimit = 35 * cycleMintSupply / 100
+            require ext_code.size(0x30c6fe3ac0260a855c90cab79aa33e76091d4904)
+            call 0x30c6fe3ac0260a855c90cab79aa33e76091d4904.0x70a08231 with:
+                 gas gas_remaining wei
+                args this.address
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require return_data.size >= 32
+            if not ext_call.return_data[0]:
+                require swapLimit
+                swapRates[0x30c6fe3ac0260a855c90cab79aa33e76091d4904] = 0 / swapLimit
+            else:
+                require ext_call.return_data[0]
+                require ext_call.return_data[0] * stor6 / ext_call.return_data[0] == stor6
+                if not ext_call.return_data[0] * stor6:
+                    require swapLimit
+                    swapRates[0x30c6fe3ac0260a855c90cab79aa33e76091d4904] = 0 / swapLimit
+                else:
+                    require ext_call.return_data[0] * stor6
+                    require 35 * ext_call.return_data[0] * stor6 / ext_call.return_data[0] * stor6 == 35
+                    require swapLimit
+                    swapRates[0x30c6fe3ac0260a855c90cab79aa33e76091d4904] = 35 * ext_call.return_data[0] * stor6 / 100 / swapLimit
+            emit SwapStarted(block.timestamp);
+}
+
+
+
+}
