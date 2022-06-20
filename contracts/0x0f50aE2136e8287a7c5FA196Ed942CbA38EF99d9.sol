@@ -1,0 +1,13348 @@
+contract main {
+
+
+
+
+// =====================  Runtime code  =====================
+
+
+#
+#  - convertForPrioritized2(address[] arg1, uint256 arg2, uint256 arg3, address arg4, uint256 arg5, uint8 arg6, bytes32 arg7, bytes32 arg8)
+#
+const BANCOR_CONVERTER_UPGRADER = 'BancorConverterUpgrader'
+
+const BNT_TOKEN = 'BNTToken'
+
+const CONTRACT_REGISTRY = 'ContractRegistry'
+
+const BANCOR_CONVERTER_FACTORY = 'BancorConverterFactory'
+
+const BNT_CONVERTER = 'BNTConverter'
+
+const BANCOR_FORMULA = 'BancorFormula'
+
+const CONTRACT_FEATURES = 'ContractFeatures'
+
+const BANCOR_NETWORK = 'BancorNetwork'
+
+const BANCOR_GAS_PRICE_LIMIT = 'BancorGasPriceLimit'
+
+const CONVERTER_CONVERSION_WHITELIST = 1
+
+const BANCOR_X = 'BancorX'
+
+
+address owner;
+address newOwner;
+address signerAddress;
+address registryAddress;
+mapping of uint8 stor4;
+mapping of uint8 stor5;
+
+function signerAddress() {
+    return signerAddress
+}
+
+function registry() {
+    return registryAddress
+}
+
+function etherTokens(address arg1) {
+    return bool(stor4[arg1])
+}
+
+function conversionHashes(bytes32 arg1) {
+    return bool(stor5[arg1])
+}
+
+function owner() {
+    return owner
+}
+
+function newOwner() {
+    return newOwner
+}
+
+function _fallback() payable {
+    revert
+}
+
+function transferOwnership(address arg1) {
+    require msg.sender == owner
+    require owner != arg1
+    newOwner = arg1
+}
+
+function acceptOwnership() {
+    require msg.sender == newOwner
+    emit OwnerUpdate(owner, newOwner);
+    owner = newOwner
+    newOwner = 0
+}
+
+function setRegistry(address arg1) {
+    require msg.sender == owner
+    require arg1
+    require arg1 != this.address
+    registryAddress = arg1
+}
+
+function setSignerAddress(address arg1) {
+    require msg.sender == owner
+    require arg1
+    require arg1 != this.address
+    signerAddress = arg1
+}
+
+function registerEtherToken(address arg1, bool arg2) {
+    require msg.sender == owner
+    require arg1
+    require arg1 != this.address
+    stor4[address(arg1)] = uint8(arg2)
+}
+
+function withdrawTokens(address arg1, address arg2, uint256 arg3) {
+    require msg.sender == owner
+    require arg1
+    require arg2
+    require arg2 != this.address
+    require ext_code.size(arg1)
+    call arg1.0xa9059cbb with:
+         gas gas_remaining wei
+        args address(arg2), arg3
+    if not ext_call.success:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+    require ext_call.return_data[0]
+}
+
+function getReturnByPath(address[] arg1, uint256 arg2) {
+    mem[128 len 32 * arg1.length] = call.data[arg1 + 36 len 32 * arg1.length]
+    mem[(32 * arg1.length) + 132] = 'BancorFormula'
+    require ext_code.size(registryAddress)
+    call registryAddress.0x21f8a721 with:
+         gas gas_remaining wei
+        args 'BancorFormula'
+    mem[(32 * arg1.length) + 128] = ext_call.return_data[0]
+    if not ext_call.success:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+    require 0 < arg1.length
+    idx = 1
+    s = 0
+    t = 0
+    u = 0
+    v = 0
+    w = 0
+    x = arg2
+    y = 0
+    y = 0
+    y = 0
+    y = mem[128]
+    while idx < arg1.length:
+        require idx < arg1.length
+        _140 = mem[(32 * idx) + 128]
+        require idx + 1 < arg1.length
+        _142 = mem[(32 * idx + 1) + 128]
+        require ext_code.size(mem[(32 * idx) + 140 len 20])
+        call mem[(32 * idx) + 140 len 20].0x8da5cb5b with:
+             gas gas_remaining wei
+        if not ext_call.success:
+            revert with ext_call.return_data[0 len return_data.size]
+        require return_data.size >= 32
+        if mem[(32 * idx) + 140 len 20] != mem[(32 * idx + 1) + 140 len 20]:
+            if address(y) != mem[(32 * idx) + 140 len 20]:
+                mem[(32 * arg1.length) + 164] = mem[(32 * idx + 1) + 140 len 20]
+                mem[(32 * arg1.length) + 196] = x
+                require ext_code.size(address(ext_call.return_data[0]))
+                call address(ext_call.return_data[0]).getReturn(address arg1, address arg2, uint256 arg3) with:
+                     gas gas_remaining wei
+                    args address(y), address(_142), x
+                mem[(32 * arg1.length) + 128 len 64] = ext_call.return_data[0 len 64]
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 64
+                idx = idx + 2
+                s = _140
+                t = t
+                u = u
+                v = v
+                w = ext_call.return_data[32]
+                x = ext_call.return_data[0]
+                y = ext_call.return_data[0]
+                y = _142
+                y = _140
+                y = _142
+                continue 
+            if mem[(32 * idx) + 140 len 20] == address(s):
+                require ext_code.size(address(ext_call.return_data[0]))
+                call address(ext_call.return_data[0]).getConnectorBalance(address arg1) with:
+                     gas gas_remaining wei
+                    args address(mem[(32 * idx + 1) + 128])
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                require ext_code.size(address(ext_call.return_data[0]))
+                call address(ext_call.return_data[0]).connectors(address arg1) with:
+                     gas gas_remaining wei
+                    args address(mem[(32 * idx + 1) + 128])
+                mem[(32 * arg1.length) + 128 len 160] = ext_call.return_data[0 len 160]
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 160
+                mem[(32 * arg1.length) + 132] = v
+                mem[(32 * arg1.length) + 164] = ext_call.return_data[0]
+                mem[(32 * arg1.length) + 196] = uint32(ext_call.return_data[32])
+                mem[(32 * arg1.length) + 228] = x
+                require ext_code.size(address(ext_call.return_data[0]))
+                call address(ext_call.return_data[0]).calculateSaleReturn(uint256 arg1, uint256 arg2, uint32 arg3, uint256 arg4) with:
+                     gas gas_remaining wei
+                    args v, ext_call.return_data[0], ext_call.return_data[32] << 224, x
+            else:
+                require ext_code.size(mem[(32 * idx) + 140 len 20])
+                call mem[(32 * idx) + 140 len 20].0x18160ddd with:
+                     gas gas_remaining wei
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                require ext_code.size(address(ext_call.return_data[0]))
+                call address(ext_call.return_data[0]).getConnectorBalance(address arg1) with:
+                     gas gas_remaining wei
+                    args address(mem[(32 * idx + 1) + 128])
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                require ext_code.size(address(ext_call.return_data[0]))
+                call address(ext_call.return_data[0]).connectors(address arg1) with:
+                     gas gas_remaining wei
+                    args address(mem[(32 * idx + 1) + 128])
+                mem[(32 * arg1.length) + 128 len 160] = ext_call.return_data[0 len 160]
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 160
+                mem[(32 * arg1.length) + 132] = ext_call.return_data[0]
+                mem[(32 * arg1.length) + 164] = ext_call.return_data[0]
+                mem[(32 * arg1.length) + 196] = uint32(ext_call.return_data[32])
+                mem[(32 * arg1.length) + 228] = x
+                require ext_code.size(address(ext_call.return_data[0]))
+                call address(ext_call.return_data[0]).calculateSaleReturn(uint256 arg1, uint256 arg2, uint32 arg3, uint256 arg4) with:
+                     gas gas_remaining wei
+                    args ext_call.return_data[0], ext_call.return_data[0], ext_call.return_data[32] << 224, x
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require return_data.size >= 32
+            require ext_code.size(address(ext_call.return_data[0]))
+            call address(ext_call.return_data[0]).conversionFee() with:
+                 gas gas_remaining wei
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require return_data.size >= 32
+            if ext_call.return_data[0]:
+                require ext_call.return_data[0]
+                require uint32(ext_call.return_data[0]) * ext_call.return_data[0] / ext_call.return_data[0] == uint32(ext_call.return_data[0])
+            require ext_code.size(address(_140))
+            call address(_140).0x18160ddd with:
+                 gas gas_remaining wei
+            mem[(32 * arg1.length) + 128] = ext_call.return_data[0]
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require return_data.size >= 32
+            idx = idx + 2
+            s = _140
+            t = ext_call.return_data[32]
+            u = ext_call.return_data[0]
+            v = uint32(ext_call.return_data[0]) * ext_call.return_data[0] / 10^6
+            w = uint32(ext_call.return_data[0]) * ext_call.return_data[0] / 10^6
+            x = ext_call.return_data[0] - (uint32(ext_call.return_data[0]) * ext_call.return_data[0] / 10^6)
+            y = ext_call.return_data[0]
+            y = _142
+            y = _140
+            y = _142
+            continue 
+        if mem[(32 * idx) + 140 len 20] == address(s):
+            require ext_code.size(address(ext_call.return_data[0]))
+            call address(ext_call.return_data[0]).connectors(address arg1) with:
+                 gas gas_remaining wei
+                args address(y)
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require return_data.size >= 160
+            require ext_call.return_data[96]
+            require ext_code.size(address(ext_call.return_data[0]))
+            call address(ext_call.return_data[0]).getConnectorBalance(address arg1) with:
+                 gas gas_remaining wei
+                args address(y)
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require return_data.size >= 32
+            require ext_code.size(address(ext_call.return_data[0]))
+            call address(ext_call.return_data[0]).connectors(address arg1) with:
+                 gas gas_remaining wei
+                args address(y)
+            mem[(32 * arg1.length) + 128 len 160] = ext_call.return_data[0 len 160]
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require return_data.size >= 160
+            mem[(32 * arg1.length) + 132] = v
+            mem[(32 * arg1.length) + 164] = ext_call.return_data[0]
+            mem[(32 * arg1.length) + 196] = uint32(ext_call.return_data[32])
+            mem[(32 * arg1.length) + 228] = x
+            require ext_code.size(address(ext_call.return_data[0]))
+            call address(ext_call.return_data[0]).calculatePurchaseReturn(uint256 arg1, uint256 arg2, uint32 arg3, uint256 arg4) with:
+                 gas gas_remaining wei
+                args v, ext_call.return_data[0], ext_call.return_data[32] << 224, x
+        else:
+            require ext_code.size(mem[(32 * idx) + 140 len 20])
+            call mem[(32 * idx) + 140 len 20].0x18160ddd with:
+                 gas gas_remaining wei
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require return_data.size >= 32
+            require ext_code.size(address(ext_call.return_data[0]))
+            call address(ext_call.return_data[0]).connectors(address arg1) with:
+                 gas gas_remaining wei
+                args address(y)
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require return_data.size >= 160
+            require ext_call.return_data[96]
+            require ext_code.size(address(ext_call.return_data[0]))
+            call address(ext_call.return_data[0]).getConnectorBalance(address arg1) with:
+                 gas gas_remaining wei
+                args address(y)
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require return_data.size >= 32
+            require ext_code.size(address(ext_call.return_data[0]))
+            call address(ext_call.return_data[0]).connectors(address arg1) with:
+                 gas gas_remaining wei
+                args address(y)
+            mem[(32 * arg1.length) + 128 len 160] = ext_call.return_data[0 len 160]
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require return_data.size >= 160
+            mem[(32 * arg1.length) + 132] = ext_call.return_data[0]
+            mem[(32 * arg1.length) + 164] = ext_call.return_data[0]
+            mem[(32 * arg1.length) + 196] = uint32(ext_call.return_data[32])
+            mem[(32 * arg1.length) + 228] = x
+            require ext_code.size(address(ext_call.return_data[0]))
+            call address(ext_call.return_data[0]).calculatePurchaseReturn(uint256 arg1, uint256 arg2, uint32 arg3, uint256 arg4) with:
+                 gas gas_remaining wei
+                args ext_call.return_data[0], ext_call.return_data[0], ext_call.return_data[32] << 224, x
+        if not ext_call.success:
+            revert with ext_call.return_data[0 len return_data.size]
+        require return_data.size >= 32
+        require ext_code.size(address(ext_call.return_data[0]))
+        call address(ext_call.return_data[0]).conversionFee() with:
+             gas gas_remaining wei
+        if not ext_call.success:
+            revert with ext_call.return_data[0 len return_data.size]
+        require return_data.size >= 32
+        if ext_call.return_data[0]:
+            require ext_call.return_data[0]
+            require uint32(ext_call.return_data[0]) * ext_call.return_data[0] / ext_call.return_data[0] == uint32(ext_call.return_data[0])
+        require ext_code.size(address(_140))
+        call address(_140).0x18160ddd with:
+             gas gas_remaining wei
+        mem[(32 * arg1.length) + 128] = ext_call.return_data[0]
+        if not ext_call.success:
+            revert with ext_call.return_data[0 len return_data.size]
+        require return_data.size >= 32
+        idx = idx + 2
+        s = _140
+        t = ext_call.return_data[32]
+        u = ext_call.return_data[0]
+        v = (2 * ext_call.return_data[0]) - (uint32(ext_call.return_data[0]) * ext_call.return_data[0] / 10^6)
+        w = uint32(ext_call.return_data[0]) * ext_call.return_data[0] / 10^6
+        x = ext_call.return_data[0] - (uint32(ext_call.return_data[0]) * ext_call.return_data[0] / 10^6)
+        y = ext_call.return_data[0]
+        y = _142
+        y = _140
+        y = _142
+        continue 
+    return x, w
+}
+
+function convert(address[] arg1, uint256 arg2, uint256 arg3) payable {
+    mem[128 len 32 * arg1.length] = call.data[arg1 + 36 len 32 * arg1.length]
+    require arg1.length > 2
+    require arg1.length <= 21
+    require 1 == bool(arg1.length)
+    require 0 < arg1.length
+    if 0 == msg.value:
+        if msg.value <= 0:
+            require arg1.length > 2
+            require arg1.length <= 21
+            require 1 == bool(arg1.length)
+            require ext_code.size(registryAddress)
+            call registryAddress.0xbb34534c with:
+                 gas gas_remaining wei
+                args 'BancorGasPriceLimit'
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require return_data.size >= 32
+            mem[(32 * arg1.length) + 128] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+            mem[(32 * arg1.length) + 132] = block.gasprice
+            require ext_code.size(address(ext_call.return_data[0]))
+            call address(ext_call.return_data[0]).0x6b4dff1f with:
+                 gas gas_remaining wei
+                args block.gasprice
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            if 0 < arg1.length:
+                _45 = mem[128]
+                mem[(32 * arg1.length) + 132] = 'ContractFeatures'
+                require ext_code.size(registryAddress)
+                call registryAddress.0xbb34534c with:
+                     gas gas_remaining wei
+                    args 'ContractFeatures'
+                mem[(32 * arg1.length) + 128] = ext_call.return_data[0]
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                idx = 1
+                s = 0
+                s = 0
+                t = 0
+                t = _45
+                u = arg2
+                while idx < arg1.length:
+                    require idx < arg1.length
+                    _829 = mem[(32 * idx) + 128]
+                    require idx + 1 < arg1.length
+                    _844 = mem[(32 * idx + 1) + 128]
+                    require ext_code.size(mem[(32 * idx) + 140 len 20])
+                    call mem[(32 * idx) + 140 len 20].0x8da5cb5b with:
+                         gas gas_remaining wei
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).0xa5fbf287 with:
+                         gas gas_remaining wei
+                        args address(ext_call.return_data[0]), 1
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    if ext_call.return_data[0]:
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).conversionWhitelist() with:
+                             gas gas_remaining wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if address(ext_call.return_data[0]):
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                 gas gas_remaining wei
+                                args msg.sender
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    if address(t) != mem[(32 * idx) + 140 len 20]:
+                        require ext_code.size(address(t))
+                        call address(t).0xdd62ed3e with:
+                             gas gas_remaining wei
+                            args this.address, address(ext_call.return_data[0])
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if ext_call.return_data[0] < u:
+                            require ext_code.size(address(t))
+                            call address(t).0xdd62ed3e with:
+                                 gas gas_remaining wei
+                                args this.address, address(ext_call.return_data[0])
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_code.size(address(t))
+                            if ext_call.return_data[0]:
+                                call address(t).approve(address arg1, uint256 arg2) with:
+                                     gas gas_remaining wei
+                                    args address(ext_call.return_data[0]), 0
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                            call address(t).approve(address arg1, uint256 arg2) with:
+                                 gas gas_remaining wei
+                                args address(ext_call.return_data[0]), u
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    mem[(32 * arg1.length) + 132] = address(t)
+                    mem[(32 * arg1.length) + 164] = address(_844)
+                    mem[(32 * arg1.length) + 196] = u
+                    if idx == arg1.length - 2:
+                        mem[(32 * arg1.length) + 228] = arg3
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(t), address(_844), u, arg3
+                    else:
+                        mem[(32 * arg1.length) + 228] = 1
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(t), address(_844), u, 1
+                    mem[(32 * arg1.length) + 128] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    idx = idx + 2
+                    s = ext_call.return_data[0]
+                    s = _844
+                    t = _829
+                    t = _844
+                    u = ext_call.return_data[0]
+                    continue 
+                require ext_code.size(address(s))
+                if stor4[address(s)]:
+                    call address(s).withdrawTo(address arg1, uint256 arg2) with:
+                         gas gas_remaining wei
+                        args msg.sender, u
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    return u
+                call address(s).0xa9059cbb with:
+                     gas gas_remaining wei
+                    args msg.sender, u
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                if ext_call.return_data[0]:
+                    return u
+        else:
+            require ext_code.size(mem[140 len 20])
+            call mem[140 len 20].deposit() with:
+               value msg.value wei
+                 gas gas_remaining wei
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require arg1.length > 2
+            require arg1.length <= 21
+            require 1 == bool(arg1.length)
+            require ext_code.size(registryAddress)
+            call registryAddress.0xbb34534c with:
+                 gas gas_remaining wei
+                args 'BancorGasPriceLimit'
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require return_data.size >= 32
+            mem[(32 * arg1.length) + 128] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+            mem[(32 * arg1.length) + 132] = block.gasprice
+            require ext_code.size(address(ext_call.return_data[0]))
+            call address(ext_call.return_data[0]).0x6b4dff1f with:
+                 gas gas_remaining wei
+                args block.gasprice
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            if 0 < arg1.length:
+                _56 = mem[128]
+                mem[(32 * arg1.length) + 132] = 'ContractFeatures'
+                require ext_code.size(registryAddress)
+                call registryAddress.0xbb34534c with:
+                     gas gas_remaining wei
+                    args 'ContractFeatures'
+                mem[(32 * arg1.length) + 128] = ext_call.return_data[0]
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                idx = 1
+                s = 0
+                s = 0
+                t = 0
+                t = _56
+                u = arg2
+                while idx < arg1.length:
+                    require idx < arg1.length
+                    _832 = mem[(32 * idx) + 128]
+                    require idx + 1 < arg1.length
+                    _851 = mem[(32 * idx + 1) + 128]
+                    require ext_code.size(mem[(32 * idx) + 140 len 20])
+                    call mem[(32 * idx) + 140 len 20].0x8da5cb5b with:
+                         gas gas_remaining wei
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).0xa5fbf287 with:
+                         gas gas_remaining wei
+                        args address(ext_call.return_data[0]), 1
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    if ext_call.return_data[0]:
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).conversionWhitelist() with:
+                             gas gas_remaining wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if address(ext_call.return_data[0]):
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                 gas gas_remaining wei
+                                args msg.sender
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    if address(t) != mem[(32 * idx) + 140 len 20]:
+                        require ext_code.size(address(t))
+                        call address(t).0xdd62ed3e with:
+                             gas gas_remaining wei
+                            args this.address, address(ext_call.return_data[0])
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if ext_call.return_data[0] < u:
+                            require ext_code.size(address(t))
+                            call address(t).0xdd62ed3e with:
+                                 gas gas_remaining wei
+                                args this.address, address(ext_call.return_data[0])
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_code.size(address(t))
+                            if ext_call.return_data[0]:
+                                call address(t).approve(address arg1, uint256 arg2) with:
+                                     gas gas_remaining wei
+                                    args address(ext_call.return_data[0]), 0
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                            call address(t).approve(address arg1, uint256 arg2) with:
+                                 gas gas_remaining wei
+                                args address(ext_call.return_data[0]), u
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    mem[(32 * arg1.length) + 132] = address(t)
+                    mem[(32 * arg1.length) + 164] = address(_851)
+                    mem[(32 * arg1.length) + 196] = u
+                    if idx == arg1.length - 2:
+                        mem[(32 * arg1.length) + 228] = arg3
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(t), address(_851), u, arg3
+                    else:
+                        mem[(32 * arg1.length) + 228] = 1
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(t), address(_851), u, 1
+                    mem[(32 * arg1.length) + 128] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    idx = idx + 2
+                    s = ext_call.return_data[0]
+                    s = _851
+                    t = _832
+                    t = _851
+                    u = ext_call.return_data[0]
+                    continue 
+                require ext_code.size(address(s))
+                if stor4[address(s)]:
+                    call address(s).withdrawTo(address arg1, uint256 arg2) with:
+                         gas gas_remaining wei
+                        args msg.sender, u
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    return u
+                call address(s).0xa9059cbb with:
+                     gas gas_remaining wei
+                    args msg.sender, u
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                if ext_call.return_data[0]:
+                    return u
+    else:
+        require arg2 == msg.value
+        require stor4[mem[140 len 20]]
+        if msg.value <= 0:
+            require arg1.length > 2
+            require arg1.length <= 21
+            require 1 == bool(arg1.length)
+            require ext_code.size(registryAddress)
+            call registryAddress.0xbb34534c with:
+                 gas gas_remaining wei
+                args 'BancorGasPriceLimit'
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require return_data.size >= 32
+            mem[(32 * arg1.length) + 128] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+            mem[(32 * arg1.length) + 132] = block.gasprice
+            require ext_code.size(address(ext_call.return_data[0]))
+            call address(ext_call.return_data[0]).0x6b4dff1f with:
+                 gas gas_remaining wei
+                args block.gasprice
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            if 0 < arg1.length:
+                _54 = mem[128]
+                mem[(32 * arg1.length) + 132] = 'ContractFeatures'
+                require ext_code.size(registryAddress)
+                call registryAddress.0xbb34534c with:
+                     gas gas_remaining wei
+                    args 'ContractFeatures'
+                mem[(32 * arg1.length) + 128] = ext_call.return_data[0]
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                idx = 1
+                s = 0
+                s = 0
+                t = 0
+                t = _54
+                u = arg2
+                while idx < arg1.length:
+                    require idx < arg1.length
+                    _835 = mem[(32 * idx) + 128]
+                    require idx + 1 < arg1.length
+                    _858 = mem[(32 * idx + 1) + 128]
+                    require ext_code.size(mem[(32 * idx) + 140 len 20])
+                    call mem[(32 * idx) + 140 len 20].0x8da5cb5b with:
+                         gas gas_remaining wei
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).0xa5fbf287 with:
+                         gas gas_remaining wei
+                        args address(ext_call.return_data[0]), 1
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    if ext_call.return_data[0]:
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).conversionWhitelist() with:
+                             gas gas_remaining wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if address(ext_call.return_data[0]):
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                 gas gas_remaining wei
+                                args msg.sender
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    if address(t) != mem[(32 * idx) + 140 len 20]:
+                        require ext_code.size(address(t))
+                        call address(t).0xdd62ed3e with:
+                             gas gas_remaining wei
+                            args this.address, address(ext_call.return_data[0])
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if ext_call.return_data[0] < u:
+                            require ext_code.size(address(t))
+                            call address(t).0xdd62ed3e with:
+                                 gas gas_remaining wei
+                                args this.address, address(ext_call.return_data[0])
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_code.size(address(t))
+                            if ext_call.return_data[0]:
+                                call address(t).approve(address arg1, uint256 arg2) with:
+                                     gas gas_remaining wei
+                                    args address(ext_call.return_data[0]), 0
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                            call address(t).approve(address arg1, uint256 arg2) with:
+                                 gas gas_remaining wei
+                                args address(ext_call.return_data[0]), u
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    mem[(32 * arg1.length) + 132] = address(t)
+                    mem[(32 * arg1.length) + 164] = address(_858)
+                    mem[(32 * arg1.length) + 196] = u
+                    if idx == arg1.length - 2:
+                        mem[(32 * arg1.length) + 228] = arg3
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(t), address(_858), u, arg3
+                    else:
+                        mem[(32 * arg1.length) + 228] = 1
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(t), address(_858), u, 1
+                    mem[(32 * arg1.length) + 128] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    idx = idx + 2
+                    s = ext_call.return_data[0]
+                    s = _858
+                    t = _835
+                    t = _858
+                    u = ext_call.return_data[0]
+                    continue 
+                require ext_code.size(address(s))
+                if stor4[address(s)]:
+                    call address(s).withdrawTo(address arg1, uint256 arg2) with:
+                         gas gas_remaining wei
+                        args msg.sender, u
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    return u
+                call address(s).0xa9059cbb with:
+                     gas gas_remaining wei
+                    args msg.sender, u
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                if ext_call.return_data[0]:
+                    return u
+        else:
+            require ext_code.size(mem[140 len 20])
+            call mem[140 len 20].deposit() with:
+               value msg.value wei
+                 gas gas_remaining wei
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require arg1.length > 2
+            require arg1.length <= 21
+            require 1 == bool(arg1.length)
+            require ext_code.size(registryAddress)
+            call registryAddress.0xbb34534c with:
+                 gas gas_remaining wei
+                args 'BancorGasPriceLimit'
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require return_data.size >= 32
+            mem[(32 * arg1.length) + 128] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+            mem[(32 * arg1.length) + 132] = block.gasprice
+            require ext_code.size(address(ext_call.return_data[0]))
+            call address(ext_call.return_data[0]).0x6b4dff1f with:
+                 gas gas_remaining wei
+                args block.gasprice
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            if 0 < arg1.length:
+                _65 = mem[128]
+                mem[(32 * arg1.length) + 132] = 'ContractFeatures'
+                require ext_code.size(registryAddress)
+                call registryAddress.0xbb34534c with:
+                     gas gas_remaining wei
+                    args 'ContractFeatures'
+                mem[(32 * arg1.length) + 128] = ext_call.return_data[0]
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                idx = 1
+                s = 0
+                s = 0
+                t = 0
+                t = _65
+                u = arg2
+                while idx < arg1.length:
+                    require idx < arg1.length
+                    _838 = mem[(32 * idx) + 128]
+                    require idx + 1 < arg1.length
+                    _865 = mem[(32 * idx + 1) + 128]
+                    require ext_code.size(mem[(32 * idx) + 140 len 20])
+                    call mem[(32 * idx) + 140 len 20].0x8da5cb5b with:
+                         gas gas_remaining wei
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).0xa5fbf287 with:
+                         gas gas_remaining wei
+                        args address(ext_call.return_data[0]), 1
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    if ext_call.return_data[0]:
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).conversionWhitelist() with:
+                             gas gas_remaining wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if address(ext_call.return_data[0]):
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                 gas gas_remaining wei
+                                args msg.sender
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    if address(t) != mem[(32 * idx) + 140 len 20]:
+                        require ext_code.size(address(t))
+                        call address(t).0xdd62ed3e with:
+                             gas gas_remaining wei
+                            args this.address, address(ext_call.return_data[0])
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if ext_call.return_data[0] < u:
+                            require ext_code.size(address(t))
+                            call address(t).0xdd62ed3e with:
+                                 gas gas_remaining wei
+                                args this.address, address(ext_call.return_data[0])
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_code.size(address(t))
+                            if ext_call.return_data[0]:
+                                call address(t).approve(address arg1, uint256 arg2) with:
+                                     gas gas_remaining wei
+                                    args address(ext_call.return_data[0]), 0
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                            call address(t).approve(address arg1, uint256 arg2) with:
+                                 gas gas_remaining wei
+                                args address(ext_call.return_data[0]), u
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    mem[(32 * arg1.length) + 132] = address(t)
+                    mem[(32 * arg1.length) + 164] = address(_865)
+                    mem[(32 * arg1.length) + 196] = u
+                    if idx == arg1.length - 2:
+                        mem[(32 * arg1.length) + 228] = arg3
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(t), address(_865), u, arg3
+                    else:
+                        mem[(32 * arg1.length) + 228] = 1
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(t), address(_865), u, 1
+                    mem[(32 * arg1.length) + 128] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    idx = idx + 2
+                    s = ext_call.return_data[0]
+                    s = _865
+                    t = _838
+                    t = _865
+                    u = ext_call.return_data[0]
+                    continue 
+                require ext_code.size(address(s))
+                if stor4[address(s)]:
+                    call address(s).withdrawTo(address arg1, uint256 arg2) with:
+                         gas gas_remaining wei
+                        args msg.sender, u
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    return u
+                call address(s).0xa9059cbb with:
+                     gas gas_remaining wei
+                    args msg.sender, u
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                if ext_call.return_data[0]:
+                    return u
+    revert
+}
+
+function convertFor(address[] arg1, uint256 arg2, uint256 arg3, address arg4) payable {
+    mem[128 len 32 * arg1.length] = call.data[arg1 + 36 len 32 * arg1.length]
+    require arg1.length > 2
+    require arg1.length <= 21
+    require 1 == bool(arg1.length)
+    require 0 < arg1.length
+    if 0 == msg.value:
+        if msg.value <= 0:
+            require arg1.length > 2
+            require arg1.length <= 21
+            require 1 == bool(arg1.length)
+            require ext_code.size(registryAddress)
+            call registryAddress.0xbb34534c with:
+                 gas gas_remaining wei
+                args 'BancorGasPriceLimit'
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require return_data.size >= 32
+            mem[(32 * arg1.length) + 128] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+            mem[(32 * arg1.length) + 132] = block.gasprice
+            require ext_code.size(address(ext_call.return_data[0]))
+            call address(ext_call.return_data[0]).0x6b4dff1f with:
+                 gas gas_remaining wei
+                args block.gasprice
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            if 0 < arg1.length:
+                _45 = mem[128]
+                mem[(32 * arg1.length) + 132] = 'ContractFeatures'
+                require ext_code.size(registryAddress)
+                call registryAddress.0xbb34534c with:
+                     gas gas_remaining wei
+                    args 'ContractFeatures'
+                mem[(32 * arg1.length) + 128] = ext_call.return_data[0]
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                idx = 1
+                s = 0
+                s = 0
+                t = 0
+                t = _45
+                u = arg2
+                while idx < arg1.length:
+                    require idx < arg1.length
+                    _829 = mem[(32 * idx) + 128]
+                    require idx + 1 < arg1.length
+                    _844 = mem[(32 * idx + 1) + 128]
+                    require ext_code.size(mem[(32 * idx) + 140 len 20])
+                    call mem[(32 * idx) + 140 len 20].0x8da5cb5b with:
+                         gas gas_remaining wei
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).0xa5fbf287 with:
+                         gas gas_remaining wei
+                        args address(ext_call.return_data[0]), 1
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    if ext_call.return_data[0]:
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).conversionWhitelist() with:
+                             gas gas_remaining wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if address(ext_call.return_data[0]):
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                 gas gas_remaining wei
+                                args address(arg4)
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    if address(t) != mem[(32 * idx) + 140 len 20]:
+                        require ext_code.size(address(t))
+                        call address(t).0xdd62ed3e with:
+                             gas gas_remaining wei
+                            args this.address, address(ext_call.return_data[0])
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if ext_call.return_data[0] < u:
+                            require ext_code.size(address(t))
+                            call address(t).0xdd62ed3e with:
+                                 gas gas_remaining wei
+                                args this.address, address(ext_call.return_data[0])
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_code.size(address(t))
+                            if ext_call.return_data[0]:
+                                call address(t).approve(address arg1, uint256 arg2) with:
+                                     gas gas_remaining wei
+                                    args address(ext_call.return_data[0]), 0
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                            call address(t).approve(address arg1, uint256 arg2) with:
+                                 gas gas_remaining wei
+                                args address(ext_call.return_data[0]), u
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    mem[(32 * arg1.length) + 132] = address(t)
+                    mem[(32 * arg1.length) + 164] = address(_844)
+                    mem[(32 * arg1.length) + 196] = u
+                    if idx == arg1.length - 2:
+                        mem[(32 * arg1.length) + 228] = arg3
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(t), address(_844), u, arg3
+                    else:
+                        mem[(32 * arg1.length) + 228] = 1
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(t), address(_844), u, 1
+                    mem[(32 * arg1.length) + 128] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    idx = idx + 2
+                    s = ext_call.return_data[0]
+                    s = _844
+                    t = _829
+                    t = _844
+                    u = ext_call.return_data[0]
+                    continue 
+                require ext_code.size(address(s))
+                if stor4[address(s)]:
+                    call address(s).withdrawTo(address arg1, uint256 arg2) with:
+                         gas gas_remaining wei
+                        args address(arg4), u
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    return u
+                call address(s).0xa9059cbb with:
+                     gas gas_remaining wei
+                    args address(arg4), u
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                if ext_call.return_data[0]:
+                    return u
+        else:
+            require ext_code.size(mem[140 len 20])
+            call mem[140 len 20].deposit() with:
+               value msg.value wei
+                 gas gas_remaining wei
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require arg1.length > 2
+            require arg1.length <= 21
+            require 1 == bool(arg1.length)
+            require ext_code.size(registryAddress)
+            call registryAddress.0xbb34534c with:
+                 gas gas_remaining wei
+                args 'BancorGasPriceLimit'
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require return_data.size >= 32
+            mem[(32 * arg1.length) + 128] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+            mem[(32 * arg1.length) + 132] = block.gasprice
+            require ext_code.size(address(ext_call.return_data[0]))
+            call address(ext_call.return_data[0]).0x6b4dff1f with:
+                 gas gas_remaining wei
+                args block.gasprice
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            if 0 < arg1.length:
+                _56 = mem[128]
+                mem[(32 * arg1.length) + 132] = 'ContractFeatures'
+                require ext_code.size(registryAddress)
+                call registryAddress.0xbb34534c with:
+                     gas gas_remaining wei
+                    args 'ContractFeatures'
+                mem[(32 * arg1.length) + 128] = ext_call.return_data[0]
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                idx = 1
+                s = 0
+                s = 0
+                t = 0
+                t = _56
+                u = arg2
+                while idx < arg1.length:
+                    require idx < arg1.length
+                    _832 = mem[(32 * idx) + 128]
+                    require idx + 1 < arg1.length
+                    _851 = mem[(32 * idx + 1) + 128]
+                    require ext_code.size(mem[(32 * idx) + 140 len 20])
+                    call mem[(32 * idx) + 140 len 20].0x8da5cb5b with:
+                         gas gas_remaining wei
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).0xa5fbf287 with:
+                         gas gas_remaining wei
+                        args address(ext_call.return_data[0]), 1
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    if ext_call.return_data[0]:
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).conversionWhitelist() with:
+                             gas gas_remaining wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if address(ext_call.return_data[0]):
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                 gas gas_remaining wei
+                                args address(arg4)
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    if address(t) != mem[(32 * idx) + 140 len 20]:
+                        require ext_code.size(address(t))
+                        call address(t).0xdd62ed3e with:
+                             gas gas_remaining wei
+                            args this.address, address(ext_call.return_data[0])
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if ext_call.return_data[0] < u:
+                            require ext_code.size(address(t))
+                            call address(t).0xdd62ed3e with:
+                                 gas gas_remaining wei
+                                args this.address, address(ext_call.return_data[0])
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_code.size(address(t))
+                            if ext_call.return_data[0]:
+                                call address(t).approve(address arg1, uint256 arg2) with:
+                                     gas gas_remaining wei
+                                    args address(ext_call.return_data[0]), 0
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                            call address(t).approve(address arg1, uint256 arg2) with:
+                                 gas gas_remaining wei
+                                args address(ext_call.return_data[0]), u
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    mem[(32 * arg1.length) + 132] = address(t)
+                    mem[(32 * arg1.length) + 164] = address(_851)
+                    mem[(32 * arg1.length) + 196] = u
+                    if idx == arg1.length - 2:
+                        mem[(32 * arg1.length) + 228] = arg3
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(t), address(_851), u, arg3
+                    else:
+                        mem[(32 * arg1.length) + 228] = 1
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(t), address(_851), u, 1
+                    mem[(32 * arg1.length) + 128] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    idx = idx + 2
+                    s = ext_call.return_data[0]
+                    s = _851
+                    t = _832
+                    t = _851
+                    u = ext_call.return_data[0]
+                    continue 
+                require ext_code.size(address(s))
+                if stor4[address(s)]:
+                    call address(s).withdrawTo(address arg1, uint256 arg2) with:
+                         gas gas_remaining wei
+                        args address(arg4), u
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    return u
+                call address(s).0xa9059cbb with:
+                     gas gas_remaining wei
+                    args address(arg4), u
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                if ext_call.return_data[0]:
+                    return u
+    else:
+        require arg2 == msg.value
+        require stor4[mem[140 len 20]]
+        if msg.value <= 0:
+            require arg1.length > 2
+            require arg1.length <= 21
+            require 1 == bool(arg1.length)
+            require ext_code.size(registryAddress)
+            call registryAddress.0xbb34534c with:
+                 gas gas_remaining wei
+                args 'BancorGasPriceLimit'
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require return_data.size >= 32
+            mem[(32 * arg1.length) + 128] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+            mem[(32 * arg1.length) + 132] = block.gasprice
+            require ext_code.size(address(ext_call.return_data[0]))
+            call address(ext_call.return_data[0]).0x6b4dff1f with:
+                 gas gas_remaining wei
+                args block.gasprice
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            if 0 < arg1.length:
+                _54 = mem[128]
+                mem[(32 * arg1.length) + 132] = 'ContractFeatures'
+                require ext_code.size(registryAddress)
+                call registryAddress.0xbb34534c with:
+                     gas gas_remaining wei
+                    args 'ContractFeatures'
+                mem[(32 * arg1.length) + 128] = ext_call.return_data[0]
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                idx = 1
+                s = 0
+                s = 0
+                t = 0
+                t = _54
+                u = arg2
+                while idx < arg1.length:
+                    require idx < arg1.length
+                    _835 = mem[(32 * idx) + 128]
+                    require idx + 1 < arg1.length
+                    _858 = mem[(32 * idx + 1) + 128]
+                    require ext_code.size(mem[(32 * idx) + 140 len 20])
+                    call mem[(32 * idx) + 140 len 20].0x8da5cb5b with:
+                         gas gas_remaining wei
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).0xa5fbf287 with:
+                         gas gas_remaining wei
+                        args address(ext_call.return_data[0]), 1
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    if ext_call.return_data[0]:
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).conversionWhitelist() with:
+                             gas gas_remaining wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if address(ext_call.return_data[0]):
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                 gas gas_remaining wei
+                                args address(arg4)
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    if address(t) != mem[(32 * idx) + 140 len 20]:
+                        require ext_code.size(address(t))
+                        call address(t).0xdd62ed3e with:
+                             gas gas_remaining wei
+                            args this.address, address(ext_call.return_data[0])
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if ext_call.return_data[0] < u:
+                            require ext_code.size(address(t))
+                            call address(t).0xdd62ed3e with:
+                                 gas gas_remaining wei
+                                args this.address, address(ext_call.return_data[0])
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_code.size(address(t))
+                            if ext_call.return_data[0]:
+                                call address(t).approve(address arg1, uint256 arg2) with:
+                                     gas gas_remaining wei
+                                    args address(ext_call.return_data[0]), 0
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                            call address(t).approve(address arg1, uint256 arg2) with:
+                                 gas gas_remaining wei
+                                args address(ext_call.return_data[0]), u
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    mem[(32 * arg1.length) + 132] = address(t)
+                    mem[(32 * arg1.length) + 164] = address(_858)
+                    mem[(32 * arg1.length) + 196] = u
+                    if idx == arg1.length - 2:
+                        mem[(32 * arg1.length) + 228] = arg3
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(t), address(_858), u, arg3
+                    else:
+                        mem[(32 * arg1.length) + 228] = 1
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(t), address(_858), u, 1
+                    mem[(32 * arg1.length) + 128] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    idx = idx + 2
+                    s = ext_call.return_data[0]
+                    s = _858
+                    t = _835
+                    t = _858
+                    u = ext_call.return_data[0]
+                    continue 
+                require ext_code.size(address(s))
+                if stor4[address(s)]:
+                    call address(s).withdrawTo(address arg1, uint256 arg2) with:
+                         gas gas_remaining wei
+                        args address(arg4), u
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    return u
+                call address(s).0xa9059cbb with:
+                     gas gas_remaining wei
+                    args address(arg4), u
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                if ext_call.return_data[0]:
+                    return u
+        else:
+            require ext_code.size(mem[140 len 20])
+            call mem[140 len 20].deposit() with:
+               value msg.value wei
+                 gas gas_remaining wei
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require arg1.length > 2
+            require arg1.length <= 21
+            require 1 == bool(arg1.length)
+            require ext_code.size(registryAddress)
+            call registryAddress.0xbb34534c with:
+                 gas gas_remaining wei
+                args 'BancorGasPriceLimit'
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require return_data.size >= 32
+            mem[(32 * arg1.length) + 128] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+            mem[(32 * arg1.length) + 132] = block.gasprice
+            require ext_code.size(address(ext_call.return_data[0]))
+            call address(ext_call.return_data[0]).0x6b4dff1f with:
+                 gas gas_remaining wei
+                args block.gasprice
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            if 0 < arg1.length:
+                _65 = mem[128]
+                mem[(32 * arg1.length) + 132] = 'ContractFeatures'
+                require ext_code.size(registryAddress)
+                call registryAddress.0xbb34534c with:
+                     gas gas_remaining wei
+                    args 'ContractFeatures'
+                mem[(32 * arg1.length) + 128] = ext_call.return_data[0]
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                idx = 1
+                s = 0
+                s = 0
+                t = 0
+                t = _65
+                u = arg2
+                while idx < arg1.length:
+                    require idx < arg1.length
+                    _838 = mem[(32 * idx) + 128]
+                    require idx + 1 < arg1.length
+                    _865 = mem[(32 * idx + 1) + 128]
+                    require ext_code.size(mem[(32 * idx) + 140 len 20])
+                    call mem[(32 * idx) + 140 len 20].0x8da5cb5b with:
+                         gas gas_remaining wei
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).0xa5fbf287 with:
+                         gas gas_remaining wei
+                        args address(ext_call.return_data[0]), 1
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    if ext_call.return_data[0]:
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).conversionWhitelist() with:
+                             gas gas_remaining wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if address(ext_call.return_data[0]):
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                 gas gas_remaining wei
+                                args address(arg4)
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    if address(t) != mem[(32 * idx) + 140 len 20]:
+                        require ext_code.size(address(t))
+                        call address(t).0xdd62ed3e with:
+                             gas gas_remaining wei
+                            args this.address, address(ext_call.return_data[0])
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if ext_call.return_data[0] < u:
+                            require ext_code.size(address(t))
+                            call address(t).0xdd62ed3e with:
+                                 gas gas_remaining wei
+                                args this.address, address(ext_call.return_data[0])
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_code.size(address(t))
+                            if ext_call.return_data[0]:
+                                call address(t).approve(address arg1, uint256 arg2) with:
+                                     gas gas_remaining wei
+                                    args address(ext_call.return_data[0]), 0
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                            call address(t).approve(address arg1, uint256 arg2) with:
+                                 gas gas_remaining wei
+                                args address(ext_call.return_data[0]), u
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    mem[(32 * arg1.length) + 132] = address(t)
+                    mem[(32 * arg1.length) + 164] = address(_865)
+                    mem[(32 * arg1.length) + 196] = u
+                    if idx == arg1.length - 2:
+                        mem[(32 * arg1.length) + 228] = arg3
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(t), address(_865), u, arg3
+                    else:
+                        mem[(32 * arg1.length) + 228] = 1
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(t), address(_865), u, 1
+                    mem[(32 * arg1.length) + 128] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    idx = idx + 2
+                    s = ext_call.return_data[0]
+                    s = _865
+                    t = _838
+                    t = _865
+                    u = ext_call.return_data[0]
+                    continue 
+                require ext_code.size(address(s))
+                if stor4[address(s)]:
+                    call address(s).withdrawTo(address arg1, uint256 arg2) with:
+                         gas gas_remaining wei
+                        args address(arg4), u
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    return u
+                call address(s).0xa9059cbb with:
+                     gas gas_remaining wei
+                    args address(arg4), u
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                if ext_call.return_data[0]:
+                    return u
+    revert
+}
+
+function claimAndConvert(address[] arg1, uint256 arg2, uint256 arg3) {
+    mem[128 len 32 * arg1.length] = call.data[arg1 + 36 len 32 * arg1.length]
+    require 0 < arg1.length
+    mem[(32 * arg1.length) + 164] = this.address
+    mem[(32 * arg1.length) + 196] = arg2
+    require ext_code.size(mem[140 len 20])
+    call mem[140 len 20].0x23b872dd with:
+         gas gas_remaining wei
+        args msg.sender, this.address, arg2
+    mem[(32 * arg1.length) + 128] = ext_call.return_data[0]
+    if not ext_call.success:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+    require ext_call.return_data[0]
+    require arg1.length > 2
+    require arg1.length <= 21
+    require 1 == bool(arg1.length)
+    require 0 < arg1.length
+    if 0 == msg.value:
+        if msg.value <= 0:
+            require arg1.length > 2
+            require arg1.length <= 21
+            require 1 == bool(arg1.length)
+            require ext_code.size(registryAddress)
+            call registryAddress.0xbb34534c with:
+                 gas gas_remaining wei
+                args 'BancorGasPriceLimit'
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require return_data.size >= 32
+            mem[(32 * arg1.length) + 128] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+            mem[(32 * arg1.length) + 132] = block.gasprice
+            require ext_code.size(address(ext_call.return_data[0]))
+            call address(ext_call.return_data[0]).0x6b4dff1f with:
+                 gas gas_remaining wei
+                args block.gasprice
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            if 0 < arg1.length:
+                _51 = mem[128]
+                mem[(32 * arg1.length) + 132] = 'ContractFeatures'
+                require ext_code.size(registryAddress)
+                call registryAddress.0xbb34534c with:
+                     gas gas_remaining wei
+                    args 'ContractFeatures'
+                mem[(32 * arg1.length) + 128] = ext_call.return_data[0]
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                idx = 1
+                s = 0
+                s = 0
+                t = 0
+                t = _51
+                u = arg2
+                while idx < arg1.length:
+                    require idx < arg1.length
+                    _835 = mem[(32 * idx) + 128]
+                    require idx + 1 < arg1.length
+                    _850 = mem[(32 * idx + 1) + 128]
+                    require ext_code.size(mem[(32 * idx) + 140 len 20])
+                    call mem[(32 * idx) + 140 len 20].0x8da5cb5b with:
+                         gas gas_remaining wei
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).0xa5fbf287 with:
+                         gas gas_remaining wei
+                        args address(ext_call.return_data[0]), 1
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    if ext_call.return_data[0]:
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).conversionWhitelist() with:
+                             gas gas_remaining wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if address(ext_call.return_data[0]):
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                 gas gas_remaining wei
+                                args msg.sender
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    if address(t) != mem[(32 * idx) + 140 len 20]:
+                        require ext_code.size(address(t))
+                        call address(t).0xdd62ed3e with:
+                             gas gas_remaining wei
+                            args this.address, address(ext_call.return_data[0])
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if ext_call.return_data[0] < u:
+                            require ext_code.size(address(t))
+                            call address(t).0xdd62ed3e with:
+                                 gas gas_remaining wei
+                                args this.address, address(ext_call.return_data[0])
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_code.size(address(t))
+                            if ext_call.return_data[0]:
+                                call address(t).approve(address arg1, uint256 arg2) with:
+                                     gas gas_remaining wei
+                                    args address(ext_call.return_data[0]), 0
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                            call address(t).approve(address arg1, uint256 arg2) with:
+                                 gas gas_remaining wei
+                                args address(ext_call.return_data[0]), u
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    mem[(32 * arg1.length) + 132] = address(t)
+                    mem[(32 * arg1.length) + 164] = address(_850)
+                    mem[(32 * arg1.length) + 196] = u
+                    if idx == arg1.length - 2:
+                        mem[(32 * arg1.length) + 228] = arg3
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(t), address(_850), u, arg3
+                    else:
+                        mem[(32 * arg1.length) + 228] = 1
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(t), address(_850), u, 1
+                    mem[(32 * arg1.length) + 128] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    idx = idx + 2
+                    s = ext_call.return_data[0]
+                    s = _850
+                    t = _835
+                    t = _850
+                    u = ext_call.return_data[0]
+                    continue 
+                require ext_code.size(address(s))
+                if stor4[address(s)]:
+                    call address(s).withdrawTo(address arg1, uint256 arg2) with:
+                         gas gas_remaining wei
+                        args msg.sender, u
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    return u
+                call address(s).0xa9059cbb with:
+                     gas gas_remaining wei
+                    args msg.sender, u
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                if ext_call.return_data[0]:
+                    return u
+        else:
+            require ext_code.size(mem[140 len 20])
+            call mem[140 len 20].deposit() with:
+               value msg.value wei
+                 gas gas_remaining wei
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require arg1.length > 2
+            require arg1.length <= 21
+            require 1 == bool(arg1.length)
+            require ext_code.size(registryAddress)
+            call registryAddress.0xbb34534c with:
+                 gas gas_remaining wei
+                args 'BancorGasPriceLimit'
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require return_data.size >= 32
+            mem[(32 * arg1.length) + 128] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+            mem[(32 * arg1.length) + 132] = block.gasprice
+            require ext_code.size(address(ext_call.return_data[0]))
+            call address(ext_call.return_data[0]).0x6b4dff1f with:
+                 gas gas_remaining wei
+                args block.gasprice
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            if 0 < arg1.length:
+                _62 = mem[128]
+                mem[(32 * arg1.length) + 132] = 'ContractFeatures'
+                require ext_code.size(registryAddress)
+                call registryAddress.0xbb34534c with:
+                     gas gas_remaining wei
+                    args 'ContractFeatures'
+                mem[(32 * arg1.length) + 128] = ext_call.return_data[0]
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                idx = 1
+                s = 0
+                s = 0
+                t = 0
+                t = _62
+                u = arg2
+                while idx < arg1.length:
+                    require idx < arg1.length
+                    _838 = mem[(32 * idx) + 128]
+                    require idx + 1 < arg1.length
+                    _857 = mem[(32 * idx + 1) + 128]
+                    require ext_code.size(mem[(32 * idx) + 140 len 20])
+                    call mem[(32 * idx) + 140 len 20].0x8da5cb5b with:
+                         gas gas_remaining wei
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).0xa5fbf287 with:
+                         gas gas_remaining wei
+                        args address(ext_call.return_data[0]), 1
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    if ext_call.return_data[0]:
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).conversionWhitelist() with:
+                             gas gas_remaining wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if address(ext_call.return_data[0]):
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                 gas gas_remaining wei
+                                args msg.sender
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    if address(t) != mem[(32 * idx) + 140 len 20]:
+                        require ext_code.size(address(t))
+                        call address(t).0xdd62ed3e with:
+                             gas gas_remaining wei
+                            args this.address, address(ext_call.return_data[0])
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if ext_call.return_data[0] < u:
+                            require ext_code.size(address(t))
+                            call address(t).0xdd62ed3e with:
+                                 gas gas_remaining wei
+                                args this.address, address(ext_call.return_data[0])
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_code.size(address(t))
+                            if ext_call.return_data[0]:
+                                call address(t).approve(address arg1, uint256 arg2) with:
+                                     gas gas_remaining wei
+                                    args address(ext_call.return_data[0]), 0
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                            call address(t).approve(address arg1, uint256 arg2) with:
+                                 gas gas_remaining wei
+                                args address(ext_call.return_data[0]), u
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    mem[(32 * arg1.length) + 132] = address(t)
+                    mem[(32 * arg1.length) + 164] = address(_857)
+                    mem[(32 * arg1.length) + 196] = u
+                    if idx == arg1.length - 2:
+                        mem[(32 * arg1.length) + 228] = arg3
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(t), address(_857), u, arg3
+                    else:
+                        mem[(32 * arg1.length) + 228] = 1
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(t), address(_857), u, 1
+                    mem[(32 * arg1.length) + 128] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    idx = idx + 2
+                    s = ext_call.return_data[0]
+                    s = _857
+                    t = _838
+                    t = _857
+                    u = ext_call.return_data[0]
+                    continue 
+                require ext_code.size(address(s))
+                if stor4[address(s)]:
+                    call address(s).withdrawTo(address arg1, uint256 arg2) with:
+                         gas gas_remaining wei
+                        args msg.sender, u
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    return u
+                call address(s).0xa9059cbb with:
+                     gas gas_remaining wei
+                    args msg.sender, u
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                if ext_call.return_data[0]:
+                    return u
+    else:
+        require arg2 == msg.value
+        require stor4[mem[140 len 20]]
+        if msg.value <= 0:
+            require arg1.length > 2
+            require arg1.length <= 21
+            require 1 == bool(arg1.length)
+            require ext_code.size(registryAddress)
+            call registryAddress.0xbb34534c with:
+                 gas gas_remaining wei
+                args 'BancorGasPriceLimit'
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require return_data.size >= 32
+            mem[(32 * arg1.length) + 128] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+            mem[(32 * arg1.length) + 132] = block.gasprice
+            require ext_code.size(address(ext_call.return_data[0]))
+            call address(ext_call.return_data[0]).0x6b4dff1f with:
+                 gas gas_remaining wei
+                args block.gasprice
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            if 0 < arg1.length:
+                _60 = mem[128]
+                mem[(32 * arg1.length) + 132] = 'ContractFeatures'
+                require ext_code.size(registryAddress)
+                call registryAddress.0xbb34534c with:
+                     gas gas_remaining wei
+                    args 'ContractFeatures'
+                mem[(32 * arg1.length) + 128] = ext_call.return_data[0]
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                idx = 1
+                s = 0
+                s = 0
+                t = 0
+                t = _60
+                u = arg2
+                while idx < arg1.length:
+                    require idx < arg1.length
+                    _841 = mem[(32 * idx) + 128]
+                    require idx + 1 < arg1.length
+                    _864 = mem[(32 * idx + 1) + 128]
+                    require ext_code.size(mem[(32 * idx) + 140 len 20])
+                    call mem[(32 * idx) + 140 len 20].0x8da5cb5b with:
+                         gas gas_remaining wei
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).0xa5fbf287 with:
+                         gas gas_remaining wei
+                        args address(ext_call.return_data[0]), 1
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    if ext_call.return_data[0]:
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).conversionWhitelist() with:
+                             gas gas_remaining wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if address(ext_call.return_data[0]):
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                 gas gas_remaining wei
+                                args msg.sender
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    if address(t) != mem[(32 * idx) + 140 len 20]:
+                        require ext_code.size(address(t))
+                        call address(t).0xdd62ed3e with:
+                             gas gas_remaining wei
+                            args this.address, address(ext_call.return_data[0])
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if ext_call.return_data[0] < u:
+                            require ext_code.size(address(t))
+                            call address(t).0xdd62ed3e with:
+                                 gas gas_remaining wei
+                                args this.address, address(ext_call.return_data[0])
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_code.size(address(t))
+                            if ext_call.return_data[0]:
+                                call address(t).approve(address arg1, uint256 arg2) with:
+                                     gas gas_remaining wei
+                                    args address(ext_call.return_data[0]), 0
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                            call address(t).approve(address arg1, uint256 arg2) with:
+                                 gas gas_remaining wei
+                                args address(ext_call.return_data[0]), u
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    mem[(32 * arg1.length) + 132] = address(t)
+                    mem[(32 * arg1.length) + 164] = address(_864)
+                    mem[(32 * arg1.length) + 196] = u
+                    if idx == arg1.length - 2:
+                        mem[(32 * arg1.length) + 228] = arg3
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(t), address(_864), u, arg3
+                    else:
+                        mem[(32 * arg1.length) + 228] = 1
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(t), address(_864), u, 1
+                    mem[(32 * arg1.length) + 128] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    idx = idx + 2
+                    s = ext_call.return_data[0]
+                    s = _864
+                    t = _841
+                    t = _864
+                    u = ext_call.return_data[0]
+                    continue 
+                require ext_code.size(address(s))
+                if stor4[address(s)]:
+                    call address(s).withdrawTo(address arg1, uint256 arg2) with:
+                         gas gas_remaining wei
+                        args msg.sender, u
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    return u
+                call address(s).0xa9059cbb with:
+                     gas gas_remaining wei
+                    args msg.sender, u
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                if ext_call.return_data[0]:
+                    return u
+        else:
+            require ext_code.size(mem[140 len 20])
+            call mem[140 len 20].deposit() with:
+               value msg.value wei
+                 gas gas_remaining wei
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require arg1.length > 2
+            require arg1.length <= 21
+            require 1 == bool(arg1.length)
+            require ext_code.size(registryAddress)
+            call registryAddress.0xbb34534c with:
+                 gas gas_remaining wei
+                args 'BancorGasPriceLimit'
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require return_data.size >= 32
+            mem[(32 * arg1.length) + 128] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+            mem[(32 * arg1.length) + 132] = block.gasprice
+            require ext_code.size(address(ext_call.return_data[0]))
+            call address(ext_call.return_data[0]).0x6b4dff1f with:
+                 gas gas_remaining wei
+                args block.gasprice
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            if 0 < arg1.length:
+                _71 = mem[128]
+                mem[(32 * arg1.length) + 132] = 'ContractFeatures'
+                require ext_code.size(registryAddress)
+                call registryAddress.0xbb34534c with:
+                     gas gas_remaining wei
+                    args 'ContractFeatures'
+                mem[(32 * arg1.length) + 128] = ext_call.return_data[0]
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                idx = 1
+                s = 0
+                s = 0
+                t = 0
+                t = _71
+                u = arg2
+                while idx < arg1.length:
+                    require idx < arg1.length
+                    _844 = mem[(32 * idx) + 128]
+                    require idx + 1 < arg1.length
+                    _871 = mem[(32 * idx + 1) + 128]
+                    require ext_code.size(mem[(32 * idx) + 140 len 20])
+                    call mem[(32 * idx) + 140 len 20].0x8da5cb5b with:
+                         gas gas_remaining wei
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).0xa5fbf287 with:
+                         gas gas_remaining wei
+                        args address(ext_call.return_data[0]), 1
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    if ext_call.return_data[0]:
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).conversionWhitelist() with:
+                             gas gas_remaining wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if address(ext_call.return_data[0]):
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                 gas gas_remaining wei
+                                args msg.sender
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    if address(t) != mem[(32 * idx) + 140 len 20]:
+                        require ext_code.size(address(t))
+                        call address(t).0xdd62ed3e with:
+                             gas gas_remaining wei
+                            args this.address, address(ext_call.return_data[0])
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if ext_call.return_data[0] < u:
+                            require ext_code.size(address(t))
+                            call address(t).0xdd62ed3e with:
+                                 gas gas_remaining wei
+                                args this.address, address(ext_call.return_data[0])
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_code.size(address(t))
+                            if ext_call.return_data[0]:
+                                call address(t).approve(address arg1, uint256 arg2) with:
+                                     gas gas_remaining wei
+                                    args address(ext_call.return_data[0]), 0
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                            call address(t).approve(address arg1, uint256 arg2) with:
+                                 gas gas_remaining wei
+                                args address(ext_call.return_data[0]), u
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    mem[(32 * arg1.length) + 132] = address(t)
+                    mem[(32 * arg1.length) + 164] = address(_871)
+                    mem[(32 * arg1.length) + 196] = u
+                    if idx == arg1.length - 2:
+                        mem[(32 * arg1.length) + 228] = arg3
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(t), address(_871), u, arg3
+                    else:
+                        mem[(32 * arg1.length) + 228] = 1
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(t), address(_871), u, 1
+                    mem[(32 * arg1.length) + 128] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    idx = idx + 2
+                    s = ext_call.return_data[0]
+                    s = _871
+                    t = _844
+                    t = _871
+                    u = ext_call.return_data[0]
+                    continue 
+                require ext_code.size(address(s))
+                if stor4[address(s)]:
+                    call address(s).withdrawTo(address arg1, uint256 arg2) with:
+                         gas gas_remaining wei
+                        args msg.sender, u
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    return u
+                call address(s).0xa9059cbb with:
+                     gas gas_remaining wei
+                    args msg.sender, u
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                if ext_call.return_data[0]:
+                    return u
+    revert
+}
+
+function claimAndConvertFor(address[] arg1, uint256 arg2, uint256 arg3, address arg4) {
+    mem[128 len 32 * arg1.length] = call.data[arg1 + 36 len 32 * arg1.length]
+    require 0 < arg1.length
+    mem[(32 * arg1.length) + 164] = this.address
+    mem[(32 * arg1.length) + 196] = arg2
+    require ext_code.size(mem[140 len 20])
+    call mem[140 len 20].0x23b872dd with:
+         gas gas_remaining wei
+        args msg.sender, this.address, arg2
+    mem[(32 * arg1.length) + 128] = ext_call.return_data[0]
+    if not ext_call.success:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+    require ext_call.return_data[0]
+    require arg1.length > 2
+    require arg1.length <= 21
+    require 1 == bool(arg1.length)
+    require 0 < arg1.length
+    if 0 == msg.value:
+        if msg.value <= 0:
+            require arg1.length > 2
+            require arg1.length <= 21
+            require 1 == bool(arg1.length)
+            require ext_code.size(registryAddress)
+            call registryAddress.0xbb34534c with:
+                 gas gas_remaining wei
+                args 'BancorGasPriceLimit'
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require return_data.size >= 32
+            mem[(32 * arg1.length) + 128] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+            mem[(32 * arg1.length) + 132] = block.gasprice
+            require ext_code.size(address(ext_call.return_data[0]))
+            call address(ext_call.return_data[0]).0x6b4dff1f with:
+                 gas gas_remaining wei
+                args block.gasprice
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            if 0 < arg1.length:
+                _51 = mem[128]
+                mem[(32 * arg1.length) + 132] = 'ContractFeatures'
+                require ext_code.size(registryAddress)
+                call registryAddress.0xbb34534c with:
+                     gas gas_remaining wei
+                    args 'ContractFeatures'
+                mem[(32 * arg1.length) + 128] = ext_call.return_data[0]
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                idx = 1
+                s = 0
+                s = 0
+                t = 0
+                t = _51
+                u = arg2
+                while idx < arg1.length:
+                    require idx < arg1.length
+                    _835 = mem[(32 * idx) + 128]
+                    require idx + 1 < arg1.length
+                    _850 = mem[(32 * idx + 1) + 128]
+                    require ext_code.size(mem[(32 * idx) + 140 len 20])
+                    call mem[(32 * idx) + 140 len 20].0x8da5cb5b with:
+                         gas gas_remaining wei
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).0xa5fbf287 with:
+                         gas gas_remaining wei
+                        args address(ext_call.return_data[0]), 1
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    if ext_call.return_data[0]:
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).conversionWhitelist() with:
+                             gas gas_remaining wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if address(ext_call.return_data[0]):
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                 gas gas_remaining wei
+                                args address(arg4)
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    if address(t) != mem[(32 * idx) + 140 len 20]:
+                        require ext_code.size(address(t))
+                        call address(t).0xdd62ed3e with:
+                             gas gas_remaining wei
+                            args this.address, address(ext_call.return_data[0])
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if ext_call.return_data[0] < u:
+                            require ext_code.size(address(t))
+                            call address(t).0xdd62ed3e with:
+                                 gas gas_remaining wei
+                                args this.address, address(ext_call.return_data[0])
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_code.size(address(t))
+                            if ext_call.return_data[0]:
+                                call address(t).approve(address arg1, uint256 arg2) with:
+                                     gas gas_remaining wei
+                                    args address(ext_call.return_data[0]), 0
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                            call address(t).approve(address arg1, uint256 arg2) with:
+                                 gas gas_remaining wei
+                                args address(ext_call.return_data[0]), u
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    mem[(32 * arg1.length) + 132] = address(t)
+                    mem[(32 * arg1.length) + 164] = address(_850)
+                    mem[(32 * arg1.length) + 196] = u
+                    if idx == arg1.length - 2:
+                        mem[(32 * arg1.length) + 228] = arg3
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(t), address(_850), u, arg3
+                    else:
+                        mem[(32 * arg1.length) + 228] = 1
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(t), address(_850), u, 1
+                    mem[(32 * arg1.length) + 128] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    idx = idx + 2
+                    s = ext_call.return_data[0]
+                    s = _850
+                    t = _835
+                    t = _850
+                    u = ext_call.return_data[0]
+                    continue 
+                require ext_code.size(address(s))
+                if stor4[address(s)]:
+                    call address(s).withdrawTo(address arg1, uint256 arg2) with:
+                         gas gas_remaining wei
+                        args address(arg4), u
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    return u
+                call address(s).0xa9059cbb with:
+                     gas gas_remaining wei
+                    args address(arg4), u
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                if ext_call.return_data[0]:
+                    return u
+        else:
+            require ext_code.size(mem[140 len 20])
+            call mem[140 len 20].deposit() with:
+               value msg.value wei
+                 gas gas_remaining wei
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require arg1.length > 2
+            require arg1.length <= 21
+            require 1 == bool(arg1.length)
+            require ext_code.size(registryAddress)
+            call registryAddress.0xbb34534c with:
+                 gas gas_remaining wei
+                args 'BancorGasPriceLimit'
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require return_data.size >= 32
+            mem[(32 * arg1.length) + 128] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+            mem[(32 * arg1.length) + 132] = block.gasprice
+            require ext_code.size(address(ext_call.return_data[0]))
+            call address(ext_call.return_data[0]).0x6b4dff1f with:
+                 gas gas_remaining wei
+                args block.gasprice
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            if 0 < arg1.length:
+                _62 = mem[128]
+                mem[(32 * arg1.length) + 132] = 'ContractFeatures'
+                require ext_code.size(registryAddress)
+                call registryAddress.0xbb34534c with:
+                     gas gas_remaining wei
+                    args 'ContractFeatures'
+                mem[(32 * arg1.length) + 128] = ext_call.return_data[0]
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                idx = 1
+                s = 0
+                s = 0
+                t = 0
+                t = _62
+                u = arg2
+                while idx < arg1.length:
+                    require idx < arg1.length
+                    _838 = mem[(32 * idx) + 128]
+                    require idx + 1 < arg1.length
+                    _857 = mem[(32 * idx + 1) + 128]
+                    require ext_code.size(mem[(32 * idx) + 140 len 20])
+                    call mem[(32 * idx) + 140 len 20].0x8da5cb5b with:
+                         gas gas_remaining wei
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).0xa5fbf287 with:
+                         gas gas_remaining wei
+                        args address(ext_call.return_data[0]), 1
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    if ext_call.return_data[0]:
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).conversionWhitelist() with:
+                             gas gas_remaining wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if address(ext_call.return_data[0]):
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                 gas gas_remaining wei
+                                args address(arg4)
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    if address(t) != mem[(32 * idx) + 140 len 20]:
+                        require ext_code.size(address(t))
+                        call address(t).0xdd62ed3e with:
+                             gas gas_remaining wei
+                            args this.address, address(ext_call.return_data[0])
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if ext_call.return_data[0] < u:
+                            require ext_code.size(address(t))
+                            call address(t).0xdd62ed3e with:
+                                 gas gas_remaining wei
+                                args this.address, address(ext_call.return_data[0])
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_code.size(address(t))
+                            if ext_call.return_data[0]:
+                                call address(t).approve(address arg1, uint256 arg2) with:
+                                     gas gas_remaining wei
+                                    args address(ext_call.return_data[0]), 0
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                            call address(t).approve(address arg1, uint256 arg2) with:
+                                 gas gas_remaining wei
+                                args address(ext_call.return_data[0]), u
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    mem[(32 * arg1.length) + 132] = address(t)
+                    mem[(32 * arg1.length) + 164] = address(_857)
+                    mem[(32 * arg1.length) + 196] = u
+                    if idx == arg1.length - 2:
+                        mem[(32 * arg1.length) + 228] = arg3
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(t), address(_857), u, arg3
+                    else:
+                        mem[(32 * arg1.length) + 228] = 1
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(t), address(_857), u, 1
+                    mem[(32 * arg1.length) + 128] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    idx = idx + 2
+                    s = ext_call.return_data[0]
+                    s = _857
+                    t = _838
+                    t = _857
+                    u = ext_call.return_data[0]
+                    continue 
+                require ext_code.size(address(s))
+                if stor4[address(s)]:
+                    call address(s).withdrawTo(address arg1, uint256 arg2) with:
+                         gas gas_remaining wei
+                        args address(arg4), u
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    return u
+                call address(s).0xa9059cbb with:
+                     gas gas_remaining wei
+                    args address(arg4), u
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                if ext_call.return_data[0]:
+                    return u
+    else:
+        require arg2 == msg.value
+        require stor4[mem[140 len 20]]
+        if msg.value <= 0:
+            require arg1.length > 2
+            require arg1.length <= 21
+            require 1 == bool(arg1.length)
+            require ext_code.size(registryAddress)
+            call registryAddress.0xbb34534c with:
+                 gas gas_remaining wei
+                args 'BancorGasPriceLimit'
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require return_data.size >= 32
+            mem[(32 * arg1.length) + 128] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+            mem[(32 * arg1.length) + 132] = block.gasprice
+            require ext_code.size(address(ext_call.return_data[0]))
+            call address(ext_call.return_data[0]).0x6b4dff1f with:
+                 gas gas_remaining wei
+                args block.gasprice
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            if 0 < arg1.length:
+                _60 = mem[128]
+                mem[(32 * arg1.length) + 132] = 'ContractFeatures'
+                require ext_code.size(registryAddress)
+                call registryAddress.0xbb34534c with:
+                     gas gas_remaining wei
+                    args 'ContractFeatures'
+                mem[(32 * arg1.length) + 128] = ext_call.return_data[0]
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                idx = 1
+                s = 0
+                s = 0
+                t = 0
+                t = _60
+                u = arg2
+                while idx < arg1.length:
+                    require idx < arg1.length
+                    _841 = mem[(32 * idx) + 128]
+                    require idx + 1 < arg1.length
+                    _864 = mem[(32 * idx + 1) + 128]
+                    require ext_code.size(mem[(32 * idx) + 140 len 20])
+                    call mem[(32 * idx) + 140 len 20].0x8da5cb5b with:
+                         gas gas_remaining wei
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).0xa5fbf287 with:
+                         gas gas_remaining wei
+                        args address(ext_call.return_data[0]), 1
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    if ext_call.return_data[0]:
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).conversionWhitelist() with:
+                             gas gas_remaining wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if address(ext_call.return_data[0]):
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                 gas gas_remaining wei
+                                args address(arg4)
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    if address(t) != mem[(32 * idx) + 140 len 20]:
+                        require ext_code.size(address(t))
+                        call address(t).0xdd62ed3e with:
+                             gas gas_remaining wei
+                            args this.address, address(ext_call.return_data[0])
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if ext_call.return_data[0] < u:
+                            require ext_code.size(address(t))
+                            call address(t).0xdd62ed3e with:
+                                 gas gas_remaining wei
+                                args this.address, address(ext_call.return_data[0])
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_code.size(address(t))
+                            if ext_call.return_data[0]:
+                                call address(t).approve(address arg1, uint256 arg2) with:
+                                     gas gas_remaining wei
+                                    args address(ext_call.return_data[0]), 0
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                            call address(t).approve(address arg1, uint256 arg2) with:
+                                 gas gas_remaining wei
+                                args address(ext_call.return_data[0]), u
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    mem[(32 * arg1.length) + 132] = address(t)
+                    mem[(32 * arg1.length) + 164] = address(_864)
+                    mem[(32 * arg1.length) + 196] = u
+                    if idx == arg1.length - 2:
+                        mem[(32 * arg1.length) + 228] = arg3
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(t), address(_864), u, arg3
+                    else:
+                        mem[(32 * arg1.length) + 228] = 1
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(t), address(_864), u, 1
+                    mem[(32 * arg1.length) + 128] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    idx = idx + 2
+                    s = ext_call.return_data[0]
+                    s = _864
+                    t = _841
+                    t = _864
+                    u = ext_call.return_data[0]
+                    continue 
+                require ext_code.size(address(s))
+                if stor4[address(s)]:
+                    call address(s).withdrawTo(address arg1, uint256 arg2) with:
+                         gas gas_remaining wei
+                        args address(arg4), u
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    return u
+                call address(s).0xa9059cbb with:
+                     gas gas_remaining wei
+                    args address(arg4), u
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                if ext_call.return_data[0]:
+                    return u
+        else:
+            require ext_code.size(mem[140 len 20])
+            call mem[140 len 20].deposit() with:
+               value msg.value wei
+                 gas gas_remaining wei
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require arg1.length > 2
+            require arg1.length <= 21
+            require 1 == bool(arg1.length)
+            require ext_code.size(registryAddress)
+            call registryAddress.0xbb34534c with:
+                 gas gas_remaining wei
+                args 'BancorGasPriceLimit'
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require return_data.size >= 32
+            mem[(32 * arg1.length) + 128] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+            mem[(32 * arg1.length) + 132] = block.gasprice
+            require ext_code.size(address(ext_call.return_data[0]))
+            call address(ext_call.return_data[0]).0x6b4dff1f with:
+                 gas gas_remaining wei
+                args block.gasprice
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            if 0 < arg1.length:
+                _71 = mem[128]
+                mem[(32 * arg1.length) + 132] = 'ContractFeatures'
+                require ext_code.size(registryAddress)
+                call registryAddress.0xbb34534c with:
+                     gas gas_remaining wei
+                    args 'ContractFeatures'
+                mem[(32 * arg1.length) + 128] = ext_call.return_data[0]
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                idx = 1
+                s = 0
+                s = 0
+                t = 0
+                t = _71
+                u = arg2
+                while idx < arg1.length:
+                    require idx < arg1.length
+                    _844 = mem[(32 * idx) + 128]
+                    require idx + 1 < arg1.length
+                    _871 = mem[(32 * idx + 1) + 128]
+                    require ext_code.size(mem[(32 * idx) + 140 len 20])
+                    call mem[(32 * idx) + 140 len 20].0x8da5cb5b with:
+                         gas gas_remaining wei
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).0xa5fbf287 with:
+                         gas gas_remaining wei
+                        args address(ext_call.return_data[0]), 1
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    if ext_call.return_data[0]:
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).conversionWhitelist() with:
+                             gas gas_remaining wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if address(ext_call.return_data[0]):
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                 gas gas_remaining wei
+                                args address(arg4)
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    if address(t) != mem[(32 * idx) + 140 len 20]:
+                        require ext_code.size(address(t))
+                        call address(t).0xdd62ed3e with:
+                             gas gas_remaining wei
+                            args this.address, address(ext_call.return_data[0])
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if ext_call.return_data[0] < u:
+                            require ext_code.size(address(t))
+                            call address(t).0xdd62ed3e with:
+                                 gas gas_remaining wei
+                                args this.address, address(ext_call.return_data[0])
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_code.size(address(t))
+                            if ext_call.return_data[0]:
+                                call address(t).approve(address arg1, uint256 arg2) with:
+                                     gas gas_remaining wei
+                                    args address(ext_call.return_data[0]), 0
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                            call address(t).approve(address arg1, uint256 arg2) with:
+                                 gas gas_remaining wei
+                                args address(ext_call.return_data[0]), u
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    mem[(32 * arg1.length) + 132] = address(t)
+                    mem[(32 * arg1.length) + 164] = address(_871)
+                    mem[(32 * arg1.length) + 196] = u
+                    if idx == arg1.length - 2:
+                        mem[(32 * arg1.length) + 228] = arg3
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(t), address(_871), u, arg3
+                    else:
+                        mem[(32 * arg1.length) + 228] = 1
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(t), address(_871), u, 1
+                    mem[(32 * arg1.length) + 128] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    idx = idx + 2
+                    s = ext_call.return_data[0]
+                    s = _871
+                    t = _844
+                    t = _871
+                    u = ext_call.return_data[0]
+                    continue 
+                require ext_code.size(address(s))
+                if stor4[address(s)]:
+                    call address(s).withdrawTo(address arg1, uint256 arg2) with:
+                         gas gas_remaining wei
+                        args address(arg4), u
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    return u
+                call address(s).0xa9059cbb with:
+                     gas gas_remaining wei
+                    args address(arg4), u
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                if ext_call.return_data[0]:
+                    return u
+    revert
+}
+
+function convertForPrioritized(address[] arg1, uint256 arg2, uint256 arg3, address arg4, uint256 arg5, uint256 arg6, uint8 arg7, bytes32 arg8, bytes32 arg9) payable {
+    mem[128 len 32 * arg1.length] = call.data[arg1 + 36 len 32 * arg1.length]
+    require arg1.length > 2
+    require arg1.length <= 21
+    require 1 == bool(arg1.length)
+    require 0 < arg1.length
+    if 0 == msg.value:
+        if msg.value <= 0:
+            require arg1.length > 2
+            require arg1.length <= 21
+            require 1 == bool(arg1.length)
+            if arg7:
+                mem[(32 * arg1.length) + 264 len floor32(arg1.length)] = call.data[arg1 + 36 len floor32(arg1.length)]
+                _3309 = sha3(arg5, block.gasprice, arg4, msg.sender, arg2, call.data[arg1 + 36 len floor32(arg1.length)], mem[(32 * arg1.length) + floor32(arg1.length) + 264 len (32 * arg1.length) - floor32(arg1.length)])
+                require not stor5[arg5][block.gasprice][arg4][msg.sender][arg2][call.data[arg1 + 36 len floor32(arg1.length)]][mem[(32 * arg1.length) + floor32(arg1.length) + 264 len (32 * arg1.length) - floor32(arg1.length)]]
+                require block.number <= arg5
+                _3402 = sha3(Mask(224, 32, '\x19Ethereum Signed Message:\n32') >> 32, sha3(arg5, block.gasprice, arg4, msg.sender, arg2, call.data[arg1 + 36 len floor32(arg1.length)], mem[(32 * arg1.length) + floor32(arg1.length) + 264 len (32 * arg1.length) - floor32(arg1.length)]))
+                mem[(32 * arg1.length) + 192] = arg7
+                mem[(32 * arg1.length) + 224] = arg8
+                mem[(32 * arg1.length) + 256] = arg9
+                signer = erecover(_3402, arg7 << 248, arg8, arg9) 
+                mem[(32 * arg1.length) + 128] = signer
+                if not erecover.result:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require address(signer) == signerAddress
+                stor5[_3309] = 1
+                if 0 < arg1.length:
+                    mem[(32 * arg1.length) + 164] = 'ContractFeatures'
+                    require ext_code.size(registryAddress)
+                    call registryAddress.0xbb34534c with:
+                         gas gas_remaining wei
+                        args 'ContractFeatures'
+                    mem[(32 * arg1.length) + 160] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    idx = 1
+                    s = 0
+                    s = 0
+                    t = 0
+                    t = mem[128]
+                    u = arg2
+                    while idx < arg1.length:
+                        require idx < arg1.length
+                        _6529 = mem[(32 * idx) + 128]
+                        require idx + 1 < arg1.length
+                        _6568 = mem[(32 * idx + 1) + 128]
+                        require ext_code.size(mem[(32 * idx) + 140 len 20])
+                        call mem[(32 * idx) + 140 len 20].0x8da5cb5b with:
+                             gas gas_remaining wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).0xa5fbf287 with:
+                             gas gas_remaining wei
+                            args address(ext_call.return_data[0]), 1
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if ext_call.return_data[0]:
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).conversionWhitelist() with:
+                                 gas gas_remaining wei
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if address(ext_call.return_data[0]):
+                                require ext_code.size(address(ext_call.return_data[0]))
+                                call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                     gas gas_remaining wei
+                                    args address(arg4)
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                        if address(t) != mem[(32 * idx) + 140 len 20]:
+                            require ext_code.size(address(t))
+                            call address(t).0xdd62ed3e with:
+                                 gas gas_remaining wei
+                                args this.address, address(ext_call.return_data[0])
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if ext_call.return_data[0] < u:
+                                require ext_code.size(address(t))
+                                call address(t).0xdd62ed3e with:
+                                     gas gas_remaining wei
+                                    args this.address, address(ext_call.return_data[0])
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_code.size(address(t))
+                                if ext_call.return_data[0]:
+                                    call address(t).approve(address arg1, uint256 arg2) with:
+                                         gas gas_remaining wei
+                                        args address(ext_call.return_data[0]), 0
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    require ext_call.return_data[0]
+                                call address(t).approve(address arg1, uint256 arg2) with:
+                                     gas gas_remaining wei
+                                    args address(ext_call.return_data[0]), u
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                        mem[(32 * arg1.length) + 164] = address(t)
+                        mem[(32 * arg1.length) + 196] = address(_6568)
+                        mem[(32 * arg1.length) + 228] = u
+                        if idx == arg1.length - 2:
+                            mem[(32 * arg1.length) + 260] = arg3
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                 gas gas_remaining wei
+                                args address(t), address(_6568), u, arg3
+                        else:
+                            mem[(32 * arg1.length) + 260] = 1
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                 gas gas_remaining wei
+                                args address(t), address(_6568), u, 1
+                        mem[(32 * arg1.length) + 160] = ext_call.return_data[0]
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        idx = idx + 2
+                        s = ext_call.return_data[0]
+                        s = _6568
+                        t = _6529
+                        t = _6568
+                        u = ext_call.return_data[0]
+                        continue 
+                    require ext_code.size(address(s))
+                    if stor4[address(s)]:
+                        call address(s).withdrawTo(address arg1, uint256 arg2) with:
+                             gas gas_remaining wei
+                            args address(arg4), u
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        return u
+                    call address(s).0xa9059cbb with:
+                         gas gas_remaining wei
+                        args address(arg4), u
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    if ext_call.return_data[0]:
+                        return u
+            else:
+                if arg8:
+                    mem[(32 * arg1.length) + 264 len floor32(arg1.length)] = call.data[arg1 + 36 len floor32(arg1.length)]
+                    _3313 = sha3(arg5, block.gasprice, arg4, msg.sender, arg2, call.data[arg1 + 36 len floor32(arg1.length)], mem[(32 * arg1.length) + floor32(arg1.length) + 264 len (32 * arg1.length) - floor32(arg1.length)])
+                    require not stor5[arg5][block.gasprice][arg4][msg.sender][arg2][call.data[arg1 + 36 len floor32(arg1.length)]][mem[(32 * arg1.length) + floor32(arg1.length) + 264 len (32 * arg1.length) - floor32(arg1.length)]]
+                    require block.number <= arg5
+                    _3406 = sha3(Mask(224, 32, '\x19Ethereum Signed Message:\n32') >> 32, sha3(arg5, block.gasprice, arg4, msg.sender, arg2, call.data[arg1 + 36 len floor32(arg1.length)], mem[(32 * arg1.length) + floor32(arg1.length) + 264 len (32 * arg1.length) - floor32(arg1.length)]))
+                    mem[(32 * arg1.length) + 192] = arg7
+                    mem[(32 * arg1.length) + 224] = arg8
+                    mem[(32 * arg1.length) + 256] = arg9
+                    signer = erecover(_3406, arg7 << 248, arg8, arg9) 
+                    mem[(32 * arg1.length) + 128] = signer
+                    if not erecover.result:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require address(signer) == signerAddress
+                    stor5[_3313] = 1
+                    if 0 < arg1.length:
+                        mem[(32 * arg1.length) + 164] = 'ContractFeatures'
+                        require ext_code.size(registryAddress)
+                        call registryAddress.0xbb34534c with:
+                             gas gas_remaining wei
+                            args 'ContractFeatures'
+                        mem[(32 * arg1.length) + 160] = ext_call.return_data[0]
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        idx = 1
+                        s = 0
+                        s = 0
+                        t = 0
+                        t = mem[128]
+                        u = arg2
+                        while idx < arg1.length:
+                            require idx < arg1.length
+                            _6532 = mem[(32 * idx) + 128]
+                            require idx + 1 < arg1.length
+                            _6575 = mem[(32 * idx + 1) + 128]
+                            require ext_code.size(mem[(32 * idx) + 140 len 20])
+                            call mem[(32 * idx) + 140 len 20].0x8da5cb5b with:
+                                 gas gas_remaining wei
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).0xa5fbf287 with:
+                                 gas gas_remaining wei
+                                args address(ext_call.return_data[0]), 1
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if ext_call.return_data[0]:
+                                require ext_code.size(address(ext_call.return_data[0]))
+                                call address(ext_call.return_data[0]).conversionWhitelist() with:
+                                     gas gas_remaining wei
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                if address(ext_call.return_data[0]):
+                                    require ext_code.size(address(ext_call.return_data[0]))
+                                    call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                         gas gas_remaining wei
+                                        args address(arg4)
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    require ext_call.return_data[0]
+                            if address(t) != mem[(32 * idx) + 140 len 20]:
+                                require ext_code.size(address(t))
+                                call address(t).0xdd62ed3e with:
+                                     gas gas_remaining wei
+                                    args this.address, address(ext_call.return_data[0])
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                if ext_call.return_data[0] < u:
+                                    require ext_code.size(address(t))
+                                    call address(t).0xdd62ed3e with:
+                                         gas gas_remaining wei
+                                        args this.address, address(ext_call.return_data[0])
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    require ext_code.size(address(t))
+                                    if ext_call.return_data[0]:
+                                        call address(t).approve(address arg1, uint256 arg2) with:
+                                             gas gas_remaining wei
+                                            args address(ext_call.return_data[0]), 0
+                                        if not ext_call.success:
+                                            revert with ext_call.return_data[0 len return_data.size]
+                                        require return_data.size >= 32
+                                        require ext_call.return_data[0]
+                                    call address(t).approve(address arg1, uint256 arg2) with:
+                                         gas gas_remaining wei
+                                        args address(ext_call.return_data[0]), u
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    require ext_call.return_data[0]
+                            mem[(32 * arg1.length) + 164] = address(t)
+                            mem[(32 * arg1.length) + 196] = address(_6575)
+                            mem[(32 * arg1.length) + 228] = u
+                            if idx == arg1.length - 2:
+                                mem[(32 * arg1.length) + 260] = arg3
+                                require ext_code.size(address(ext_call.return_data[0]))
+                                call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                     gas gas_remaining wei
+                                    args address(t), address(_6575), u, arg3
+                            else:
+                                mem[(32 * arg1.length) + 260] = 1
+                                require ext_code.size(address(ext_call.return_data[0]))
+                                call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                     gas gas_remaining wei
+                                    args address(t), address(_6575), u, 1
+                            mem[(32 * arg1.length) + 160] = ext_call.return_data[0]
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            idx = idx + 2
+                            s = ext_call.return_data[0]
+                            s = _6575
+                            t = _6532
+                            t = _6575
+                            u = ext_call.return_data[0]
+                            continue 
+                        require ext_code.size(address(s))
+                        if stor4[address(s)]:
+                            call address(s).withdrawTo(address arg1, uint256 arg2) with:
+                                 gas gas_remaining wei
+                                args address(arg4), u
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            return u
+                        call address(s).0xa9059cbb with:
+                             gas gas_remaining wei
+                            args address(arg4), u
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if ext_call.return_data[0]:
+                            return u
+                else:
+                    if not arg9:
+                        require ext_code.size(registryAddress)
+                        call registryAddress.0xbb34534c with:
+                             gas gas_remaining wei
+                            args 'BancorGasPriceLimit'
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        mem[(32 * arg1.length) + 128] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+                        mem[(32 * arg1.length) + 132] = block.gasprice
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).0x6b4dff1f with:
+                             gas gas_remaining wei
+                            args block.gasprice
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        if 0 < arg1.length:
+                            _133 = mem[128]
+                            mem[(32 * arg1.length) + 132] = 'ContractFeatures'
+                            require ext_code.size(registryAddress)
+                            call registryAddress.0xbb34534c with:
+                                 gas gas_remaining wei
+                                args 'ContractFeatures'
+                            mem[(32 * arg1.length) + 128] = ext_call.return_data[0]
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            idx = 1
+                            s = 0
+                            s = 0
+                            t = 0
+                            t = _133
+                            u = arg2
+                            while idx < arg1.length:
+                                require idx < arg1.length
+                                _3361 = mem[(32 * idx) + 128]
+                                require idx + 1 < arg1.length
+                                _3376 = mem[(32 * idx + 1) + 128]
+                                require ext_code.size(mem[(32 * idx) + 140 len 20])
+                                call mem[(32 * idx) + 140 len 20].0x8da5cb5b with:
+                                     gas gas_remaining wei
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_code.size(address(ext_call.return_data[0]))
+                                call address(ext_call.return_data[0]).0xa5fbf287 with:
+                                     gas gas_remaining wei
+                                    args address(ext_call.return_data[0]), 1
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                if ext_call.return_data[0]:
+                                    require ext_code.size(address(ext_call.return_data[0]))
+                                    call address(ext_call.return_data[0]).conversionWhitelist() with:
+                                         gas gas_remaining wei
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    if address(ext_call.return_data[0]):
+                                        require ext_code.size(address(ext_call.return_data[0]))
+                                        call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                             gas gas_remaining wei
+                                            args address(arg4)
+                                        if not ext_call.success:
+                                            revert with ext_call.return_data[0 len return_data.size]
+                                        require return_data.size >= 32
+                                        require ext_call.return_data[0]
+                                if address(t) != mem[(32 * idx) + 140 len 20]:
+                                    require ext_code.size(address(t))
+                                    call address(t).0xdd62ed3e with:
+                                         gas gas_remaining wei
+                                        args this.address, address(ext_call.return_data[0])
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    if ext_call.return_data[0] < u:
+                                        require ext_code.size(address(t))
+                                        call address(t).0xdd62ed3e with:
+                                             gas gas_remaining wei
+                                            args this.address, address(ext_call.return_data[0])
+                                        if not ext_call.success:
+                                            revert with ext_call.return_data[0 len return_data.size]
+                                        require return_data.size >= 32
+                                        require ext_code.size(address(t))
+                                        if ext_call.return_data[0]:
+                                            call address(t).approve(address arg1, uint256 arg2) with:
+                                                 gas gas_remaining wei
+                                                args address(ext_call.return_data[0]), 0
+                                            if not ext_call.success:
+                                                revert with ext_call.return_data[0 len return_data.size]
+                                            require return_data.size >= 32
+                                            require ext_call.return_data[0]
+                                        call address(t).approve(address arg1, uint256 arg2) with:
+                                             gas gas_remaining wei
+                                            args address(ext_call.return_data[0]), u
+                                        if not ext_call.success:
+                                            revert with ext_call.return_data[0 len return_data.size]
+                                        require return_data.size >= 32
+                                        require ext_call.return_data[0]
+                                mem[(32 * arg1.length) + 132] = address(t)
+                                mem[(32 * arg1.length) + 164] = address(_3376)
+                                mem[(32 * arg1.length) + 196] = u
+                                if idx == arg1.length - 2:
+                                    mem[(32 * arg1.length) + 228] = arg3
+                                    require ext_code.size(address(ext_call.return_data[0]))
+                                    call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                         gas gas_remaining wei
+                                        args address(t), address(_3376), u, arg3
+                                else:
+                                    mem[(32 * arg1.length) + 228] = 1
+                                    require ext_code.size(address(ext_call.return_data[0]))
+                                    call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                         gas gas_remaining wei
+                                        args address(t), address(_3376), u, 1
+                                mem[(32 * arg1.length) + 128] = ext_call.return_data[0]
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                idx = idx + 2
+                                s = ext_call.return_data[0]
+                                s = _3376
+                                t = _3361
+                                t = _3376
+                                u = ext_call.return_data[0]
+                                continue 
+                            require ext_code.size(address(s))
+                            if stor4[address(s)]:
+                                call address(s).withdrawTo(address arg1, uint256 arg2) with:
+                                     gas gas_remaining wei
+                                    args address(arg4), u
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                return u
+                            call address(s).0xa9059cbb with:
+                                 gas gas_remaining wei
+                                args address(arg4), u
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if ext_call.return_data[0]:
+                                return u
+                    else:
+                        mem[(32 * arg1.length) + 264 len floor32(arg1.length)] = call.data[arg1 + 36 len floor32(arg1.length)]
+                        _3317 = sha3(arg5, block.gasprice, arg4, msg.sender, arg2, call.data[arg1 + 36 len floor32(arg1.length)], mem[(32 * arg1.length) + floor32(arg1.length) + 264 len (32 * arg1.length) - floor32(arg1.length)])
+                        require not stor5[arg5][block.gasprice][arg4][msg.sender][arg2][call.data[arg1 + 36 len floor32(arg1.length)]][mem[(32 * arg1.length) + floor32(arg1.length) + 264 len (32 * arg1.length) - floor32(arg1.length)]]
+                        require block.number <= arg5
+                        _3410 = sha3(Mask(224, 32, '\x19Ethereum Signed Message:\n32') >> 32, sha3(arg5, block.gasprice, arg4, msg.sender, arg2, call.data[arg1 + 36 len floor32(arg1.length)], mem[(32 * arg1.length) + floor32(arg1.length) + 264 len (32 * arg1.length) - floor32(arg1.length)]))
+                        mem[(32 * arg1.length) + 192] = arg7
+                        mem[(32 * arg1.length) + 224] = arg8
+                        mem[(32 * arg1.length) + 256] = arg9
+                        signer = erecover(_3410, arg7 << 248, arg8, arg9) 
+                        mem[(32 * arg1.length) + 128] = signer
+                        if not erecover.result:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require address(signer) == signerAddress
+                        stor5[_3317] = 1
+                        if 0 < arg1.length:
+                            mem[(32 * arg1.length) + 164] = 'ContractFeatures'
+                            require ext_code.size(registryAddress)
+                            call registryAddress.0xbb34534c with:
+                                 gas gas_remaining wei
+                                args 'ContractFeatures'
+                            mem[(32 * arg1.length) + 160] = ext_call.return_data[0]
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            idx = 1
+                            s = 0
+                            s = 0
+                            t = 0
+                            t = mem[128]
+                            u = arg2
+                            while idx < arg1.length:
+                                require idx < arg1.length
+                                _6535 = mem[(32 * idx) + 128]
+                                require idx + 1 < arg1.length
+                                _6582 = mem[(32 * idx + 1) + 128]
+                                require ext_code.size(mem[(32 * idx) + 140 len 20])
+                                call mem[(32 * idx) + 140 len 20].0x8da5cb5b with:
+                                     gas gas_remaining wei
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_code.size(address(ext_call.return_data[0]))
+                                call address(ext_call.return_data[0]).0xa5fbf287 with:
+                                     gas gas_remaining wei
+                                    args address(ext_call.return_data[0]), 1
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                if ext_call.return_data[0]:
+                                    require ext_code.size(address(ext_call.return_data[0]))
+                                    call address(ext_call.return_data[0]).conversionWhitelist() with:
+                                         gas gas_remaining wei
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    if address(ext_call.return_data[0]):
+                                        require ext_code.size(address(ext_call.return_data[0]))
+                                        call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                             gas gas_remaining wei
+                                            args address(arg4)
+                                        if not ext_call.success:
+                                            revert with ext_call.return_data[0 len return_data.size]
+                                        require return_data.size >= 32
+                                        require ext_call.return_data[0]
+                                if address(t) != mem[(32 * idx) + 140 len 20]:
+                                    require ext_code.size(address(t))
+                                    call address(t).0xdd62ed3e with:
+                                         gas gas_remaining wei
+                                        args this.address, address(ext_call.return_data[0])
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    if ext_call.return_data[0] < u:
+                                        require ext_code.size(address(t))
+                                        call address(t).0xdd62ed3e with:
+                                             gas gas_remaining wei
+                                            args this.address, address(ext_call.return_data[0])
+                                        if not ext_call.success:
+                                            revert with ext_call.return_data[0 len return_data.size]
+                                        require return_data.size >= 32
+                                        require ext_code.size(address(t))
+                                        if ext_call.return_data[0]:
+                                            call address(t).approve(address arg1, uint256 arg2) with:
+                                                 gas gas_remaining wei
+                                                args address(ext_call.return_data[0]), 0
+                                            if not ext_call.success:
+                                                revert with ext_call.return_data[0 len return_data.size]
+                                            require return_data.size >= 32
+                                            require ext_call.return_data[0]
+                                        call address(t).approve(address arg1, uint256 arg2) with:
+                                             gas gas_remaining wei
+                                            args address(ext_call.return_data[0]), u
+                                        if not ext_call.success:
+                                            revert with ext_call.return_data[0 len return_data.size]
+                                        require return_data.size >= 32
+                                        require ext_call.return_data[0]
+                                mem[(32 * arg1.length) + 164] = address(t)
+                                mem[(32 * arg1.length) + 196] = address(_6582)
+                                mem[(32 * arg1.length) + 228] = u
+                                if idx == arg1.length - 2:
+                                    mem[(32 * arg1.length) + 260] = arg3
+                                    require ext_code.size(address(ext_call.return_data[0]))
+                                    call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                         gas gas_remaining wei
+                                        args address(t), address(_6582), u, arg3
+                                else:
+                                    mem[(32 * arg1.length) + 260] = 1
+                                    require ext_code.size(address(ext_call.return_data[0]))
+                                    call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                         gas gas_remaining wei
+                                        args address(t), address(_6582), u, 1
+                                mem[(32 * arg1.length) + 160] = ext_call.return_data[0]
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                idx = idx + 2
+                                s = ext_call.return_data[0]
+                                s = _6582
+                                t = _6535
+                                t = _6582
+                                u = ext_call.return_data[0]
+                                continue 
+                            require ext_code.size(address(s))
+                            if stor4[address(s)]:
+                                call address(s).withdrawTo(address arg1, uint256 arg2) with:
+                                     gas gas_remaining wei
+                                    args address(arg4), u
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                return u
+                            call address(s).0xa9059cbb with:
+                                 gas gas_remaining wei
+                                args address(arg4), u
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if ext_call.return_data[0]:
+                                return u
+        else:
+            require ext_code.size(mem[140 len 20])
+            call mem[140 len 20].deposit() with:
+               value msg.value wei
+                 gas gas_remaining wei
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require arg1.length > 2
+            require arg1.length <= 21
+            require 1 == bool(arg1.length)
+            if arg7:
+                mem[(32 * arg1.length) + 264 len floor32(arg1.length)] = call.data[arg1 + 36 len floor32(arg1.length)]
+                _3322 = sha3(arg5, block.gasprice, arg4, msg.sender, arg2, call.data[arg1 + 36 len floor32(arg1.length)], mem[(32 * arg1.length) + floor32(arg1.length) + 264 len (32 * arg1.length) - floor32(arg1.length)])
+                require not stor5[arg5][block.gasprice][arg4][msg.sender][arg2][call.data[arg1 + 36 len floor32(arg1.length)]][mem[(32 * arg1.length) + floor32(arg1.length) + 264 len (32 * arg1.length) - floor32(arg1.length)]]
+                require block.number <= arg5
+                _3414 = sha3(Mask(224, 32, '\x19Ethereum Signed Message:\n32') >> 32, sha3(arg5, block.gasprice, arg4, msg.sender, arg2, call.data[arg1 + 36 len floor32(arg1.length)], mem[(32 * arg1.length) + floor32(arg1.length) + 264 len (32 * arg1.length) - floor32(arg1.length)]))
+                mem[(32 * arg1.length) + 192] = arg7
+                mem[(32 * arg1.length) + 224] = arg8
+                mem[(32 * arg1.length) + 256] = arg9
+                signer = erecover(_3414, arg7 << 248, arg8, arg9) 
+                mem[(32 * arg1.length) + 128] = signer
+                if not erecover.result:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require address(signer) == signerAddress
+                stor5[_3322] = 1
+                if 0 < arg1.length:
+                    mem[(32 * arg1.length) + 164] = 'ContractFeatures'
+                    require ext_code.size(registryAddress)
+                    call registryAddress.0xbb34534c with:
+                         gas gas_remaining wei
+                        args 'ContractFeatures'
+                    mem[(32 * arg1.length) + 160] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    idx = 1
+                    s = 0
+                    s = 0
+                    t = 0
+                    t = mem[128]
+                    u = arg2
+                    while idx < arg1.length:
+                        require idx < arg1.length
+                        _6538 = mem[(32 * idx) + 128]
+                        require idx + 1 < arg1.length
+                        _6589 = mem[(32 * idx + 1) + 128]
+                        require ext_code.size(mem[(32 * idx) + 140 len 20])
+                        call mem[(32 * idx) + 140 len 20].0x8da5cb5b with:
+                             gas gas_remaining wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).0xa5fbf287 with:
+                             gas gas_remaining wei
+                            args address(ext_call.return_data[0]), 1
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if ext_call.return_data[0]:
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).conversionWhitelist() with:
+                                 gas gas_remaining wei
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if address(ext_call.return_data[0]):
+                                require ext_code.size(address(ext_call.return_data[0]))
+                                call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                     gas gas_remaining wei
+                                    args address(arg4)
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                        if address(t) != mem[(32 * idx) + 140 len 20]:
+                            require ext_code.size(address(t))
+                            call address(t).0xdd62ed3e with:
+                                 gas gas_remaining wei
+                                args this.address, address(ext_call.return_data[0])
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if ext_call.return_data[0] < u:
+                                require ext_code.size(address(t))
+                                call address(t).0xdd62ed3e with:
+                                     gas gas_remaining wei
+                                    args this.address, address(ext_call.return_data[0])
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_code.size(address(t))
+                                if ext_call.return_data[0]:
+                                    call address(t).approve(address arg1, uint256 arg2) with:
+                                         gas gas_remaining wei
+                                        args address(ext_call.return_data[0]), 0
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    require ext_call.return_data[0]
+                                call address(t).approve(address arg1, uint256 arg2) with:
+                                     gas gas_remaining wei
+                                    args address(ext_call.return_data[0]), u
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                        mem[(32 * arg1.length) + 164] = address(t)
+                        mem[(32 * arg1.length) + 196] = address(_6589)
+                        mem[(32 * arg1.length) + 228] = u
+                        if idx == arg1.length - 2:
+                            mem[(32 * arg1.length) + 260] = arg3
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                 gas gas_remaining wei
+                                args address(t), address(_6589), u, arg3
+                        else:
+                            mem[(32 * arg1.length) + 260] = 1
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                 gas gas_remaining wei
+                                args address(t), address(_6589), u, 1
+                        mem[(32 * arg1.length) + 160] = ext_call.return_data[0]
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        idx = idx + 2
+                        s = ext_call.return_data[0]
+                        s = _6589
+                        t = _6538
+                        t = _6589
+                        u = ext_call.return_data[0]
+                        continue 
+                    require ext_code.size(address(s))
+                    if stor4[address(s)]:
+                        call address(s).withdrawTo(address arg1, uint256 arg2) with:
+                             gas gas_remaining wei
+                            args address(arg4), u
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        return u
+                    call address(s).0xa9059cbb with:
+                         gas gas_remaining wei
+                        args address(arg4), u
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    if ext_call.return_data[0]:
+                        return u
+            else:
+                if arg8:
+                    mem[(32 * arg1.length) + 264 len floor32(arg1.length)] = call.data[arg1 + 36 len floor32(arg1.length)]
+                    _3326 = sha3(arg5, block.gasprice, arg4, msg.sender, arg2, call.data[arg1 + 36 len floor32(arg1.length)], mem[(32 * arg1.length) + floor32(arg1.length) + 264 len (32 * arg1.length) - floor32(arg1.length)])
+                    require not stor5[arg5][block.gasprice][arg4][msg.sender][arg2][call.data[arg1 + 36 len floor32(arg1.length)]][mem[(32 * arg1.length) + floor32(arg1.length) + 264 len (32 * arg1.length) - floor32(arg1.length)]]
+                    require block.number <= arg5
+                    _3418 = sha3(Mask(224, 32, '\x19Ethereum Signed Message:\n32') >> 32, sha3(arg5, block.gasprice, arg4, msg.sender, arg2, call.data[arg1 + 36 len floor32(arg1.length)], mem[(32 * arg1.length) + floor32(arg1.length) + 264 len (32 * arg1.length) - floor32(arg1.length)]))
+                    mem[(32 * arg1.length) + 192] = arg7
+                    mem[(32 * arg1.length) + 224] = arg8
+                    mem[(32 * arg1.length) + 256] = arg9
+                    signer = erecover(_3418, arg7 << 248, arg8, arg9) 
+                    mem[(32 * arg1.length) + 128] = signer
+                    if not erecover.result:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require address(signer) == signerAddress
+                    stor5[_3326] = 1
+                    if 0 < arg1.length:
+                        mem[(32 * arg1.length) + 164] = 'ContractFeatures'
+                        require ext_code.size(registryAddress)
+                        call registryAddress.0xbb34534c with:
+                             gas gas_remaining wei
+                            args 'ContractFeatures'
+                        mem[(32 * arg1.length) + 160] = ext_call.return_data[0]
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        idx = 1
+                        s = 0
+                        s = 0
+                        t = 0
+                        t = mem[128]
+                        u = arg2
+                        while idx < arg1.length:
+                            require idx < arg1.length
+                            _6541 = mem[(32 * idx) + 128]
+                            require idx + 1 < arg1.length
+                            _6596 = mem[(32 * idx + 1) + 128]
+                            require ext_code.size(mem[(32 * idx) + 140 len 20])
+                            call mem[(32 * idx) + 140 len 20].0x8da5cb5b with:
+                                 gas gas_remaining wei
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).0xa5fbf287 with:
+                                 gas gas_remaining wei
+                                args address(ext_call.return_data[0]), 1
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if ext_call.return_data[0]:
+                                require ext_code.size(address(ext_call.return_data[0]))
+                                call address(ext_call.return_data[0]).conversionWhitelist() with:
+                                     gas gas_remaining wei
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                if address(ext_call.return_data[0]):
+                                    require ext_code.size(address(ext_call.return_data[0]))
+                                    call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                         gas gas_remaining wei
+                                        args address(arg4)
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    require ext_call.return_data[0]
+                            if address(t) != mem[(32 * idx) + 140 len 20]:
+                                require ext_code.size(address(t))
+                                call address(t).0xdd62ed3e with:
+                                     gas gas_remaining wei
+                                    args this.address, address(ext_call.return_data[0])
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                if ext_call.return_data[0] < u:
+                                    require ext_code.size(address(t))
+                                    call address(t).0xdd62ed3e with:
+                                         gas gas_remaining wei
+                                        args this.address, address(ext_call.return_data[0])
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    require ext_code.size(address(t))
+                                    if ext_call.return_data[0]:
+                                        call address(t).approve(address arg1, uint256 arg2) with:
+                                             gas gas_remaining wei
+                                            args address(ext_call.return_data[0]), 0
+                                        if not ext_call.success:
+                                            revert with ext_call.return_data[0 len return_data.size]
+                                        require return_data.size >= 32
+                                        require ext_call.return_data[0]
+                                    call address(t).approve(address arg1, uint256 arg2) with:
+                                         gas gas_remaining wei
+                                        args address(ext_call.return_data[0]), u
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    require ext_call.return_data[0]
+                            mem[(32 * arg1.length) + 164] = address(t)
+                            mem[(32 * arg1.length) + 196] = address(_6596)
+                            mem[(32 * arg1.length) + 228] = u
+                            if idx == arg1.length - 2:
+                                mem[(32 * arg1.length) + 260] = arg3
+                                require ext_code.size(address(ext_call.return_data[0]))
+                                call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                     gas gas_remaining wei
+                                    args address(t), address(_6596), u, arg3
+                            else:
+                                mem[(32 * arg1.length) + 260] = 1
+                                require ext_code.size(address(ext_call.return_data[0]))
+                                call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                     gas gas_remaining wei
+                                    args address(t), address(_6596), u, 1
+                            mem[(32 * arg1.length) + 160] = ext_call.return_data[0]
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            idx = idx + 2
+                            s = ext_call.return_data[0]
+                            s = _6596
+                            t = _6541
+                            t = _6596
+                            u = ext_call.return_data[0]
+                            continue 
+                        require ext_code.size(address(s))
+                        if stor4[address(s)]:
+                            call address(s).withdrawTo(address arg1, uint256 arg2) with:
+                                 gas gas_remaining wei
+                                args address(arg4), u
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            return u
+                        call address(s).0xa9059cbb with:
+                             gas gas_remaining wei
+                            args address(arg4), u
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if ext_call.return_data[0]:
+                            return u
+                else:
+                    if not arg9:
+                        require ext_code.size(registryAddress)
+                        call registryAddress.0xbb34534c with:
+                             gas gas_remaining wei
+                            args 'BancorGasPriceLimit'
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        mem[(32 * arg1.length) + 128] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+                        mem[(32 * arg1.length) + 132] = block.gasprice
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).0x6b4dff1f with:
+                             gas gas_remaining wei
+                            args block.gasprice
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        if 0 < arg1.length:
+                            _200 = mem[128]
+                            mem[(32 * arg1.length) + 132] = 'ContractFeatures'
+                            require ext_code.size(registryAddress)
+                            call registryAddress.0xbb34534c with:
+                                 gas gas_remaining wei
+                                args 'ContractFeatures'
+                            mem[(32 * arg1.length) + 128] = ext_call.return_data[0]
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            idx = 1
+                            s = 0
+                            s = 0
+                            t = 0
+                            t = _200
+                            u = arg2
+                            while idx < arg1.length:
+                                require idx < arg1.length
+                                _3364 = mem[(32 * idx) + 128]
+                                require idx + 1 < arg1.length
+                                _3383 = mem[(32 * idx + 1) + 128]
+                                require ext_code.size(mem[(32 * idx) + 140 len 20])
+                                call mem[(32 * idx) + 140 len 20].0x8da5cb5b with:
+                                     gas gas_remaining wei
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_code.size(address(ext_call.return_data[0]))
+                                call address(ext_call.return_data[0]).0xa5fbf287 with:
+                                     gas gas_remaining wei
+                                    args address(ext_call.return_data[0]), 1
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                if ext_call.return_data[0]:
+                                    require ext_code.size(address(ext_call.return_data[0]))
+                                    call address(ext_call.return_data[0]).conversionWhitelist() with:
+                                         gas gas_remaining wei
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    if address(ext_call.return_data[0]):
+                                        require ext_code.size(address(ext_call.return_data[0]))
+                                        call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                             gas gas_remaining wei
+                                            args address(arg4)
+                                        if not ext_call.success:
+                                            revert with ext_call.return_data[0 len return_data.size]
+                                        require return_data.size >= 32
+                                        require ext_call.return_data[0]
+                                if address(t) != mem[(32 * idx) + 140 len 20]:
+                                    require ext_code.size(address(t))
+                                    call address(t).0xdd62ed3e with:
+                                         gas gas_remaining wei
+                                        args this.address, address(ext_call.return_data[0])
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    if ext_call.return_data[0] < u:
+                                        require ext_code.size(address(t))
+                                        call address(t).0xdd62ed3e with:
+                                             gas gas_remaining wei
+                                            args this.address, address(ext_call.return_data[0])
+                                        if not ext_call.success:
+                                            revert with ext_call.return_data[0 len return_data.size]
+                                        require return_data.size >= 32
+                                        require ext_code.size(address(t))
+                                        if ext_call.return_data[0]:
+                                            call address(t).approve(address arg1, uint256 arg2) with:
+                                                 gas gas_remaining wei
+                                                args address(ext_call.return_data[0]), 0
+                                            if not ext_call.success:
+                                                revert with ext_call.return_data[0 len return_data.size]
+                                            require return_data.size >= 32
+                                            require ext_call.return_data[0]
+                                        call address(t).approve(address arg1, uint256 arg2) with:
+                                             gas gas_remaining wei
+                                            args address(ext_call.return_data[0]), u
+                                        if not ext_call.success:
+                                            revert with ext_call.return_data[0 len return_data.size]
+                                        require return_data.size >= 32
+                                        require ext_call.return_data[0]
+                                mem[(32 * arg1.length) + 132] = address(t)
+                                mem[(32 * arg1.length) + 164] = address(_3383)
+                                mem[(32 * arg1.length) + 196] = u
+                                if idx == arg1.length - 2:
+                                    mem[(32 * arg1.length) + 228] = arg3
+                                    require ext_code.size(address(ext_call.return_data[0]))
+                                    call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                         gas gas_remaining wei
+                                        args address(t), address(_3383), u, arg3
+                                else:
+                                    mem[(32 * arg1.length) + 228] = 1
+                                    require ext_code.size(address(ext_call.return_data[0]))
+                                    call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                         gas gas_remaining wei
+                                        args address(t), address(_3383), u, 1
+                                mem[(32 * arg1.length) + 128] = ext_call.return_data[0]
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                idx = idx + 2
+                                s = ext_call.return_data[0]
+                                s = _3383
+                                t = _3364
+                                t = _3383
+                                u = ext_call.return_data[0]
+                                continue 
+                            require ext_code.size(address(s))
+                            if stor4[address(s)]:
+                                call address(s).withdrawTo(address arg1, uint256 arg2) with:
+                                     gas gas_remaining wei
+                                    args address(arg4), u
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                return u
+                            call address(s).0xa9059cbb with:
+                                 gas gas_remaining wei
+                                args address(arg4), u
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if ext_call.return_data[0]:
+                                return u
+                    else:
+                        mem[(32 * arg1.length) + 264 len floor32(arg1.length)] = call.data[arg1 + 36 len floor32(arg1.length)]
+                        _3330 = sha3(arg5, block.gasprice, arg4, msg.sender, arg2, call.data[arg1 + 36 len floor32(arg1.length)], mem[(32 * arg1.length) + floor32(arg1.length) + 264 len (32 * arg1.length) - floor32(arg1.length)])
+                        require not stor5[arg5][block.gasprice][arg4][msg.sender][arg2][call.data[arg1 + 36 len floor32(arg1.length)]][mem[(32 * arg1.length) + floor32(arg1.length) + 264 len (32 * arg1.length) - floor32(arg1.length)]]
+                        require block.number <= arg5
+                        _3422 = sha3(Mask(224, 32, '\x19Ethereum Signed Message:\n32') >> 32, sha3(arg5, block.gasprice, arg4, msg.sender, arg2, call.data[arg1 + 36 len floor32(arg1.length)], mem[(32 * arg1.length) + floor32(arg1.length) + 264 len (32 * arg1.length) - floor32(arg1.length)]))
+                        mem[(32 * arg1.length) + 192] = arg7
+                        mem[(32 * arg1.length) + 224] = arg8
+                        mem[(32 * arg1.length) + 256] = arg9
+                        signer = erecover(_3422, arg7 << 248, arg8, arg9) 
+                        mem[(32 * arg1.length) + 128] = signer
+                        if not erecover.result:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require address(signer) == signerAddress
+                        stor5[_3330] = 1
+                        if 0 < arg1.length:
+                            mem[(32 * arg1.length) + 164] = 'ContractFeatures'
+                            require ext_code.size(registryAddress)
+                            call registryAddress.0xbb34534c with:
+                                 gas gas_remaining wei
+                                args 'ContractFeatures'
+                            mem[(32 * arg1.length) + 160] = ext_call.return_data[0]
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            idx = 1
+                            s = 0
+                            s = 0
+                            t = 0
+                            t = mem[128]
+                            u = arg2
+                            while idx < arg1.length:
+                                require idx < arg1.length
+                                _6544 = mem[(32 * idx) + 128]
+                                require idx + 1 < arg1.length
+                                _6603 = mem[(32 * idx + 1) + 128]
+                                require ext_code.size(mem[(32 * idx) + 140 len 20])
+                                call mem[(32 * idx) + 140 len 20].0x8da5cb5b with:
+                                     gas gas_remaining wei
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_code.size(address(ext_call.return_data[0]))
+                                call address(ext_call.return_data[0]).0xa5fbf287 with:
+                                     gas gas_remaining wei
+                                    args address(ext_call.return_data[0]), 1
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                if ext_call.return_data[0]:
+                                    require ext_code.size(address(ext_call.return_data[0]))
+                                    call address(ext_call.return_data[0]).conversionWhitelist() with:
+                                         gas gas_remaining wei
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    if address(ext_call.return_data[0]):
+                                        require ext_code.size(address(ext_call.return_data[0]))
+                                        call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                             gas gas_remaining wei
+                                            args address(arg4)
+                                        if not ext_call.success:
+                                            revert with ext_call.return_data[0 len return_data.size]
+                                        require return_data.size >= 32
+                                        require ext_call.return_data[0]
+                                if address(t) != mem[(32 * idx) + 140 len 20]:
+                                    require ext_code.size(address(t))
+                                    call address(t).0xdd62ed3e with:
+                                         gas gas_remaining wei
+                                        args this.address, address(ext_call.return_data[0])
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    if ext_call.return_data[0] < u:
+                                        require ext_code.size(address(t))
+                                        call address(t).0xdd62ed3e with:
+                                             gas gas_remaining wei
+                                            args this.address, address(ext_call.return_data[0])
+                                        if not ext_call.success:
+                                            revert with ext_call.return_data[0 len return_data.size]
+                                        require return_data.size >= 32
+                                        require ext_code.size(address(t))
+                                        if ext_call.return_data[0]:
+                                            call address(t).approve(address arg1, uint256 arg2) with:
+                                                 gas gas_remaining wei
+                                                args address(ext_call.return_data[0]), 0
+                                            if not ext_call.success:
+                                                revert with ext_call.return_data[0 len return_data.size]
+                                            require return_data.size >= 32
+                                            require ext_call.return_data[0]
+                                        call address(t).approve(address arg1, uint256 arg2) with:
+                                             gas gas_remaining wei
+                                            args address(ext_call.return_data[0]), u
+                                        if not ext_call.success:
+                                            revert with ext_call.return_data[0 len return_data.size]
+                                        require return_data.size >= 32
+                                        require ext_call.return_data[0]
+                                mem[(32 * arg1.length) + 164] = address(t)
+                                mem[(32 * arg1.length) + 196] = address(_6603)
+                                mem[(32 * arg1.length) + 228] = u
+                                if idx == arg1.length - 2:
+                                    mem[(32 * arg1.length) + 260] = arg3
+                                    require ext_code.size(address(ext_call.return_data[0]))
+                                    call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                         gas gas_remaining wei
+                                        args address(t), address(_6603), u, arg3
+                                else:
+                                    mem[(32 * arg1.length) + 260] = 1
+                                    require ext_code.size(address(ext_call.return_data[0]))
+                                    call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                         gas gas_remaining wei
+                                        args address(t), address(_6603), u, 1
+                                mem[(32 * arg1.length) + 160] = ext_call.return_data[0]
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                idx = idx + 2
+                                s = ext_call.return_data[0]
+                                s = _6603
+                                t = _6544
+                                t = _6603
+                                u = ext_call.return_data[0]
+                                continue 
+                            require ext_code.size(address(s))
+                            if stor4[address(s)]:
+                                call address(s).withdrawTo(address arg1, uint256 arg2) with:
+                                     gas gas_remaining wei
+                                    args address(arg4), u
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                return u
+                            call address(s).0xa9059cbb with:
+                                 gas gas_remaining wei
+                                args address(arg4), u
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if ext_call.return_data[0]:
+                                return u
+    else:
+        require arg2 == msg.value
+        require stor4[mem[140 len 20]]
+        if msg.value <= 0:
+            require arg1.length > 2
+            require arg1.length <= 21
+            require 1 == bool(arg1.length)
+            if arg7:
+                mem[(32 * arg1.length) + 264 len floor32(arg1.length)] = call.data[arg1 + 36 len floor32(arg1.length)]
+                _3335 = sha3(arg5, block.gasprice, arg4, msg.sender, arg2, call.data[arg1 + 36 len floor32(arg1.length)], mem[(32 * arg1.length) + floor32(arg1.length) + 264 len (32 * arg1.length) - floor32(arg1.length)])
+                require not stor5[arg5][block.gasprice][arg4][msg.sender][arg2][call.data[arg1 + 36 len floor32(arg1.length)]][mem[(32 * arg1.length) + floor32(arg1.length) + 264 len (32 * arg1.length) - floor32(arg1.length)]]
+                require block.number <= arg5
+                _3426 = sha3(Mask(224, 32, '\x19Ethereum Signed Message:\n32') >> 32, sha3(arg5, block.gasprice, arg4, msg.sender, arg2, call.data[arg1 + 36 len floor32(arg1.length)], mem[(32 * arg1.length) + floor32(arg1.length) + 264 len (32 * arg1.length) - floor32(arg1.length)]))
+                mem[(32 * arg1.length) + 192] = arg7
+                mem[(32 * arg1.length) + 224] = arg8
+                mem[(32 * arg1.length) + 256] = arg9
+                signer = erecover(_3426, arg7 << 248, arg8, arg9) 
+                mem[(32 * arg1.length) + 128] = signer
+                if not erecover.result:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require address(signer) == signerAddress
+                stor5[_3335] = 1
+                if 0 < arg1.length:
+                    mem[(32 * arg1.length) + 164] = 'ContractFeatures'
+                    require ext_code.size(registryAddress)
+                    call registryAddress.0xbb34534c with:
+                         gas gas_remaining wei
+                        args 'ContractFeatures'
+                    mem[(32 * arg1.length) + 160] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    idx = 1
+                    s = 0
+                    s = 0
+                    t = 0
+                    t = mem[128]
+                    u = arg2
+                    while idx < arg1.length:
+                        require idx < arg1.length
+                        _6547 = mem[(32 * idx) + 128]
+                        require idx + 1 < arg1.length
+                        _6610 = mem[(32 * idx + 1) + 128]
+                        require ext_code.size(mem[(32 * idx) + 140 len 20])
+                        call mem[(32 * idx) + 140 len 20].0x8da5cb5b with:
+                             gas gas_remaining wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).0xa5fbf287 with:
+                             gas gas_remaining wei
+                            args address(ext_call.return_data[0]), 1
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if ext_call.return_data[0]:
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).conversionWhitelist() with:
+                                 gas gas_remaining wei
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if address(ext_call.return_data[0]):
+                                require ext_code.size(address(ext_call.return_data[0]))
+                                call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                     gas gas_remaining wei
+                                    args address(arg4)
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                        if address(t) != mem[(32 * idx) + 140 len 20]:
+                            require ext_code.size(address(t))
+                            call address(t).0xdd62ed3e with:
+                                 gas gas_remaining wei
+                                args this.address, address(ext_call.return_data[0])
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if ext_call.return_data[0] < u:
+                                require ext_code.size(address(t))
+                                call address(t).0xdd62ed3e with:
+                                     gas gas_remaining wei
+                                    args this.address, address(ext_call.return_data[0])
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_code.size(address(t))
+                                if ext_call.return_data[0]:
+                                    call address(t).approve(address arg1, uint256 arg2) with:
+                                         gas gas_remaining wei
+                                        args address(ext_call.return_data[0]), 0
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    require ext_call.return_data[0]
+                                call address(t).approve(address arg1, uint256 arg2) with:
+                                     gas gas_remaining wei
+                                    args address(ext_call.return_data[0]), u
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                        mem[(32 * arg1.length) + 164] = address(t)
+                        mem[(32 * arg1.length) + 196] = address(_6610)
+                        mem[(32 * arg1.length) + 228] = u
+                        if idx == arg1.length - 2:
+                            mem[(32 * arg1.length) + 260] = arg3
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                 gas gas_remaining wei
+                                args address(t), address(_6610), u, arg3
+                        else:
+                            mem[(32 * arg1.length) + 260] = 1
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                 gas gas_remaining wei
+                                args address(t), address(_6610), u, 1
+                        mem[(32 * arg1.length) + 160] = ext_call.return_data[0]
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        idx = idx + 2
+                        s = ext_call.return_data[0]
+                        s = _6610
+                        t = _6547
+                        t = _6610
+                        u = ext_call.return_data[0]
+                        continue 
+                    require ext_code.size(address(s))
+                    if stor4[address(s)]:
+                        call address(s).withdrawTo(address arg1, uint256 arg2) with:
+                             gas gas_remaining wei
+                            args address(arg4), u
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        return u
+                    call address(s).0xa9059cbb with:
+                         gas gas_remaining wei
+                        args address(arg4), u
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    if ext_call.return_data[0]:
+                        return u
+            else:
+                if arg8:
+                    mem[(32 * arg1.length) + 264 len floor32(arg1.length)] = call.data[arg1 + 36 len floor32(arg1.length)]
+                    _3339 = sha3(arg5, block.gasprice, arg4, msg.sender, arg2, call.data[arg1 + 36 len floor32(arg1.length)], mem[(32 * arg1.length) + floor32(arg1.length) + 264 len (32 * arg1.length) - floor32(arg1.length)])
+                    require not stor5[arg5][block.gasprice][arg4][msg.sender][arg2][call.data[arg1 + 36 len floor32(arg1.length)]][mem[(32 * arg1.length) + floor32(arg1.length) + 264 len (32 * arg1.length) - floor32(arg1.length)]]
+                    require block.number <= arg5
+                    _3430 = sha3(Mask(224, 32, '\x19Ethereum Signed Message:\n32') >> 32, sha3(arg5, block.gasprice, arg4, msg.sender, arg2, call.data[arg1 + 36 len floor32(arg1.length)], mem[(32 * arg1.length) + floor32(arg1.length) + 264 len (32 * arg1.length) - floor32(arg1.length)]))
+                    mem[(32 * arg1.length) + 192] = arg7
+                    mem[(32 * arg1.length) + 224] = arg8
+                    mem[(32 * arg1.length) + 256] = arg9
+                    signer = erecover(_3430, arg7 << 248, arg8, arg9) 
+                    mem[(32 * arg1.length) + 128] = signer
+                    if not erecover.result:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require address(signer) == signerAddress
+                    stor5[_3339] = 1
+                    if 0 < arg1.length:
+                        mem[(32 * arg1.length) + 164] = 'ContractFeatures'
+                        require ext_code.size(registryAddress)
+                        call registryAddress.0xbb34534c with:
+                             gas gas_remaining wei
+                            args 'ContractFeatures'
+                        mem[(32 * arg1.length) + 160] = ext_call.return_data[0]
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        idx = 1
+                        s = 0
+                        s = 0
+                        t = 0
+                        t = mem[128]
+                        u = arg2
+                        while idx < arg1.length:
+                            require idx < arg1.length
+                            _6550 = mem[(32 * idx) + 128]
+                            require idx + 1 < arg1.length
+                            _6617 = mem[(32 * idx + 1) + 128]
+                            require ext_code.size(mem[(32 * idx) + 140 len 20])
+                            call mem[(32 * idx) + 140 len 20].0x8da5cb5b with:
+                                 gas gas_remaining wei
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).0xa5fbf287 with:
+                                 gas gas_remaining wei
+                                args address(ext_call.return_data[0]), 1
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if ext_call.return_data[0]:
+                                require ext_code.size(address(ext_call.return_data[0]))
+                                call address(ext_call.return_data[0]).conversionWhitelist() with:
+                                     gas gas_remaining wei
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                if address(ext_call.return_data[0]):
+                                    require ext_code.size(address(ext_call.return_data[0]))
+                                    call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                         gas gas_remaining wei
+                                        args address(arg4)
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    require ext_call.return_data[0]
+                            if address(t) != mem[(32 * idx) + 140 len 20]:
+                                require ext_code.size(address(t))
+                                call address(t).0xdd62ed3e with:
+                                     gas gas_remaining wei
+                                    args this.address, address(ext_call.return_data[0])
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                if ext_call.return_data[0] < u:
+                                    require ext_code.size(address(t))
+                                    call address(t).0xdd62ed3e with:
+                                         gas gas_remaining wei
+                                        args this.address, address(ext_call.return_data[0])
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    require ext_code.size(address(t))
+                                    if ext_call.return_data[0]:
+                                        call address(t).approve(address arg1, uint256 arg2) with:
+                                             gas gas_remaining wei
+                                            args address(ext_call.return_data[0]), 0
+                                        if not ext_call.success:
+                                            revert with ext_call.return_data[0 len return_data.size]
+                                        require return_data.size >= 32
+                                        require ext_call.return_data[0]
+                                    call address(t).approve(address arg1, uint256 arg2) with:
+                                         gas gas_remaining wei
+                                        args address(ext_call.return_data[0]), u
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    require ext_call.return_data[0]
+                            mem[(32 * arg1.length) + 164] = address(t)
+                            mem[(32 * arg1.length) + 196] = address(_6617)
+                            mem[(32 * arg1.length) + 228] = u
+                            if idx == arg1.length - 2:
+                                mem[(32 * arg1.length) + 260] = arg3
+                                require ext_code.size(address(ext_call.return_data[0]))
+                                call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                     gas gas_remaining wei
+                                    args address(t), address(_6617), u, arg3
+                            else:
+                                mem[(32 * arg1.length) + 260] = 1
+                                require ext_code.size(address(ext_call.return_data[0]))
+                                call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                     gas gas_remaining wei
+                                    args address(t), address(_6617), u, 1
+                            mem[(32 * arg1.length) + 160] = ext_call.return_data[0]
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            idx = idx + 2
+                            s = ext_call.return_data[0]
+                            s = _6617
+                            t = _6550
+                            t = _6617
+                            u = ext_call.return_data[0]
+                            continue 
+                        require ext_code.size(address(s))
+                        if stor4[address(s)]:
+                            call address(s).withdrawTo(address arg1, uint256 arg2) with:
+                                 gas gas_remaining wei
+                                args address(arg4), u
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            return u
+                        call address(s).0xa9059cbb with:
+                             gas gas_remaining wei
+                            args address(arg4), u
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if ext_call.return_data[0]:
+                            return u
+                else:
+                    if not arg9:
+                        require ext_code.size(registryAddress)
+                        call registryAddress.0xbb34534c with:
+                             gas gas_remaining wei
+                            args 'BancorGasPriceLimit'
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        mem[(32 * arg1.length) + 128] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+                        mem[(32 * arg1.length) + 132] = block.gasprice
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).0x6b4dff1f with:
+                             gas gas_remaining wei
+                            args block.gasprice
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        if 0 < arg1.length:
+                            _187 = mem[128]
+                            mem[(32 * arg1.length) + 132] = 'ContractFeatures'
+                            require ext_code.size(registryAddress)
+                            call registryAddress.0xbb34534c with:
+                                 gas gas_remaining wei
+                                args 'ContractFeatures'
+                            mem[(32 * arg1.length) + 128] = ext_call.return_data[0]
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            idx = 1
+                            s = 0
+                            s = 0
+                            t = 0
+                            t = _187
+                            u = arg2
+                            while idx < arg1.length:
+                                require idx < arg1.length
+                                _3367 = mem[(32 * idx) + 128]
+                                require idx + 1 < arg1.length
+                                _3390 = mem[(32 * idx + 1) + 128]
+                                require ext_code.size(mem[(32 * idx) + 140 len 20])
+                                call mem[(32 * idx) + 140 len 20].0x8da5cb5b with:
+                                     gas gas_remaining wei
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_code.size(address(ext_call.return_data[0]))
+                                call address(ext_call.return_data[0]).0xa5fbf287 with:
+                                     gas gas_remaining wei
+                                    args address(ext_call.return_data[0]), 1
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                if ext_call.return_data[0]:
+                                    require ext_code.size(address(ext_call.return_data[0]))
+                                    call address(ext_call.return_data[0]).conversionWhitelist() with:
+                                         gas gas_remaining wei
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    if address(ext_call.return_data[0]):
+                                        require ext_code.size(address(ext_call.return_data[0]))
+                                        call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                             gas gas_remaining wei
+                                            args address(arg4)
+                                        if not ext_call.success:
+                                            revert with ext_call.return_data[0 len return_data.size]
+                                        require return_data.size >= 32
+                                        require ext_call.return_data[0]
+                                if address(t) != mem[(32 * idx) + 140 len 20]:
+                                    require ext_code.size(address(t))
+                                    call address(t).0xdd62ed3e with:
+                                         gas gas_remaining wei
+                                        args this.address, address(ext_call.return_data[0])
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    if ext_call.return_data[0] < u:
+                                        require ext_code.size(address(t))
+                                        call address(t).0xdd62ed3e with:
+                                             gas gas_remaining wei
+                                            args this.address, address(ext_call.return_data[0])
+                                        if not ext_call.success:
+                                            revert with ext_call.return_data[0 len return_data.size]
+                                        require return_data.size >= 32
+                                        require ext_code.size(address(t))
+                                        if ext_call.return_data[0]:
+                                            call address(t).approve(address arg1, uint256 arg2) with:
+                                                 gas gas_remaining wei
+                                                args address(ext_call.return_data[0]), 0
+                                            if not ext_call.success:
+                                                revert with ext_call.return_data[0 len return_data.size]
+                                            require return_data.size >= 32
+                                            require ext_call.return_data[0]
+                                        call address(t).approve(address arg1, uint256 arg2) with:
+                                             gas gas_remaining wei
+                                            args address(ext_call.return_data[0]), u
+                                        if not ext_call.success:
+                                            revert with ext_call.return_data[0 len return_data.size]
+                                        require return_data.size >= 32
+                                        require ext_call.return_data[0]
+                                mem[(32 * arg1.length) + 132] = address(t)
+                                mem[(32 * arg1.length) + 164] = address(_3390)
+                                mem[(32 * arg1.length) + 196] = u
+                                if idx == arg1.length - 2:
+                                    mem[(32 * arg1.length) + 228] = arg3
+                                    require ext_code.size(address(ext_call.return_data[0]))
+                                    call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                         gas gas_remaining wei
+                                        args address(t), address(_3390), u, arg3
+                                else:
+                                    mem[(32 * arg1.length) + 228] = 1
+                                    require ext_code.size(address(ext_call.return_data[0]))
+                                    call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                         gas gas_remaining wei
+                                        args address(t), address(_3390), u, 1
+                                mem[(32 * arg1.length) + 128] = ext_call.return_data[0]
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                idx = idx + 2
+                                s = ext_call.return_data[0]
+                                s = _3390
+                                t = _3367
+                                t = _3390
+                                u = ext_call.return_data[0]
+                                continue 
+                            require ext_code.size(address(s))
+                            if stor4[address(s)]:
+                                call address(s).withdrawTo(address arg1, uint256 arg2) with:
+                                     gas gas_remaining wei
+                                    args address(arg4), u
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                return u
+                            call address(s).0xa9059cbb with:
+                                 gas gas_remaining wei
+                                args address(arg4), u
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if ext_call.return_data[0]:
+                                return u
+                    else:
+                        mem[(32 * arg1.length) + 264 len floor32(arg1.length)] = call.data[arg1 + 36 len floor32(arg1.length)]
+                        _3343 = sha3(arg5, block.gasprice, arg4, msg.sender, arg2, call.data[arg1 + 36 len floor32(arg1.length)], mem[(32 * arg1.length) + floor32(arg1.length) + 264 len (32 * arg1.length) - floor32(arg1.length)])
+                        require not stor5[arg5][block.gasprice][arg4][msg.sender][arg2][call.data[arg1 + 36 len floor32(arg1.length)]][mem[(32 * arg1.length) + floor32(arg1.length) + 264 len (32 * arg1.length) - floor32(arg1.length)]]
+                        require block.number <= arg5
+                        _3434 = sha3(Mask(224, 32, '\x19Ethereum Signed Message:\n32') >> 32, sha3(arg5, block.gasprice, arg4, msg.sender, arg2, call.data[arg1 + 36 len floor32(arg1.length)], mem[(32 * arg1.length) + floor32(arg1.length) + 264 len (32 * arg1.length) - floor32(arg1.length)]))
+                        mem[(32 * arg1.length) + 192] = arg7
+                        mem[(32 * arg1.length) + 224] = arg8
+                        mem[(32 * arg1.length) + 256] = arg9
+                        signer = erecover(_3434, arg7 << 248, arg8, arg9) 
+                        mem[(32 * arg1.length) + 128] = signer
+                        if not erecover.result:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require address(signer) == signerAddress
+                        stor5[_3343] = 1
+                        if 0 < arg1.length:
+                            mem[(32 * arg1.length) + 164] = 'ContractFeatures'
+                            require ext_code.size(registryAddress)
+                            call registryAddress.0xbb34534c with:
+                                 gas gas_remaining wei
+                                args 'ContractFeatures'
+                            mem[(32 * arg1.length) + 160] = ext_call.return_data[0]
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            idx = 1
+                            s = 0
+                            s = 0
+                            t = 0
+                            t = mem[128]
+                            u = arg2
+                            while idx < arg1.length:
+                                require idx < arg1.length
+                                _6553 = mem[(32 * idx) + 128]
+                                require idx + 1 < arg1.length
+                                _6624 = mem[(32 * idx + 1) + 128]
+                                require ext_code.size(mem[(32 * idx) + 140 len 20])
+                                call mem[(32 * idx) + 140 len 20].0x8da5cb5b with:
+                                     gas gas_remaining wei
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_code.size(address(ext_call.return_data[0]))
+                                call address(ext_call.return_data[0]).0xa5fbf287 with:
+                                     gas gas_remaining wei
+                                    args address(ext_call.return_data[0]), 1
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                if ext_call.return_data[0]:
+                                    require ext_code.size(address(ext_call.return_data[0]))
+                                    call address(ext_call.return_data[0]).conversionWhitelist() with:
+                                         gas gas_remaining wei
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    if address(ext_call.return_data[0]):
+                                        require ext_code.size(address(ext_call.return_data[0]))
+                                        call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                             gas gas_remaining wei
+                                            args address(arg4)
+                                        if not ext_call.success:
+                                            revert with ext_call.return_data[0 len return_data.size]
+                                        require return_data.size >= 32
+                                        require ext_call.return_data[0]
+                                if address(t) != mem[(32 * idx) + 140 len 20]:
+                                    require ext_code.size(address(t))
+                                    call address(t).0xdd62ed3e with:
+                                         gas gas_remaining wei
+                                        args this.address, address(ext_call.return_data[0])
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    if ext_call.return_data[0] < u:
+                                        require ext_code.size(address(t))
+                                        call address(t).0xdd62ed3e with:
+                                             gas gas_remaining wei
+                                            args this.address, address(ext_call.return_data[0])
+                                        if not ext_call.success:
+                                            revert with ext_call.return_data[0 len return_data.size]
+                                        require return_data.size >= 32
+                                        require ext_code.size(address(t))
+                                        if ext_call.return_data[0]:
+                                            call address(t).approve(address arg1, uint256 arg2) with:
+                                                 gas gas_remaining wei
+                                                args address(ext_call.return_data[0]), 0
+                                            if not ext_call.success:
+                                                revert with ext_call.return_data[0 len return_data.size]
+                                            require return_data.size >= 32
+                                            require ext_call.return_data[0]
+                                        call address(t).approve(address arg1, uint256 arg2) with:
+                                             gas gas_remaining wei
+                                            args address(ext_call.return_data[0]), u
+                                        if not ext_call.success:
+                                            revert with ext_call.return_data[0 len return_data.size]
+                                        require return_data.size >= 32
+                                        require ext_call.return_data[0]
+                                mem[(32 * arg1.length) + 164] = address(t)
+                                mem[(32 * arg1.length) + 196] = address(_6624)
+                                mem[(32 * arg1.length) + 228] = u
+                                if idx == arg1.length - 2:
+                                    mem[(32 * arg1.length) + 260] = arg3
+                                    require ext_code.size(address(ext_call.return_data[0]))
+                                    call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                         gas gas_remaining wei
+                                        args address(t), address(_6624), u, arg3
+                                else:
+                                    mem[(32 * arg1.length) + 260] = 1
+                                    require ext_code.size(address(ext_call.return_data[0]))
+                                    call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                         gas gas_remaining wei
+                                        args address(t), address(_6624), u, 1
+                                mem[(32 * arg1.length) + 160] = ext_call.return_data[0]
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                idx = idx + 2
+                                s = ext_call.return_data[0]
+                                s = _6624
+                                t = _6553
+                                t = _6624
+                                u = ext_call.return_data[0]
+                                continue 
+                            require ext_code.size(address(s))
+                            if stor4[address(s)]:
+                                call address(s).withdrawTo(address arg1, uint256 arg2) with:
+                                     gas gas_remaining wei
+                                    args address(arg4), u
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                return u
+                            call address(s).0xa9059cbb with:
+                                 gas gas_remaining wei
+                                args address(arg4), u
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if ext_call.return_data[0]:
+                                return u
+        else:
+            require ext_code.size(mem[140 len 20])
+            call mem[140 len 20].deposit() with:
+               value msg.value wei
+                 gas gas_remaining wei
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require arg1.length > 2
+            require arg1.length <= 21
+            require 1 == bool(arg1.length)
+            if arg7:
+                mem[(32 * arg1.length) + 264 len floor32(arg1.length)] = call.data[arg1 + 36 len floor32(arg1.length)]
+                _3348 = sha3(arg5, block.gasprice, arg4, msg.sender, arg2, call.data[arg1 + 36 len floor32(arg1.length)], mem[(32 * arg1.length) + floor32(arg1.length) + 264 len (32 * arg1.length) - floor32(arg1.length)])
+                require not stor5[arg5][block.gasprice][arg4][msg.sender][arg2][call.data[arg1 + 36 len floor32(arg1.length)]][mem[(32 * arg1.length) + floor32(arg1.length) + 264 len (32 * arg1.length) - floor32(arg1.length)]]
+                require block.number <= arg5
+                _3438 = sha3(Mask(224, 32, '\x19Ethereum Signed Message:\n32') >> 32, sha3(arg5, block.gasprice, arg4, msg.sender, arg2, call.data[arg1 + 36 len floor32(arg1.length)], mem[(32 * arg1.length) + floor32(arg1.length) + 264 len (32 * arg1.length) - floor32(arg1.length)]))
+                mem[(32 * arg1.length) + 192] = arg7
+                mem[(32 * arg1.length) + 224] = arg8
+                mem[(32 * arg1.length) + 256] = arg9
+                signer = erecover(_3438, arg7 << 248, arg8, arg9) 
+                mem[(32 * arg1.length) + 128] = signer
+                if not erecover.result:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require address(signer) == signerAddress
+                stor5[_3348] = 1
+                if 0 < arg1.length:
+                    mem[(32 * arg1.length) + 164] = 'ContractFeatures'
+                    require ext_code.size(registryAddress)
+                    call registryAddress.0xbb34534c with:
+                         gas gas_remaining wei
+                        args 'ContractFeatures'
+                    mem[(32 * arg1.length) + 160] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    idx = 1
+                    s = 0
+                    s = 0
+                    t = 0
+                    t = mem[128]
+                    u = arg2
+                    while idx < arg1.length:
+                        require idx < arg1.length
+                        _6556 = mem[(32 * idx) + 128]
+                        require idx + 1 < arg1.length
+                        _6631 = mem[(32 * idx + 1) + 128]
+                        require ext_code.size(mem[(32 * idx) + 140 len 20])
+                        call mem[(32 * idx) + 140 len 20].0x8da5cb5b with:
+                             gas gas_remaining wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).0xa5fbf287 with:
+                             gas gas_remaining wei
+                            args address(ext_call.return_data[0]), 1
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if ext_call.return_data[0]:
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).conversionWhitelist() with:
+                                 gas gas_remaining wei
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if address(ext_call.return_data[0]):
+                                require ext_code.size(address(ext_call.return_data[0]))
+                                call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                     gas gas_remaining wei
+                                    args address(arg4)
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                        if address(t) != mem[(32 * idx) + 140 len 20]:
+                            require ext_code.size(address(t))
+                            call address(t).0xdd62ed3e with:
+                                 gas gas_remaining wei
+                                args this.address, address(ext_call.return_data[0])
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if ext_call.return_data[0] < u:
+                                require ext_code.size(address(t))
+                                call address(t).0xdd62ed3e with:
+                                     gas gas_remaining wei
+                                    args this.address, address(ext_call.return_data[0])
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_code.size(address(t))
+                                if ext_call.return_data[0]:
+                                    call address(t).approve(address arg1, uint256 arg2) with:
+                                         gas gas_remaining wei
+                                        args address(ext_call.return_data[0]), 0
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    require ext_call.return_data[0]
+                                call address(t).approve(address arg1, uint256 arg2) with:
+                                     gas gas_remaining wei
+                                    args address(ext_call.return_data[0]), u
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                        mem[(32 * arg1.length) + 164] = address(t)
+                        mem[(32 * arg1.length) + 196] = address(_6631)
+                        mem[(32 * arg1.length) + 228] = u
+                        if idx == arg1.length - 2:
+                            mem[(32 * arg1.length) + 260] = arg3
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                 gas gas_remaining wei
+                                args address(t), address(_6631), u, arg3
+                        else:
+                            mem[(32 * arg1.length) + 260] = 1
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                 gas gas_remaining wei
+                                args address(t), address(_6631), u, 1
+                        mem[(32 * arg1.length) + 160] = ext_call.return_data[0]
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        idx = idx + 2
+                        s = ext_call.return_data[0]
+                        s = _6631
+                        t = _6556
+                        t = _6631
+                        u = ext_call.return_data[0]
+                        continue 
+                    require ext_code.size(address(s))
+                    if stor4[address(s)]:
+                        call address(s).withdrawTo(address arg1, uint256 arg2) with:
+                             gas gas_remaining wei
+                            args address(arg4), u
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        return u
+                    call address(s).0xa9059cbb with:
+                         gas gas_remaining wei
+                        args address(arg4), u
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    if ext_call.return_data[0]:
+                        return u
+            else:
+                if arg8:
+                    mem[(32 * arg1.length) + 264 len floor32(arg1.length)] = call.data[arg1 + 36 len floor32(arg1.length)]
+                    _3352 = sha3(arg5, block.gasprice, arg4, msg.sender, arg2, call.data[arg1 + 36 len floor32(arg1.length)], mem[(32 * arg1.length) + floor32(arg1.length) + 264 len (32 * arg1.length) - floor32(arg1.length)])
+                    require not stor5[arg5][block.gasprice][arg4][msg.sender][arg2][call.data[arg1 + 36 len floor32(arg1.length)]][mem[(32 * arg1.length) + floor32(arg1.length) + 264 len (32 * arg1.length) - floor32(arg1.length)]]
+                    require block.number <= arg5
+                    _3442 = sha3(Mask(224, 32, '\x19Ethereum Signed Message:\n32') >> 32, sha3(arg5, block.gasprice, arg4, msg.sender, arg2, call.data[arg1 + 36 len floor32(arg1.length)], mem[(32 * arg1.length) + floor32(arg1.length) + 264 len (32 * arg1.length) - floor32(arg1.length)]))
+                    mem[(32 * arg1.length) + 192] = arg7
+                    mem[(32 * arg1.length) + 224] = arg8
+                    mem[(32 * arg1.length) + 256] = arg9
+                    signer = erecover(_3442, arg7 << 248, arg8, arg9) 
+                    mem[(32 * arg1.length) + 128] = signer
+                    if not erecover.result:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require address(signer) == signerAddress
+                    stor5[_3352] = 1
+                    if 0 < arg1.length:
+                        mem[(32 * arg1.length) + 164] = 'ContractFeatures'
+                        require ext_code.size(registryAddress)
+                        call registryAddress.0xbb34534c with:
+                             gas gas_remaining wei
+                            args 'ContractFeatures'
+                        mem[(32 * arg1.length) + 160] = ext_call.return_data[0]
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        idx = 1
+                        s = 0
+                        s = 0
+                        t = 0
+                        t = mem[128]
+                        u = arg2
+                        while idx < arg1.length:
+                            require idx < arg1.length
+                            _6559 = mem[(32 * idx) + 128]
+                            require idx + 1 < arg1.length
+                            _6638 = mem[(32 * idx + 1) + 128]
+                            require ext_code.size(mem[(32 * idx) + 140 len 20])
+                            call mem[(32 * idx) + 140 len 20].0x8da5cb5b with:
+                                 gas gas_remaining wei
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).0xa5fbf287 with:
+                                 gas gas_remaining wei
+                                args address(ext_call.return_data[0]), 1
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if ext_call.return_data[0]:
+                                require ext_code.size(address(ext_call.return_data[0]))
+                                call address(ext_call.return_data[0]).conversionWhitelist() with:
+                                     gas gas_remaining wei
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                if address(ext_call.return_data[0]):
+                                    require ext_code.size(address(ext_call.return_data[0]))
+                                    call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                         gas gas_remaining wei
+                                        args address(arg4)
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    require ext_call.return_data[0]
+                            if address(t) != mem[(32 * idx) + 140 len 20]:
+                                require ext_code.size(address(t))
+                                call address(t).0xdd62ed3e with:
+                                     gas gas_remaining wei
+                                    args this.address, address(ext_call.return_data[0])
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                if ext_call.return_data[0] < u:
+                                    require ext_code.size(address(t))
+                                    call address(t).0xdd62ed3e with:
+                                         gas gas_remaining wei
+                                        args this.address, address(ext_call.return_data[0])
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    require ext_code.size(address(t))
+                                    if ext_call.return_data[0]:
+                                        call address(t).approve(address arg1, uint256 arg2) with:
+                                             gas gas_remaining wei
+                                            args address(ext_call.return_data[0]), 0
+                                        if not ext_call.success:
+                                            revert with ext_call.return_data[0 len return_data.size]
+                                        require return_data.size >= 32
+                                        require ext_call.return_data[0]
+                                    call address(t).approve(address arg1, uint256 arg2) with:
+                                         gas gas_remaining wei
+                                        args address(ext_call.return_data[0]), u
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    require ext_call.return_data[0]
+                            mem[(32 * arg1.length) + 164] = address(t)
+                            mem[(32 * arg1.length) + 196] = address(_6638)
+                            mem[(32 * arg1.length) + 228] = u
+                            if idx == arg1.length - 2:
+                                mem[(32 * arg1.length) + 260] = arg3
+                                require ext_code.size(address(ext_call.return_data[0]))
+                                call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                     gas gas_remaining wei
+                                    args address(t), address(_6638), u, arg3
+                            else:
+                                mem[(32 * arg1.length) + 260] = 1
+                                require ext_code.size(address(ext_call.return_data[0]))
+                                call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                     gas gas_remaining wei
+                                    args address(t), address(_6638), u, 1
+                            mem[(32 * arg1.length) + 160] = ext_call.return_data[0]
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            idx = idx + 2
+                            s = ext_call.return_data[0]
+                            s = _6638
+                            t = _6559
+                            t = _6638
+                            u = ext_call.return_data[0]
+                            continue 
+                        require ext_code.size(address(s))
+                        if stor4[address(s)]:
+                            call address(s).withdrawTo(address arg1, uint256 arg2) with:
+                                 gas gas_remaining wei
+                                args address(arg4), u
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            return u
+                        call address(s).0xa9059cbb with:
+                             gas gas_remaining wei
+                            args address(arg4), u
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if ext_call.return_data[0]:
+                            return u
+                else:
+                    if not arg9:
+                        require ext_code.size(registryAddress)
+                        call registryAddress.0xbb34534c with:
+                             gas gas_remaining wei
+                            args 'BancorGasPriceLimit'
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        mem[(32 * arg1.length) + 128] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+                        mem[(32 * arg1.length) + 132] = block.gasprice
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).0x6b4dff1f with:
+                             gas gas_remaining wei
+                            args block.gasprice
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        if 0 < arg1.length:
+                            _243 = mem[128]
+                            mem[(32 * arg1.length) + 132] = 'ContractFeatures'
+                            require ext_code.size(registryAddress)
+                            call registryAddress.0xbb34534c with:
+                                 gas gas_remaining wei
+                                args 'ContractFeatures'
+                            mem[(32 * arg1.length) + 128] = ext_call.return_data[0]
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            idx = 1
+                            s = 0
+                            s = 0
+                            t = 0
+                            t = _243
+                            u = arg2
+                            while idx < arg1.length:
+                                require idx < arg1.length
+                                _3370 = mem[(32 * idx) + 128]
+                                require idx + 1 < arg1.length
+                                _3397 = mem[(32 * idx + 1) + 128]
+                                require ext_code.size(mem[(32 * idx) + 140 len 20])
+                                call mem[(32 * idx) + 140 len 20].0x8da5cb5b with:
+                                     gas gas_remaining wei
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_code.size(address(ext_call.return_data[0]))
+                                call address(ext_call.return_data[0]).0xa5fbf287 with:
+                                     gas gas_remaining wei
+                                    args address(ext_call.return_data[0]), 1
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                if ext_call.return_data[0]:
+                                    require ext_code.size(address(ext_call.return_data[0]))
+                                    call address(ext_call.return_data[0]).conversionWhitelist() with:
+                                         gas gas_remaining wei
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    if address(ext_call.return_data[0]):
+                                        require ext_code.size(address(ext_call.return_data[0]))
+                                        call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                             gas gas_remaining wei
+                                            args address(arg4)
+                                        if not ext_call.success:
+                                            revert with ext_call.return_data[0 len return_data.size]
+                                        require return_data.size >= 32
+                                        require ext_call.return_data[0]
+                                if address(t) != mem[(32 * idx) + 140 len 20]:
+                                    require ext_code.size(address(t))
+                                    call address(t).0xdd62ed3e with:
+                                         gas gas_remaining wei
+                                        args this.address, address(ext_call.return_data[0])
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    if ext_call.return_data[0] < u:
+                                        require ext_code.size(address(t))
+                                        call address(t).0xdd62ed3e with:
+                                             gas gas_remaining wei
+                                            args this.address, address(ext_call.return_data[0])
+                                        if not ext_call.success:
+                                            revert with ext_call.return_data[0 len return_data.size]
+                                        require return_data.size >= 32
+                                        require ext_code.size(address(t))
+                                        if ext_call.return_data[0]:
+                                            call address(t).approve(address arg1, uint256 arg2) with:
+                                                 gas gas_remaining wei
+                                                args address(ext_call.return_data[0]), 0
+                                            if not ext_call.success:
+                                                revert with ext_call.return_data[0 len return_data.size]
+                                            require return_data.size >= 32
+                                            require ext_call.return_data[0]
+                                        call address(t).approve(address arg1, uint256 arg2) with:
+                                             gas gas_remaining wei
+                                            args address(ext_call.return_data[0]), u
+                                        if not ext_call.success:
+                                            revert with ext_call.return_data[0 len return_data.size]
+                                        require return_data.size >= 32
+                                        require ext_call.return_data[0]
+                                mem[(32 * arg1.length) + 132] = address(t)
+                                mem[(32 * arg1.length) + 164] = address(_3397)
+                                mem[(32 * arg1.length) + 196] = u
+                                if idx == arg1.length - 2:
+                                    mem[(32 * arg1.length) + 228] = arg3
+                                    require ext_code.size(address(ext_call.return_data[0]))
+                                    call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                         gas gas_remaining wei
+                                        args address(t), address(_3397), u, arg3
+                                else:
+                                    mem[(32 * arg1.length) + 228] = 1
+                                    require ext_code.size(address(ext_call.return_data[0]))
+                                    call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                         gas gas_remaining wei
+                                        args address(t), address(_3397), u, 1
+                                mem[(32 * arg1.length) + 128] = ext_call.return_data[0]
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                idx = idx + 2
+                                s = ext_call.return_data[0]
+                                s = _3397
+                                t = _3370
+                                t = _3397
+                                u = ext_call.return_data[0]
+                                continue 
+                            require ext_code.size(address(s))
+                            if stor4[address(s)]:
+                                call address(s).withdrawTo(address arg1, uint256 arg2) with:
+                                     gas gas_remaining wei
+                                    args address(arg4), u
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                return u
+                            call address(s).0xa9059cbb with:
+                                 gas gas_remaining wei
+                                args address(arg4), u
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if ext_call.return_data[0]:
+                                return u
+                    else:
+                        mem[(32 * arg1.length) + 264 len floor32(arg1.length)] = call.data[arg1 + 36 len floor32(arg1.length)]
+                        _3356 = sha3(arg5, block.gasprice, arg4, msg.sender, arg2, call.data[arg1 + 36 len floor32(arg1.length)], mem[(32 * arg1.length) + floor32(arg1.length) + 264 len (32 * arg1.length) - floor32(arg1.length)])
+                        require not stor5[arg5][block.gasprice][arg4][msg.sender][arg2][call.data[arg1 + 36 len floor32(arg1.length)]][mem[(32 * arg1.length) + floor32(arg1.length) + 264 len (32 * arg1.length) - floor32(arg1.length)]]
+                        require block.number <= arg5
+                        _3446 = sha3(Mask(224, 32, '\x19Ethereum Signed Message:\n32') >> 32, sha3(arg5, block.gasprice, arg4, msg.sender, arg2, call.data[arg1 + 36 len floor32(arg1.length)], mem[(32 * arg1.length) + floor32(arg1.length) + 264 len (32 * arg1.length) - floor32(arg1.length)]))
+                        mem[(32 * arg1.length) + 192] = arg7
+                        mem[(32 * arg1.length) + 224] = arg8
+                        mem[(32 * arg1.length) + 256] = arg9
+                        signer = erecover(_3446, arg7 << 248, arg8, arg9) 
+                        mem[(32 * arg1.length) + 128] = signer
+                        if not erecover.result:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require address(signer) == signerAddress
+                        stor5[_3356] = 1
+                        if 0 < arg1.length:
+                            mem[(32 * arg1.length) + 164] = 'ContractFeatures'
+                            require ext_code.size(registryAddress)
+                            call registryAddress.0xbb34534c with:
+                                 gas gas_remaining wei
+                                args 'ContractFeatures'
+                            mem[(32 * arg1.length) + 160] = ext_call.return_data[0]
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            idx = 1
+                            s = 0
+                            s = 0
+                            t = 0
+                            t = mem[128]
+                            u = arg2
+                            while idx < arg1.length:
+                                require idx < arg1.length
+                                _6562 = mem[(32 * idx) + 128]
+                                require idx + 1 < arg1.length
+                                _6645 = mem[(32 * idx + 1) + 128]
+                                require ext_code.size(mem[(32 * idx) + 140 len 20])
+                                call mem[(32 * idx) + 140 len 20].0x8da5cb5b with:
+                                     gas gas_remaining wei
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_code.size(address(ext_call.return_data[0]))
+                                call address(ext_call.return_data[0]).0xa5fbf287 with:
+                                     gas gas_remaining wei
+                                    args address(ext_call.return_data[0]), 1
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                if ext_call.return_data[0]:
+                                    require ext_code.size(address(ext_call.return_data[0]))
+                                    call address(ext_call.return_data[0]).conversionWhitelist() with:
+                                         gas gas_remaining wei
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    if address(ext_call.return_data[0]):
+                                        require ext_code.size(address(ext_call.return_data[0]))
+                                        call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                             gas gas_remaining wei
+                                            args address(arg4)
+                                        if not ext_call.success:
+                                            revert with ext_call.return_data[0 len return_data.size]
+                                        require return_data.size >= 32
+                                        require ext_call.return_data[0]
+                                if address(t) != mem[(32 * idx) + 140 len 20]:
+                                    require ext_code.size(address(t))
+                                    call address(t).0xdd62ed3e with:
+                                         gas gas_remaining wei
+                                        args this.address, address(ext_call.return_data[0])
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    if ext_call.return_data[0] < u:
+                                        require ext_code.size(address(t))
+                                        call address(t).0xdd62ed3e with:
+                                             gas gas_remaining wei
+                                            args this.address, address(ext_call.return_data[0])
+                                        if not ext_call.success:
+                                            revert with ext_call.return_data[0 len return_data.size]
+                                        require return_data.size >= 32
+                                        require ext_code.size(address(t))
+                                        if ext_call.return_data[0]:
+                                            call address(t).approve(address arg1, uint256 arg2) with:
+                                                 gas gas_remaining wei
+                                                args address(ext_call.return_data[0]), 0
+                                            if not ext_call.success:
+                                                revert with ext_call.return_data[0 len return_data.size]
+                                            require return_data.size >= 32
+                                            require ext_call.return_data[0]
+                                        call address(t).approve(address arg1, uint256 arg2) with:
+                                             gas gas_remaining wei
+                                            args address(ext_call.return_data[0]), u
+                                        if not ext_call.success:
+                                            revert with ext_call.return_data[0 len return_data.size]
+                                        require return_data.size >= 32
+                                        require ext_call.return_data[0]
+                                mem[(32 * arg1.length) + 164] = address(t)
+                                mem[(32 * arg1.length) + 196] = address(_6645)
+                                mem[(32 * arg1.length) + 228] = u
+                                if idx == arg1.length - 2:
+                                    mem[(32 * arg1.length) + 260] = arg3
+                                    require ext_code.size(address(ext_call.return_data[0]))
+                                    call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                         gas gas_remaining wei
+                                        args address(t), address(_6645), u, arg3
+                                else:
+                                    mem[(32 * arg1.length) + 260] = 1
+                                    require ext_code.size(address(ext_call.return_data[0]))
+                                    call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                         gas gas_remaining wei
+                                        args address(t), address(_6645), u, 1
+                                mem[(32 * arg1.length) + 160] = ext_call.return_data[0]
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                idx = idx + 2
+                                s = ext_call.return_data[0]
+                                s = _6645
+                                t = _6562
+                                t = _6645
+                                u = ext_call.return_data[0]
+                                continue 
+                            require ext_code.size(address(s))
+                            if stor4[address(s)]:
+                                call address(s).withdrawTo(address arg1, uint256 arg2) with:
+                                     gas gas_remaining wei
+                                    args address(arg4), u
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                return u
+                            call address(s).0xa9059cbb with:
+                                 gas gas_remaining wei
+                                args address(arg4), u
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if ext_call.return_data[0]:
+                                return u
+    revert
+}
+
+function convertForMultiple(address[] arg1, uint256[] arg2, uint256[] arg3, uint256[] arg4, address arg5) payable {
+    mem[96] = arg1.length
+    mem[128 len 32 * arg1.length] = call.data[arg1 + 36 len 32 * arg1.length]
+    mem[(32 * arg1.length) + 128] = arg2.length
+    mem[(32 * arg1.length) + 160 len 32 * arg2.length] = call.data[arg2 + 36 len 32 * arg2.length]
+    mem[(32 * arg2.length) + (32 * arg1.length) + 160] = arg3.length
+    mem[(32 * arg2.length) + (32 * arg1.length) + 192 len 32 * arg3.length] = call.data[arg3 + 36 len 32 * arg3.length]
+    mem[64] = (32 * arg4.length) + (32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + 224
+    mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + 192] = arg4.length
+    mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + 224 len 32 * arg4.length] = call.data[arg4 + 36 len 32 * arg4.length]
+    s = 0
+    s = 0
+    s = 96
+    idx = 0
+    s = 0
+    s = 0
+    while idx < arg2.length:
+        if idx == mem[(32 * arg1.length) + 128] - 1:
+            _10031 = mem[96]
+            require idx < mem[(32 * arg1.length) + 128]
+            _10038 = mem[(32 * idx) + (32 * arg1.length) + 160]
+            _10039 = mem[64]
+            mem[mem[64]] = mem[96] - mem[(32 * idx) + (32 * arg1.length) + 160]
+            mem[64] = mem[64] + (32 * _10031 - _10038) + 32
+            if not _10031 - _10038:
+                require idx < mem[(32 * arg1.length) + 128]
+                t = mem[(32 * idx) + (32 * arg1.length) + 160]
+                while t < _10031:
+                    require t < mem[96]
+                    require idx < mem[(32 * arg1.length) + 128]
+                    require t - mem[(32 * idx) + (32 * arg1.length) + 160] < mem[_10039]
+                    mem[_10039 + (32 * t - mem[(32 * idx) + (32 * arg1.length) + 160]) + 32] = mem[(32 * t) + 140 len 20]
+                    t = t + 1
+                    continue 
+                require 0 < mem[_10039]
+                _20063 = mem[_10039 + 32]
+                if 0 == msg.value:
+                    if msg.value <= 0:
+                        require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                        _20111 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                        require idx < mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                        _20127 = mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 224]
+                        require mem[_10039] > 2
+                        require mem[_10039] <= 21
+                        require 1 == bool(mem[_10039])
+                        require ext_code.size(registryAddress)
+                        call registryAddress.0xbb34534c with:
+                             gas gas_remaining wei
+                            args 'BancorGasPriceLimit'
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        mem[mem[64]] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+                        mem[mem[64] + 4] = block.gasprice
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).0x6b4dff1f with:
+                             gas gas_remaining wei
+                            args block.gasprice
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require 0 < mem[_10039]
+                        _20703 = mem[_10039 + 32]
+                        mem[mem[64] + 4] = 'ContractFeatures'
+                        require ext_code.size(registryAddress)
+                        call registryAddress.0xbb34534c with:
+                             gas gas_remaining wei
+                            args 'ContractFeatures'
+                        mem[mem[64]] = ext_call.return_data[0]
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        _20856 = mem[_10039]
+                        t = 1
+                        u = 0
+                        u = 0
+                        v = 0
+                        v = _20703
+                        w = _20111
+                        while t < _20856:
+                            require t < mem[_10039]
+                            _30104 = mem[(32 * t) + _10039 + 32]
+                            require t + 1 < mem[_10039]
+                            _30251 = mem[(32 * t + 1) + _10039 + 32]
+                            require ext_code.size(mem[(32 * t) + _10039 + 44 len 20])
+                            call mem[(32 * t) + _10039 + 44 len 20].0x8da5cb5b with:
+                                 gas gas_remaining wei
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).0xa5fbf287 with:
+                                 gas gas_remaining wei
+                                args address(ext_call.return_data[0]), 1
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if ext_call.return_data[0]:
+                                require ext_code.size(address(ext_call.return_data[0]))
+                                call address(ext_call.return_data[0]).conversionWhitelist() with:
+                                     gas gas_remaining wei
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                if address(ext_call.return_data[0]):
+                                    require ext_code.size(address(ext_call.return_data[0]))
+                                    call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                         gas gas_remaining wei
+                                        args address(arg5)
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    require ext_call.return_data[0]
+                            if address(v) != mem[(32 * t) + _10039 + 44 len 20]:
+                                require ext_code.size(address(v))
+                                call address(v).0xdd62ed3e with:
+                                     gas gas_remaining wei
+                                    args this.address, address(ext_call.return_data[0])
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                if ext_call.return_data[0] < w:
+                                    require ext_code.size(address(v))
+                                    call address(v).0xdd62ed3e with:
+                                         gas gas_remaining wei
+                                        args this.address, address(ext_call.return_data[0])
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    require ext_code.size(address(v))
+                                    if ext_call.return_data[0]:
+                                        call address(v).approve(address arg1, uint256 arg2) with:
+                                             gas gas_remaining wei
+                                            args address(ext_call.return_data[0]), 0
+                                        if not ext_call.success:
+                                            revert with ext_call.return_data[0 len return_data.size]
+                                        require return_data.size >= 32
+                                        require ext_call.return_data[0]
+                                    call address(v).approve(address arg1, uint256 arg2) with:
+                                         gas gas_remaining wei
+                                        args address(ext_call.return_data[0]), w
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    require ext_call.return_data[0]
+                            mem[mem[64] + 4] = address(v)
+                            mem[mem[64] + 36] = address(_30251)
+                            mem[mem[64] + 68] = w
+                            if t == _20856 - 2:
+                                mem[mem[64] + 100] = _20127
+                                require ext_code.size(address(ext_call.return_data[0]))
+                                call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                     gas gas_remaining wei
+                                    args address(v), address(_30251), w, _20127
+                            else:
+                                mem[mem[64] + 100] = 1
+                                require ext_code.size(address(ext_call.return_data[0]))
+                                call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                     gas gas_remaining wei
+                                    args address(v), address(_30251), w, 1
+                            mem[mem[64]] = ext_call.return_data[0]
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            t = t + 2
+                            u = ext_call.return_data[0]
+                            u = _30251
+                            v = _30104
+                            v = _30251
+                            w = ext_call.return_data[0]
+                            continue 
+                        mem[0] = address(u)
+                        mem[32] = 4
+                        if stor4[address(u)]:
+                            mem[mem[64]] = 0x205c287800000000000000000000000000000000000000000000000000000000
+                            mem[mem[64] + 4] = arg5
+                            mem[mem[64] + 36] = w
+                            require ext_code.size(address(u))
+                            call address(u).withdrawTo(address arg1, uint256 arg2) with:
+                                 gas gas_remaining wei
+                                args address(arg5), w
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                        else:
+                            mem[mem[64] + 4] = arg5
+                            mem[mem[64] + 36] = w
+                            require ext_code.size(address(u))
+                            call address(u).0xa9059cbb with:
+                                 gas gas_remaining wei
+                                args address(arg5), w
+                            mem[mem[64]] = ext_call.return_data[0]
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                        require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                        mem[(32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 192] = w
+                        s = _20063
+                        s = _10031
+                        s = _10039
+                        idx = idx + 1
+                        s = _10031
+                        s = s
+                        continue 
+                    mem[0] = mem[_10039 + 44 len 20]
+                    mem[32] = 4
+                    require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                    if not stor4[mem[0]]:
+                        _20128 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                        require idx < mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                        _20160 = mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 224]
+                        require mem[_10039] > 2
+                        require mem[_10039] <= 21
+                        require 1 == bool(mem[_10039])
+                        require ext_code.size(registryAddress)
+                        call registryAddress.0xbb34534c with:
+                             gas gas_remaining wei
+                            args 'BancorGasPriceLimit'
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        mem[mem[64]] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+                        mem[mem[64] + 4] = block.gasprice
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).0x6b4dff1f with:
+                             gas gas_remaining wei
+                            args block.gasprice
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require 0 < mem[_10039]
+                        _20753 = mem[_10039 + 32]
+                        mem[mem[64] + 4] = 'ContractFeatures'
+                        require ext_code.size(registryAddress)
+                        call registryAddress.0xbb34534c with:
+                             gas gas_remaining wei
+                            args 'ContractFeatures'
+                        mem[mem[64]] = ext_call.return_data[0]
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        _20908 = mem[_10039]
+                        t = 1
+                        u = 0
+                        u = 0
+                        v = 0
+                        v = _20753
+                        w = _20128
+                        while t < _20908:
+                            require t < mem[_10039]
+                            _30107 = mem[(32 * t) + _10039 + 32]
+                            require t + 1 < mem[_10039]
+                            _30258 = mem[(32 * t + 1) + _10039 + 32]
+                            require ext_code.size(mem[(32 * t) + _10039 + 44 len 20])
+                            call mem[(32 * t) + _10039 + 44 len 20].0x8da5cb5b with:
+                                 gas gas_remaining wei
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).0xa5fbf287 with:
+                                 gas gas_remaining wei
+                                args address(ext_call.return_data[0]), 1
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if ext_call.return_data[0]:
+                                require ext_code.size(address(ext_call.return_data[0]))
+                                call address(ext_call.return_data[0]).conversionWhitelist() with:
+                                     gas gas_remaining wei
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                if address(ext_call.return_data[0]):
+                                    require ext_code.size(address(ext_call.return_data[0]))
+                                    call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                         gas gas_remaining wei
+                                        args address(arg5)
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    require ext_call.return_data[0]
+                            if address(v) != mem[(32 * t) + _10039 + 44 len 20]:
+                                require ext_code.size(address(v))
+                                call address(v).0xdd62ed3e with:
+                                     gas gas_remaining wei
+                                    args this.address, address(ext_call.return_data[0])
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                if ext_call.return_data[0] < w:
+                                    require ext_code.size(address(v))
+                                    call address(v).0xdd62ed3e with:
+                                         gas gas_remaining wei
+                                        args this.address, address(ext_call.return_data[0])
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    require ext_code.size(address(v))
+                                    if ext_call.return_data[0]:
+                                        call address(v).approve(address arg1, uint256 arg2) with:
+                                             gas gas_remaining wei
+                                            args address(ext_call.return_data[0]), 0
+                                        if not ext_call.success:
+                                            revert with ext_call.return_data[0 len return_data.size]
+                                        require return_data.size >= 32
+                                        require ext_call.return_data[0]
+                                    call address(v).approve(address arg1, uint256 arg2) with:
+                                         gas gas_remaining wei
+                                        args address(ext_call.return_data[0]), w
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    require ext_call.return_data[0]
+                            mem[mem[64] + 4] = address(v)
+                            mem[mem[64] + 36] = address(_30258)
+                            mem[mem[64] + 68] = w
+                            if t == _20908 - 2:
+                                mem[mem[64] + 100] = _20160
+                                require ext_code.size(address(ext_call.return_data[0]))
+                                call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                     gas gas_remaining wei
+                                    args address(v), address(_30258), w, _20160
+                            else:
+                                mem[mem[64] + 100] = 1
+                                require ext_code.size(address(ext_call.return_data[0]))
+                                call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                     gas gas_remaining wei
+                                    args address(v), address(_30258), w, 1
+                            mem[mem[64]] = ext_call.return_data[0]
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            t = t + 2
+                            u = ext_call.return_data[0]
+                            u = _30258
+                            v = _30107
+                            v = _30258
+                            w = ext_call.return_data[0]
+                            continue 
+                        mem[0] = address(u)
+                        mem[32] = 4
+                        if stor4[address(u)]:
+                            mem[mem[64]] = 0x205c287800000000000000000000000000000000000000000000000000000000
+                            mem[mem[64] + 4] = arg5
+                            mem[mem[64] + 36] = w
+                            require ext_code.size(address(u))
+                            call address(u).withdrawTo(address arg1, uint256 arg2) with:
+                                 gas gas_remaining wei
+                                args address(arg5), w
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                        else:
+                            mem[mem[64] + 4] = arg5
+                            mem[mem[64] + 36] = w
+                            require ext_code.size(address(u))
+                            call address(u).0xa9059cbb with:
+                                 gas gas_remaining wei
+                                args address(arg5), w
+                            mem[mem[64]] = ext_call.return_data[0]
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                        require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                        mem[(32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 192] = w
+                        s = _20063
+                        s = _10031
+                        s = _10039
+                        idx = idx + 1
+                        s = _10031
+                        s = s
+                        continue 
+                    _20130 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                    mem[mem[64]] = 0xd0e30db000000000000000000000000000000000000000000000000000000000
+                    require ext_code.size(address(_20063))
+                    call address(_20063).deposit() with:
+                       value _20130 wei
+                         gas gas_remaining wei
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                    _20228 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                    require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                    _20348 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                    require idx < mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                    _20391 = mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 224]
+                    require mem[_10039] > 2
+                    require mem[_10039] <= 21
+                    require 1 == bool(mem[_10039])
+                    require ext_code.size(registryAddress)
+                    call registryAddress.0xbb34534c with:
+                         gas gas_remaining wei
+                        args 'BancorGasPriceLimit'
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    mem[mem[64]] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+                    mem[mem[64] + 4] = block.gasprice
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).0x6b4dff1f with:
+                         gas gas_remaining wei
+                        args block.gasprice
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require 0 < mem[_10039]
+                    _20976 = mem[_10039 + 32]
+                    mem[mem[64] + 4] = 'ContractFeatures'
+                    require ext_code.size(registryAddress)
+                    call registryAddress.0xbb34534c with:
+                         gas gas_remaining wei
+                        args 'ContractFeatures'
+                    mem[mem[64]] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    _21202 = mem[_10039]
+                    t = 1
+                    u = 0
+                    u = 0
+                    v = 0
+                    v = _20976
+                    w = _20348
+                    while t < _21202:
+                        require t < mem[_10039]
+                        _30110 = mem[(32 * t) + _10039 + 32]
+                        require t + 1 < mem[_10039]
+                        _30265 = mem[(32 * t + 1) + _10039 + 32]
+                        require ext_code.size(mem[(32 * t) + _10039 + 44 len 20])
+                        call mem[(32 * t) + _10039 + 44 len 20].0x8da5cb5b with:
+                             gas gas_remaining wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).0xa5fbf287 with:
+                             gas gas_remaining wei
+                            args address(ext_call.return_data[0]), 1
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if ext_call.return_data[0]:
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).conversionWhitelist() with:
+                                 gas gas_remaining wei
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if address(ext_call.return_data[0]):
+                                require ext_code.size(address(ext_call.return_data[0]))
+                                call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                     gas gas_remaining wei
+                                    args address(arg5)
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                        if address(v) != mem[(32 * t) + _10039 + 44 len 20]:
+                            require ext_code.size(address(v))
+                            call address(v).0xdd62ed3e with:
+                                 gas gas_remaining wei
+                                args this.address, address(ext_call.return_data[0])
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if ext_call.return_data[0] < w:
+                                require ext_code.size(address(v))
+                                call address(v).0xdd62ed3e with:
+                                     gas gas_remaining wei
+                                    args this.address, address(ext_call.return_data[0])
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_code.size(address(v))
+                                if ext_call.return_data[0]:
+                                    call address(v).approve(address arg1, uint256 arg2) with:
+                                         gas gas_remaining wei
+                                        args address(ext_call.return_data[0]), 0
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    require ext_call.return_data[0]
+                                call address(v).approve(address arg1, uint256 arg2) with:
+                                     gas gas_remaining wei
+                                    args address(ext_call.return_data[0]), w
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                        mem[mem[64] + 4] = address(v)
+                        mem[mem[64] + 36] = address(_30265)
+                        mem[mem[64] + 68] = w
+                        if t == _21202 - 2:
+                            mem[mem[64] + 100] = _20391
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                 gas gas_remaining wei
+                                args address(v), address(_30265), w, _20391
+                        else:
+                            mem[mem[64] + 100] = 1
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                 gas gas_remaining wei
+                                args address(v), address(_30265), w, 1
+                        mem[mem[64]] = ext_call.return_data[0]
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        t = t + 2
+                        u = ext_call.return_data[0]
+                        u = _30265
+                        v = _30110
+                        v = _30265
+                        w = ext_call.return_data[0]
+                        continue 
+                    mem[0] = address(u)
+                    mem[32] = 4
+                    if stor4[address(u)]:
+                        mem[mem[64]] = 0x205c287800000000000000000000000000000000000000000000000000000000
+                        mem[mem[64] + 4] = arg5
+                        mem[mem[64] + 36] = w
+                        require ext_code.size(address(u))
+                        call address(u).withdrawTo(address arg1, uint256 arg2) with:
+                             gas gas_remaining wei
+                            args address(arg5), w
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                    else:
+                        mem[mem[64] + 4] = arg5
+                        mem[mem[64] + 36] = w
+                        require ext_code.size(address(u))
+                        call address(u).0xa9059cbb with:
+                             gas gas_remaining wei
+                            args address(arg5), w
+                        mem[mem[64]] = ext_call.return_data[0]
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_call.return_data[0]
+                    require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                    mem[(32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 192] = w
+                    s = _20063
+                    s = _10031
+                    s = _10039
+                    idx = idx + 1
+                    s = _10031
+                    s = s + _20228
+                    continue 
+                require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                mem[0] = mem[_10039 + 44 len 20]
+                mem[32] = 4
+                if mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192] > msg.value:
+                    require not stor4[mem[0]]
+                    if msg.value <= 0:
+                        require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                        _20182 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                        require idx < mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                        _20229 = mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 224]
+                        require mem[_10039] > 2
+                        require mem[_10039] <= 21
+                        require 1 == bool(mem[_10039])
+                        require ext_code.size(registryAddress)
+                        call registryAddress.0xbb34534c with:
+                             gas gas_remaining wei
+                            args 'BancorGasPriceLimit'
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        mem[mem[64]] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+                        mem[mem[64] + 4] = block.gasprice
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).0x6b4dff1f with:
+                             gas gas_remaining wei
+                            args block.gasprice
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require 0 < mem[_10039]
+                        _20824 = mem[_10039 + 32]
+                        mem[mem[64] + 4] = 'ContractFeatures'
+                        require ext_code.size(registryAddress)
+                        call registryAddress.0xbb34534c with:
+                             gas gas_remaining wei
+                            args 'ContractFeatures'
+                        mem[mem[64]] = ext_call.return_data[0]
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        _21018 = mem[_10039]
+                        t = 1
+                        u = 0
+                        u = 0
+                        v = 0
+                        v = _20824
+                        w = _20182
+                        while t < _21018:
+                            require t < mem[_10039]
+                            _30113 = mem[(32 * t) + _10039 + 32]
+                            require t + 1 < mem[_10039]
+                            _30272 = mem[(32 * t + 1) + _10039 + 32]
+                            require ext_code.size(mem[(32 * t) + _10039 + 44 len 20])
+                            call mem[(32 * t) + _10039 + 44 len 20].0x8da5cb5b with:
+                                 gas gas_remaining wei
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).0xa5fbf287 with:
+                                 gas gas_remaining wei
+                                args address(ext_call.return_data[0]), 1
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if ext_call.return_data[0]:
+                                require ext_code.size(address(ext_call.return_data[0]))
+                                call address(ext_call.return_data[0]).conversionWhitelist() with:
+                                     gas gas_remaining wei
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                if address(ext_call.return_data[0]):
+                                    require ext_code.size(address(ext_call.return_data[0]))
+                                    call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                         gas gas_remaining wei
+                                        args address(arg5)
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    require ext_call.return_data[0]
+                            if address(v) != mem[(32 * t) + _10039 + 44 len 20]:
+                                require ext_code.size(address(v))
+                                call address(v).0xdd62ed3e with:
+                                     gas gas_remaining wei
+                                    args this.address, address(ext_call.return_data[0])
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                if ext_call.return_data[0] < w:
+                                    require ext_code.size(address(v))
+                                    call address(v).0xdd62ed3e with:
+                                         gas gas_remaining wei
+                                        args this.address, address(ext_call.return_data[0])
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    require ext_code.size(address(v))
+                                    if ext_call.return_data[0]:
+                                        call address(v).approve(address arg1, uint256 arg2) with:
+                                             gas gas_remaining wei
+                                            args address(ext_call.return_data[0]), 0
+                                        if not ext_call.success:
+                                            revert with ext_call.return_data[0 len return_data.size]
+                                        require return_data.size >= 32
+                                        require ext_call.return_data[0]
+                                    call address(v).approve(address arg1, uint256 arg2) with:
+                                         gas gas_remaining wei
+                                        args address(ext_call.return_data[0]), w
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    require ext_call.return_data[0]
+                            mem[mem[64] + 4] = address(v)
+                            mem[mem[64] + 36] = address(_30272)
+                            mem[mem[64] + 68] = w
+                            if t == _21018 - 2:
+                                mem[mem[64] + 100] = _20229
+                                require ext_code.size(address(ext_call.return_data[0]))
+                                call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                     gas gas_remaining wei
+                                    args address(v), address(_30272), w, _20229
+                            else:
+                                mem[mem[64] + 100] = 1
+                                require ext_code.size(address(ext_call.return_data[0]))
+                                call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                     gas gas_remaining wei
+                                    args address(v), address(_30272), w, 1
+                            mem[mem[64]] = ext_call.return_data[0]
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            t = t + 2
+                            u = ext_call.return_data[0]
+                            u = _30272
+                            v = _30113
+                            v = _30272
+                            w = ext_call.return_data[0]
+                            continue 
+                        mem[0] = address(u)
+                        mem[32] = 4
+                        if stor4[address(u)]:
+                            mem[mem[64]] = 0x205c287800000000000000000000000000000000000000000000000000000000
+                            mem[mem[64] + 4] = arg5
+                            mem[mem[64] + 36] = w
+                            require ext_code.size(address(u))
+                            call address(u).withdrawTo(address arg1, uint256 arg2) with:
+                                 gas gas_remaining wei
+                                args address(arg5), w
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                        else:
+                            mem[mem[64] + 4] = arg5
+                            mem[mem[64] + 36] = w
+                            require ext_code.size(address(u))
+                            call address(u).0xa9059cbb with:
+                                 gas gas_remaining wei
+                                args address(arg5), w
+                            mem[mem[64]] = ext_call.return_data[0]
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                        require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                        mem[(32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 192] = w
+                        s = _20063
+                        s = _10031
+                        s = _10039
+                        idx = idx + 1
+                        s = _10031
+                        s = s
+                        continue 
+                    mem[0] = address(_20063)
+                    mem[32] = 4
+                    require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                    if not stor4[address(_20063)]:
+                        _20230 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                        require idx < mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                        _20302 = mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 224]
+                        require mem[_10039] > 2
+                        require mem[_10039] <= 21
+                        require 1 == bool(mem[_10039])
+                        require ext_code.size(registryAddress)
+                        call registryAddress.0xbb34534c with:
+                             gas gas_remaining wei
+                            args 'BancorGasPriceLimit'
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        mem[mem[64]] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+                        mem[mem[64] + 4] = block.gasprice
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).0x6b4dff1f with:
+                             gas gas_remaining wei
+                            args block.gasprice
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require 0 < mem[_10039]
+                        _20860 = mem[_10039 + 32]
+                        mem[mem[64] + 4] = 'ContractFeatures'
+                        require ext_code.size(registryAddress)
+                        call registryAddress.0xbb34534c with:
+                             gas gas_remaining wei
+                            args 'ContractFeatures'
+                        mem[mem[64]] = ext_call.return_data[0]
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        _21074 = mem[_10039]
+                        t = 1
+                        u = 0
+                        u = 0
+                        v = 0
+                        v = _20860
+                        w = _20230
+                        while t < _21074:
+                            require t < mem[_10039]
+                            _30116 = mem[(32 * t) + _10039 + 32]
+                            require t + 1 < mem[_10039]
+                            _30279 = mem[(32 * t + 1) + _10039 + 32]
+                            require ext_code.size(mem[(32 * t) + _10039 + 44 len 20])
+                            call mem[(32 * t) + _10039 + 44 len 20].0x8da5cb5b with:
+                                 gas gas_remaining wei
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).0xa5fbf287 with:
+                                 gas gas_remaining wei
+                                args address(ext_call.return_data[0]), 1
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if ext_call.return_data[0]:
+                                require ext_code.size(address(ext_call.return_data[0]))
+                                call address(ext_call.return_data[0]).conversionWhitelist() with:
+                                     gas gas_remaining wei
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                if address(ext_call.return_data[0]):
+                                    require ext_code.size(address(ext_call.return_data[0]))
+                                    call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                         gas gas_remaining wei
+                                        args address(arg5)
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    require ext_call.return_data[0]
+                            if address(v) != mem[(32 * t) + _10039 + 44 len 20]:
+                                require ext_code.size(address(v))
+                                call address(v).0xdd62ed3e with:
+                                     gas gas_remaining wei
+                                    args this.address, address(ext_call.return_data[0])
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                if ext_call.return_data[0] < w:
+                                    require ext_code.size(address(v))
+                                    call address(v).0xdd62ed3e with:
+                                         gas gas_remaining wei
+                                        args this.address, address(ext_call.return_data[0])
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    require ext_code.size(address(v))
+                                    if ext_call.return_data[0]:
+                                        call address(v).approve(address arg1, uint256 arg2) with:
+                                             gas gas_remaining wei
+                                            args address(ext_call.return_data[0]), 0
+                                        if not ext_call.success:
+                                            revert with ext_call.return_data[0 len return_data.size]
+                                        require return_data.size >= 32
+                                        require ext_call.return_data[0]
+                                    call address(v).approve(address arg1, uint256 arg2) with:
+                                         gas gas_remaining wei
+                                        args address(ext_call.return_data[0]), w
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    require ext_call.return_data[0]
+                            mem[mem[64] + 4] = address(v)
+                            mem[mem[64] + 36] = address(_30279)
+                            mem[mem[64] + 68] = w
+                            if t == _21074 - 2:
+                                mem[mem[64] + 100] = _20302
+                                require ext_code.size(address(ext_call.return_data[0]))
+                                call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                     gas gas_remaining wei
+                                    args address(v), address(_30279), w, _20302
+                            else:
+                                mem[mem[64] + 100] = 1
+                                require ext_code.size(address(ext_call.return_data[0]))
+                                call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                     gas gas_remaining wei
+                                    args address(v), address(_30279), w, 1
+                            mem[mem[64]] = ext_call.return_data[0]
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            t = t + 2
+                            u = ext_call.return_data[0]
+                            u = _30279
+                            v = _30116
+                            v = _30279
+                            w = ext_call.return_data[0]
+                            continue 
+                        mem[0] = address(u)
+                        mem[32] = 4
+                        if stor4[address(u)]:
+                            mem[mem[64]] = 0x205c287800000000000000000000000000000000000000000000000000000000
+                            mem[mem[64] + 4] = arg5
+                            mem[mem[64] + 36] = w
+                            require ext_code.size(address(u))
+                            call address(u).withdrawTo(address arg1, uint256 arg2) with:
+                                 gas gas_remaining wei
+                                args address(arg5), w
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                        else:
+                            mem[mem[64] + 4] = arg5
+                            mem[mem[64] + 36] = w
+                            require ext_code.size(address(u))
+                            call address(u).0xa9059cbb with:
+                                 gas gas_remaining wei
+                                args address(arg5), w
+                            mem[mem[64]] = ext_call.return_data[0]
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                        require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                        mem[(32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 192] = w
+                        s = _20063
+                        s = _10031
+                        s = _10039
+                        idx = idx + 1
+                        s = _10031
+                        s = s
+                        continue 
+                    _20232 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                    mem[mem[64]] = 0xd0e30db000000000000000000000000000000000000000000000000000000000
+                    require ext_code.size(address(_20063))
+                    call address(_20063).deposit() with:
+                       value _20232 wei
+                         gas gas_remaining wei
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                    _20393 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                    require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                    _20453 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                    require idx < mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                    _20487 = mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 224]
+                    require mem[_10039] > 2
+                    require mem[_10039] <= 21
+                    require 1 == bool(mem[_10039])
+                    require ext_code.size(registryAddress)
+                    call registryAddress.0xbb34534c with:
+                         gas gas_remaining wei
+                        args 'BancorGasPriceLimit'
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    mem[mem[64]] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+                    mem[mem[64] + 4] = block.gasprice
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).0x6b4dff1f with:
+                         gas gas_remaining wei
+                        args block.gasprice
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require 0 < mem[_10039]
+                    _21148 = mem[_10039 + 32]
+                    mem[mem[64] + 4] = 'ContractFeatures'
+                    require ext_code.size(registryAddress)
+                    call registryAddress.0xbb34534c with:
+                         gas gas_remaining wei
+                        args 'ContractFeatures'
+                    mem[mem[64]] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    _21529 = mem[_10039]
+                    t = 1
+                    u = 0
+                    u = 0
+                    v = 0
+                    v = _21148
+                    w = _20453
+                    while t < _21529:
+                        require t < mem[_10039]
+                        _30119 = mem[(32 * t) + _10039 + 32]
+                        require t + 1 < mem[_10039]
+                        _30286 = mem[(32 * t + 1) + _10039 + 32]
+                        require ext_code.size(mem[(32 * t) + _10039 + 44 len 20])
+                        call mem[(32 * t) + _10039 + 44 len 20].0x8da5cb5b with:
+                             gas gas_remaining wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).0xa5fbf287 with:
+                             gas gas_remaining wei
+                            args address(ext_call.return_data[0]), 1
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if ext_call.return_data[0]:
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).conversionWhitelist() with:
+                                 gas gas_remaining wei
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if address(ext_call.return_data[0]):
+                                require ext_code.size(address(ext_call.return_data[0]))
+                                call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                     gas gas_remaining wei
+                                    args address(arg5)
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                        if address(v) != mem[(32 * t) + _10039 + 44 len 20]:
+                            require ext_code.size(address(v))
+                            call address(v).0xdd62ed3e with:
+                                 gas gas_remaining wei
+                                args this.address, address(ext_call.return_data[0])
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if ext_call.return_data[0] < w:
+                                require ext_code.size(address(v))
+                                call address(v).0xdd62ed3e with:
+                                     gas gas_remaining wei
+                                    args this.address, address(ext_call.return_data[0])
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_code.size(address(v))
+                                if ext_call.return_data[0]:
+                                    call address(v).approve(address arg1, uint256 arg2) with:
+                                         gas gas_remaining wei
+                                        args address(ext_call.return_data[0]), 0
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    require ext_call.return_data[0]
+                                call address(v).approve(address arg1, uint256 arg2) with:
+                                     gas gas_remaining wei
+                                    args address(ext_call.return_data[0]), w
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                        mem[mem[64] + 4] = address(v)
+                        mem[mem[64] + 36] = address(_30286)
+                        mem[mem[64] + 68] = w
+                        if t == _21529 - 2:
+                            mem[mem[64] + 100] = _20487
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                 gas gas_remaining wei
+                                args address(v), address(_30286), w, _20487
+                        else:
+                            mem[mem[64] + 100] = 1
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                 gas gas_remaining wei
+                                args address(v), address(_30286), w, 1
+                        mem[mem[64]] = ext_call.return_data[0]
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        t = t + 2
+                        u = ext_call.return_data[0]
+                        u = _30286
+                        v = _30119
+                        v = _30286
+                        w = ext_call.return_data[0]
+                        continue 
+                    mem[0] = address(u)
+                    mem[32] = 4
+                    if stor4[address(u)]:
+                        mem[mem[64]] = 0x205c287800000000000000000000000000000000000000000000000000000000
+                        mem[mem[64] + 4] = arg5
+                        mem[mem[64] + 36] = w
+                        require ext_code.size(address(u))
+                        call address(u).withdrawTo(address arg1, uint256 arg2) with:
+                             gas gas_remaining wei
+                            args address(arg5), w
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                    else:
+                        mem[mem[64] + 4] = arg5
+                        mem[mem[64] + 36] = w
+                        require ext_code.size(address(u))
+                        call address(u).0xa9059cbb with:
+                             gas gas_remaining wei
+                            args address(arg5), w
+                        mem[mem[64]] = ext_call.return_data[0]
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_call.return_data[0]
+                    require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                    mem[(32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 192] = w
+                    s = _20063
+                    s = _10031
+                    s = _10039
+                    idx = idx + 1
+                    s = _10031
+                    s = s + _20393
+                    continue 
+                if stor4[mem[0]]:
+                    if msg.value <= 0:
+                        require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                        _20186 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                        require idx < mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                        _20235 = mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 224]
+                        require mem[_10039] > 2
+                        require mem[_10039] <= 21
+                        require 1 == bool(mem[_10039])
+                        require ext_code.size(registryAddress)
+                        call registryAddress.0xbb34534c with:
+                             gas gas_remaining wei
+                            args 'BancorGasPriceLimit'
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        mem[mem[64]] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+                        mem[mem[64] + 4] = block.gasprice
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).0x6b4dff1f with:
+                             gas gas_remaining wei
+                            args block.gasprice
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require 0 < mem[_10039]
+                        _20826 = mem[_10039 + 32]
+                        mem[mem[64] + 4] = 'ContractFeatures'
+                        require ext_code.size(registryAddress)
+                        call registryAddress.0xbb34534c with:
+                             gas gas_remaining wei
+                            args 'ContractFeatures'
+                        mem[mem[64]] = ext_call.return_data[0]
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        _21021 = mem[_10039]
+                        t = 1
+                        u = 0
+                        u = 0
+                        v = 0
+                        v = _20826
+                        w = _20186
+                        while t < _21021:
+                            require t < mem[_10039]
+                            _30122 = mem[(32 * t) + _10039 + 32]
+                            require t + 1 < mem[_10039]
+                            _30293 = mem[(32 * t + 1) + _10039 + 32]
+                            require ext_code.size(mem[(32 * t) + _10039 + 44 len 20])
+                            call mem[(32 * t) + _10039 + 44 len 20].0x8da5cb5b with:
+                                 gas gas_remaining wei
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).0xa5fbf287 with:
+                                 gas gas_remaining wei
+                                args address(ext_call.return_data[0]), 1
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if ext_call.return_data[0]:
+                                require ext_code.size(address(ext_call.return_data[0]))
+                                call address(ext_call.return_data[0]).conversionWhitelist() with:
+                                     gas gas_remaining wei
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                if address(ext_call.return_data[0]):
+                                    require ext_code.size(address(ext_call.return_data[0]))
+                                    call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                         gas gas_remaining wei
+                                        args address(arg5)
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    require ext_call.return_data[0]
+                            if address(v) != mem[(32 * t) + _10039 + 44 len 20]:
+                                require ext_code.size(address(v))
+                                call address(v).0xdd62ed3e with:
+                                     gas gas_remaining wei
+                                    args this.address, address(ext_call.return_data[0])
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                if ext_call.return_data[0] < w:
+                                    require ext_code.size(address(v))
+                                    call address(v).0xdd62ed3e with:
+                                         gas gas_remaining wei
+                                        args this.address, address(ext_call.return_data[0])
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    require ext_code.size(address(v))
+                                    if ext_call.return_data[0]:
+                                        call address(v).approve(address arg1, uint256 arg2) with:
+                                             gas gas_remaining wei
+                                            args address(ext_call.return_data[0]), 0
+                                        if not ext_call.success:
+                                            revert with ext_call.return_data[0 len return_data.size]
+                                        require return_data.size >= 32
+                                        require ext_call.return_data[0]
+                                    call address(v).approve(address arg1, uint256 arg2) with:
+                                         gas gas_remaining wei
+                                        args address(ext_call.return_data[0]), w
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    require ext_call.return_data[0]
+                            mem[mem[64] + 4] = address(v)
+                            mem[mem[64] + 36] = address(_30293)
+                            mem[mem[64] + 68] = w
+                            if t == _21021 - 2:
+                                mem[mem[64] + 100] = _20235
+                                require ext_code.size(address(ext_call.return_data[0]))
+                                call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                     gas gas_remaining wei
+                                    args address(v), address(_30293), w, _20235
+                            else:
+                                mem[mem[64] + 100] = 1
+                                require ext_code.size(address(ext_call.return_data[0]))
+                                call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                     gas gas_remaining wei
+                                    args address(v), address(_30293), w, 1
+                            mem[mem[64]] = ext_call.return_data[0]
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            t = t + 2
+                            u = ext_call.return_data[0]
+                            u = _30293
+                            v = _30122
+                            v = _30293
+                            w = ext_call.return_data[0]
+                            continue 
+                        mem[0] = address(u)
+                        mem[32] = 4
+                        if stor4[address(u)]:
+                            mem[mem[64]] = 0x205c287800000000000000000000000000000000000000000000000000000000
+                            mem[mem[64] + 4] = arg5
+                            mem[mem[64] + 36] = w
+                            require ext_code.size(address(u))
+                            call address(u).withdrawTo(address arg1, uint256 arg2) with:
+                                 gas gas_remaining wei
+                                args address(arg5), w
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                        else:
+                            mem[mem[64] + 4] = arg5
+                            mem[mem[64] + 36] = w
+                            require ext_code.size(address(u))
+                            call address(u).0xa9059cbb with:
+                                 gas gas_remaining wei
+                                args address(arg5), w
+                            mem[mem[64]] = ext_call.return_data[0]
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                        require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                        mem[(32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 192] = w
+                        s = _20063
+                        s = _10031
+                        s = _10039
+                        idx = idx + 1
+                        s = _10031
+                        s = s
+                        continue 
+                    mem[0] = address(_20063)
+                    mem[32] = 4
+                    require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                    if not stor4[address(_20063)]:
+                        _20236 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                        require idx < mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                        _20304 = mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 224]
+                        require mem[_10039] > 2
+                        require mem[_10039] <= 21
+                        require 1 == bool(mem[_10039])
+                        require ext_code.size(registryAddress)
+                        call registryAddress.0xbb34534c with:
+                             gas gas_remaining wei
+                            args 'BancorGasPriceLimit'
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        mem[mem[64]] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+                        mem[mem[64] + 4] = block.gasprice
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).0x6b4dff1f with:
+                             gas gas_remaining wei
+                            args block.gasprice
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require 0 < mem[_10039]
+                        _20864 = mem[_10039 + 32]
+                        mem[mem[64] + 4] = 'ContractFeatures'
+                        require ext_code.size(registryAddress)
+                        call registryAddress.0xbb34534c with:
+                             gas gas_remaining wei
+                            args 'ContractFeatures'
+                        mem[mem[64]] = ext_call.return_data[0]
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        _21077 = mem[_10039]
+                        t = 1
+                        u = 0
+                        u = 0
+                        v = 0
+                        v = _20864
+                        w = _20236
+                        while t < _21077:
+                            require t < mem[_10039]
+                            _30125 = mem[(32 * t) + _10039 + 32]
+                            require t + 1 < mem[_10039]
+                            _30300 = mem[(32 * t + 1) + _10039 + 32]
+                            require ext_code.size(mem[(32 * t) + _10039 + 44 len 20])
+                            call mem[(32 * t) + _10039 + 44 len 20].0x8da5cb5b with:
+                                 gas gas_remaining wei
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).0xa5fbf287 with:
+                                 gas gas_remaining wei
+                                args address(ext_call.return_data[0]), 1
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if ext_call.return_data[0]:
+                                require ext_code.size(address(ext_call.return_data[0]))
+                                call address(ext_call.return_data[0]).conversionWhitelist() with:
+                                     gas gas_remaining wei
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                if address(ext_call.return_data[0]):
+                                    require ext_code.size(address(ext_call.return_data[0]))
+                                    call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                         gas gas_remaining wei
+                                        args address(arg5)
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    require ext_call.return_data[0]
+                            if address(v) != mem[(32 * t) + _10039 + 44 len 20]:
+                                require ext_code.size(address(v))
+                                call address(v).0xdd62ed3e with:
+                                     gas gas_remaining wei
+                                    args this.address, address(ext_call.return_data[0])
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                if ext_call.return_data[0] < w:
+                                    require ext_code.size(address(v))
+                                    call address(v).0xdd62ed3e with:
+                                         gas gas_remaining wei
+                                        args this.address, address(ext_call.return_data[0])
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    require ext_code.size(address(v))
+                                    if ext_call.return_data[0]:
+                                        call address(v).approve(address arg1, uint256 arg2) with:
+                                             gas gas_remaining wei
+                                            args address(ext_call.return_data[0]), 0
+                                        if not ext_call.success:
+                                            revert with ext_call.return_data[0 len return_data.size]
+                                        require return_data.size >= 32
+                                        require ext_call.return_data[0]
+                                    call address(v).approve(address arg1, uint256 arg2) with:
+                                         gas gas_remaining wei
+                                        args address(ext_call.return_data[0]), w
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    require ext_call.return_data[0]
+                            mem[mem[64] + 4] = address(v)
+                            mem[mem[64] + 36] = address(_30300)
+                            mem[mem[64] + 68] = w
+                            if t == _21077 - 2:
+                                mem[mem[64] + 100] = _20304
+                                require ext_code.size(address(ext_call.return_data[0]))
+                                call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                     gas gas_remaining wei
+                                    args address(v), address(_30300), w, _20304
+                            else:
+                                mem[mem[64] + 100] = 1
+                                require ext_code.size(address(ext_call.return_data[0]))
+                                call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                     gas gas_remaining wei
+                                    args address(v), address(_30300), w, 1
+                            mem[mem[64]] = ext_call.return_data[0]
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            t = t + 2
+                            u = ext_call.return_data[0]
+                            u = _30300
+                            v = _30125
+                            v = _30300
+                            w = ext_call.return_data[0]
+                            continue 
+                        mem[0] = address(u)
+                        mem[32] = 4
+                        if stor4[address(u)]:
+                            mem[mem[64]] = 0x205c287800000000000000000000000000000000000000000000000000000000
+                            mem[mem[64] + 4] = arg5
+                            mem[mem[64] + 36] = w
+                            require ext_code.size(address(u))
+                            call address(u).withdrawTo(address arg1, uint256 arg2) with:
+                                 gas gas_remaining wei
+                                args address(arg5), w
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                        else:
+                            mem[mem[64] + 4] = arg5
+                            mem[mem[64] + 36] = w
+                            require ext_code.size(address(u))
+                            call address(u).0xa9059cbb with:
+                                 gas gas_remaining wei
+                                args address(arg5), w
+                            mem[mem[64]] = ext_call.return_data[0]
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                        require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                        mem[(32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 192] = w
+                        s = _20063
+                        s = _10031
+                        s = _10039
+                        idx = idx + 1
+                        s = _10031
+                        s = s
+                        continue 
+                    _20238 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                    mem[mem[64]] = 0xd0e30db000000000000000000000000000000000000000000000000000000000
+                    require ext_code.size(address(_20063))
+                    call address(_20063).deposit() with:
+                       value _20238 wei
+                         gas gas_remaining wei
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                    _20395 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                    require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                    _20456 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                    require idx < mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                    _20488 = mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 224]
+                    require mem[_10039] > 2
+                    require mem[_10039] <= 21
+                    require 1 == bool(mem[_10039])
+                    require ext_code.size(registryAddress)
+                    call registryAddress.0xbb34534c with:
+                         gas gas_remaining wei
+                        args 'BancorGasPriceLimit'
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    mem[mem[64]] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+                    mem[mem[64] + 4] = block.gasprice
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).0x6b4dff1f with:
+                         gas gas_remaining wei
+                        args block.gasprice
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require 0 < mem[_10039]
+                    _21150 = mem[_10039 + 32]
+                    mem[mem[64] + 4] = 'ContractFeatures'
+                    require ext_code.size(registryAddress)
+                    call registryAddress.0xbb34534c with:
+                         gas gas_remaining wei
+                        args 'ContractFeatures'
+                    mem[mem[64]] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    _21533 = mem[_10039]
+                    t = 1
+                    u = 0
+                    u = 0
+                    v = 0
+                    v = _21150
+                    w = _20456
+                    while t < _21533:
+                        require t < mem[_10039]
+                        _30128 = mem[(32 * t) + _10039 + 32]
+                        require t + 1 < mem[_10039]
+                        _30307 = mem[(32 * t + 1) + _10039 + 32]
+                        require ext_code.size(mem[(32 * t) + _10039 + 44 len 20])
+                        call mem[(32 * t) + _10039 + 44 len 20].0x8da5cb5b with:
+                             gas gas_remaining wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).0xa5fbf287 with:
+                             gas gas_remaining wei
+                            args address(ext_call.return_data[0]), 1
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if ext_call.return_data[0]:
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).conversionWhitelist() with:
+                                 gas gas_remaining wei
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if address(ext_call.return_data[0]):
+                                require ext_code.size(address(ext_call.return_data[0]))
+                                call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                     gas gas_remaining wei
+                                    args address(arg5)
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                        if address(v) != mem[(32 * t) + _10039 + 44 len 20]:
+                            require ext_code.size(address(v))
+                            call address(v).0xdd62ed3e with:
+                                 gas gas_remaining wei
+                                args this.address, address(ext_call.return_data[0])
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if ext_call.return_data[0] < w:
+                                require ext_code.size(address(v))
+                                call address(v).0xdd62ed3e with:
+                                     gas gas_remaining wei
+                                    args this.address, address(ext_call.return_data[0])
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_code.size(address(v))
+                                if ext_call.return_data[0]:
+                                    call address(v).approve(address arg1, uint256 arg2) with:
+                                         gas gas_remaining wei
+                                        args address(ext_call.return_data[0]), 0
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    require ext_call.return_data[0]
+                                call address(v).approve(address arg1, uint256 arg2) with:
+                                     gas gas_remaining wei
+                                    args address(ext_call.return_data[0]), w
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                        mem[mem[64] + 4] = address(v)
+                        mem[mem[64] + 36] = address(_30307)
+                        mem[mem[64] + 68] = w
+                        if t == _21533 - 2:
+                            mem[mem[64] + 100] = _20488
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                 gas gas_remaining wei
+                                args address(v), address(_30307), w, _20488
+                        else:
+                            mem[mem[64] + 100] = 1
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                 gas gas_remaining wei
+                                args address(v), address(_30307), w, 1
+                        mem[mem[64]] = ext_call.return_data[0]
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        t = t + 2
+                        u = ext_call.return_data[0]
+                        u = _30307
+                        v = _30128
+                        v = _30307
+                        w = ext_call.return_data[0]
+                        continue 
+                    mem[0] = address(u)
+                    mem[32] = 4
+                    if stor4[address(u)]:
+                        mem[mem[64]] = 0x205c287800000000000000000000000000000000000000000000000000000000
+                        mem[mem[64] + 4] = arg5
+                        mem[mem[64] + 36] = w
+                        require ext_code.size(address(u))
+                        call address(u).withdrawTo(address arg1, uint256 arg2) with:
+                             gas gas_remaining wei
+                            args address(arg5), w
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                    else:
+                        mem[mem[64] + 4] = arg5
+                        mem[mem[64] + 36] = w
+                        require ext_code.size(address(u))
+                        call address(u).0xa9059cbb with:
+                             gas gas_remaining wei
+                            args address(arg5), w
+                        mem[mem[64]] = ext_call.return_data[0]
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_call.return_data[0]
+                    require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                    mem[(32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 192] = w
+                    s = _20063
+                    s = _10031
+                    s = _10039
+                    idx = idx + 1
+                    s = _10031
+                    s = s + _20395
+                    continue 
+                mem[0] = address(_20063)
+                mem[32] = 4
+                require not stor4[address(_20063)]
+                if msg.value <= 0:
+                    require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                    _20241 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                    require idx < mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                    _20305 = mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 224]
+                    require mem[_10039] > 2
+                    require mem[_10039] <= 21
+                    require 1 == bool(mem[_10039])
+                    require ext_code.size(registryAddress)
+                    call registryAddress.0xbb34534c with:
+                         gas gas_remaining wei
+                        args 'BancorGasPriceLimit'
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    mem[mem[64]] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+                    mem[mem[64] + 4] = block.gasprice
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).0x6b4dff1f with:
+                         gas gas_remaining wei
+                        args block.gasprice
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require 0 < mem[_10039]
+                    _20866 = mem[_10039 + 32]
+                    mem[mem[64] + 4] = 'ContractFeatures'
+                    require ext_code.size(registryAddress)
+                    call registryAddress.0xbb34534c with:
+                         gas gas_remaining wei
+                        args 'ContractFeatures'
+                    mem[mem[64]] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    _21080 = mem[_10039]
+                    t = 1
+                    u = 0
+                    u = 0
+                    v = 0
+                    v = _20866
+                    w = _20241
+                    while t < _21080:
+                        require t < mem[_10039]
+                        _30131 = mem[(32 * t) + _10039 + 32]
+                        require t + 1 < mem[_10039]
+                        _30314 = mem[(32 * t + 1) + _10039 + 32]
+                        require ext_code.size(mem[(32 * t) + _10039 + 44 len 20])
+                        call mem[(32 * t) + _10039 + 44 len 20].0x8da5cb5b with:
+                             gas gas_remaining wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).0xa5fbf287 with:
+                             gas gas_remaining wei
+                            args address(ext_call.return_data[0]), 1
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if ext_call.return_data[0]:
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).conversionWhitelist() with:
+                                 gas gas_remaining wei
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if address(ext_call.return_data[0]):
+                                require ext_code.size(address(ext_call.return_data[0]))
+                                call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                     gas gas_remaining wei
+                                    args address(arg5)
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                        if address(v) != mem[(32 * t) + _10039 + 44 len 20]:
+                            require ext_code.size(address(v))
+                            call address(v).0xdd62ed3e with:
+                                 gas gas_remaining wei
+                                args this.address, address(ext_call.return_data[0])
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if ext_call.return_data[0] < w:
+                                require ext_code.size(address(v))
+                                call address(v).0xdd62ed3e with:
+                                     gas gas_remaining wei
+                                    args this.address, address(ext_call.return_data[0])
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_code.size(address(v))
+                                if ext_call.return_data[0]:
+                                    call address(v).approve(address arg1, uint256 arg2) with:
+                                         gas gas_remaining wei
+                                        args address(ext_call.return_data[0]), 0
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    require ext_call.return_data[0]
+                                call address(v).approve(address arg1, uint256 arg2) with:
+                                     gas gas_remaining wei
+                                    args address(ext_call.return_data[0]), w
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                        mem[mem[64] + 4] = address(v)
+                        mem[mem[64] + 36] = address(_30314)
+                        mem[mem[64] + 68] = w
+                        if t == _21080 - 2:
+                            mem[mem[64] + 100] = _20305
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                 gas gas_remaining wei
+                                args address(v), address(_30314), w, _20305
+                        else:
+                            mem[mem[64] + 100] = 1
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                 gas gas_remaining wei
+                                args address(v), address(_30314), w, 1
+                        mem[mem[64]] = ext_call.return_data[0]
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        t = t + 2
+                        u = ext_call.return_data[0]
+                        u = _30314
+                        v = _30131
+                        v = _30314
+                        w = ext_call.return_data[0]
+                        continue 
+                    mem[0] = address(u)
+                    mem[32] = 4
+                    if stor4[address(u)]:
+                        mem[mem[64]] = 0x205c287800000000000000000000000000000000000000000000000000000000
+                        mem[mem[64] + 4] = arg5
+                        mem[mem[64] + 36] = w
+                        require ext_code.size(address(u))
+                        call address(u).withdrawTo(address arg1, uint256 arg2) with:
+                             gas gas_remaining wei
+                            args address(arg5), w
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                    else:
+                        mem[mem[64] + 4] = arg5
+                        mem[mem[64] + 36] = w
+                        require ext_code.size(address(u))
+                        call address(u).0xa9059cbb with:
+                             gas gas_remaining wei
+                            args address(arg5), w
+                        mem[mem[64]] = ext_call.return_data[0]
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_call.return_data[0]
+                    require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                    mem[(32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 192] = w
+                    s = _20063
+                    s = _10031
+                    s = _10039
+                    idx = idx + 1
+                    s = _10031
+                    s = s
+                    continue 
+                mem[0] = address(_20063)
+                mem[32] = 4
+                require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                if not stor4[address(_20063)]:
+                    _20306 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                    require idx < mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                    _20357 = mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 224]
+                    require mem[_10039] > 2
+                    require mem[_10039] <= 21
+                    require 1 == bool(mem[_10039])
+                    require ext_code.size(registryAddress)
+                    call registryAddress.0xbb34534c with:
+                         gas gas_remaining wei
+                        args 'BancorGasPriceLimit'
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    mem[mem[64]] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+                    mem[mem[64] + 4] = block.gasprice
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).0x6b4dff1f with:
+                         gas gas_remaining wei
+                        args block.gasprice
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require 0 < mem[_10039]
+                    _20922 = mem[_10039 + 32]
+                    mem[mem[64] + 4] = 'ContractFeatures'
+                    require ext_code.size(registryAddress)
+                    call registryAddress.0xbb34534c with:
+                         gas gas_remaining wei
+                        args 'ContractFeatures'
+                    mem[mem[64]] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    _21152 = mem[_10039]
+                    t = 1
+                    u = 0
+                    u = 0
+                    v = 0
+                    v = _20922
+                    w = _20306
+                    while t < _21152:
+                        require t < mem[_10039]
+                        _30134 = mem[(32 * t) + _10039 + 32]
+                        require t + 1 < mem[_10039]
+                        _30321 = mem[(32 * t + 1) + _10039 + 32]
+                        require ext_code.size(mem[(32 * t) + _10039 + 44 len 20])
+                        call mem[(32 * t) + _10039 + 44 len 20].0x8da5cb5b with:
+                             gas gas_remaining wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).0xa5fbf287 with:
+                             gas gas_remaining wei
+                            args address(ext_call.return_data[0]), 1
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if ext_call.return_data[0]:
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).conversionWhitelist() with:
+                                 gas gas_remaining wei
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if address(ext_call.return_data[0]):
+                                require ext_code.size(address(ext_call.return_data[0]))
+                                call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                     gas gas_remaining wei
+                                    args address(arg5)
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                        if address(v) != mem[(32 * t) + _10039 + 44 len 20]:
+                            require ext_code.size(address(v))
+                            call address(v).0xdd62ed3e with:
+                                 gas gas_remaining wei
+                                args this.address, address(ext_call.return_data[0])
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if ext_call.return_data[0] < w:
+                                require ext_code.size(address(v))
+                                call address(v).0xdd62ed3e with:
+                                     gas gas_remaining wei
+                                    args this.address, address(ext_call.return_data[0])
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_code.size(address(v))
+                                if ext_call.return_data[0]:
+                                    call address(v).approve(address arg1, uint256 arg2) with:
+                                         gas gas_remaining wei
+                                        args address(ext_call.return_data[0]), 0
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    require ext_call.return_data[0]
+                                call address(v).approve(address arg1, uint256 arg2) with:
+                                     gas gas_remaining wei
+                                    args address(ext_call.return_data[0]), w
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                        mem[mem[64] + 4] = address(v)
+                        mem[mem[64] + 36] = address(_30321)
+                        mem[mem[64] + 68] = w
+                        if t == _21152 - 2:
+                            mem[mem[64] + 100] = _20357
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                 gas gas_remaining wei
+                                args address(v), address(_30321), w, _20357
+                        else:
+                            mem[mem[64] + 100] = 1
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                 gas gas_remaining wei
+                                args address(v), address(_30321), w, 1
+                        mem[mem[64]] = ext_call.return_data[0]
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        t = t + 2
+                        u = ext_call.return_data[0]
+                        u = _30321
+                        v = _30134
+                        v = _30321
+                        w = ext_call.return_data[0]
+                        continue 
+                    mem[0] = address(u)
+                    mem[32] = 4
+                    if stor4[address(u)]:
+                        mem[mem[64]] = 0x205c287800000000000000000000000000000000000000000000000000000000
+                        mem[mem[64] + 4] = arg5
+                        mem[mem[64] + 36] = w
+                        require ext_code.size(address(u))
+                        call address(u).withdrawTo(address arg1, uint256 arg2) with:
+                             gas gas_remaining wei
+                            args address(arg5), w
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                    else:
+                        mem[mem[64] + 4] = arg5
+                        mem[mem[64] + 36] = w
+                        require ext_code.size(address(u))
+                        call address(u).0xa9059cbb with:
+                             gas gas_remaining wei
+                            args address(arg5), w
+                        mem[mem[64]] = ext_call.return_data[0]
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_call.return_data[0]
+                    require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                    mem[(32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 192] = w
+                    s = _20063
+                    s = _10031
+                    s = _10039
+                    idx = idx + 1
+                    s = _10031
+                    s = s
+                    continue 
+                _20308 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                mem[mem[64]] = 0xd0e30db000000000000000000000000000000000000000000000000000000000
+                require ext_code.size(address(_20063))
+                call address(_20063).deposit() with:
+                   value _20308 wei
+                     gas gas_remaining wei
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                _20429 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                _20490 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                require idx < mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                _20510 = mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 224]
+                require mem[_10039] > 2
+                require mem[_10039] <= 21
+                require 1 == bool(mem[_10039])
+                require ext_code.size(registryAddress)
+                call registryAddress.0xbb34534c with:
+                     gas gas_remaining wei
+                    args 'BancorGasPriceLimit'
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                mem[mem[64]] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+                mem[mem[64] + 4] = block.gasprice
+                require ext_code.size(address(ext_call.return_data[0]))
+                call address(ext_call.return_data[0]).0x6b4dff1f with:
+                     gas gas_remaining wei
+                    args block.gasprice
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require 0 < mem[_10039]
+                _21216 = mem[_10039 + 32]
+                mem[mem[64] + 4] = 'ContractFeatures'
+                require ext_code.size(registryAddress)
+                call registryAddress.0xbb34534c with:
+                     gas gas_remaining wei
+                    args 'ContractFeatures'
+                mem[mem[64]] = ext_call.return_data[0]
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                _21631 = mem[_10039]
+                t = 1
+                u = 0
+                u = 0
+                v = 0
+                v = _21216
+                w = _20490
+                while t < _21631:
+                    require t < mem[_10039]
+                    _30137 = mem[(32 * t) + _10039 + 32]
+                    require t + 1 < mem[_10039]
+                    _30328 = mem[(32 * t + 1) + _10039 + 32]
+                    require ext_code.size(mem[(32 * t) + _10039 + 44 len 20])
+                    call mem[(32 * t) + _10039 + 44 len 20].0x8da5cb5b with:
+                         gas gas_remaining wei
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).0xa5fbf287 with:
+                         gas gas_remaining wei
+                        args address(ext_call.return_data[0]), 1
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    if ext_call.return_data[0]:
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).conversionWhitelist() with:
+                             gas gas_remaining wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if address(ext_call.return_data[0]):
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                 gas gas_remaining wei
+                                args address(arg5)
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    if address(v) != mem[(32 * t) + _10039 + 44 len 20]:
+                        require ext_code.size(address(v))
+                        call address(v).0xdd62ed3e with:
+                             gas gas_remaining wei
+                            args this.address, address(ext_call.return_data[0])
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if ext_call.return_data[0] < w:
+                            require ext_code.size(address(v))
+                            call address(v).0xdd62ed3e with:
+                                 gas gas_remaining wei
+                                args this.address, address(ext_call.return_data[0])
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_code.size(address(v))
+                            if ext_call.return_data[0]:
+                                call address(v).approve(address arg1, uint256 arg2) with:
+                                     gas gas_remaining wei
+                                    args address(ext_call.return_data[0]), 0
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                            call address(v).approve(address arg1, uint256 arg2) with:
+                                 gas gas_remaining wei
+                                args address(ext_call.return_data[0]), w
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    mem[mem[64] + 4] = address(v)
+                    mem[mem[64] + 36] = address(_30328)
+                    mem[mem[64] + 68] = w
+                    if t == _21631 - 2:
+                        mem[mem[64] + 100] = _20510
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(v), address(_30328), w, _20510
+                    else:
+                        mem[mem[64] + 100] = 1
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(v), address(_30328), w, 1
+                    mem[mem[64]] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    t = t + 2
+                    u = ext_call.return_data[0]
+                    u = _30328
+                    v = _30137
+                    v = _30328
+                    w = ext_call.return_data[0]
+                    continue 
+                mem[0] = address(u)
+                mem[32] = 4
+                if stor4[address(u)]:
+                    mem[mem[64]] = 0x205c287800000000000000000000000000000000000000000000000000000000
+                    mem[mem[64] + 4] = arg5
+                    mem[mem[64] + 36] = w
+                    require ext_code.size(address(u))
+                    call address(u).withdrawTo(address arg1, uint256 arg2) with:
+                         gas gas_remaining wei
+                        args address(arg5), w
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                else:
+                    mem[mem[64] + 4] = arg5
+                    mem[mem[64] + 36] = w
+                    require ext_code.size(address(u))
+                    call address(u).0xa9059cbb with:
+                         gas gas_remaining wei
+                        args address(arg5), w
+                    mem[mem[64]] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    require ext_call.return_data[0]
+                require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                mem[(32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 192] = w
+                s = _20063
+                s = _10031
+                s = _10039
+                idx = idx + 1
+                s = _10031
+                s = s + _20429
+                continue 
+            mem[_10039 + 32 len 32 * _10031 - _10038] = code.data[10217 len 32 * _10031 - _10038]
+            require idx < mem[(32 * arg1.length) + 128]
+            t = mem[(32 * idx) + (32 * arg1.length) + 160]
+            while t < _10031:
+                require t < mem[96]
+                require idx < mem[(32 * arg1.length) + 128]
+                require t - mem[(32 * idx) + (32 * arg1.length) + 160] < mem[_10039]
+                mem[_10039 + (32 * t - mem[(32 * idx) + (32 * arg1.length) + 160]) + 32] = mem[(32 * t) + 140 len 20]
+                t = t + 1
+                continue 
+            require 0 < mem[_10039]
+            _20066 = mem[_10039 + 32]
+            if 0 == msg.value:
+                if msg.value <= 0:
+                    require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                    _20115 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                    require idx < mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                    _20135 = mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 224]
+                    require mem[_10039] > 2
+                    require mem[_10039] <= 21
+                    require 1 == bool(mem[_10039])
+                    require ext_code.size(registryAddress)
+                    call registryAddress.0xbb34534c with:
+                         gas gas_remaining wei
+                        args 'BancorGasPriceLimit'
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    mem[mem[64]] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+                    mem[mem[64] + 4] = block.gasprice
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).0x6b4dff1f with:
+                         gas gas_remaining wei
+                        args block.gasprice
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require 0 < mem[_10039]
+                    _20715 = mem[_10039 + 32]
+                    mem[mem[64] + 4] = 'ContractFeatures'
+                    require ext_code.size(registryAddress)
+                    call registryAddress.0xbb34534c with:
+                         gas gas_remaining wei
+                        args 'ContractFeatures'
+                    mem[mem[64]] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    _20869 = mem[_10039]
+                    t = 1
+                    u = 0
+                    u = 0
+                    v = 0
+                    v = _20715
+                    w = _20115
+                    while t < _20869:
+                        require t < mem[_10039]
+                        _30140 = mem[(32 * t) + _10039 + 32]
+                        require t + 1 < mem[_10039]
+                        _30335 = mem[(32 * t + 1) + _10039 + 32]
+                        require ext_code.size(mem[(32 * t) + _10039 + 44 len 20])
+                        call mem[(32 * t) + _10039 + 44 len 20].0x8da5cb5b with:
+                             gas gas_remaining wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).0xa5fbf287 with:
+                             gas gas_remaining wei
+                            args address(ext_call.return_data[0]), 1
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if ext_call.return_data[0]:
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).conversionWhitelist() with:
+                                 gas gas_remaining wei
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if address(ext_call.return_data[0]):
+                                require ext_code.size(address(ext_call.return_data[0]))
+                                call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                     gas gas_remaining wei
+                                    args address(arg5)
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                        if address(v) != mem[(32 * t) + _10039 + 44 len 20]:
+                            require ext_code.size(address(v))
+                            call address(v).0xdd62ed3e with:
+                                 gas gas_remaining wei
+                                args this.address, address(ext_call.return_data[0])
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if ext_call.return_data[0] < w:
+                                require ext_code.size(address(v))
+                                call address(v).0xdd62ed3e with:
+                                     gas gas_remaining wei
+                                    args this.address, address(ext_call.return_data[0])
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_code.size(address(v))
+                                if ext_call.return_data[0]:
+                                    call address(v).approve(address arg1, uint256 arg2) with:
+                                         gas gas_remaining wei
+                                        args address(ext_call.return_data[0]), 0
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    require ext_call.return_data[0]
+                                call address(v).approve(address arg1, uint256 arg2) with:
+                                     gas gas_remaining wei
+                                    args address(ext_call.return_data[0]), w
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                        mem[mem[64] + 4] = address(v)
+                        mem[mem[64] + 36] = address(_30335)
+                        mem[mem[64] + 68] = w
+                        if t == _20869 - 2:
+                            mem[mem[64] + 100] = _20135
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                 gas gas_remaining wei
+                                args address(v), address(_30335), w, _20135
+                        else:
+                            mem[mem[64] + 100] = 1
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                 gas gas_remaining wei
+                                args address(v), address(_30335), w, 1
+                        mem[mem[64]] = ext_call.return_data[0]
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        t = t + 2
+                        u = ext_call.return_data[0]
+                        u = _30335
+                        v = _30140
+                        v = _30335
+                        w = ext_call.return_data[0]
+                        continue 
+                    mem[0] = address(u)
+                    mem[32] = 4
+                    if stor4[address(u)]:
+                        mem[mem[64]] = 0x205c287800000000000000000000000000000000000000000000000000000000
+                        mem[mem[64] + 4] = arg5
+                        mem[mem[64] + 36] = w
+                        require ext_code.size(address(u))
+                        call address(u).withdrawTo(address arg1, uint256 arg2) with:
+                             gas gas_remaining wei
+                            args address(arg5), w
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                    else:
+                        mem[mem[64] + 4] = arg5
+                        mem[mem[64] + 36] = w
+                        require ext_code.size(address(u))
+                        call address(u).0xa9059cbb with:
+                             gas gas_remaining wei
+                            args address(arg5), w
+                        mem[mem[64]] = ext_call.return_data[0]
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_call.return_data[0]
+                    require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                    mem[(32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 192] = w
+                    s = _20066
+                    s = _10031
+                    s = _10039
+                    idx = idx + 1
+                    s = _10031
+                    s = s
+                    continue 
+                mem[0] = mem[_10039 + 44 len 20]
+                mem[32] = 4
+                require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                if not stor4[mem[0]]:
+                    _20136 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                    require idx < mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                    _20165 = mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 224]
+                    require mem[_10039] > 2
+                    require mem[_10039] <= 21
+                    require 1 == bool(mem[_10039])
+                    require ext_code.size(registryAddress)
+                    call registryAddress.0xbb34534c with:
+                         gas gas_remaining wei
+                        args 'BancorGasPriceLimit'
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    mem[mem[64]] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+                    mem[mem[64] + 4] = block.gasprice
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).0x6b4dff1f with:
+                         gas gas_remaining wei
+                        args block.gasprice
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require 0 < mem[_10039]
+                    _20760 = mem[_10039 + 32]
+                    mem[mem[64] + 4] = 'ContractFeatures'
+                    require ext_code.size(registryAddress)
+                    call registryAddress.0xbb34534c with:
+                         gas gas_remaining wei
+                        args 'ContractFeatures'
+                    mem[mem[64]] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    _20925 = mem[_10039]
+                    t = 1
+                    u = 0
+                    u = 0
+                    v = 0
+                    v = _20760
+                    w = _20136
+                    while t < _20925:
+                        require t < mem[_10039]
+                        _30143 = mem[(32 * t) + _10039 + 32]
+                        require t + 1 < mem[_10039]
+                        _30342 = mem[(32 * t + 1) + _10039 + 32]
+                        require ext_code.size(mem[(32 * t) + _10039 + 44 len 20])
+                        call mem[(32 * t) + _10039 + 44 len 20].0x8da5cb5b with:
+                             gas gas_remaining wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).0xa5fbf287 with:
+                             gas gas_remaining wei
+                            args address(ext_call.return_data[0]), 1
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if ext_call.return_data[0]:
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).conversionWhitelist() with:
+                                 gas gas_remaining wei
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if address(ext_call.return_data[0]):
+                                require ext_code.size(address(ext_call.return_data[0]))
+                                call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                     gas gas_remaining wei
+                                    args address(arg5)
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                        if address(v) != mem[(32 * t) + _10039 + 44 len 20]:
+                            require ext_code.size(address(v))
+                            call address(v).0xdd62ed3e with:
+                                 gas gas_remaining wei
+                                args this.address, address(ext_call.return_data[0])
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if ext_call.return_data[0] < w:
+                                require ext_code.size(address(v))
+                                call address(v).0xdd62ed3e with:
+                                     gas gas_remaining wei
+                                    args this.address, address(ext_call.return_data[0])
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_code.size(address(v))
+                                if ext_call.return_data[0]:
+                                    call address(v).approve(address arg1, uint256 arg2) with:
+                                         gas gas_remaining wei
+                                        args address(ext_call.return_data[0]), 0
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    require ext_call.return_data[0]
+                                call address(v).approve(address arg1, uint256 arg2) with:
+                                     gas gas_remaining wei
+                                    args address(ext_call.return_data[0]), w
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                        mem[mem[64] + 4] = address(v)
+                        mem[mem[64] + 36] = address(_30342)
+                        mem[mem[64] + 68] = w
+                        if t == _20925 - 2:
+                            mem[mem[64] + 100] = _20165
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                 gas gas_remaining wei
+                                args address(v), address(_30342), w, _20165
+                        else:
+                            mem[mem[64] + 100] = 1
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                 gas gas_remaining wei
+                                args address(v), address(_30342), w, 1
+                        mem[mem[64]] = ext_call.return_data[0]
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        t = t + 2
+                        u = ext_call.return_data[0]
+                        u = _30342
+                        v = _30143
+                        v = _30342
+                        w = ext_call.return_data[0]
+                        continue 
+                    mem[0] = address(u)
+                    mem[32] = 4
+                    if stor4[address(u)]:
+                        mem[mem[64]] = 0x205c287800000000000000000000000000000000000000000000000000000000
+                        mem[mem[64] + 4] = arg5
+                        mem[mem[64] + 36] = w
+                        require ext_code.size(address(u))
+                        call address(u).withdrawTo(address arg1, uint256 arg2) with:
+                             gas gas_remaining wei
+                            args address(arg5), w
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                    else:
+                        mem[mem[64] + 4] = arg5
+                        mem[mem[64] + 36] = w
+                        require ext_code.size(address(u))
+                        call address(u).0xa9059cbb with:
+                             gas gas_remaining wei
+                            args address(arg5), w
+                        mem[mem[64]] = ext_call.return_data[0]
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_call.return_data[0]
+                    require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                    mem[(32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 192] = w
+                    s = _20066
+                    s = _10031
+                    s = _10039
+                    idx = idx + 1
+                    s = _10031
+                    s = s
+                    continue 
+                _20138 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                mem[mem[64]] = 0xd0e30db000000000000000000000000000000000000000000000000000000000
+                require ext_code.size(address(_20066))
+                call address(_20066).deposit() with:
+                   value _20138 wei
+                     gas gas_remaining wei
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                _20246 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                _20359 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                require idx < mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                _20399 = mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 224]
+                require mem[_10039] > 2
+                require mem[_10039] <= 21
+                require 1 == bool(mem[_10039])
+                require ext_code.size(registryAddress)
+                call registryAddress.0xbb34534c with:
+                     gas gas_remaining wei
+                    args 'BancorGasPriceLimit'
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                mem[mem[64]] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+                mem[mem[64] + 4] = block.gasprice
+                require ext_code.size(address(ext_call.return_data[0]))
+                call address(ext_call.return_data[0]).0x6b4dff1f with:
+                     gas gas_remaining wei
+                    args block.gasprice
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require 0 < mem[_10039]
+                _20985 = mem[_10039 + 32]
+                mem[mem[64] + 4] = 'ContractFeatures'
+                require ext_code.size(registryAddress)
+                call registryAddress.0xbb34534c with:
+                     gas gas_remaining wei
+                    args 'ContractFeatures'
+                mem[mem[64]] = ext_call.return_data[0]
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                _21220 = mem[_10039]
+                t = 1
+                u = 0
+                u = 0
+                v = 0
+                v = _20985
+                w = _20359
+                while t < _21220:
+                    require t < mem[_10039]
+                    _30146 = mem[(32 * t) + _10039 + 32]
+                    require t + 1 < mem[_10039]
+                    _30349 = mem[(32 * t + 1) + _10039 + 32]
+                    require ext_code.size(mem[(32 * t) + _10039 + 44 len 20])
+                    call mem[(32 * t) + _10039 + 44 len 20].0x8da5cb5b with:
+                         gas gas_remaining wei
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).0xa5fbf287 with:
+                         gas gas_remaining wei
+                        args address(ext_call.return_data[0]), 1
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    if ext_call.return_data[0]:
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).conversionWhitelist() with:
+                             gas gas_remaining wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if address(ext_call.return_data[0]):
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                 gas gas_remaining wei
+                                args address(arg5)
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    if address(v) != mem[(32 * t) + _10039 + 44 len 20]:
+                        require ext_code.size(address(v))
+                        call address(v).0xdd62ed3e with:
+                             gas gas_remaining wei
+                            args this.address, address(ext_call.return_data[0])
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if ext_call.return_data[0] < w:
+                            require ext_code.size(address(v))
+                            call address(v).0xdd62ed3e with:
+                                 gas gas_remaining wei
+                                args this.address, address(ext_call.return_data[0])
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_code.size(address(v))
+                            if ext_call.return_data[0]:
+                                call address(v).approve(address arg1, uint256 arg2) with:
+                                     gas gas_remaining wei
+                                    args address(ext_call.return_data[0]), 0
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                            call address(v).approve(address arg1, uint256 arg2) with:
+                                 gas gas_remaining wei
+                                args address(ext_call.return_data[0]), w
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    mem[mem[64] + 4] = address(v)
+                    mem[mem[64] + 36] = address(_30349)
+                    mem[mem[64] + 68] = w
+                    if t == _21220 - 2:
+                        mem[mem[64] + 100] = _20399
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(v), address(_30349), w, _20399
+                    else:
+                        mem[mem[64] + 100] = 1
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(v), address(_30349), w, 1
+                    mem[mem[64]] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    t = t + 2
+                    u = ext_call.return_data[0]
+                    u = _30349
+                    v = _30146
+                    v = _30349
+                    w = ext_call.return_data[0]
+                    continue 
+                mem[0] = address(u)
+                mem[32] = 4
+                if stor4[address(u)]:
+                    mem[mem[64]] = 0x205c287800000000000000000000000000000000000000000000000000000000
+                    mem[mem[64] + 4] = arg5
+                    mem[mem[64] + 36] = w
+                    require ext_code.size(address(u))
+                    call address(u).withdrawTo(address arg1, uint256 arg2) with:
+                         gas gas_remaining wei
+                        args address(arg5), w
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                else:
+                    mem[mem[64] + 4] = arg5
+                    mem[mem[64] + 36] = w
+                    require ext_code.size(address(u))
+                    call address(u).0xa9059cbb with:
+                         gas gas_remaining wei
+                        args address(arg5), w
+                    mem[mem[64]] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    require ext_call.return_data[0]
+                require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                mem[(32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 192] = w
+                s = _20066
+                s = _10031
+                s = _10039
+                idx = idx + 1
+                s = _10031
+                s = s + _20246
+                continue 
+            require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+            mem[0] = mem[_10039 + 44 len 20]
+            mem[32] = 4
+            if mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192] > msg.value:
+                require not stor4[mem[0]]
+                if msg.value <= 0:
+                    require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                    _20194 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                    require idx < mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                    _20247 = mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 224]
+                    require mem[_10039] > 2
+                    require mem[_10039] <= 21
+                    require 1 == bool(mem[_10039])
+                    require ext_code.size(registryAddress)
+                    call registryAddress.0xbb34534c with:
+                         gas gas_remaining wei
+                        args 'BancorGasPriceLimit'
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    mem[mem[64]] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+                    mem[mem[64] + 4] = block.gasprice
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).0x6b4dff1f with:
+                         gas gas_remaining wei
+                        args block.gasprice
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require 0 < mem[_10039]
+                    _20832 = mem[_10039 + 32]
+                    mem[mem[64] + 4] = 'ContractFeatures'
+                    require ext_code.size(registryAddress)
+                    call registryAddress.0xbb34534c with:
+                         gas gas_remaining wei
+                        args 'ContractFeatures'
+                    mem[mem[64]] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    _21031 = mem[_10039]
+                    t = 1
+                    u = 0
+                    u = 0
+                    v = 0
+                    v = _20832
+                    w = _20194
+                    while t < _21031:
+                        require t < mem[_10039]
+                        _30149 = mem[(32 * t) + _10039 + 32]
+                        require t + 1 < mem[_10039]
+                        _30356 = mem[(32 * t + 1) + _10039 + 32]
+                        require ext_code.size(mem[(32 * t) + _10039 + 44 len 20])
+                        call mem[(32 * t) + _10039 + 44 len 20].0x8da5cb5b with:
+                             gas gas_remaining wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).0xa5fbf287 with:
+                             gas gas_remaining wei
+                            args address(ext_call.return_data[0]), 1
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if ext_call.return_data[0]:
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).conversionWhitelist() with:
+                                 gas gas_remaining wei
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if address(ext_call.return_data[0]):
+                                require ext_code.size(address(ext_call.return_data[0]))
+                                call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                     gas gas_remaining wei
+                                    args address(arg5)
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                        if address(v) != mem[(32 * t) + _10039 + 44 len 20]:
+                            require ext_code.size(address(v))
+                            call address(v).0xdd62ed3e with:
+                                 gas gas_remaining wei
+                                args this.address, address(ext_call.return_data[0])
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if ext_call.return_data[0] < w:
+                                require ext_code.size(address(v))
+                                call address(v).0xdd62ed3e with:
+                                     gas gas_remaining wei
+                                    args this.address, address(ext_call.return_data[0])
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_code.size(address(v))
+                                if ext_call.return_data[0]:
+                                    call address(v).approve(address arg1, uint256 arg2) with:
+                                         gas gas_remaining wei
+                                        args address(ext_call.return_data[0]), 0
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    require ext_call.return_data[0]
+                                call address(v).approve(address arg1, uint256 arg2) with:
+                                     gas gas_remaining wei
+                                    args address(ext_call.return_data[0]), w
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                        mem[mem[64] + 4] = address(v)
+                        mem[mem[64] + 36] = address(_30356)
+                        mem[mem[64] + 68] = w
+                        if t == _21031 - 2:
+                            mem[mem[64] + 100] = _20247
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                 gas gas_remaining wei
+                                args address(v), address(_30356), w, _20247
+                        else:
+                            mem[mem[64] + 100] = 1
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                 gas gas_remaining wei
+                                args address(v), address(_30356), w, 1
+                        mem[mem[64]] = ext_call.return_data[0]
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        t = t + 2
+                        u = ext_call.return_data[0]
+                        u = _30356
+                        v = _30149
+                        v = _30356
+                        w = ext_call.return_data[0]
+                        continue 
+                    mem[0] = address(u)
+                    mem[32] = 4
+                    if stor4[address(u)]:
+                        mem[mem[64]] = 0x205c287800000000000000000000000000000000000000000000000000000000
+                        mem[mem[64] + 4] = arg5
+                        mem[mem[64] + 36] = w
+                        require ext_code.size(address(u))
+                        call address(u).withdrawTo(address arg1, uint256 arg2) with:
+                             gas gas_remaining wei
+                            args address(arg5), w
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                    else:
+                        mem[mem[64] + 4] = arg5
+                        mem[mem[64] + 36] = w
+                        require ext_code.size(address(u))
+                        call address(u).0xa9059cbb with:
+                             gas gas_remaining wei
+                            args address(arg5), w
+                        mem[mem[64]] = ext_call.return_data[0]
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_call.return_data[0]
+                    require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                    mem[(32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 192] = w
+                    s = _20066
+                    s = _10031
+                    s = _10039
+                    idx = idx + 1
+                    s = _10031
+                    s = s
+                    continue 
+                mem[0] = address(_20066)
+                mem[32] = 4
+                require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                if not stor4[address(_20066)]:
+                    _20248 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                    require idx < mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                    _20314 = mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 224]
+                    require mem[_10039] > 2
+                    require mem[_10039] <= 21
+                    require 1 == bool(mem[_10039])
+                    require ext_code.size(registryAddress)
+                    call registryAddress.0xbb34534c with:
+                         gas gas_remaining wei
+                        args 'BancorGasPriceLimit'
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    mem[mem[64]] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+                    mem[mem[64] + 4] = block.gasprice
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).0x6b4dff1f with:
+                         gas gas_remaining wei
+                        args block.gasprice
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require 0 < mem[_10039]
+                    _20873 = mem[_10039 + 32]
+                    mem[mem[64] + 4] = 'ContractFeatures'
+                    require ext_code.size(registryAddress)
+                    call registryAddress.0xbb34534c with:
+                         gas gas_remaining wei
+                        args 'ContractFeatures'
+                    mem[mem[64]] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    _21093 = mem[_10039]
+                    t = 1
+                    u = 0
+                    u = 0
+                    v = 0
+                    v = _20873
+                    w = _20248
+                    while t < _21093:
+                        require t < mem[_10039]
+                        _30152 = mem[(32 * t) + _10039 + 32]
+                        require t + 1 < mem[_10039]
+                        _30363 = mem[(32 * t + 1) + _10039 + 32]
+                        require ext_code.size(mem[(32 * t) + _10039 + 44 len 20])
+                        call mem[(32 * t) + _10039 + 44 len 20].0x8da5cb5b with:
+                             gas gas_remaining wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).0xa5fbf287 with:
+                             gas gas_remaining wei
+                            args address(ext_call.return_data[0]), 1
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if ext_call.return_data[0]:
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).conversionWhitelist() with:
+                                 gas gas_remaining wei
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if address(ext_call.return_data[0]):
+                                require ext_code.size(address(ext_call.return_data[0]))
+                                call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                     gas gas_remaining wei
+                                    args address(arg5)
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                        if address(v) != mem[(32 * t) + _10039 + 44 len 20]:
+                            require ext_code.size(address(v))
+                            call address(v).0xdd62ed3e with:
+                                 gas gas_remaining wei
+                                args this.address, address(ext_call.return_data[0])
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if ext_call.return_data[0] < w:
+                                require ext_code.size(address(v))
+                                call address(v).0xdd62ed3e with:
+                                     gas gas_remaining wei
+                                    args this.address, address(ext_call.return_data[0])
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_code.size(address(v))
+                                if ext_call.return_data[0]:
+                                    call address(v).approve(address arg1, uint256 arg2) with:
+                                         gas gas_remaining wei
+                                        args address(ext_call.return_data[0]), 0
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    require ext_call.return_data[0]
+                                call address(v).approve(address arg1, uint256 arg2) with:
+                                     gas gas_remaining wei
+                                    args address(ext_call.return_data[0]), w
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                        mem[mem[64] + 4] = address(v)
+                        mem[mem[64] + 36] = address(_30363)
+                        mem[mem[64] + 68] = w
+                        if t == _21093 - 2:
+                            mem[mem[64] + 100] = _20314
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                 gas gas_remaining wei
+                                args address(v), address(_30363), w, _20314
+                        else:
+                            mem[mem[64] + 100] = 1
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                 gas gas_remaining wei
+                                args address(v), address(_30363), w, 1
+                        mem[mem[64]] = ext_call.return_data[0]
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        t = t + 2
+                        u = ext_call.return_data[0]
+                        u = _30363
+                        v = _30152
+                        v = _30363
+                        w = ext_call.return_data[0]
+                        continue 
+                    mem[0] = address(u)
+                    mem[32] = 4
+                    if stor4[address(u)]:
+                        mem[mem[64]] = 0x205c287800000000000000000000000000000000000000000000000000000000
+                        mem[mem[64] + 4] = arg5
+                        mem[mem[64] + 36] = w
+                        require ext_code.size(address(u))
+                        call address(u).withdrawTo(address arg1, uint256 arg2) with:
+                             gas gas_remaining wei
+                            args address(arg5), w
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                    else:
+                        mem[mem[64] + 4] = arg5
+                        mem[mem[64] + 36] = w
+                        require ext_code.size(address(u))
+                        call address(u).0xa9059cbb with:
+                             gas gas_remaining wei
+                            args address(arg5), w
+                        mem[mem[64]] = ext_call.return_data[0]
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_call.return_data[0]
+                    require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                    mem[(32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 192] = w
+                    s = _20066
+                    s = _10031
+                    s = _10039
+                    idx = idx + 1
+                    s = _10031
+                    s = s
+                    continue 
+                _20250 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                mem[mem[64]] = 0xd0e30db000000000000000000000000000000000000000000000000000000000
+                require ext_code.size(address(_20066))
+                call address(_20066).deposit() with:
+                   value _20250 wei
+                     gas gas_remaining wei
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                _20401 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                _20462 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                require idx < mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                _20492 = mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 224]
+                require mem[_10039] > 2
+                require mem[_10039] <= 21
+                require 1 == bool(mem[_10039])
+                require ext_code.size(registryAddress)
+                call registryAddress.0xbb34534c with:
+                     gas gas_remaining wei
+                    args 'BancorGasPriceLimit'
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                mem[mem[64]] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+                mem[mem[64] + 4] = block.gasprice
+                require ext_code.size(address(ext_call.return_data[0]))
+                call address(ext_call.return_data[0]).0x6b4dff1f with:
+                     gas gas_remaining wei
+                    args block.gasprice
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require 0 < mem[_10039]
+                _21163 = mem[_10039 + 32]
+                mem[mem[64] + 4] = 'ContractFeatures'
+                require ext_code.size(registryAddress)
+                call registryAddress.0xbb34534c with:
+                     gas gas_remaining wei
+                    args 'ContractFeatures'
+                mem[mem[64]] = ext_call.return_data[0]
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                _21552 = mem[_10039]
+                t = 1
+                u = 0
+                u = 0
+                v = 0
+                v = _21163
+                w = _20462
+                while t < _21552:
+                    require t < mem[_10039]
+                    _30155 = mem[(32 * t) + _10039 + 32]
+                    require t + 1 < mem[_10039]
+                    _30370 = mem[(32 * t + 1) + _10039 + 32]
+                    require ext_code.size(mem[(32 * t) + _10039 + 44 len 20])
+                    call mem[(32 * t) + _10039 + 44 len 20].0x8da5cb5b with:
+                         gas gas_remaining wei
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).0xa5fbf287 with:
+                         gas gas_remaining wei
+                        args address(ext_call.return_data[0]), 1
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    if ext_call.return_data[0]:
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).conversionWhitelist() with:
+                             gas gas_remaining wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if address(ext_call.return_data[0]):
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                 gas gas_remaining wei
+                                args address(arg5)
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    if address(v) != mem[(32 * t) + _10039 + 44 len 20]:
+                        require ext_code.size(address(v))
+                        call address(v).0xdd62ed3e with:
+                             gas gas_remaining wei
+                            args this.address, address(ext_call.return_data[0])
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if ext_call.return_data[0] < w:
+                            require ext_code.size(address(v))
+                            call address(v).0xdd62ed3e with:
+                                 gas gas_remaining wei
+                                args this.address, address(ext_call.return_data[0])
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_code.size(address(v))
+                            if ext_call.return_data[0]:
+                                call address(v).approve(address arg1, uint256 arg2) with:
+                                     gas gas_remaining wei
+                                    args address(ext_call.return_data[0]), 0
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                            call address(v).approve(address arg1, uint256 arg2) with:
+                                 gas gas_remaining wei
+                                args address(ext_call.return_data[0]), w
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    mem[mem[64] + 4] = address(v)
+                    mem[mem[64] + 36] = address(_30370)
+                    mem[mem[64] + 68] = w
+                    if t == _21552 - 2:
+                        mem[mem[64] + 100] = _20492
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(v), address(_30370), w, _20492
+                    else:
+                        mem[mem[64] + 100] = 1
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(v), address(_30370), w, 1
+                    mem[mem[64]] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    t = t + 2
+                    u = ext_call.return_data[0]
+                    u = _30370
+                    v = _30155
+                    v = _30370
+                    w = ext_call.return_data[0]
+                    continue 
+                mem[0] = address(u)
+                mem[32] = 4
+                if stor4[address(u)]:
+                    mem[mem[64]] = 0x205c287800000000000000000000000000000000000000000000000000000000
+                    mem[mem[64] + 4] = arg5
+                    mem[mem[64] + 36] = w
+                    require ext_code.size(address(u))
+                    call address(u).withdrawTo(address arg1, uint256 arg2) with:
+                         gas gas_remaining wei
+                        args address(arg5), w
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                else:
+                    mem[mem[64] + 4] = arg5
+                    mem[mem[64] + 36] = w
+                    require ext_code.size(address(u))
+                    call address(u).0xa9059cbb with:
+                         gas gas_remaining wei
+                        args address(arg5), w
+                    mem[mem[64]] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    require ext_call.return_data[0]
+                require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                mem[(32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 192] = w
+                s = _20066
+                s = _10031
+                s = _10039
+                idx = idx + 1
+                s = _10031
+                s = s + _20401
+                continue 
+            if stor4[mem[0]]:
+                if msg.value <= 0:
+                    require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                    _20198 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                    require idx < mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                    _20253 = mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 224]
+                    require mem[_10039] > 2
+                    require mem[_10039] <= 21
+                    require 1 == bool(mem[_10039])
+                    require ext_code.size(registryAddress)
+                    call registryAddress.0xbb34534c with:
+                         gas gas_remaining wei
+                        args 'BancorGasPriceLimit'
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    mem[mem[64]] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+                    mem[mem[64] + 4] = block.gasprice
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).0x6b4dff1f with:
+                         gas gas_remaining wei
+                        args block.gasprice
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require 0 < mem[_10039]
+                    _20834 = mem[_10039 + 32]
+                    mem[mem[64] + 4] = 'ContractFeatures'
+                    require ext_code.size(registryAddress)
+                    call registryAddress.0xbb34534c with:
+                         gas gas_remaining wei
+                        args 'ContractFeatures'
+                    mem[mem[64]] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    _21034 = mem[_10039]
+                    t = 1
+                    u = 0
+                    u = 0
+                    v = 0
+                    v = _20834
+                    w = _20198
+                    while t < _21034:
+                        require t < mem[_10039]
+                        _30158 = mem[(32 * t) + _10039 + 32]
+                        require t + 1 < mem[_10039]
+                        _30377 = mem[(32 * t + 1) + _10039 + 32]
+                        require ext_code.size(mem[(32 * t) + _10039 + 44 len 20])
+                        call mem[(32 * t) + _10039 + 44 len 20].0x8da5cb5b with:
+                             gas gas_remaining wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).0xa5fbf287 with:
+                             gas gas_remaining wei
+                            args address(ext_call.return_data[0]), 1
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if ext_call.return_data[0]:
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).conversionWhitelist() with:
+                                 gas gas_remaining wei
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if address(ext_call.return_data[0]):
+                                require ext_code.size(address(ext_call.return_data[0]))
+                                call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                     gas gas_remaining wei
+                                    args address(arg5)
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                        if address(v) != mem[(32 * t) + _10039 + 44 len 20]:
+                            require ext_code.size(address(v))
+                            call address(v).0xdd62ed3e with:
+                                 gas gas_remaining wei
+                                args this.address, address(ext_call.return_data[0])
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if ext_call.return_data[0] < w:
+                                require ext_code.size(address(v))
+                                call address(v).0xdd62ed3e with:
+                                     gas gas_remaining wei
+                                    args this.address, address(ext_call.return_data[0])
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_code.size(address(v))
+                                if ext_call.return_data[0]:
+                                    call address(v).approve(address arg1, uint256 arg2) with:
+                                         gas gas_remaining wei
+                                        args address(ext_call.return_data[0]), 0
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    require ext_call.return_data[0]
+                                call address(v).approve(address arg1, uint256 arg2) with:
+                                     gas gas_remaining wei
+                                    args address(ext_call.return_data[0]), w
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                        mem[mem[64] + 4] = address(v)
+                        mem[mem[64] + 36] = address(_30377)
+                        mem[mem[64] + 68] = w
+                        if t == _21034 - 2:
+                            mem[mem[64] + 100] = _20253
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                 gas gas_remaining wei
+                                args address(v), address(_30377), w, _20253
+                        else:
+                            mem[mem[64] + 100] = 1
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                 gas gas_remaining wei
+                                args address(v), address(_30377), w, 1
+                        mem[mem[64]] = ext_call.return_data[0]
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        t = t + 2
+                        u = ext_call.return_data[0]
+                        u = _30377
+                        v = _30158
+                        v = _30377
+                        w = ext_call.return_data[0]
+                        continue 
+                    mem[0] = address(u)
+                    mem[32] = 4
+                    if stor4[address(u)]:
+                        mem[mem[64]] = 0x205c287800000000000000000000000000000000000000000000000000000000
+                        mem[mem[64] + 4] = arg5
+                        mem[mem[64] + 36] = w
+                        require ext_code.size(address(u))
+                        call address(u).withdrawTo(address arg1, uint256 arg2) with:
+                             gas gas_remaining wei
+                            args address(arg5), w
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                    else:
+                        mem[mem[64] + 4] = arg5
+                        mem[mem[64] + 36] = w
+                        require ext_code.size(address(u))
+                        call address(u).0xa9059cbb with:
+                             gas gas_remaining wei
+                            args address(arg5), w
+                        mem[mem[64]] = ext_call.return_data[0]
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_call.return_data[0]
+                    require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                    mem[(32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 192] = w
+                    s = _20066
+                    s = _10031
+                    s = _10039
+                    idx = idx + 1
+                    s = _10031
+                    s = s
+                    continue 
+                mem[0] = address(_20066)
+                mem[32] = 4
+                require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                if not stor4[address(_20066)]:
+                    _20254 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                    require idx < mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                    _20316 = mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 224]
+                    require mem[_10039] > 2
+                    require mem[_10039] <= 21
+                    require 1 == bool(mem[_10039])
+                    require ext_code.size(registryAddress)
+                    call registryAddress.0xbb34534c with:
+                         gas gas_remaining wei
+                        args 'BancorGasPriceLimit'
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    mem[mem[64]] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+                    mem[mem[64] + 4] = block.gasprice
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).0x6b4dff1f with:
+                         gas gas_remaining wei
+                        args block.gasprice
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require 0 < mem[_10039]
+                    _20877 = mem[_10039 + 32]
+                    mem[mem[64] + 4] = 'ContractFeatures'
+                    require ext_code.size(registryAddress)
+                    call registryAddress.0xbb34534c with:
+                         gas gas_remaining wei
+                        args 'ContractFeatures'
+                    mem[mem[64]] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    _21096 = mem[_10039]
+                    t = 1
+                    u = 0
+                    u = 0
+                    v = 0
+                    v = _20877
+                    w = _20254
+                    while t < _21096:
+                        require t < mem[_10039]
+                        _30161 = mem[(32 * t) + _10039 + 32]
+                        require t + 1 < mem[_10039]
+                        _30384 = mem[(32 * t + 1) + _10039 + 32]
+                        require ext_code.size(mem[(32 * t) + _10039 + 44 len 20])
+                        call mem[(32 * t) + _10039 + 44 len 20].0x8da5cb5b with:
+                             gas gas_remaining wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).0xa5fbf287 with:
+                             gas gas_remaining wei
+                            args address(ext_call.return_data[0]), 1
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if ext_call.return_data[0]:
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).conversionWhitelist() with:
+                                 gas gas_remaining wei
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if address(ext_call.return_data[0]):
+                                require ext_code.size(address(ext_call.return_data[0]))
+                                call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                     gas gas_remaining wei
+                                    args address(arg5)
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                        if address(v) != mem[(32 * t) + _10039 + 44 len 20]:
+                            require ext_code.size(address(v))
+                            call address(v).0xdd62ed3e with:
+                                 gas gas_remaining wei
+                                args this.address, address(ext_call.return_data[0])
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if ext_call.return_data[0] < w:
+                                require ext_code.size(address(v))
+                                call address(v).0xdd62ed3e with:
+                                     gas gas_remaining wei
+                                    args this.address, address(ext_call.return_data[0])
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_code.size(address(v))
+                                if ext_call.return_data[0]:
+                                    call address(v).approve(address arg1, uint256 arg2) with:
+                                         gas gas_remaining wei
+                                        args address(ext_call.return_data[0]), 0
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    require ext_call.return_data[0]
+                                call address(v).approve(address arg1, uint256 arg2) with:
+                                     gas gas_remaining wei
+                                    args address(ext_call.return_data[0]), w
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                        mem[mem[64] + 4] = address(v)
+                        mem[mem[64] + 36] = address(_30384)
+                        mem[mem[64] + 68] = w
+                        if t == _21096 - 2:
+                            mem[mem[64] + 100] = _20316
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                 gas gas_remaining wei
+                                args address(v), address(_30384), w, _20316
+                        else:
+                            mem[mem[64] + 100] = 1
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                 gas gas_remaining wei
+                                args address(v), address(_30384), w, 1
+                        mem[mem[64]] = ext_call.return_data[0]
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        t = t + 2
+                        u = ext_call.return_data[0]
+                        u = _30384
+                        v = _30161
+                        v = _30384
+                        w = ext_call.return_data[0]
+                        continue 
+                    mem[0] = address(u)
+                    mem[32] = 4
+                    if stor4[address(u)]:
+                        mem[mem[64]] = 0x205c287800000000000000000000000000000000000000000000000000000000
+                        mem[mem[64] + 4] = arg5
+                        mem[mem[64] + 36] = w
+                        require ext_code.size(address(u))
+                        call address(u).withdrawTo(address arg1, uint256 arg2) with:
+                             gas gas_remaining wei
+                            args address(arg5), w
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                    else:
+                        mem[mem[64] + 4] = arg5
+                        mem[mem[64] + 36] = w
+                        require ext_code.size(address(u))
+                        call address(u).0xa9059cbb with:
+                             gas gas_remaining wei
+                            args address(arg5), w
+                        mem[mem[64]] = ext_call.return_data[0]
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_call.return_data[0]
+                    require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                    mem[(32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 192] = w
+                    s = _20066
+                    s = _10031
+                    s = _10039
+                    idx = idx + 1
+                    s = _10031
+                    s = s
+                    continue 
+                _20256 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                mem[mem[64]] = 0xd0e30db000000000000000000000000000000000000000000000000000000000
+                require ext_code.size(address(_20066))
+                call address(_20066).deposit() with:
+                   value _20256 wei
+                     gas gas_remaining wei
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                _20403 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                _20465 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                require idx < mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                _20493 = mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 224]
+                require mem[_10039] > 2
+                require mem[_10039] <= 21
+                require 1 == bool(mem[_10039])
+                require ext_code.size(registryAddress)
+                call registryAddress.0xbb34534c with:
+                     gas gas_remaining wei
+                    args 'BancorGasPriceLimit'
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                mem[mem[64]] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+                mem[mem[64] + 4] = block.gasprice
+                require ext_code.size(address(ext_call.return_data[0]))
+                call address(ext_call.return_data[0]).0x6b4dff1f with:
+                     gas gas_remaining wei
+                    args block.gasprice
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require 0 < mem[_10039]
+                _21165 = mem[_10039 + 32]
+                mem[mem[64] + 4] = 'ContractFeatures'
+                require ext_code.size(registryAddress)
+                call registryAddress.0xbb34534c with:
+                     gas gas_remaining wei
+                    args 'ContractFeatures'
+                mem[mem[64]] = ext_call.return_data[0]
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                _21556 = mem[_10039]
+                t = 1
+                u = 0
+                u = 0
+                v = 0
+                v = _21165
+                w = _20465
+                while t < _21556:
+                    require t < mem[_10039]
+                    _30164 = mem[(32 * t) + _10039 + 32]
+                    require t + 1 < mem[_10039]
+                    _30391 = mem[(32 * t + 1) + _10039 + 32]
+                    require ext_code.size(mem[(32 * t) + _10039 + 44 len 20])
+                    call mem[(32 * t) + _10039 + 44 len 20].0x8da5cb5b with:
+                         gas gas_remaining wei
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).0xa5fbf287 with:
+                         gas gas_remaining wei
+                        args address(ext_call.return_data[0]), 1
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    if ext_call.return_data[0]:
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).conversionWhitelist() with:
+                             gas gas_remaining wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if address(ext_call.return_data[0]):
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                 gas gas_remaining wei
+                                args address(arg5)
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    if address(v) != mem[(32 * t) + _10039 + 44 len 20]:
+                        require ext_code.size(address(v))
+                        call address(v).0xdd62ed3e with:
+                             gas gas_remaining wei
+                            args this.address, address(ext_call.return_data[0])
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if ext_call.return_data[0] < w:
+                            require ext_code.size(address(v))
+                            call address(v).0xdd62ed3e with:
+                                 gas gas_remaining wei
+                                args this.address, address(ext_call.return_data[0])
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_code.size(address(v))
+                            if ext_call.return_data[0]:
+                                call address(v).approve(address arg1, uint256 arg2) with:
+                                     gas gas_remaining wei
+                                    args address(ext_call.return_data[0]), 0
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                            call address(v).approve(address arg1, uint256 arg2) with:
+                                 gas gas_remaining wei
+                                args address(ext_call.return_data[0]), w
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    mem[mem[64] + 4] = address(v)
+                    mem[mem[64] + 36] = address(_30391)
+                    mem[mem[64] + 68] = w
+                    if t == _21556 - 2:
+                        mem[mem[64] + 100] = _20493
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(v), address(_30391), w, _20493
+                    else:
+                        mem[mem[64] + 100] = 1
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(v), address(_30391), w, 1
+                    mem[mem[64]] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    t = t + 2
+                    u = ext_call.return_data[0]
+                    u = _30391
+                    v = _30164
+                    v = _30391
+                    w = ext_call.return_data[0]
+                    continue 
+                mem[0] = address(u)
+                mem[32] = 4
+                if stor4[address(u)]:
+                    mem[mem[64]] = 0x205c287800000000000000000000000000000000000000000000000000000000
+                    mem[mem[64] + 4] = arg5
+                    mem[mem[64] + 36] = w
+                    require ext_code.size(address(u))
+                    call address(u).withdrawTo(address arg1, uint256 arg2) with:
+                         gas gas_remaining wei
+                        args address(arg5), w
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                else:
+                    mem[mem[64] + 4] = arg5
+                    mem[mem[64] + 36] = w
+                    require ext_code.size(address(u))
+                    call address(u).0xa9059cbb with:
+                         gas gas_remaining wei
+                        args address(arg5), w
+                    mem[mem[64]] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    require ext_call.return_data[0]
+                require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                mem[(32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 192] = w
+                s = _20066
+                s = _10031
+                s = _10039
+                idx = idx + 1
+                s = _10031
+                s = s + _20403
+                continue 
+            mem[0] = address(_20066)
+            mem[32] = 4
+            require not stor4[address(_20066)]
+            if msg.value <= 0:
+                require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                _20259 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                require idx < mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                _20317 = mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 224]
+                require mem[_10039] > 2
+                require mem[_10039] <= 21
+                require 1 == bool(mem[_10039])
+                require ext_code.size(registryAddress)
+                call registryAddress.0xbb34534c with:
+                     gas gas_remaining wei
+                    args 'BancorGasPriceLimit'
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                mem[mem[64]] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+                mem[mem[64] + 4] = block.gasprice
+                require ext_code.size(address(ext_call.return_data[0]))
+                call address(ext_call.return_data[0]).0x6b4dff1f with:
+                     gas gas_remaining wei
+                    args block.gasprice
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require 0 < mem[_10039]
+                _20879 = mem[_10039 + 32]
+                mem[mem[64] + 4] = 'ContractFeatures'
+                require ext_code.size(registryAddress)
+                call registryAddress.0xbb34534c with:
+                     gas gas_remaining wei
+                    args 'ContractFeatures'
+                mem[mem[64]] = ext_call.return_data[0]
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                _21099 = mem[_10039]
+                t = 1
+                u = 0
+                u = 0
+                v = 0
+                v = _20879
+                w = _20259
+                while t < _21099:
+                    require t < mem[_10039]
+                    _30167 = mem[(32 * t) + _10039 + 32]
+                    require t + 1 < mem[_10039]
+                    _30398 = mem[(32 * t + 1) + _10039 + 32]
+                    require ext_code.size(mem[(32 * t) + _10039 + 44 len 20])
+                    call mem[(32 * t) + _10039 + 44 len 20].0x8da5cb5b with:
+                         gas gas_remaining wei
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).0xa5fbf287 with:
+                         gas gas_remaining wei
+                        args address(ext_call.return_data[0]), 1
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    if ext_call.return_data[0]:
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).conversionWhitelist() with:
+                             gas gas_remaining wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if address(ext_call.return_data[0]):
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                 gas gas_remaining wei
+                                args address(arg5)
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    if address(v) != mem[(32 * t) + _10039 + 44 len 20]:
+                        require ext_code.size(address(v))
+                        call address(v).0xdd62ed3e with:
+                             gas gas_remaining wei
+                            args this.address, address(ext_call.return_data[0])
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if ext_call.return_data[0] < w:
+                            require ext_code.size(address(v))
+                            call address(v).0xdd62ed3e with:
+                                 gas gas_remaining wei
+                                args this.address, address(ext_call.return_data[0])
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_code.size(address(v))
+                            if ext_call.return_data[0]:
+                                call address(v).approve(address arg1, uint256 arg2) with:
+                                     gas gas_remaining wei
+                                    args address(ext_call.return_data[0]), 0
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                            call address(v).approve(address arg1, uint256 arg2) with:
+                                 gas gas_remaining wei
+                                args address(ext_call.return_data[0]), w
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    mem[mem[64] + 4] = address(v)
+                    mem[mem[64] + 36] = address(_30398)
+                    mem[mem[64] + 68] = w
+                    if t == _21099 - 2:
+                        mem[mem[64] + 100] = _20317
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(v), address(_30398), w, _20317
+                    else:
+                        mem[mem[64] + 100] = 1
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(v), address(_30398), w, 1
+                    mem[mem[64]] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    t = t + 2
+                    u = ext_call.return_data[0]
+                    u = _30398
+                    v = _30167
+                    v = _30398
+                    w = ext_call.return_data[0]
+                    continue 
+                mem[0] = address(u)
+                mem[32] = 4
+                if stor4[address(u)]:
+                    mem[mem[64]] = 0x205c287800000000000000000000000000000000000000000000000000000000
+                    mem[mem[64] + 4] = arg5
+                    mem[mem[64] + 36] = w
+                    require ext_code.size(address(u))
+                    call address(u).withdrawTo(address arg1, uint256 arg2) with:
+                         gas gas_remaining wei
+                        args address(arg5), w
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                else:
+                    mem[mem[64] + 4] = arg5
+                    mem[mem[64] + 36] = w
+                    require ext_code.size(address(u))
+                    call address(u).0xa9059cbb with:
+                         gas gas_remaining wei
+                        args address(arg5), w
+                    mem[mem[64]] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    require ext_call.return_data[0]
+                require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                mem[(32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 192] = w
+                s = _20066
+                s = _10031
+                s = _10039
+                idx = idx + 1
+                s = _10031
+                s = s
+                continue 
+            mem[0] = address(_20066)
+            mem[32] = 4
+            require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+            if not stor4[address(_20066)]:
+                _20318 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                require idx < mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                _20368 = mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 224]
+                require mem[_10039] > 2
+                require mem[_10039] <= 21
+                require 1 == bool(mem[_10039])
+                require ext_code.size(registryAddress)
+                call registryAddress.0xbb34534c with:
+                     gas gas_remaining wei
+                    args 'BancorGasPriceLimit'
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                mem[mem[64]] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+                mem[mem[64] + 4] = block.gasprice
+                require ext_code.size(address(ext_call.return_data[0]))
+                call address(ext_call.return_data[0]).0x6b4dff1f with:
+                     gas gas_remaining wei
+                    args block.gasprice
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require 0 < mem[_10039]
+                _20939 = mem[_10039 + 32]
+                mem[mem[64] + 4] = 'ContractFeatures'
+                require ext_code.size(registryAddress)
+                call registryAddress.0xbb34534c with:
+                     gas gas_remaining wei
+                    args 'ContractFeatures'
+                mem[mem[64]] = ext_call.return_data[0]
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                _21167 = mem[_10039]
+                t = 1
+                u = 0
+                u = 0
+                v = 0
+                v = _20939
+                w = _20318
+                while t < _21167:
+                    require t < mem[_10039]
+                    _30170 = mem[(32 * t) + _10039 + 32]
+                    require t + 1 < mem[_10039]
+                    _30405 = mem[(32 * t + 1) + _10039 + 32]
+                    require ext_code.size(mem[(32 * t) + _10039 + 44 len 20])
+                    call mem[(32 * t) + _10039 + 44 len 20].0x8da5cb5b with:
+                         gas gas_remaining wei
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).0xa5fbf287 with:
+                         gas gas_remaining wei
+                        args address(ext_call.return_data[0]), 1
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    if ext_call.return_data[0]:
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).conversionWhitelist() with:
+                             gas gas_remaining wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if address(ext_call.return_data[0]):
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                 gas gas_remaining wei
+                                args address(arg5)
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    if address(v) != mem[(32 * t) + _10039 + 44 len 20]:
+                        require ext_code.size(address(v))
+                        call address(v).0xdd62ed3e with:
+                             gas gas_remaining wei
+                            args this.address, address(ext_call.return_data[0])
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if ext_call.return_data[0] < w:
+                            require ext_code.size(address(v))
+                            call address(v).0xdd62ed3e with:
+                                 gas gas_remaining wei
+                                args this.address, address(ext_call.return_data[0])
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_code.size(address(v))
+                            if ext_call.return_data[0]:
+                                call address(v).approve(address arg1, uint256 arg2) with:
+                                     gas gas_remaining wei
+                                    args address(ext_call.return_data[0]), 0
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                            call address(v).approve(address arg1, uint256 arg2) with:
+                                 gas gas_remaining wei
+                                args address(ext_call.return_data[0]), w
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    mem[mem[64] + 4] = address(v)
+                    mem[mem[64] + 36] = address(_30405)
+                    mem[mem[64] + 68] = w
+                    if t == _21167 - 2:
+                        mem[mem[64] + 100] = _20368
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(v), address(_30405), w, _20368
+                    else:
+                        mem[mem[64] + 100] = 1
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(v), address(_30405), w, 1
+                    mem[mem[64]] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    t = t + 2
+                    u = ext_call.return_data[0]
+                    u = _30405
+                    v = _30170
+                    v = _30405
+                    w = ext_call.return_data[0]
+                    continue 
+                mem[0] = address(u)
+                mem[32] = 4
+                if stor4[address(u)]:
+                    mem[mem[64]] = 0x205c287800000000000000000000000000000000000000000000000000000000
+                    mem[mem[64] + 4] = arg5
+                    mem[mem[64] + 36] = w
+                    require ext_code.size(address(u))
+                    call address(u).withdrawTo(address arg1, uint256 arg2) with:
+                         gas gas_remaining wei
+                        args address(arg5), w
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                else:
+                    mem[mem[64] + 4] = arg5
+                    mem[mem[64] + 36] = w
+                    require ext_code.size(address(u))
+                    call address(u).0xa9059cbb with:
+                         gas gas_remaining wei
+                        args address(arg5), w
+                    mem[mem[64]] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    require ext_call.return_data[0]
+                require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                mem[(32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 192] = w
+                s = _20066
+                s = _10031
+                s = _10039
+                idx = idx + 1
+                s = _10031
+                s = s
+                continue 
+            _20320 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+            mem[mem[64]] = 0xd0e30db000000000000000000000000000000000000000000000000000000000
+            require ext_code.size(address(_20066))
+            call address(_20066).deposit() with:
+               value _20320 wei
+                 gas gas_remaining wei
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+            _20436 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+            require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+            _20495 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+            require idx < mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + 192]
+            _20514 = mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 224]
+            require mem[_10039] > 2
+            require mem[_10039] <= 21
+            require 1 == bool(mem[_10039])
+            require ext_code.size(registryAddress)
+            call registryAddress.0xbb34534c with:
+                 gas gas_remaining wei
+                args 'BancorGasPriceLimit'
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require return_data.size >= 32
+            mem[mem[64]] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+            mem[mem[64] + 4] = block.gasprice
+            require ext_code.size(address(ext_call.return_data[0]))
+            call address(ext_call.return_data[0]).0x6b4dff1f with:
+                 gas gas_remaining wei
+                args block.gasprice
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require 0 < mem[_10039]
+            _21234 = mem[_10039 + 32]
+            mem[mem[64] + 4] = 'ContractFeatures'
+            require ext_code.size(registryAddress)
+            call registryAddress.0xbb34534c with:
+                 gas gas_remaining wei
+                args 'ContractFeatures'
+            mem[mem[64]] = ext_call.return_data[0]
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require return_data.size >= 32
+            _21652 = mem[_10039]
+            t = 1
+            u = 0
+            u = 0
+            v = 0
+            v = _21234
+            w = _20495
+            while t < _21652:
+                require t < mem[_10039]
+                _30173 = mem[(32 * t) + _10039 + 32]
+                require t + 1 < mem[_10039]
+                _30412 = mem[(32 * t + 1) + _10039 + 32]
+                require ext_code.size(mem[(32 * t) + _10039 + 44 len 20])
+                call mem[(32 * t) + _10039 + 44 len 20].0x8da5cb5b with:
+                     gas gas_remaining wei
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                require ext_code.size(address(ext_call.return_data[0]))
+                call address(ext_call.return_data[0]).0xa5fbf287 with:
+                     gas gas_remaining wei
+                    args address(ext_call.return_data[0]), 1
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                if ext_call.return_data[0]:
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).conversionWhitelist() with:
+                         gas gas_remaining wei
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    if address(ext_call.return_data[0]):
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                             gas gas_remaining wei
+                            args address(arg5)
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_call.return_data[0]
+                if address(v) != mem[(32 * t) + _10039 + 44 len 20]:
+                    require ext_code.size(address(v))
+                    call address(v).0xdd62ed3e with:
+                         gas gas_remaining wei
+                        args this.address, address(ext_call.return_data[0])
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    if ext_call.return_data[0] < w:
+                        require ext_code.size(address(v))
+                        call address(v).0xdd62ed3e with:
+                             gas gas_remaining wei
+                            args this.address, address(ext_call.return_data[0])
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_code.size(address(v))
+                        if ext_call.return_data[0]:
+                            call address(v).approve(address arg1, uint256 arg2) with:
+                                 gas gas_remaining wei
+                                args address(ext_call.return_data[0]), 0
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                        call address(v).approve(address arg1, uint256 arg2) with:
+                             gas gas_remaining wei
+                            args address(ext_call.return_data[0]), w
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_call.return_data[0]
+                mem[mem[64] + 4] = address(v)
+                mem[mem[64] + 36] = address(_30412)
+                mem[mem[64] + 68] = w
+                if t == _21652 - 2:
+                    mem[mem[64] + 100] = _20514
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                         gas gas_remaining wei
+                        args address(v), address(_30412), w, _20514
+                else:
+                    mem[mem[64] + 100] = 1
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                         gas gas_remaining wei
+                        args address(v), address(_30412), w, 1
+                mem[mem[64]] = ext_call.return_data[0]
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                t = t + 2
+                u = ext_call.return_data[0]
+                u = _30412
+                v = _30173
+                v = _30412
+                w = ext_call.return_data[0]
+                continue 
+            mem[0] = address(u)
+            mem[32] = 4
+            if stor4[address(u)]:
+                mem[mem[64]] = 0x205c287800000000000000000000000000000000000000000000000000000000
+                mem[mem[64] + 4] = arg5
+                mem[mem[64] + 36] = w
+                require ext_code.size(address(u))
+                call address(u).withdrawTo(address arg1, uint256 arg2) with:
+                     gas gas_remaining wei
+                    args address(arg5), w
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+            else:
+                mem[mem[64] + 4] = arg5
+                mem[mem[64] + 36] = w
+                require ext_code.size(address(u))
+                call address(u).0xa9059cbb with:
+                     gas gas_remaining wei
+                    args address(arg5), w
+                mem[mem[64]] = ext_call.return_data[0]
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                require ext_call.return_data[0]
+            require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+            mem[(32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 192] = w
+            s = _20066
+            s = _10031
+            s = _10039
+            idx = idx + 1
+            s = _10031
+            s = s + _20436
+            continue 
+        require idx + 1 < mem[(32 * arg1.length) + 128]
+        _10037 = mem[(32 * idx + 1) + (32 * arg1.length) + 160]
+        require idx < mem[(32 * arg1.length) + 128]
+        _10044 = mem[(32 * idx) + (32 * arg1.length) + 160]
+        _10045 = mem[64]
+        mem[mem[64]] = mem[(32 * idx + 1) + (32 * arg1.length) + 160] - mem[(32 * idx) + (32 * arg1.length) + 160]
+        mem[64] = mem[64] + (32 * _10037 - _10044) + 32
+        if not _10037 - _10044:
+            require idx < mem[(32 * arg1.length) + 128]
+            t = mem[(32 * idx) + (32 * arg1.length) + 160]
+            while t < _10037:
+                require t < mem[96]
+                require idx < mem[(32 * arg1.length) + 128]
+                require t - mem[(32 * idx) + (32 * arg1.length) + 160] < mem[_10045]
+                mem[_10045 + (32 * t - mem[(32 * idx) + (32 * arg1.length) + 160]) + 32] = mem[(32 * t) + 140 len 20]
+                t = t + 1
+                continue 
+            require 0 < mem[_10045]
+            _20069 = mem[_10045 + 32]
+            if 0 == msg.value:
+                if msg.value <= 0:
+                    require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                    _20119 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                    require idx < mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                    _20143 = mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 224]
+                    require mem[_10045] > 2
+                    require mem[_10045] <= 21
+                    require 1 == bool(mem[_10045])
+                    require ext_code.size(registryAddress)
+                    call registryAddress.0xbb34534c with:
+                         gas gas_remaining wei
+                        args 'BancorGasPriceLimit'
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    mem[mem[64]] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+                    mem[mem[64] + 4] = block.gasprice
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).0x6b4dff1f with:
+                         gas gas_remaining wei
+                        args block.gasprice
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require 0 < mem[_10045]
+                    _20727 = mem[_10045 + 32]
+                    mem[mem[64] + 4] = 'ContractFeatures'
+                    require ext_code.size(registryAddress)
+                    call registryAddress.0xbb34534c with:
+                         gas gas_remaining wei
+                        args 'ContractFeatures'
+                    mem[mem[64]] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    _20882 = mem[_10045]
+                    t = 1
+                    u = 0
+                    u = 0
+                    v = 0
+                    v = _20727
+                    w = _20119
+                    while t < _20882:
+                        require t < mem[_10045]
+                        _30176 = mem[(32 * t) + _10045 + 32]
+                        require t + 1 < mem[_10045]
+                        _30419 = mem[(32 * t + 1) + _10045 + 32]
+                        require ext_code.size(mem[(32 * t) + _10045 + 44 len 20])
+                        call mem[(32 * t) + _10045 + 44 len 20].0x8da5cb5b with:
+                             gas gas_remaining wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).0xa5fbf287 with:
+                             gas gas_remaining wei
+                            args address(ext_call.return_data[0]), 1
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if ext_call.return_data[0]:
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).conversionWhitelist() with:
+                                 gas gas_remaining wei
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if address(ext_call.return_data[0]):
+                                require ext_code.size(address(ext_call.return_data[0]))
+                                call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                     gas gas_remaining wei
+                                    args address(arg5)
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                        if address(v) != mem[(32 * t) + _10045 + 44 len 20]:
+                            require ext_code.size(address(v))
+                            call address(v).0xdd62ed3e with:
+                                 gas gas_remaining wei
+                                args this.address, address(ext_call.return_data[0])
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if ext_call.return_data[0] < w:
+                                require ext_code.size(address(v))
+                                call address(v).0xdd62ed3e with:
+                                     gas gas_remaining wei
+                                    args this.address, address(ext_call.return_data[0])
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_code.size(address(v))
+                                if ext_call.return_data[0]:
+                                    call address(v).approve(address arg1, uint256 arg2) with:
+                                         gas gas_remaining wei
+                                        args address(ext_call.return_data[0]), 0
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    require ext_call.return_data[0]
+                                call address(v).approve(address arg1, uint256 arg2) with:
+                                     gas gas_remaining wei
+                                    args address(ext_call.return_data[0]), w
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                        mem[mem[64] + 4] = address(v)
+                        mem[mem[64] + 36] = address(_30419)
+                        mem[mem[64] + 68] = w
+                        if t == _20882 - 2:
+                            mem[mem[64] + 100] = _20143
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                 gas gas_remaining wei
+                                args address(v), address(_30419), w, _20143
+                        else:
+                            mem[mem[64] + 100] = 1
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                 gas gas_remaining wei
+                                args address(v), address(_30419), w, 1
+                        mem[mem[64]] = ext_call.return_data[0]
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        t = t + 2
+                        u = ext_call.return_data[0]
+                        u = _30419
+                        v = _30176
+                        v = _30419
+                        w = ext_call.return_data[0]
+                        continue 
+                    mem[0] = address(u)
+                    mem[32] = 4
+                    if stor4[address(u)]:
+                        mem[mem[64]] = 0x205c287800000000000000000000000000000000000000000000000000000000
+                        mem[mem[64] + 4] = arg5
+                        mem[mem[64] + 36] = w
+                        require ext_code.size(address(u))
+                        call address(u).withdrawTo(address arg1, uint256 arg2) with:
+                             gas gas_remaining wei
+                            args address(arg5), w
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                    else:
+                        mem[mem[64] + 4] = arg5
+                        mem[mem[64] + 36] = w
+                        require ext_code.size(address(u))
+                        call address(u).0xa9059cbb with:
+                             gas gas_remaining wei
+                            args address(arg5), w
+                        mem[mem[64]] = ext_call.return_data[0]
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_call.return_data[0]
+                    require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                    mem[(32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 192] = w
+                    s = _20069
+                    s = _10037
+                    s = _10045
+                    idx = idx + 1
+                    s = _10037
+                    s = s
+                    continue 
+                mem[0] = mem[_10045 + 44 len 20]
+                mem[32] = 4
+                require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                if not stor4[mem[0]]:
+                    _20144 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                    require idx < mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                    _20170 = mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 224]
+                    require mem[_10045] > 2
+                    require mem[_10045] <= 21
+                    require 1 == bool(mem[_10045])
+                    require ext_code.size(registryAddress)
+                    call registryAddress.0xbb34534c with:
+                         gas gas_remaining wei
+                        args 'BancorGasPriceLimit'
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    mem[mem[64]] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+                    mem[mem[64] + 4] = block.gasprice
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).0x6b4dff1f with:
+                         gas gas_remaining wei
+                        args block.gasprice
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require 0 < mem[_10045]
+                    _20767 = mem[_10045 + 32]
+                    mem[mem[64] + 4] = 'ContractFeatures'
+                    require ext_code.size(registryAddress)
+                    call registryAddress.0xbb34534c with:
+                         gas gas_remaining wei
+                        args 'ContractFeatures'
+                    mem[mem[64]] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    _20942 = mem[_10045]
+                    t = 1
+                    u = 0
+                    u = 0
+                    v = 0
+                    v = _20767
+                    w = _20144
+                    while t < _20942:
+                        require t < mem[_10045]
+                        _30179 = mem[(32 * t) + _10045 + 32]
+                        require t + 1 < mem[_10045]
+                        _30426 = mem[(32 * t + 1) + _10045 + 32]
+                        require ext_code.size(mem[(32 * t) + _10045 + 44 len 20])
+                        call mem[(32 * t) + _10045 + 44 len 20].0x8da5cb5b with:
+                             gas gas_remaining wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).0xa5fbf287 with:
+                             gas gas_remaining wei
+                            args address(ext_call.return_data[0]), 1
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if ext_call.return_data[0]:
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).conversionWhitelist() with:
+                                 gas gas_remaining wei
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if address(ext_call.return_data[0]):
+                                require ext_code.size(address(ext_call.return_data[0]))
+                                call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                     gas gas_remaining wei
+                                    args address(arg5)
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                        if address(v) != mem[(32 * t) + _10045 + 44 len 20]:
+                            require ext_code.size(address(v))
+                            call address(v).0xdd62ed3e with:
+                                 gas gas_remaining wei
+                                args this.address, address(ext_call.return_data[0])
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if ext_call.return_data[0] < w:
+                                require ext_code.size(address(v))
+                                call address(v).0xdd62ed3e with:
+                                     gas gas_remaining wei
+                                    args this.address, address(ext_call.return_data[0])
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_code.size(address(v))
+                                if ext_call.return_data[0]:
+                                    call address(v).approve(address arg1, uint256 arg2) with:
+                                         gas gas_remaining wei
+                                        args address(ext_call.return_data[0]), 0
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    require ext_call.return_data[0]
+                                call address(v).approve(address arg1, uint256 arg2) with:
+                                     gas gas_remaining wei
+                                    args address(ext_call.return_data[0]), w
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                        mem[mem[64] + 4] = address(v)
+                        mem[mem[64] + 36] = address(_30426)
+                        mem[mem[64] + 68] = w
+                        if t == _20942 - 2:
+                            mem[mem[64] + 100] = _20170
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                 gas gas_remaining wei
+                                args address(v), address(_30426), w, _20170
+                        else:
+                            mem[mem[64] + 100] = 1
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                 gas gas_remaining wei
+                                args address(v), address(_30426), w, 1
+                        mem[mem[64]] = ext_call.return_data[0]
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        t = t + 2
+                        u = ext_call.return_data[0]
+                        u = _30426
+                        v = _30179
+                        v = _30426
+                        w = ext_call.return_data[0]
+                        continue 
+                    mem[0] = address(u)
+                    mem[32] = 4
+                    if stor4[address(u)]:
+                        mem[mem[64]] = 0x205c287800000000000000000000000000000000000000000000000000000000
+                        mem[mem[64] + 4] = arg5
+                        mem[mem[64] + 36] = w
+                        require ext_code.size(address(u))
+                        call address(u).withdrawTo(address arg1, uint256 arg2) with:
+                             gas gas_remaining wei
+                            args address(arg5), w
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                    else:
+                        mem[mem[64] + 4] = arg5
+                        mem[mem[64] + 36] = w
+                        require ext_code.size(address(u))
+                        call address(u).0xa9059cbb with:
+                             gas gas_remaining wei
+                            args address(arg5), w
+                        mem[mem[64]] = ext_call.return_data[0]
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_call.return_data[0]
+                    require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                    mem[(32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 192] = w
+                    s = _20069
+                    s = _10037
+                    s = _10045
+                    idx = idx + 1
+                    s = _10037
+                    s = s
+                    continue 
+                _20146 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                mem[mem[64]] = 0xd0e30db000000000000000000000000000000000000000000000000000000000
+                require ext_code.size(address(_20069))
+                call address(_20069).deposit() with:
+                   value _20146 wei
+                     gas gas_remaining wei
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                _20264 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                _20370 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                require idx < mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                _20407 = mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 224]
+                require mem[_10045] > 2
+                require mem[_10045] <= 21
+                require 1 == bool(mem[_10045])
+                require ext_code.size(registryAddress)
+                call registryAddress.0xbb34534c with:
+                     gas gas_remaining wei
+                    args 'BancorGasPriceLimit'
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                mem[mem[64]] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+                mem[mem[64] + 4] = block.gasprice
+                require ext_code.size(address(ext_call.return_data[0]))
+                call address(ext_call.return_data[0]).0x6b4dff1f with:
+                     gas gas_remaining wei
+                    args block.gasprice
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require 0 < mem[_10045]
+                _20994 = mem[_10045 + 32]
+                mem[mem[64] + 4] = 'ContractFeatures'
+                require ext_code.size(registryAddress)
+                call registryAddress.0xbb34534c with:
+                     gas gas_remaining wei
+                    args 'ContractFeatures'
+                mem[mem[64]] = ext_call.return_data[0]
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                _21238 = mem[_10045]
+                t = 1
+                u = 0
+                u = 0
+                v = 0
+                v = _20994
+                w = _20370
+                while t < _21238:
+                    require t < mem[_10045]
+                    _30182 = mem[(32 * t) + _10045 + 32]
+                    require t + 1 < mem[_10045]
+                    _30433 = mem[(32 * t + 1) + _10045 + 32]
+                    require ext_code.size(mem[(32 * t) + _10045 + 44 len 20])
+                    call mem[(32 * t) + _10045 + 44 len 20].0x8da5cb5b with:
+                         gas gas_remaining wei
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).0xa5fbf287 with:
+                         gas gas_remaining wei
+                        args address(ext_call.return_data[0]), 1
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    if ext_call.return_data[0]:
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).conversionWhitelist() with:
+                             gas gas_remaining wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if address(ext_call.return_data[0]):
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                 gas gas_remaining wei
+                                args address(arg5)
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    if address(v) != mem[(32 * t) + _10045 + 44 len 20]:
+                        require ext_code.size(address(v))
+                        call address(v).0xdd62ed3e with:
+                             gas gas_remaining wei
+                            args this.address, address(ext_call.return_data[0])
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if ext_call.return_data[0] < w:
+                            require ext_code.size(address(v))
+                            call address(v).0xdd62ed3e with:
+                                 gas gas_remaining wei
+                                args this.address, address(ext_call.return_data[0])
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_code.size(address(v))
+                            if ext_call.return_data[0]:
+                                call address(v).approve(address arg1, uint256 arg2) with:
+                                     gas gas_remaining wei
+                                    args address(ext_call.return_data[0]), 0
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                            call address(v).approve(address arg1, uint256 arg2) with:
+                                 gas gas_remaining wei
+                                args address(ext_call.return_data[0]), w
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    mem[mem[64] + 4] = address(v)
+                    mem[mem[64] + 36] = address(_30433)
+                    mem[mem[64] + 68] = w
+                    if t == _21238 - 2:
+                        mem[mem[64] + 100] = _20407
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(v), address(_30433), w, _20407
+                    else:
+                        mem[mem[64] + 100] = 1
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(v), address(_30433), w, 1
+                    mem[mem[64]] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    t = t + 2
+                    u = ext_call.return_data[0]
+                    u = _30433
+                    v = _30182
+                    v = _30433
+                    w = ext_call.return_data[0]
+                    continue 
+                mem[0] = address(u)
+                mem[32] = 4
+                if stor4[address(u)]:
+                    mem[mem[64]] = 0x205c287800000000000000000000000000000000000000000000000000000000
+                    mem[mem[64] + 4] = arg5
+                    mem[mem[64] + 36] = w
+                    require ext_code.size(address(u))
+                    call address(u).withdrawTo(address arg1, uint256 arg2) with:
+                         gas gas_remaining wei
+                        args address(arg5), w
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                else:
+                    mem[mem[64] + 4] = arg5
+                    mem[mem[64] + 36] = w
+                    require ext_code.size(address(u))
+                    call address(u).0xa9059cbb with:
+                         gas gas_remaining wei
+                        args address(arg5), w
+                    mem[mem[64]] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    require ext_call.return_data[0]
+                require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                mem[(32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 192] = w
+                s = _20069
+                s = _10037
+                s = _10045
+                idx = idx + 1
+                s = _10037
+                s = s + _20264
+                continue 
+            require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+            mem[0] = mem[_10045 + 44 len 20]
+            mem[32] = 4
+            if mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192] > msg.value:
+                require not stor4[mem[0]]
+                if msg.value <= 0:
+                    require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                    _20206 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                    require idx < mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                    _20265 = mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 224]
+                    require mem[_10045] > 2
+                    require mem[_10045] <= 21
+                    require 1 == bool(mem[_10045])
+                    require ext_code.size(registryAddress)
+                    call registryAddress.0xbb34534c with:
+                         gas gas_remaining wei
+                        args 'BancorGasPriceLimit'
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    mem[mem[64]] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+                    mem[mem[64] + 4] = block.gasprice
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).0x6b4dff1f with:
+                         gas gas_remaining wei
+                        args block.gasprice
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require 0 < mem[_10045]
+                    _20840 = mem[_10045 + 32]
+                    mem[mem[64] + 4] = 'ContractFeatures'
+                    require ext_code.size(registryAddress)
+                    call registryAddress.0xbb34534c with:
+                         gas gas_remaining wei
+                        args 'ContractFeatures'
+                    mem[mem[64]] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    _21044 = mem[_10045]
+                    t = 1
+                    u = 0
+                    u = 0
+                    v = 0
+                    v = _20840
+                    w = _20206
+                    while t < _21044:
+                        require t < mem[_10045]
+                        _30185 = mem[(32 * t) + _10045 + 32]
+                        require t + 1 < mem[_10045]
+                        _30440 = mem[(32 * t + 1) + _10045 + 32]
+                        require ext_code.size(mem[(32 * t) + _10045 + 44 len 20])
+                        call mem[(32 * t) + _10045 + 44 len 20].0x8da5cb5b with:
+                             gas gas_remaining wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).0xa5fbf287 with:
+                             gas gas_remaining wei
+                            args address(ext_call.return_data[0]), 1
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if ext_call.return_data[0]:
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).conversionWhitelist() with:
+                                 gas gas_remaining wei
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if address(ext_call.return_data[0]):
+                                require ext_code.size(address(ext_call.return_data[0]))
+                                call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                     gas gas_remaining wei
+                                    args address(arg5)
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                        if address(v) != mem[(32 * t) + _10045 + 44 len 20]:
+                            require ext_code.size(address(v))
+                            call address(v).0xdd62ed3e with:
+                                 gas gas_remaining wei
+                                args this.address, address(ext_call.return_data[0])
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if ext_call.return_data[0] < w:
+                                require ext_code.size(address(v))
+                                call address(v).0xdd62ed3e with:
+                                     gas gas_remaining wei
+                                    args this.address, address(ext_call.return_data[0])
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_code.size(address(v))
+                                if ext_call.return_data[0]:
+                                    call address(v).approve(address arg1, uint256 arg2) with:
+                                         gas gas_remaining wei
+                                        args address(ext_call.return_data[0]), 0
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    require ext_call.return_data[0]
+                                call address(v).approve(address arg1, uint256 arg2) with:
+                                     gas gas_remaining wei
+                                    args address(ext_call.return_data[0]), w
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                        mem[mem[64] + 4] = address(v)
+                        mem[mem[64] + 36] = address(_30440)
+                        mem[mem[64] + 68] = w
+                        if t == _21044 - 2:
+                            mem[mem[64] + 100] = _20265
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                 gas gas_remaining wei
+                                args address(v), address(_30440), w, _20265
+                        else:
+                            mem[mem[64] + 100] = 1
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                 gas gas_remaining wei
+                                args address(v), address(_30440), w, 1
+                        mem[mem[64]] = ext_call.return_data[0]
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        t = t + 2
+                        u = ext_call.return_data[0]
+                        u = _30440
+                        v = _30185
+                        v = _30440
+                        w = ext_call.return_data[0]
+                        continue 
+                    mem[0] = address(u)
+                    mem[32] = 4
+                    if stor4[address(u)]:
+                        mem[mem[64]] = 0x205c287800000000000000000000000000000000000000000000000000000000
+                        mem[mem[64] + 4] = arg5
+                        mem[mem[64] + 36] = w
+                        require ext_code.size(address(u))
+                        call address(u).withdrawTo(address arg1, uint256 arg2) with:
+                             gas gas_remaining wei
+                            args address(arg5), w
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                    else:
+                        mem[mem[64] + 4] = arg5
+                        mem[mem[64] + 36] = w
+                        require ext_code.size(address(u))
+                        call address(u).0xa9059cbb with:
+                             gas gas_remaining wei
+                            args address(arg5), w
+                        mem[mem[64]] = ext_call.return_data[0]
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_call.return_data[0]
+                    require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                    mem[(32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 192] = w
+                    s = _20069
+                    s = _10037
+                    s = _10045
+                    idx = idx + 1
+                    s = _10037
+                    s = s
+                    continue 
+                mem[0] = address(_20069)
+                mem[32] = 4
+                require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                if not stor4[address(_20069)]:
+                    _20266 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                    require idx < mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                    _20326 = mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 224]
+                    require mem[_10045] > 2
+                    require mem[_10045] <= 21
+                    require 1 == bool(mem[_10045])
+                    require ext_code.size(registryAddress)
+                    call registryAddress.0xbb34534c with:
+                         gas gas_remaining wei
+                        args 'BancorGasPriceLimit'
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    mem[mem[64]] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+                    mem[mem[64] + 4] = block.gasprice
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).0x6b4dff1f with:
+                         gas gas_remaining wei
+                        args block.gasprice
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require 0 < mem[_10045]
+                    _20886 = mem[_10045 + 32]
+                    mem[mem[64] + 4] = 'ContractFeatures'
+                    require ext_code.size(registryAddress)
+                    call registryAddress.0xbb34534c with:
+                         gas gas_remaining wei
+                        args 'ContractFeatures'
+                    mem[mem[64]] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    _21112 = mem[_10045]
+                    t = 1
+                    u = 0
+                    u = 0
+                    v = 0
+                    v = _20886
+                    w = _20266
+                    while t < _21112:
+                        require t < mem[_10045]
+                        _30188 = mem[(32 * t) + _10045 + 32]
+                        require t + 1 < mem[_10045]
+                        _30447 = mem[(32 * t + 1) + _10045 + 32]
+                        require ext_code.size(mem[(32 * t) + _10045 + 44 len 20])
+                        call mem[(32 * t) + _10045 + 44 len 20].0x8da5cb5b with:
+                             gas gas_remaining wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).0xa5fbf287 with:
+                             gas gas_remaining wei
+                            args address(ext_call.return_data[0]), 1
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if ext_call.return_data[0]:
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).conversionWhitelist() with:
+                                 gas gas_remaining wei
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if address(ext_call.return_data[0]):
+                                require ext_code.size(address(ext_call.return_data[0]))
+                                call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                     gas gas_remaining wei
+                                    args address(arg5)
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                        if address(v) != mem[(32 * t) + _10045 + 44 len 20]:
+                            require ext_code.size(address(v))
+                            call address(v).0xdd62ed3e with:
+                                 gas gas_remaining wei
+                                args this.address, address(ext_call.return_data[0])
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if ext_call.return_data[0] < w:
+                                require ext_code.size(address(v))
+                                call address(v).0xdd62ed3e with:
+                                     gas gas_remaining wei
+                                    args this.address, address(ext_call.return_data[0])
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_code.size(address(v))
+                                if ext_call.return_data[0]:
+                                    call address(v).approve(address arg1, uint256 arg2) with:
+                                         gas gas_remaining wei
+                                        args address(ext_call.return_data[0]), 0
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    require ext_call.return_data[0]
+                                call address(v).approve(address arg1, uint256 arg2) with:
+                                     gas gas_remaining wei
+                                    args address(ext_call.return_data[0]), w
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                        mem[mem[64] + 4] = address(v)
+                        mem[mem[64] + 36] = address(_30447)
+                        mem[mem[64] + 68] = w
+                        if t == _21112 - 2:
+                            mem[mem[64] + 100] = _20326
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                 gas gas_remaining wei
+                                args address(v), address(_30447), w, _20326
+                        else:
+                            mem[mem[64] + 100] = 1
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                 gas gas_remaining wei
+                                args address(v), address(_30447), w, 1
+                        mem[mem[64]] = ext_call.return_data[0]
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        t = t + 2
+                        u = ext_call.return_data[0]
+                        u = _30447
+                        v = _30188
+                        v = _30447
+                        w = ext_call.return_data[0]
+                        continue 
+                    mem[0] = address(u)
+                    mem[32] = 4
+                    if stor4[address(u)]:
+                        mem[mem[64]] = 0x205c287800000000000000000000000000000000000000000000000000000000
+                        mem[mem[64] + 4] = arg5
+                        mem[mem[64] + 36] = w
+                        require ext_code.size(address(u))
+                        call address(u).withdrawTo(address arg1, uint256 arg2) with:
+                             gas gas_remaining wei
+                            args address(arg5), w
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                    else:
+                        mem[mem[64] + 4] = arg5
+                        mem[mem[64] + 36] = w
+                        require ext_code.size(address(u))
+                        call address(u).0xa9059cbb with:
+                             gas gas_remaining wei
+                            args address(arg5), w
+                        mem[mem[64]] = ext_call.return_data[0]
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_call.return_data[0]
+                    require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                    mem[(32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 192] = w
+                    s = _20069
+                    s = _10037
+                    s = _10045
+                    idx = idx + 1
+                    s = _10037
+                    s = s
+                    continue 
+                _20268 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                mem[mem[64]] = 0xd0e30db000000000000000000000000000000000000000000000000000000000
+                require ext_code.size(address(_20069))
+                call address(_20069).deposit() with:
+                   value _20268 wei
+                     gas gas_remaining wei
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                _20409 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                _20471 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                require idx < mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                _20497 = mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 224]
+                require mem[_10045] > 2
+                require mem[_10045] <= 21
+                require 1 == bool(mem[_10045])
+                require ext_code.size(registryAddress)
+                call registryAddress.0xbb34534c with:
+                     gas gas_remaining wei
+                    args 'BancorGasPriceLimit'
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                mem[mem[64]] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+                mem[mem[64] + 4] = block.gasprice
+                require ext_code.size(address(ext_call.return_data[0]))
+                call address(ext_call.return_data[0]).0x6b4dff1f with:
+                     gas gas_remaining wei
+                    args block.gasprice
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require 0 < mem[_10045]
+                _21178 = mem[_10045 + 32]
+                mem[mem[64] + 4] = 'ContractFeatures'
+                require ext_code.size(registryAddress)
+                call registryAddress.0xbb34534c with:
+                     gas gas_remaining wei
+                    args 'ContractFeatures'
+                mem[mem[64]] = ext_call.return_data[0]
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                _21575 = mem[_10045]
+                t = 1
+                u = 0
+                u = 0
+                v = 0
+                v = _21178
+                w = _20471
+                while t < _21575:
+                    require t < mem[_10045]
+                    _30191 = mem[(32 * t) + _10045 + 32]
+                    require t + 1 < mem[_10045]
+                    _30454 = mem[(32 * t + 1) + _10045 + 32]
+                    require ext_code.size(mem[(32 * t) + _10045 + 44 len 20])
+                    call mem[(32 * t) + _10045 + 44 len 20].0x8da5cb5b with:
+                         gas gas_remaining wei
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).0xa5fbf287 with:
+                         gas gas_remaining wei
+                        args address(ext_call.return_data[0]), 1
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    if ext_call.return_data[0]:
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).conversionWhitelist() with:
+                             gas gas_remaining wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if address(ext_call.return_data[0]):
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                 gas gas_remaining wei
+                                args address(arg5)
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    if address(v) != mem[(32 * t) + _10045 + 44 len 20]:
+                        require ext_code.size(address(v))
+                        call address(v).0xdd62ed3e with:
+                             gas gas_remaining wei
+                            args this.address, address(ext_call.return_data[0])
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if ext_call.return_data[0] < w:
+                            require ext_code.size(address(v))
+                            call address(v).0xdd62ed3e with:
+                                 gas gas_remaining wei
+                                args this.address, address(ext_call.return_data[0])
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_code.size(address(v))
+                            if ext_call.return_data[0]:
+                                call address(v).approve(address arg1, uint256 arg2) with:
+                                     gas gas_remaining wei
+                                    args address(ext_call.return_data[0]), 0
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                            call address(v).approve(address arg1, uint256 arg2) with:
+                                 gas gas_remaining wei
+                                args address(ext_call.return_data[0]), w
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    mem[mem[64] + 4] = address(v)
+                    mem[mem[64] + 36] = address(_30454)
+                    mem[mem[64] + 68] = w
+                    if t == _21575 - 2:
+                        mem[mem[64] + 100] = _20497
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(v), address(_30454), w, _20497
+                    else:
+                        mem[mem[64] + 100] = 1
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(v), address(_30454), w, 1
+                    mem[mem[64]] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    t = t + 2
+                    u = ext_call.return_data[0]
+                    u = _30454
+                    v = _30191
+                    v = _30454
+                    w = ext_call.return_data[0]
+                    continue 
+                mem[0] = address(u)
+                mem[32] = 4
+                if stor4[address(u)]:
+                    mem[mem[64]] = 0x205c287800000000000000000000000000000000000000000000000000000000
+                    mem[mem[64] + 4] = arg5
+                    mem[mem[64] + 36] = w
+                    require ext_code.size(address(u))
+                    call address(u).withdrawTo(address arg1, uint256 arg2) with:
+                         gas gas_remaining wei
+                        args address(arg5), w
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                else:
+                    mem[mem[64] + 4] = arg5
+                    mem[mem[64] + 36] = w
+                    require ext_code.size(address(u))
+                    call address(u).0xa9059cbb with:
+                         gas gas_remaining wei
+                        args address(arg5), w
+                    mem[mem[64]] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    require ext_call.return_data[0]
+                require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                mem[(32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 192] = w
+                s = _20069
+                s = _10037
+                s = _10045
+                idx = idx + 1
+                s = _10037
+                s = s + _20409
+                continue 
+            if stor4[mem[0]]:
+                if msg.value <= 0:
+                    require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                    _20210 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                    require idx < mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                    _20271 = mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 224]
+                    require mem[_10045] > 2
+                    require mem[_10045] <= 21
+                    require 1 == bool(mem[_10045])
+                    require ext_code.size(registryAddress)
+                    call registryAddress.0xbb34534c with:
+                         gas gas_remaining wei
+                        args 'BancorGasPriceLimit'
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    mem[mem[64]] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+                    mem[mem[64] + 4] = block.gasprice
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).0x6b4dff1f with:
+                         gas gas_remaining wei
+                        args block.gasprice
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require 0 < mem[_10045]
+                    _20842 = mem[_10045 + 32]
+                    mem[mem[64] + 4] = 'ContractFeatures'
+                    require ext_code.size(registryAddress)
+                    call registryAddress.0xbb34534c with:
+                         gas gas_remaining wei
+                        args 'ContractFeatures'
+                    mem[mem[64]] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    _21047 = mem[_10045]
+                    t = 1
+                    u = 0
+                    u = 0
+                    v = 0
+                    v = _20842
+                    w = _20210
+                    while t < _21047:
+                        require t < mem[_10045]
+                        _30194 = mem[(32 * t) + _10045 + 32]
+                        require t + 1 < mem[_10045]
+                        _30461 = mem[(32 * t + 1) + _10045 + 32]
+                        require ext_code.size(mem[(32 * t) + _10045 + 44 len 20])
+                        call mem[(32 * t) + _10045 + 44 len 20].0x8da5cb5b with:
+                             gas gas_remaining wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).0xa5fbf287 with:
+                             gas gas_remaining wei
+                            args address(ext_call.return_data[0]), 1
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if ext_call.return_data[0]:
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).conversionWhitelist() with:
+                                 gas gas_remaining wei
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if address(ext_call.return_data[0]):
+                                require ext_code.size(address(ext_call.return_data[0]))
+                                call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                     gas gas_remaining wei
+                                    args address(arg5)
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                        if address(v) != mem[(32 * t) + _10045 + 44 len 20]:
+                            require ext_code.size(address(v))
+                            call address(v).0xdd62ed3e with:
+                                 gas gas_remaining wei
+                                args this.address, address(ext_call.return_data[0])
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if ext_call.return_data[0] < w:
+                                require ext_code.size(address(v))
+                                call address(v).0xdd62ed3e with:
+                                     gas gas_remaining wei
+                                    args this.address, address(ext_call.return_data[0])
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_code.size(address(v))
+                                if ext_call.return_data[0]:
+                                    call address(v).approve(address arg1, uint256 arg2) with:
+                                         gas gas_remaining wei
+                                        args address(ext_call.return_data[0]), 0
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    require ext_call.return_data[0]
+                                call address(v).approve(address arg1, uint256 arg2) with:
+                                     gas gas_remaining wei
+                                    args address(ext_call.return_data[0]), w
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                        mem[mem[64] + 4] = address(v)
+                        mem[mem[64] + 36] = address(_30461)
+                        mem[mem[64] + 68] = w
+                        if t == _21047 - 2:
+                            mem[mem[64] + 100] = _20271
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                 gas gas_remaining wei
+                                args address(v), address(_30461), w, _20271
+                        else:
+                            mem[mem[64] + 100] = 1
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                 gas gas_remaining wei
+                                args address(v), address(_30461), w, 1
+                        mem[mem[64]] = ext_call.return_data[0]
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        t = t + 2
+                        u = ext_call.return_data[0]
+                        u = _30461
+                        v = _30194
+                        v = _30461
+                        w = ext_call.return_data[0]
+                        continue 
+                    mem[0] = address(u)
+                    mem[32] = 4
+                    if stor4[address(u)]:
+                        mem[mem[64]] = 0x205c287800000000000000000000000000000000000000000000000000000000
+                        mem[mem[64] + 4] = arg5
+                        mem[mem[64] + 36] = w
+                        require ext_code.size(address(u))
+                        call address(u).withdrawTo(address arg1, uint256 arg2) with:
+                             gas gas_remaining wei
+                            args address(arg5), w
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                    else:
+                        mem[mem[64] + 4] = arg5
+                        mem[mem[64] + 36] = w
+                        require ext_code.size(address(u))
+                        call address(u).0xa9059cbb with:
+                             gas gas_remaining wei
+                            args address(arg5), w
+                        mem[mem[64]] = ext_call.return_data[0]
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_call.return_data[0]
+                    require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                    mem[(32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 192] = w
+                    s = _20069
+                    s = _10037
+                    s = _10045
+                    idx = idx + 1
+                    s = _10037
+                    s = s
+                    continue 
+                mem[0] = address(_20069)
+                mem[32] = 4
+                require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                if not stor4[address(_20069)]:
+                    _20272 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                    require idx < mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                    _20328 = mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 224]
+                    require mem[_10045] > 2
+                    require mem[_10045] <= 21
+                    require 1 == bool(mem[_10045])
+                    require ext_code.size(registryAddress)
+                    call registryAddress.0xbb34534c with:
+                         gas gas_remaining wei
+                        args 'BancorGasPriceLimit'
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    mem[mem[64]] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+                    mem[mem[64] + 4] = block.gasprice
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).0x6b4dff1f with:
+                         gas gas_remaining wei
+                        args block.gasprice
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require 0 < mem[_10045]
+                    _20890 = mem[_10045 + 32]
+                    mem[mem[64] + 4] = 'ContractFeatures'
+                    require ext_code.size(registryAddress)
+                    call registryAddress.0xbb34534c with:
+                         gas gas_remaining wei
+                        args 'ContractFeatures'
+                    mem[mem[64]] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    _21115 = mem[_10045]
+                    t = 1
+                    u = 0
+                    u = 0
+                    v = 0
+                    v = _20890
+                    w = _20272
+                    while t < _21115:
+                        require t < mem[_10045]
+                        _30197 = mem[(32 * t) + _10045 + 32]
+                        require t + 1 < mem[_10045]
+                        _30468 = mem[(32 * t + 1) + _10045 + 32]
+                        require ext_code.size(mem[(32 * t) + _10045 + 44 len 20])
+                        call mem[(32 * t) + _10045 + 44 len 20].0x8da5cb5b with:
+                             gas gas_remaining wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).0xa5fbf287 with:
+                             gas gas_remaining wei
+                            args address(ext_call.return_data[0]), 1
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if ext_call.return_data[0]:
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).conversionWhitelist() with:
+                                 gas gas_remaining wei
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if address(ext_call.return_data[0]):
+                                require ext_code.size(address(ext_call.return_data[0]))
+                                call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                     gas gas_remaining wei
+                                    args address(arg5)
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                        if address(v) != mem[(32 * t) + _10045 + 44 len 20]:
+                            require ext_code.size(address(v))
+                            call address(v).0xdd62ed3e with:
+                                 gas gas_remaining wei
+                                args this.address, address(ext_call.return_data[0])
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            if ext_call.return_data[0] < w:
+                                require ext_code.size(address(v))
+                                call address(v).0xdd62ed3e with:
+                                     gas gas_remaining wei
+                                    args this.address, address(ext_call.return_data[0])
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_code.size(address(v))
+                                if ext_call.return_data[0]:
+                                    call address(v).approve(address arg1, uint256 arg2) with:
+                                         gas gas_remaining wei
+                                        args address(ext_call.return_data[0]), 0
+                                    if not ext_call.success:
+                                        revert with ext_call.return_data[0 len return_data.size]
+                                    require return_data.size >= 32
+                                    require ext_call.return_data[0]
+                                call address(v).approve(address arg1, uint256 arg2) with:
+                                     gas gas_remaining wei
+                                    args address(ext_call.return_data[0]), w
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                        mem[mem[64] + 4] = address(v)
+                        mem[mem[64] + 36] = address(_30468)
+                        mem[mem[64] + 68] = w
+                        if t == _21115 - 2:
+                            mem[mem[64] + 100] = _20328
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                 gas gas_remaining wei
+                                args address(v), address(_30468), w, _20328
+                        else:
+                            mem[mem[64] + 100] = 1
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                                 gas gas_remaining wei
+                                args address(v), address(_30468), w, 1
+                        mem[mem[64]] = ext_call.return_data[0]
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        t = t + 2
+                        u = ext_call.return_data[0]
+                        u = _30468
+                        v = _30197
+                        v = _30468
+                        w = ext_call.return_data[0]
+                        continue 
+                    mem[0] = address(u)
+                    mem[32] = 4
+                    if stor4[address(u)]:
+                        mem[mem[64]] = 0x205c287800000000000000000000000000000000000000000000000000000000
+                        mem[mem[64] + 4] = arg5
+                        mem[mem[64] + 36] = w
+                        require ext_code.size(address(u))
+                        call address(u).withdrawTo(address arg1, uint256 arg2) with:
+                             gas gas_remaining wei
+                            args address(arg5), w
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                    else:
+                        mem[mem[64] + 4] = arg5
+                        mem[mem[64] + 36] = w
+                        require ext_code.size(address(u))
+                        call address(u).0xa9059cbb with:
+                             gas gas_remaining wei
+                            args address(arg5), w
+                        mem[mem[64]] = ext_call.return_data[0]
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_call.return_data[0]
+                    require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                    mem[(32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 192] = w
+                    s = _20069
+                    s = _10037
+                    s = _10045
+                    idx = idx + 1
+                    s = _10037
+                    s = s
+                    continue 
+                _20274 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                mem[mem[64]] = 0xd0e30db000000000000000000000000000000000000000000000000000000000
+                require ext_code.size(address(_20069))
+                call address(_20069).deposit() with:
+                   value _20274 wei
+                     gas gas_remaining wei
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                _20411 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                _20474 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                require idx < mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                _20498 = mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 224]
+                require mem[_10045] > 2
+                require mem[_10045] <= 21
+                require 1 == bool(mem[_10045])
+                require ext_code.size(registryAddress)
+                call registryAddress.0xbb34534c with:
+                     gas gas_remaining wei
+                    args 'BancorGasPriceLimit'
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                mem[mem[64]] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+                mem[mem[64] + 4] = block.gasprice
+                require ext_code.size(address(ext_call.return_data[0]))
+                call address(ext_call.return_data[0]).0x6b4dff1f with:
+                     gas gas_remaining wei
+                    args block.gasprice
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require 0 < mem[_10045]
+                _21180 = mem[_10045 + 32]
+                mem[mem[64] + 4] = 'ContractFeatures'
+                require ext_code.size(registryAddress)
+                call registryAddress.0xbb34534c with:
+                     gas gas_remaining wei
+                    args 'ContractFeatures'
+                mem[mem[64]] = ext_call.return_data[0]
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                _21579 = mem[_10045]
+                t = 1
+                u = 0
+                u = 0
+                v = 0
+                v = _21180
+                w = _20474
+                while t < _21579:
+                    require t < mem[_10045]
+                    _30200 = mem[(32 * t) + _10045 + 32]
+                    require t + 1 < mem[_10045]
+                    _30475 = mem[(32 * t + 1) + _10045 + 32]
+                    require ext_code.size(mem[(32 * t) + _10045 + 44 len 20])
+                    call mem[(32 * t) + _10045 + 44 len 20].0x8da5cb5b with:
+                         gas gas_remaining wei
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).0xa5fbf287 with:
+                         gas gas_remaining wei
+                        args address(ext_call.return_data[0]), 1
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    if ext_call.return_data[0]:
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).conversionWhitelist() with:
+                             gas gas_remaining wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if address(ext_call.return_data[0]):
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                 gas gas_remaining wei
+                                args address(arg5)
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    if address(v) != mem[(32 * t) + _10045 + 44 len 20]:
+                        require ext_code.size(address(v))
+                        call address(v).0xdd62ed3e with:
+                             gas gas_remaining wei
+                            args this.address, address(ext_call.return_data[0])
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if ext_call.return_data[0] < w:
+                            require ext_code.size(address(v))
+                            call address(v).0xdd62ed3e with:
+                                 gas gas_remaining wei
+                                args this.address, address(ext_call.return_data[0])
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_code.size(address(v))
+                            if ext_call.return_data[0]:
+                                call address(v).approve(address arg1, uint256 arg2) with:
+                                     gas gas_remaining wei
+                                    args address(ext_call.return_data[0]), 0
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                            call address(v).approve(address arg1, uint256 arg2) with:
+                                 gas gas_remaining wei
+                                args address(ext_call.return_data[0]), w
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    mem[mem[64] + 4] = address(v)
+                    mem[mem[64] + 36] = address(_30475)
+                    mem[mem[64] + 68] = w
+                    if t == _21579 - 2:
+                        mem[mem[64] + 100] = _20498
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(v), address(_30475), w, _20498
+                    else:
+                        mem[mem[64] + 100] = 1
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(v), address(_30475), w, 1
+                    mem[mem[64]] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    t = t + 2
+                    u = ext_call.return_data[0]
+                    u = _30475
+                    v = _30200
+                    v = _30475
+                    w = ext_call.return_data[0]
+                    continue 
+                mem[0] = address(u)
+                mem[32] = 4
+                if stor4[address(u)]:
+                    mem[mem[64]] = 0x205c287800000000000000000000000000000000000000000000000000000000
+                    mem[mem[64] + 4] = arg5
+                    mem[mem[64] + 36] = w
+                    require ext_code.size(address(u))
+                    call address(u).withdrawTo(address arg1, uint256 arg2) with:
+                         gas gas_remaining wei
+                        args address(arg5), w
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                else:
+                    mem[mem[64] + 4] = arg5
+                    mem[mem[64] + 36] = w
+                    require ext_code.size(address(u))
+                    call address(u).0xa9059cbb with:
+                         gas gas_remaining wei
+                        args address(arg5), w
+                    mem[mem[64]] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    require ext_call.return_data[0]
+                require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                mem[(32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 192] = w
+                s = _20069
+                s = _10037
+                s = _10045
+                idx = idx + 1
+                s = _10037
+                s = s + _20411
+                continue 
+            mem[0] = address(_20069)
+            mem[32] = 4
+            require not stor4[address(_20069)]
+            if msg.value <= 0:
+                require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                _20277 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                require idx < mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                _20329 = mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 224]
+                require mem[_10045] > 2
+                require mem[_10045] <= 21
+                require 1 == bool(mem[_10045])
+                require ext_code.size(registryAddress)
+                call registryAddress.0xbb34534c with:
+                     gas gas_remaining wei
+                    args 'BancorGasPriceLimit'
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                mem[mem[64]] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+                mem[mem[64] + 4] = block.gasprice
+                require ext_code.size(address(ext_call.return_data[0]))
+                call address(ext_call.return_data[0]).0x6b4dff1f with:
+                     gas gas_remaining wei
+                    args block.gasprice
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require 0 < mem[_10045]
+                _20892 = mem[_10045 + 32]
+                mem[mem[64] + 4] = 'ContractFeatures'
+                require ext_code.size(registryAddress)
+                call registryAddress.0xbb34534c with:
+                     gas gas_remaining wei
+                    args 'ContractFeatures'
+                mem[mem[64]] = ext_call.return_data[0]
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                _21118 = mem[_10045]
+                t = 1
+                u = 0
+                u = 0
+                v = 0
+                v = _20892
+                w = _20277
+                while t < _21118:
+                    require t < mem[_10045]
+                    _30203 = mem[(32 * t) + _10045 + 32]
+                    require t + 1 < mem[_10045]
+                    _30482 = mem[(32 * t + 1) + _10045 + 32]
+                    require ext_code.size(mem[(32 * t) + _10045 + 44 len 20])
+                    call mem[(32 * t) + _10045 + 44 len 20].0x8da5cb5b with:
+                         gas gas_remaining wei
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).0xa5fbf287 with:
+                         gas gas_remaining wei
+                        args address(ext_call.return_data[0]), 1
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    if ext_call.return_data[0]:
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).conversionWhitelist() with:
+                             gas gas_remaining wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if address(ext_call.return_data[0]):
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                 gas gas_remaining wei
+                                args address(arg5)
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    if address(v) != mem[(32 * t) + _10045 + 44 len 20]:
+                        require ext_code.size(address(v))
+                        call address(v).0xdd62ed3e with:
+                             gas gas_remaining wei
+                            args this.address, address(ext_call.return_data[0])
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if ext_call.return_data[0] < w:
+                            require ext_code.size(address(v))
+                            call address(v).0xdd62ed3e with:
+                                 gas gas_remaining wei
+                                args this.address, address(ext_call.return_data[0])
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_code.size(address(v))
+                            if ext_call.return_data[0]:
+                                call address(v).approve(address arg1, uint256 arg2) with:
+                                     gas gas_remaining wei
+                                    args address(ext_call.return_data[0]), 0
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                            call address(v).approve(address arg1, uint256 arg2) with:
+                                 gas gas_remaining wei
+                                args address(ext_call.return_data[0]), w
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    mem[mem[64] + 4] = address(v)
+                    mem[mem[64] + 36] = address(_30482)
+                    mem[mem[64] + 68] = w
+                    if t == _21118 - 2:
+                        mem[mem[64] + 100] = _20329
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(v), address(_30482), w, _20329
+                    else:
+                        mem[mem[64] + 100] = 1
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(v), address(_30482), w, 1
+                    mem[mem[64]] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    t = t + 2
+                    u = ext_call.return_data[0]
+                    u = _30482
+                    v = _30203
+                    v = _30482
+                    w = ext_call.return_data[0]
+                    continue 
+                mem[0] = address(u)
+                mem[32] = 4
+                if stor4[address(u)]:
+                    mem[mem[64]] = 0x205c287800000000000000000000000000000000000000000000000000000000
+                    mem[mem[64] + 4] = arg5
+                    mem[mem[64] + 36] = w
+                    require ext_code.size(address(u))
+                    call address(u).withdrawTo(address arg1, uint256 arg2) with:
+                         gas gas_remaining wei
+                        args address(arg5), w
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                else:
+                    mem[mem[64] + 4] = arg5
+                    mem[mem[64] + 36] = w
+                    require ext_code.size(address(u))
+                    call address(u).0xa9059cbb with:
+                         gas gas_remaining wei
+                        args address(arg5), w
+                    mem[mem[64]] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    require ext_call.return_data[0]
+                require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                mem[(32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 192] = w
+                s = _20069
+                s = _10037
+                s = _10045
+                idx = idx + 1
+                s = _10037
+                s = s
+                continue 
+            mem[0] = address(_20069)
+            mem[32] = 4
+            require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+            if not stor4[address(_20069)]:
+                _20330 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                require idx < mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                _20379 = mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 224]
+                require mem[_10045] > 2
+                require mem[_10045] <= 21
+                require 1 == bool(mem[_10045])
+                require ext_code.size(registryAddress)
+                call registryAddress.0xbb34534c with:
+                     gas gas_remaining wei
+                    args 'BancorGasPriceLimit'
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                mem[mem[64]] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+                mem[mem[64] + 4] = block.gasprice
+                require ext_code.size(address(ext_call.return_data[0]))
+                call address(ext_call.return_data[0]).0x6b4dff1f with:
+                     gas gas_remaining wei
+                    args block.gasprice
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require 0 < mem[_10045]
+                _20956 = mem[_10045 + 32]
+                mem[mem[64] + 4] = 'ContractFeatures'
+                require ext_code.size(registryAddress)
+                call registryAddress.0xbb34534c with:
+                     gas gas_remaining wei
+                    args 'ContractFeatures'
+                mem[mem[64]] = ext_call.return_data[0]
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                _21182 = mem[_10045]
+                t = 1
+                u = 0
+                u = 0
+                v = 0
+                v = _20956
+                w = _20330
+                while t < _21182:
+                    require t < mem[_10045]
+                    _30206 = mem[(32 * t) + _10045 + 32]
+                    require t + 1 < mem[_10045]
+                    _30489 = mem[(32 * t + 1) + _10045 + 32]
+                    require ext_code.size(mem[(32 * t) + _10045 + 44 len 20])
+                    call mem[(32 * t) + _10045 + 44 len 20].0x8da5cb5b with:
+                         gas gas_remaining wei
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).0xa5fbf287 with:
+                         gas gas_remaining wei
+                        args address(ext_call.return_data[0]), 1
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    if ext_call.return_data[0]:
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).conversionWhitelist() with:
+                             gas gas_remaining wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if address(ext_call.return_data[0]):
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                 gas gas_remaining wei
+                                args address(arg5)
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    if address(v) != mem[(32 * t) + _10045 + 44 len 20]:
+                        require ext_code.size(address(v))
+                        call address(v).0xdd62ed3e with:
+                             gas gas_remaining wei
+                            args this.address, address(ext_call.return_data[0])
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if ext_call.return_data[0] < w:
+                            require ext_code.size(address(v))
+                            call address(v).0xdd62ed3e with:
+                                 gas gas_remaining wei
+                                args this.address, address(ext_call.return_data[0])
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_code.size(address(v))
+                            if ext_call.return_data[0]:
+                                call address(v).approve(address arg1, uint256 arg2) with:
+                                     gas gas_remaining wei
+                                    args address(ext_call.return_data[0]), 0
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                            call address(v).approve(address arg1, uint256 arg2) with:
+                                 gas gas_remaining wei
+                                args address(ext_call.return_data[0]), w
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    mem[mem[64] + 4] = address(v)
+                    mem[mem[64] + 36] = address(_30489)
+                    mem[mem[64] + 68] = w
+                    if t == _21182 - 2:
+                        mem[mem[64] + 100] = _20379
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(v), address(_30489), w, _20379
+                    else:
+                        mem[mem[64] + 100] = 1
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(v), address(_30489), w, 1
+                    mem[mem[64]] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    t = t + 2
+                    u = ext_call.return_data[0]
+                    u = _30489
+                    v = _30206
+                    v = _30489
+                    w = ext_call.return_data[0]
+                    continue 
+                mem[0] = address(u)
+                mem[32] = 4
+                if stor4[address(u)]:
+                    mem[mem[64]] = 0x205c287800000000000000000000000000000000000000000000000000000000
+                    mem[mem[64] + 4] = arg5
+                    mem[mem[64] + 36] = w
+                    require ext_code.size(address(u))
+                    call address(u).withdrawTo(address arg1, uint256 arg2) with:
+                         gas gas_remaining wei
+                        args address(arg5), w
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                else:
+                    mem[mem[64] + 4] = arg5
+                    mem[mem[64] + 36] = w
+                    require ext_code.size(address(u))
+                    call address(u).0xa9059cbb with:
+                         gas gas_remaining wei
+                        args address(arg5), w
+                    mem[mem[64]] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    require ext_call.return_data[0]
+                require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                mem[(32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 192] = w
+                s = _20069
+                s = _10037
+                s = _10045
+                idx = idx + 1
+                s = _10037
+                s = s
+                continue 
+            _20332 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+            mem[mem[64]] = 0xd0e30db000000000000000000000000000000000000000000000000000000000
+            require ext_code.size(address(_20069))
+            call address(_20069).deposit() with:
+               value _20332 wei
+                 gas gas_remaining wei
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+            _20443 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+            require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+            _20500 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+            require idx < mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + 192]
+            _20518 = mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 224]
+            require mem[_10045] > 2
+            require mem[_10045] <= 21
+            require 1 == bool(mem[_10045])
+            require ext_code.size(registryAddress)
+            call registryAddress.0xbb34534c with:
+                 gas gas_remaining wei
+                args 'BancorGasPriceLimit'
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require return_data.size >= 32
+            mem[mem[64]] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+            mem[mem[64] + 4] = block.gasprice
+            require ext_code.size(address(ext_call.return_data[0]))
+            call address(ext_call.return_data[0]).0x6b4dff1f with:
+                 gas gas_remaining wei
+                args block.gasprice
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require 0 < mem[_10045]
+            _21252 = mem[_10045 + 32]
+            mem[mem[64] + 4] = 'ContractFeatures'
+            require ext_code.size(registryAddress)
+            call registryAddress.0xbb34534c with:
+                 gas gas_remaining wei
+                args 'ContractFeatures'
+            mem[mem[64]] = ext_call.return_data[0]
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require return_data.size >= 32
+            _21673 = mem[_10045]
+            t = 1
+            u = 0
+            u = 0
+            v = 0
+            v = _21252
+            w = _20500
+            while t < _21673:
+                require t < mem[_10045]
+                _30209 = mem[(32 * t) + _10045 + 32]
+                require t + 1 < mem[_10045]
+                _30496 = mem[(32 * t + 1) + _10045 + 32]
+                require ext_code.size(mem[(32 * t) + _10045 + 44 len 20])
+                call mem[(32 * t) + _10045 + 44 len 20].0x8da5cb5b with:
+                     gas gas_remaining wei
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                require ext_code.size(address(ext_call.return_data[0]))
+                call address(ext_call.return_data[0]).0xa5fbf287 with:
+                     gas gas_remaining wei
+                    args address(ext_call.return_data[0]), 1
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                if ext_call.return_data[0]:
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).conversionWhitelist() with:
+                         gas gas_remaining wei
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    if address(ext_call.return_data[0]):
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                             gas gas_remaining wei
+                            args address(arg5)
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_call.return_data[0]
+                if address(v) != mem[(32 * t) + _10045 + 44 len 20]:
+                    require ext_code.size(address(v))
+                    call address(v).0xdd62ed3e with:
+                         gas gas_remaining wei
+                        args this.address, address(ext_call.return_data[0])
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    if ext_call.return_data[0] < w:
+                        require ext_code.size(address(v))
+                        call address(v).0xdd62ed3e with:
+                             gas gas_remaining wei
+                            args this.address, address(ext_call.return_data[0])
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_code.size(address(v))
+                        if ext_call.return_data[0]:
+                            call address(v).approve(address arg1, uint256 arg2) with:
+                                 gas gas_remaining wei
+                                args address(ext_call.return_data[0]), 0
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                        call address(v).approve(address arg1, uint256 arg2) with:
+                             gas gas_remaining wei
+                            args address(ext_call.return_data[0]), w
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_call.return_data[0]
+                mem[mem[64] + 4] = address(v)
+                mem[mem[64] + 36] = address(_30496)
+                mem[mem[64] + 68] = w
+                if t == _21673 - 2:
+                    mem[mem[64] + 100] = _20518
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                         gas gas_remaining wei
+                        args address(v), address(_30496), w, _20518
+                else:
+                    mem[mem[64] + 100] = 1
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                         gas gas_remaining wei
+                        args address(v), address(_30496), w, 1
+                mem[mem[64]] = ext_call.return_data[0]
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                t = t + 2
+                u = ext_call.return_data[0]
+                u = _30496
+                v = _30209
+                v = _30496
+                w = ext_call.return_data[0]
+                continue 
+            mem[0] = address(u)
+            mem[32] = 4
+            if stor4[address(u)]:
+                mem[mem[64]] = 0x205c287800000000000000000000000000000000000000000000000000000000
+                mem[mem[64] + 4] = arg5
+                mem[mem[64] + 36] = w
+                require ext_code.size(address(u))
+                call address(u).withdrawTo(address arg1, uint256 arg2) with:
+                     gas gas_remaining wei
+                    args address(arg5), w
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+            else:
+                mem[mem[64] + 4] = arg5
+                mem[mem[64] + 36] = w
+                require ext_code.size(address(u))
+                call address(u).0xa9059cbb with:
+                     gas gas_remaining wei
+                    args address(arg5), w
+                mem[mem[64]] = ext_call.return_data[0]
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                require ext_call.return_data[0]
+            require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+            mem[(32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 192] = w
+            s = _20069
+            s = _10037
+            s = _10045
+            idx = idx + 1
+            s = _10037
+            s = s + _20443
+            continue 
+        mem[_10045 + 32 len 32 * _10037 - _10044] = code.data[10217 len 32 * _10037 - _10044]
+        require idx < mem[(32 * arg1.length) + 128]
+        t = mem[(32 * idx) + (32 * arg1.length) + 160]
+        while t < _10037:
+            require t < mem[96]
+            require idx < mem[(32 * arg1.length) + 128]
+            require t - mem[(32 * idx) + (32 * arg1.length) + 160] < mem[_10045]
+            mem[_10045 + (32 * t - mem[(32 * idx) + (32 * arg1.length) + 160]) + 32] = mem[(32 * t) + 140 len 20]
+            t = t + 1
+            continue 
+        require 0 < mem[_10045]
+        _20072 = mem[_10045 + 32]
+        if 0 == msg.value:
+            if msg.value <= 0:
+                require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                _20123 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                require idx < mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                _20151 = mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 224]
+                require mem[_10045] > 2
+                require mem[_10045] <= 21
+                require 1 == bool(mem[_10045])
+                require ext_code.size(registryAddress)
+                call registryAddress.0xbb34534c with:
+                     gas gas_remaining wei
+                    args 'BancorGasPriceLimit'
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                mem[mem[64]] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+                mem[mem[64] + 4] = block.gasprice
+                require ext_code.size(address(ext_call.return_data[0]))
+                call address(ext_call.return_data[0]).0x6b4dff1f with:
+                     gas gas_remaining wei
+                    args block.gasprice
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require 0 < mem[_10045]
+                _20739 = mem[_10045 + 32]
+                mem[mem[64] + 4] = 'ContractFeatures'
+                require ext_code.size(registryAddress)
+                call registryAddress.0xbb34534c with:
+                     gas gas_remaining wei
+                    args 'ContractFeatures'
+                mem[mem[64]] = ext_call.return_data[0]
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                _20895 = mem[_10045]
+                t = 1
+                u = 0
+                u = 0
+                v = 0
+                v = _20739
+                w = _20123
+                while t < _20895:
+                    require t < mem[_10045]
+                    _30212 = mem[(32 * t) + _10045 + 32]
+                    require t + 1 < mem[_10045]
+                    _30503 = mem[(32 * t + 1) + _10045 + 32]
+                    require ext_code.size(mem[(32 * t) + _10045 + 44 len 20])
+                    call mem[(32 * t) + _10045 + 44 len 20].0x8da5cb5b with:
+                         gas gas_remaining wei
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).0xa5fbf287 with:
+                         gas gas_remaining wei
+                        args address(ext_call.return_data[0]), 1
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    if ext_call.return_data[0]:
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).conversionWhitelist() with:
+                             gas gas_remaining wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if address(ext_call.return_data[0]):
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                 gas gas_remaining wei
+                                args address(arg5)
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    if address(v) != mem[(32 * t) + _10045 + 44 len 20]:
+                        require ext_code.size(address(v))
+                        call address(v).0xdd62ed3e with:
+                             gas gas_remaining wei
+                            args this.address, address(ext_call.return_data[0])
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if ext_call.return_data[0] < w:
+                            require ext_code.size(address(v))
+                            call address(v).0xdd62ed3e with:
+                                 gas gas_remaining wei
+                                args this.address, address(ext_call.return_data[0])
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_code.size(address(v))
+                            if ext_call.return_data[0]:
+                                call address(v).approve(address arg1, uint256 arg2) with:
+                                     gas gas_remaining wei
+                                    args address(ext_call.return_data[0]), 0
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                            call address(v).approve(address arg1, uint256 arg2) with:
+                                 gas gas_remaining wei
+                                args address(ext_call.return_data[0]), w
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    mem[mem[64] + 4] = address(v)
+                    mem[mem[64] + 36] = address(_30503)
+                    mem[mem[64] + 68] = w
+                    if t == _20895 - 2:
+                        mem[mem[64] + 100] = _20151
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(v), address(_30503), w, _20151
+                    else:
+                        mem[mem[64] + 100] = 1
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(v), address(_30503), w, 1
+                    mem[mem[64]] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    t = t + 2
+                    u = ext_call.return_data[0]
+                    u = _30503
+                    v = _30212
+                    v = _30503
+                    w = ext_call.return_data[0]
+                    continue 
+                mem[0] = address(u)
+                mem[32] = 4
+                if stor4[address(u)]:
+                    mem[mem[64]] = 0x205c287800000000000000000000000000000000000000000000000000000000
+                    mem[mem[64] + 4] = arg5
+                    mem[mem[64] + 36] = w
+                    require ext_code.size(address(u))
+                    call address(u).withdrawTo(address arg1, uint256 arg2) with:
+                         gas gas_remaining wei
+                        args address(arg5), w
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                else:
+                    mem[mem[64] + 4] = arg5
+                    mem[mem[64] + 36] = w
+                    require ext_code.size(address(u))
+                    call address(u).0xa9059cbb with:
+                         gas gas_remaining wei
+                        args address(arg5), w
+                    mem[mem[64]] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    require ext_call.return_data[0]
+                require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                mem[(32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 192] = w
+                s = _20072
+                s = _10037
+                s = _10045
+                idx = idx + 1
+                s = _10037
+                s = s
+                continue 
+            mem[0] = mem[_10045 + 44 len 20]
+            mem[32] = 4
+            require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+            if not stor4[mem[0]]:
+                _20152 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                require idx < mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                _20175 = mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 224]
+                require mem[_10045] > 2
+                require mem[_10045] <= 21
+                require 1 == bool(mem[_10045])
+                require ext_code.size(registryAddress)
+                call registryAddress.0xbb34534c with:
+                     gas gas_remaining wei
+                    args 'BancorGasPriceLimit'
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                mem[mem[64]] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+                mem[mem[64] + 4] = block.gasprice
+                require ext_code.size(address(ext_call.return_data[0]))
+                call address(ext_call.return_data[0]).0x6b4dff1f with:
+                     gas gas_remaining wei
+                    args block.gasprice
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require 0 < mem[_10045]
+                _20774 = mem[_10045 + 32]
+                mem[mem[64] + 4] = 'ContractFeatures'
+                require ext_code.size(registryAddress)
+                call registryAddress.0xbb34534c with:
+                     gas gas_remaining wei
+                    args 'ContractFeatures'
+                mem[mem[64]] = ext_call.return_data[0]
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                _20959 = mem[_10045]
+                t = 1
+                u = 0
+                u = 0
+                v = 0
+                v = _20774
+                w = _20152
+                while t < _20959:
+                    require t < mem[_10045]
+                    _30215 = mem[(32 * t) + _10045 + 32]
+                    require t + 1 < mem[_10045]
+                    _30510 = mem[(32 * t + 1) + _10045 + 32]
+                    require ext_code.size(mem[(32 * t) + _10045 + 44 len 20])
+                    call mem[(32 * t) + _10045 + 44 len 20].0x8da5cb5b with:
+                         gas gas_remaining wei
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).0xa5fbf287 with:
+                         gas gas_remaining wei
+                        args address(ext_call.return_data[0]), 1
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    if ext_call.return_data[0]:
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).conversionWhitelist() with:
+                             gas gas_remaining wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if address(ext_call.return_data[0]):
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                 gas gas_remaining wei
+                                args address(arg5)
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    if address(v) != mem[(32 * t) + _10045 + 44 len 20]:
+                        require ext_code.size(address(v))
+                        call address(v).0xdd62ed3e with:
+                             gas gas_remaining wei
+                            args this.address, address(ext_call.return_data[0])
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if ext_call.return_data[0] < w:
+                            require ext_code.size(address(v))
+                            call address(v).0xdd62ed3e with:
+                                 gas gas_remaining wei
+                                args this.address, address(ext_call.return_data[0])
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_code.size(address(v))
+                            if ext_call.return_data[0]:
+                                call address(v).approve(address arg1, uint256 arg2) with:
+                                     gas gas_remaining wei
+                                    args address(ext_call.return_data[0]), 0
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                            call address(v).approve(address arg1, uint256 arg2) with:
+                                 gas gas_remaining wei
+                                args address(ext_call.return_data[0]), w
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    mem[mem[64] + 4] = address(v)
+                    mem[mem[64] + 36] = address(_30510)
+                    mem[mem[64] + 68] = w
+                    if t == _20959 - 2:
+                        mem[mem[64] + 100] = _20175
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(v), address(_30510), w, _20175
+                    else:
+                        mem[mem[64] + 100] = 1
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(v), address(_30510), w, 1
+                    mem[mem[64]] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    t = t + 2
+                    u = ext_call.return_data[0]
+                    u = _30510
+                    v = _30215
+                    v = _30510
+                    w = ext_call.return_data[0]
+                    continue 
+                mem[0] = address(u)
+                mem[32] = 4
+                if stor4[address(u)]:
+                    mem[mem[64]] = 0x205c287800000000000000000000000000000000000000000000000000000000
+                    mem[mem[64] + 4] = arg5
+                    mem[mem[64] + 36] = w
+                    require ext_code.size(address(u))
+                    call address(u).withdrawTo(address arg1, uint256 arg2) with:
+                         gas gas_remaining wei
+                        args address(arg5), w
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                else:
+                    mem[mem[64] + 4] = arg5
+                    mem[mem[64] + 36] = w
+                    require ext_code.size(address(u))
+                    call address(u).0xa9059cbb with:
+                         gas gas_remaining wei
+                        args address(arg5), w
+                    mem[mem[64]] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    require ext_call.return_data[0]
+                require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                mem[(32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 192] = w
+                s = _20072
+                s = _10037
+                s = _10045
+                idx = idx + 1
+                s = _10037
+                s = s
+                continue 
+            _20154 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+            mem[mem[64]] = 0xd0e30db000000000000000000000000000000000000000000000000000000000
+            require ext_code.size(address(_20072))
+            call address(_20072).deposit() with:
+               value _20154 wei
+                 gas gas_remaining wei
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+            _20282 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+            require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+            _20381 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+            require idx < mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + 192]
+            _20415 = mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 224]
+            require mem[_10045] > 2
+            require mem[_10045] <= 21
+            require 1 == bool(mem[_10045])
+            require ext_code.size(registryAddress)
+            call registryAddress.0xbb34534c with:
+                 gas gas_remaining wei
+                args 'BancorGasPriceLimit'
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require return_data.size >= 32
+            mem[mem[64]] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+            mem[mem[64] + 4] = block.gasprice
+            require ext_code.size(address(ext_call.return_data[0]))
+            call address(ext_call.return_data[0]).0x6b4dff1f with:
+                 gas gas_remaining wei
+                args block.gasprice
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require 0 < mem[_10045]
+            _21003 = mem[_10045 + 32]
+            mem[mem[64] + 4] = 'ContractFeatures'
+            require ext_code.size(registryAddress)
+            call registryAddress.0xbb34534c with:
+                 gas gas_remaining wei
+                args 'ContractFeatures'
+            mem[mem[64]] = ext_call.return_data[0]
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require return_data.size >= 32
+            _21256 = mem[_10045]
+            t = 1
+            u = 0
+            u = 0
+            v = 0
+            v = _21003
+            w = _20381
+            while t < _21256:
+                require t < mem[_10045]
+                _30218 = mem[(32 * t) + _10045 + 32]
+                require t + 1 < mem[_10045]
+                _30517 = mem[(32 * t + 1) + _10045 + 32]
+                require ext_code.size(mem[(32 * t) + _10045 + 44 len 20])
+                call mem[(32 * t) + _10045 + 44 len 20].0x8da5cb5b with:
+                     gas gas_remaining wei
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                require ext_code.size(address(ext_call.return_data[0]))
+                call address(ext_call.return_data[0]).0xa5fbf287 with:
+                     gas gas_remaining wei
+                    args address(ext_call.return_data[0]), 1
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                if ext_call.return_data[0]:
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).conversionWhitelist() with:
+                         gas gas_remaining wei
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    if address(ext_call.return_data[0]):
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                             gas gas_remaining wei
+                            args address(arg5)
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_call.return_data[0]
+                if address(v) != mem[(32 * t) + _10045 + 44 len 20]:
+                    require ext_code.size(address(v))
+                    call address(v).0xdd62ed3e with:
+                         gas gas_remaining wei
+                        args this.address, address(ext_call.return_data[0])
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    if ext_call.return_data[0] < w:
+                        require ext_code.size(address(v))
+                        call address(v).0xdd62ed3e with:
+                             gas gas_remaining wei
+                            args this.address, address(ext_call.return_data[0])
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_code.size(address(v))
+                        if ext_call.return_data[0]:
+                            call address(v).approve(address arg1, uint256 arg2) with:
+                                 gas gas_remaining wei
+                                args address(ext_call.return_data[0]), 0
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                        call address(v).approve(address arg1, uint256 arg2) with:
+                             gas gas_remaining wei
+                            args address(ext_call.return_data[0]), w
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_call.return_data[0]
+                mem[mem[64] + 4] = address(v)
+                mem[mem[64] + 36] = address(_30517)
+                mem[mem[64] + 68] = w
+                if t == _21256 - 2:
+                    mem[mem[64] + 100] = _20415
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                         gas gas_remaining wei
+                        args address(v), address(_30517), w, _20415
+                else:
+                    mem[mem[64] + 100] = 1
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                         gas gas_remaining wei
+                        args address(v), address(_30517), w, 1
+                mem[mem[64]] = ext_call.return_data[0]
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                t = t + 2
+                u = ext_call.return_data[0]
+                u = _30517
+                v = _30218
+                v = _30517
+                w = ext_call.return_data[0]
+                continue 
+            mem[0] = address(u)
+            mem[32] = 4
+            if stor4[address(u)]:
+                mem[mem[64]] = 0x205c287800000000000000000000000000000000000000000000000000000000
+                mem[mem[64] + 4] = arg5
+                mem[mem[64] + 36] = w
+                require ext_code.size(address(u))
+                call address(u).withdrawTo(address arg1, uint256 arg2) with:
+                     gas gas_remaining wei
+                    args address(arg5), w
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+            else:
+                mem[mem[64] + 4] = arg5
+                mem[mem[64] + 36] = w
+                require ext_code.size(address(u))
+                call address(u).0xa9059cbb with:
+                     gas gas_remaining wei
+                    args address(arg5), w
+                mem[mem[64]] = ext_call.return_data[0]
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                require ext_call.return_data[0]
+            require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+            mem[(32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 192] = w
+            s = _20072
+            s = _10037
+            s = _10045
+            idx = idx + 1
+            s = _10037
+            s = s + _20282
+            continue 
+        require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+        mem[0] = mem[_10045 + 44 len 20]
+        mem[32] = 4
+        if mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192] > msg.value:
+            require not stor4[mem[0]]
+            if msg.value <= 0:
+                require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                _20218 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                require idx < mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                _20283 = mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 224]
+                require mem[_10045] > 2
+                require mem[_10045] <= 21
+                require 1 == bool(mem[_10045])
+                require ext_code.size(registryAddress)
+                call registryAddress.0xbb34534c with:
+                     gas gas_remaining wei
+                    args 'BancorGasPriceLimit'
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                mem[mem[64]] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+                mem[mem[64] + 4] = block.gasprice
+                require ext_code.size(address(ext_call.return_data[0]))
+                call address(ext_call.return_data[0]).0x6b4dff1f with:
+                     gas gas_remaining wei
+                    args block.gasprice
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require 0 < mem[_10045]
+                _20848 = mem[_10045 + 32]
+                mem[mem[64] + 4] = 'ContractFeatures'
+                require ext_code.size(registryAddress)
+                call registryAddress.0xbb34534c with:
+                     gas gas_remaining wei
+                    args 'ContractFeatures'
+                mem[mem[64]] = ext_call.return_data[0]
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                _21057 = mem[_10045]
+                t = 1
+                u = 0
+                u = 0
+                v = 0
+                v = _20848
+                w = _20218
+                while t < _21057:
+                    require t < mem[_10045]
+                    _30221 = mem[(32 * t) + _10045 + 32]
+                    require t + 1 < mem[_10045]
+                    _30524 = mem[(32 * t + 1) + _10045 + 32]
+                    require ext_code.size(mem[(32 * t) + _10045 + 44 len 20])
+                    call mem[(32 * t) + _10045 + 44 len 20].0x8da5cb5b with:
+                         gas gas_remaining wei
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).0xa5fbf287 with:
+                         gas gas_remaining wei
+                        args address(ext_call.return_data[0]), 1
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    if ext_call.return_data[0]:
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).conversionWhitelist() with:
+                             gas gas_remaining wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if address(ext_call.return_data[0]):
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                 gas gas_remaining wei
+                                args address(arg5)
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    if address(v) != mem[(32 * t) + _10045 + 44 len 20]:
+                        require ext_code.size(address(v))
+                        call address(v).0xdd62ed3e with:
+                             gas gas_remaining wei
+                            args this.address, address(ext_call.return_data[0])
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if ext_call.return_data[0] < w:
+                            require ext_code.size(address(v))
+                            call address(v).0xdd62ed3e with:
+                                 gas gas_remaining wei
+                                args this.address, address(ext_call.return_data[0])
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_code.size(address(v))
+                            if ext_call.return_data[0]:
+                                call address(v).approve(address arg1, uint256 arg2) with:
+                                     gas gas_remaining wei
+                                    args address(ext_call.return_data[0]), 0
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                            call address(v).approve(address arg1, uint256 arg2) with:
+                                 gas gas_remaining wei
+                                args address(ext_call.return_data[0]), w
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    mem[mem[64] + 4] = address(v)
+                    mem[mem[64] + 36] = address(_30524)
+                    mem[mem[64] + 68] = w
+                    if t == _21057 - 2:
+                        mem[mem[64] + 100] = _20283
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(v), address(_30524), w, _20283
+                    else:
+                        mem[mem[64] + 100] = 1
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(v), address(_30524), w, 1
+                    mem[mem[64]] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    t = t + 2
+                    u = ext_call.return_data[0]
+                    u = _30524
+                    v = _30221
+                    v = _30524
+                    w = ext_call.return_data[0]
+                    continue 
+                mem[0] = address(u)
+                mem[32] = 4
+                if stor4[address(u)]:
+                    mem[mem[64]] = 0x205c287800000000000000000000000000000000000000000000000000000000
+                    mem[mem[64] + 4] = arg5
+                    mem[mem[64] + 36] = w
+                    require ext_code.size(address(u))
+                    call address(u).withdrawTo(address arg1, uint256 arg2) with:
+                         gas gas_remaining wei
+                        args address(arg5), w
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                else:
+                    mem[mem[64] + 4] = arg5
+                    mem[mem[64] + 36] = w
+                    require ext_code.size(address(u))
+                    call address(u).0xa9059cbb with:
+                         gas gas_remaining wei
+                        args address(arg5), w
+                    mem[mem[64]] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    require ext_call.return_data[0]
+                require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                mem[(32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 192] = w
+                s = _20072
+                s = _10037
+                s = _10045
+                idx = idx + 1
+                s = _10037
+                s = s
+                continue 
+            mem[0] = address(_20072)
+            mem[32] = 4
+            require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+            if not stor4[address(_20072)]:
+                _20284 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                require idx < mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                _20338 = mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 224]
+                require mem[_10045] > 2
+                require mem[_10045] <= 21
+                require 1 == bool(mem[_10045])
+                require ext_code.size(registryAddress)
+                call registryAddress.0xbb34534c with:
+                     gas gas_remaining wei
+                    args 'BancorGasPriceLimit'
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                mem[mem[64]] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+                mem[mem[64] + 4] = block.gasprice
+                require ext_code.size(address(ext_call.return_data[0]))
+                call address(ext_call.return_data[0]).0x6b4dff1f with:
+                     gas gas_remaining wei
+                    args block.gasprice
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require 0 < mem[_10045]
+                _20899 = mem[_10045 + 32]
+                mem[mem[64] + 4] = 'ContractFeatures'
+                require ext_code.size(registryAddress)
+                call registryAddress.0xbb34534c with:
+                     gas gas_remaining wei
+                    args 'ContractFeatures'
+                mem[mem[64]] = ext_call.return_data[0]
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                _21131 = mem[_10045]
+                t = 1
+                u = 0
+                u = 0
+                v = 0
+                v = _20899
+                w = _20284
+                while t < _21131:
+                    require t < mem[_10045]
+                    _30224 = mem[(32 * t) + _10045 + 32]
+                    require t + 1 < mem[_10045]
+                    _30531 = mem[(32 * t + 1) + _10045 + 32]
+                    require ext_code.size(mem[(32 * t) + _10045 + 44 len 20])
+                    call mem[(32 * t) + _10045 + 44 len 20].0x8da5cb5b with:
+                         gas gas_remaining wei
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).0xa5fbf287 with:
+                         gas gas_remaining wei
+                        args address(ext_call.return_data[0]), 1
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    if ext_call.return_data[0]:
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).conversionWhitelist() with:
+                             gas gas_remaining wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if address(ext_call.return_data[0]):
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                 gas gas_remaining wei
+                                args address(arg5)
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    if address(v) != mem[(32 * t) + _10045 + 44 len 20]:
+                        require ext_code.size(address(v))
+                        call address(v).0xdd62ed3e with:
+                             gas gas_remaining wei
+                            args this.address, address(ext_call.return_data[0])
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if ext_call.return_data[0] < w:
+                            require ext_code.size(address(v))
+                            call address(v).0xdd62ed3e with:
+                                 gas gas_remaining wei
+                                args this.address, address(ext_call.return_data[0])
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_code.size(address(v))
+                            if ext_call.return_data[0]:
+                                call address(v).approve(address arg1, uint256 arg2) with:
+                                     gas gas_remaining wei
+                                    args address(ext_call.return_data[0]), 0
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                            call address(v).approve(address arg1, uint256 arg2) with:
+                                 gas gas_remaining wei
+                                args address(ext_call.return_data[0]), w
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    mem[mem[64] + 4] = address(v)
+                    mem[mem[64] + 36] = address(_30531)
+                    mem[mem[64] + 68] = w
+                    if t == _21131 - 2:
+                        mem[mem[64] + 100] = _20338
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(v), address(_30531), w, _20338
+                    else:
+                        mem[mem[64] + 100] = 1
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(v), address(_30531), w, 1
+                    mem[mem[64]] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    t = t + 2
+                    u = ext_call.return_data[0]
+                    u = _30531
+                    v = _30224
+                    v = _30531
+                    w = ext_call.return_data[0]
+                    continue 
+                mem[0] = address(u)
+                mem[32] = 4
+                if stor4[address(u)]:
+                    mem[mem[64]] = 0x205c287800000000000000000000000000000000000000000000000000000000
+                    mem[mem[64] + 4] = arg5
+                    mem[mem[64] + 36] = w
+                    require ext_code.size(address(u))
+                    call address(u).withdrawTo(address arg1, uint256 arg2) with:
+                         gas gas_remaining wei
+                        args address(arg5), w
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                else:
+                    mem[mem[64] + 4] = arg5
+                    mem[mem[64] + 36] = w
+                    require ext_code.size(address(u))
+                    call address(u).0xa9059cbb with:
+                         gas gas_remaining wei
+                        args address(arg5), w
+                    mem[mem[64]] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    require ext_call.return_data[0]
+                require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                mem[(32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 192] = w
+                s = _20072
+                s = _10037
+                s = _10045
+                idx = idx + 1
+                s = _10037
+                s = s
+                continue 
+            _20286 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+            mem[mem[64]] = 0xd0e30db000000000000000000000000000000000000000000000000000000000
+            require ext_code.size(address(_20072))
+            call address(_20072).deposit() with:
+               value _20286 wei
+                 gas gas_remaining wei
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+            _20417 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+            require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+            _20480 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+            require idx < mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + 192]
+            _20502 = mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 224]
+            require mem[_10045] > 2
+            require mem[_10045] <= 21
+            require 1 == bool(mem[_10045])
+            require ext_code.size(registryAddress)
+            call registryAddress.0xbb34534c with:
+                 gas gas_remaining wei
+                args 'BancorGasPriceLimit'
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require return_data.size >= 32
+            mem[mem[64]] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+            mem[mem[64] + 4] = block.gasprice
+            require ext_code.size(address(ext_call.return_data[0]))
+            call address(ext_call.return_data[0]).0x6b4dff1f with:
+                 gas gas_remaining wei
+                args block.gasprice
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require 0 < mem[_10045]
+            _21193 = mem[_10045 + 32]
+            mem[mem[64] + 4] = 'ContractFeatures'
+            require ext_code.size(registryAddress)
+            call registryAddress.0xbb34534c with:
+                 gas gas_remaining wei
+                args 'ContractFeatures'
+            mem[mem[64]] = ext_call.return_data[0]
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require return_data.size >= 32
+            _21598 = mem[_10045]
+            t = 1
+            u = 0
+            u = 0
+            v = 0
+            v = _21193
+            w = _20480
+            while t < _21598:
+                require t < mem[_10045]
+                _30227 = mem[(32 * t) + _10045 + 32]
+                require t + 1 < mem[_10045]
+                _30538 = mem[(32 * t + 1) + _10045 + 32]
+                require ext_code.size(mem[(32 * t) + _10045 + 44 len 20])
+                call mem[(32 * t) + _10045 + 44 len 20].0x8da5cb5b with:
+                     gas gas_remaining wei
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                require ext_code.size(address(ext_call.return_data[0]))
+                call address(ext_call.return_data[0]).0xa5fbf287 with:
+                     gas gas_remaining wei
+                    args address(ext_call.return_data[0]), 1
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                if ext_call.return_data[0]:
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).conversionWhitelist() with:
+                         gas gas_remaining wei
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    if address(ext_call.return_data[0]):
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                             gas gas_remaining wei
+                            args address(arg5)
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_call.return_data[0]
+                if address(v) != mem[(32 * t) + _10045 + 44 len 20]:
+                    require ext_code.size(address(v))
+                    call address(v).0xdd62ed3e with:
+                         gas gas_remaining wei
+                        args this.address, address(ext_call.return_data[0])
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    if ext_call.return_data[0] < w:
+                        require ext_code.size(address(v))
+                        call address(v).0xdd62ed3e with:
+                             gas gas_remaining wei
+                            args this.address, address(ext_call.return_data[0])
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_code.size(address(v))
+                        if ext_call.return_data[0]:
+                            call address(v).approve(address arg1, uint256 arg2) with:
+                                 gas gas_remaining wei
+                                args address(ext_call.return_data[0]), 0
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                        call address(v).approve(address arg1, uint256 arg2) with:
+                             gas gas_remaining wei
+                            args address(ext_call.return_data[0]), w
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_call.return_data[0]
+                mem[mem[64] + 4] = address(v)
+                mem[mem[64] + 36] = address(_30538)
+                mem[mem[64] + 68] = w
+                if t == _21598 - 2:
+                    mem[mem[64] + 100] = _20502
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                         gas gas_remaining wei
+                        args address(v), address(_30538), w, _20502
+                else:
+                    mem[mem[64] + 100] = 1
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                         gas gas_remaining wei
+                        args address(v), address(_30538), w, 1
+                mem[mem[64]] = ext_call.return_data[0]
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                t = t + 2
+                u = ext_call.return_data[0]
+                u = _30538
+                v = _30227
+                v = _30538
+                w = ext_call.return_data[0]
+                continue 
+            mem[0] = address(u)
+            mem[32] = 4
+            if stor4[address(u)]:
+                mem[mem[64]] = 0x205c287800000000000000000000000000000000000000000000000000000000
+                mem[mem[64] + 4] = arg5
+                mem[mem[64] + 36] = w
+                require ext_code.size(address(u))
+                call address(u).withdrawTo(address arg1, uint256 arg2) with:
+                     gas gas_remaining wei
+                    args address(arg5), w
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+            else:
+                mem[mem[64] + 4] = arg5
+                mem[mem[64] + 36] = w
+                require ext_code.size(address(u))
+                call address(u).0xa9059cbb with:
+                     gas gas_remaining wei
+                    args address(arg5), w
+                mem[mem[64]] = ext_call.return_data[0]
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                require ext_call.return_data[0]
+            require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+            mem[(32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 192] = w
+            s = _20072
+            s = _10037
+            s = _10045
+            idx = idx + 1
+            s = _10037
+            s = s + _20417
+            continue 
+        if stor4[mem[0]]:
+            if msg.value <= 0:
+                require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                _20222 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                require idx < mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                _20289 = mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 224]
+                require mem[_10045] > 2
+                require mem[_10045] <= 21
+                require 1 == bool(mem[_10045])
+                require ext_code.size(registryAddress)
+                call registryAddress.0xbb34534c with:
+                     gas gas_remaining wei
+                    args 'BancorGasPriceLimit'
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                mem[mem[64]] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+                mem[mem[64] + 4] = block.gasprice
+                require ext_code.size(address(ext_call.return_data[0]))
+                call address(ext_call.return_data[0]).0x6b4dff1f with:
+                     gas gas_remaining wei
+                    args block.gasprice
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require 0 < mem[_10045]
+                _20850 = mem[_10045 + 32]
+                mem[mem[64] + 4] = 'ContractFeatures'
+                require ext_code.size(registryAddress)
+                call registryAddress.0xbb34534c with:
+                     gas gas_remaining wei
+                    args 'ContractFeatures'
+                mem[mem[64]] = ext_call.return_data[0]
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                _21060 = mem[_10045]
+                t = 1
+                u = 0
+                u = 0
+                v = 0
+                v = _20850
+                w = _20222
+                while t < _21060:
+                    require t < mem[_10045]
+                    _30230 = mem[(32 * t) + _10045 + 32]
+                    require t + 1 < mem[_10045]
+                    _30545 = mem[(32 * t + 1) + _10045 + 32]
+                    require ext_code.size(mem[(32 * t) + _10045 + 44 len 20])
+                    call mem[(32 * t) + _10045 + 44 len 20].0x8da5cb5b with:
+                         gas gas_remaining wei
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).0xa5fbf287 with:
+                         gas gas_remaining wei
+                        args address(ext_call.return_data[0]), 1
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    if ext_call.return_data[0]:
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).conversionWhitelist() with:
+                             gas gas_remaining wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if address(ext_call.return_data[0]):
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                 gas gas_remaining wei
+                                args address(arg5)
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    if address(v) != mem[(32 * t) + _10045 + 44 len 20]:
+                        require ext_code.size(address(v))
+                        call address(v).0xdd62ed3e with:
+                             gas gas_remaining wei
+                            args this.address, address(ext_call.return_data[0])
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if ext_call.return_data[0] < w:
+                            require ext_code.size(address(v))
+                            call address(v).0xdd62ed3e with:
+                                 gas gas_remaining wei
+                                args this.address, address(ext_call.return_data[0])
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_code.size(address(v))
+                            if ext_call.return_data[0]:
+                                call address(v).approve(address arg1, uint256 arg2) with:
+                                     gas gas_remaining wei
+                                    args address(ext_call.return_data[0]), 0
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                            call address(v).approve(address arg1, uint256 arg2) with:
+                                 gas gas_remaining wei
+                                args address(ext_call.return_data[0]), w
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    mem[mem[64] + 4] = address(v)
+                    mem[mem[64] + 36] = address(_30545)
+                    mem[mem[64] + 68] = w
+                    if t == _21060 - 2:
+                        mem[mem[64] + 100] = _20289
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(v), address(_30545), w, _20289
+                    else:
+                        mem[mem[64] + 100] = 1
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(v), address(_30545), w, 1
+                    mem[mem[64]] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    t = t + 2
+                    u = ext_call.return_data[0]
+                    u = _30545
+                    v = _30230
+                    v = _30545
+                    w = ext_call.return_data[0]
+                    continue 
+                mem[0] = address(u)
+                mem[32] = 4
+                if stor4[address(u)]:
+                    mem[mem[64]] = 0x205c287800000000000000000000000000000000000000000000000000000000
+                    mem[mem[64] + 4] = arg5
+                    mem[mem[64] + 36] = w
+                    require ext_code.size(address(u))
+                    call address(u).withdrawTo(address arg1, uint256 arg2) with:
+                         gas gas_remaining wei
+                        args address(arg5), w
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                else:
+                    mem[mem[64] + 4] = arg5
+                    mem[mem[64] + 36] = w
+                    require ext_code.size(address(u))
+                    call address(u).0xa9059cbb with:
+                         gas gas_remaining wei
+                        args address(arg5), w
+                    mem[mem[64]] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    require ext_call.return_data[0]
+                require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                mem[(32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 192] = w
+                s = _20072
+                s = _10037
+                s = _10045
+                idx = idx + 1
+                s = _10037
+                s = s
+                continue 
+            mem[0] = address(_20072)
+            mem[32] = 4
+            require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+            if not stor4[address(_20072)]:
+                _20290 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                require idx < mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + 192]
+                _20340 = mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 224]
+                require mem[_10045] > 2
+                require mem[_10045] <= 21
+                require 1 == bool(mem[_10045])
+                require ext_code.size(registryAddress)
+                call registryAddress.0xbb34534c with:
+                     gas gas_remaining wei
+                    args 'BancorGasPriceLimit'
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                mem[mem[64]] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+                mem[mem[64] + 4] = block.gasprice
+                require ext_code.size(address(ext_call.return_data[0]))
+                call address(ext_call.return_data[0]).0x6b4dff1f with:
+                     gas gas_remaining wei
+                    args block.gasprice
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require 0 < mem[_10045]
+                _20903 = mem[_10045 + 32]
+                mem[mem[64] + 4] = 'ContractFeatures'
+                require ext_code.size(registryAddress)
+                call registryAddress.0xbb34534c with:
+                     gas gas_remaining wei
+                    args 'ContractFeatures'
+                mem[mem[64]] = ext_call.return_data[0]
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                _21134 = mem[_10045]
+                t = 1
+                u = 0
+                u = 0
+                v = 0
+                v = _20903
+                w = _20290
+                while t < _21134:
+                    require t < mem[_10045]
+                    _30233 = mem[(32 * t) + _10045 + 32]
+                    require t + 1 < mem[_10045]
+                    _30552 = mem[(32 * t + 1) + _10045 + 32]
+                    require ext_code.size(mem[(32 * t) + _10045 + 44 len 20])
+                    call mem[(32 * t) + _10045 + 44 len 20].0x8da5cb5b with:
+                         gas gas_remaining wei
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).0xa5fbf287 with:
+                         gas gas_remaining wei
+                        args address(ext_call.return_data[0]), 1
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    if ext_call.return_data[0]:
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).conversionWhitelist() with:
+                             gas gas_remaining wei
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if address(ext_call.return_data[0]):
+                            require ext_code.size(address(ext_call.return_data[0]))
+                            call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                                 gas gas_remaining wei
+                                args address(arg5)
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    if address(v) != mem[(32 * t) + _10045 + 44 len 20]:
+                        require ext_code.size(address(v))
+                        call address(v).0xdd62ed3e with:
+                             gas gas_remaining wei
+                            args this.address, address(ext_call.return_data[0])
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        if ext_call.return_data[0] < w:
+                            require ext_code.size(address(v))
+                            call address(v).0xdd62ed3e with:
+                                 gas gas_remaining wei
+                                args this.address, address(ext_call.return_data[0])
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_code.size(address(v))
+                            if ext_call.return_data[0]:
+                                call address(v).approve(address arg1, uint256 arg2) with:
+                                     gas gas_remaining wei
+                                    args address(ext_call.return_data[0]), 0
+                                if not ext_call.success:
+                                    revert with ext_call.return_data[0 len return_data.size]
+                                require return_data.size >= 32
+                                require ext_call.return_data[0]
+                            call address(v).approve(address arg1, uint256 arg2) with:
+                                 gas gas_remaining wei
+                                args address(ext_call.return_data[0]), w
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                    mem[mem[64] + 4] = address(v)
+                    mem[mem[64] + 36] = address(_30552)
+                    mem[mem[64] + 68] = w
+                    if t == _21134 - 2:
+                        mem[mem[64] + 100] = _20340
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(v), address(_30552), w, _20340
+                    else:
+                        mem[mem[64] + 100] = 1
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                             gas gas_remaining wei
+                            args address(v), address(_30552), w, 1
+                    mem[mem[64]] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    t = t + 2
+                    u = ext_call.return_data[0]
+                    u = _30552
+                    v = _30233
+                    v = _30552
+                    w = ext_call.return_data[0]
+                    continue 
+                mem[0] = address(u)
+                mem[32] = 4
+                if stor4[address(u)]:
+                    mem[mem[64]] = 0x205c287800000000000000000000000000000000000000000000000000000000
+                    mem[mem[64] + 4] = arg5
+                    mem[mem[64] + 36] = w
+                    require ext_code.size(address(u))
+                    call address(u).withdrawTo(address arg1, uint256 arg2) with:
+                         gas gas_remaining wei
+                        args address(arg5), w
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                else:
+                    mem[mem[64] + 4] = arg5
+                    mem[mem[64] + 36] = w
+                    require ext_code.size(address(u))
+                    call address(u).0xa9059cbb with:
+                         gas gas_remaining wei
+                        args address(arg5), w
+                    mem[mem[64]] = ext_call.return_data[0]
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    require ext_call.return_data[0]
+                require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+                mem[(32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 192] = w
+                s = _20072
+                s = _10037
+                s = _10045
+                idx = idx + 1
+                s = _10037
+                s = s
+                continue 
+            _20292 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+            mem[mem[64]] = 0xd0e30db000000000000000000000000000000000000000000000000000000000
+            require ext_code.size(address(_20072))
+            call address(_20072).deposit() with:
+               value _20292 wei
+                 gas gas_remaining wei
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+            _20419 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+            require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+            _20483 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+            require idx < mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + 192]
+            _20503 = mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 224]
+            require mem[_10045] > 2
+            require mem[_10045] <= 21
+            require 1 == bool(mem[_10045])
+            require ext_code.size(registryAddress)
+            call registryAddress.0xbb34534c with:
+                 gas gas_remaining wei
+                args 'BancorGasPriceLimit'
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require return_data.size >= 32
+            mem[mem[64]] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+            mem[mem[64] + 4] = block.gasprice
+            require ext_code.size(address(ext_call.return_data[0]))
+            call address(ext_call.return_data[0]).0x6b4dff1f with:
+                 gas gas_remaining wei
+                args block.gasprice
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require 0 < mem[_10045]
+            _21195 = mem[_10045 + 32]
+            mem[mem[64] + 4] = 'ContractFeatures'
+            require ext_code.size(registryAddress)
+            call registryAddress.0xbb34534c with:
+                 gas gas_remaining wei
+                args 'ContractFeatures'
+            mem[mem[64]] = ext_call.return_data[0]
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require return_data.size >= 32
+            _21602 = mem[_10045]
+            t = 1
+            u = 0
+            u = 0
+            v = 0
+            v = _21195
+            w = _20483
+            while t < _21602:
+                require t < mem[_10045]
+                _30236 = mem[(32 * t) + _10045 + 32]
+                require t + 1 < mem[_10045]
+                _30559 = mem[(32 * t + 1) + _10045 + 32]
+                require ext_code.size(mem[(32 * t) + _10045 + 44 len 20])
+                call mem[(32 * t) + _10045 + 44 len 20].0x8da5cb5b with:
+                     gas gas_remaining wei
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                require ext_code.size(address(ext_call.return_data[0]))
+                call address(ext_call.return_data[0]).0xa5fbf287 with:
+                     gas gas_remaining wei
+                    args address(ext_call.return_data[0]), 1
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                if ext_call.return_data[0]:
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).conversionWhitelist() with:
+                         gas gas_remaining wei
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    if address(ext_call.return_data[0]):
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                             gas gas_remaining wei
+                            args address(arg5)
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_call.return_data[0]
+                if address(v) != mem[(32 * t) + _10045 + 44 len 20]:
+                    require ext_code.size(address(v))
+                    call address(v).0xdd62ed3e with:
+                         gas gas_remaining wei
+                        args this.address, address(ext_call.return_data[0])
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    if ext_call.return_data[0] < w:
+                        require ext_code.size(address(v))
+                        call address(v).0xdd62ed3e with:
+                             gas gas_remaining wei
+                            args this.address, address(ext_call.return_data[0])
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_code.size(address(v))
+                        if ext_call.return_data[0]:
+                            call address(v).approve(address arg1, uint256 arg2) with:
+                                 gas gas_remaining wei
+                                args address(ext_call.return_data[0]), 0
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                        call address(v).approve(address arg1, uint256 arg2) with:
+                             gas gas_remaining wei
+                            args address(ext_call.return_data[0]), w
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_call.return_data[0]
+                mem[mem[64] + 4] = address(v)
+                mem[mem[64] + 36] = address(_30559)
+                mem[mem[64] + 68] = w
+                if t == _21602 - 2:
+                    mem[mem[64] + 100] = _20503
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                         gas gas_remaining wei
+                        args address(v), address(_30559), w, _20503
+                else:
+                    mem[mem[64] + 100] = 1
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                         gas gas_remaining wei
+                        args address(v), address(_30559), w, 1
+                mem[mem[64]] = ext_call.return_data[0]
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                t = t + 2
+                u = ext_call.return_data[0]
+                u = _30559
+                v = _30236
+                v = _30559
+                w = ext_call.return_data[0]
+                continue 
+            mem[0] = address(u)
+            mem[32] = 4
+            if stor4[address(u)]:
+                mem[mem[64]] = 0x205c287800000000000000000000000000000000000000000000000000000000
+                mem[mem[64] + 4] = arg5
+                mem[mem[64] + 36] = w
+                require ext_code.size(address(u))
+                call address(u).withdrawTo(address arg1, uint256 arg2) with:
+                     gas gas_remaining wei
+                    args address(arg5), w
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+            else:
+                mem[mem[64] + 4] = arg5
+                mem[mem[64] + 36] = w
+                require ext_code.size(address(u))
+                call address(u).0xa9059cbb with:
+                     gas gas_remaining wei
+                    args address(arg5), w
+                mem[mem[64]] = ext_call.return_data[0]
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                require ext_call.return_data[0]
+            require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+            mem[(32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 192] = w
+            s = _20072
+            s = _10037
+            s = _10045
+            idx = idx + 1
+            s = _10037
+            s = s + _20419
+            continue 
+        mem[0] = address(_20072)
+        mem[32] = 4
+        require not stor4[address(_20072)]
+        if msg.value <= 0:
+            require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+            _20295 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+            require idx < mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + 192]
+            _20341 = mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 224]
+            require mem[_10045] > 2
+            require mem[_10045] <= 21
+            require 1 == bool(mem[_10045])
+            require ext_code.size(registryAddress)
+            call registryAddress.0xbb34534c with:
+                 gas gas_remaining wei
+                args 'BancorGasPriceLimit'
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require return_data.size >= 32
+            mem[mem[64]] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+            mem[mem[64] + 4] = block.gasprice
+            require ext_code.size(address(ext_call.return_data[0]))
+            call address(ext_call.return_data[0]).0x6b4dff1f with:
+                 gas gas_remaining wei
+                args block.gasprice
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require 0 < mem[_10045]
+            _20905 = mem[_10045 + 32]
+            mem[mem[64] + 4] = 'ContractFeatures'
+            require ext_code.size(registryAddress)
+            call registryAddress.0xbb34534c with:
+                 gas gas_remaining wei
+                args 'ContractFeatures'
+            mem[mem[64]] = ext_call.return_data[0]
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require return_data.size >= 32
+            _21137 = mem[_10045]
+            t = 1
+            u = 0
+            u = 0
+            v = 0
+            v = _20905
+            w = _20295
+            while t < _21137:
+                require t < mem[_10045]
+                _30239 = mem[(32 * t) + _10045 + 32]
+                require t + 1 < mem[_10045]
+                _30566 = mem[(32 * t + 1) + _10045 + 32]
+                require ext_code.size(mem[(32 * t) + _10045 + 44 len 20])
+                call mem[(32 * t) + _10045 + 44 len 20].0x8da5cb5b with:
+                     gas gas_remaining wei
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                require ext_code.size(address(ext_call.return_data[0]))
+                call address(ext_call.return_data[0]).0xa5fbf287 with:
+                     gas gas_remaining wei
+                    args address(ext_call.return_data[0]), 1
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                if ext_call.return_data[0]:
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).conversionWhitelist() with:
+                         gas gas_remaining wei
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    if address(ext_call.return_data[0]):
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                             gas gas_remaining wei
+                            args address(arg5)
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_call.return_data[0]
+                if address(v) != mem[(32 * t) + _10045 + 44 len 20]:
+                    require ext_code.size(address(v))
+                    call address(v).0xdd62ed3e with:
+                         gas gas_remaining wei
+                        args this.address, address(ext_call.return_data[0])
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    if ext_call.return_data[0] < w:
+                        require ext_code.size(address(v))
+                        call address(v).0xdd62ed3e with:
+                             gas gas_remaining wei
+                            args this.address, address(ext_call.return_data[0])
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_code.size(address(v))
+                        if ext_call.return_data[0]:
+                            call address(v).approve(address arg1, uint256 arg2) with:
+                                 gas gas_remaining wei
+                                args address(ext_call.return_data[0]), 0
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                        call address(v).approve(address arg1, uint256 arg2) with:
+                             gas gas_remaining wei
+                            args address(ext_call.return_data[0]), w
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_call.return_data[0]
+                mem[mem[64] + 4] = address(v)
+                mem[mem[64] + 36] = address(_30566)
+                mem[mem[64] + 68] = w
+                if t == _21137 - 2:
+                    mem[mem[64] + 100] = _20341
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                         gas gas_remaining wei
+                        args address(v), address(_30566), w, _20341
+                else:
+                    mem[mem[64] + 100] = 1
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                         gas gas_remaining wei
+                        args address(v), address(_30566), w, 1
+                mem[mem[64]] = ext_call.return_data[0]
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                t = t + 2
+                u = ext_call.return_data[0]
+                u = _30566
+                v = _30239
+                v = _30566
+                w = ext_call.return_data[0]
+                continue 
+            mem[0] = address(u)
+            mem[32] = 4
+            if stor4[address(u)]:
+                mem[mem[64]] = 0x205c287800000000000000000000000000000000000000000000000000000000
+                mem[mem[64] + 4] = arg5
+                mem[mem[64] + 36] = w
+                require ext_code.size(address(u))
+                call address(u).withdrawTo(address arg1, uint256 arg2) with:
+                     gas gas_remaining wei
+                    args address(arg5), w
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+            else:
+                mem[mem[64] + 4] = arg5
+                mem[mem[64] + 36] = w
+                require ext_code.size(address(u))
+                call address(u).0xa9059cbb with:
+                     gas gas_remaining wei
+                    args address(arg5), w
+                mem[mem[64]] = ext_call.return_data[0]
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                require ext_call.return_data[0]
+            require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+            mem[(32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 192] = w
+            s = _20072
+            s = _10037
+            s = _10045
+            idx = idx + 1
+            s = _10037
+            s = s
+            continue 
+        mem[0] = address(_20072)
+        mem[32] = 4
+        require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+        if not stor4[address(_20072)]:
+            _20342 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+            require idx < mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + 192]
+            _20390 = mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 224]
+            require mem[_10045] > 2
+            require mem[_10045] <= 21
+            require 1 == bool(mem[_10045])
+            require ext_code.size(registryAddress)
+            call registryAddress.0xbb34534c with:
+                 gas gas_remaining wei
+                args 'BancorGasPriceLimit'
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require return_data.size >= 32
+            mem[mem[64]] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+            mem[mem[64] + 4] = block.gasprice
+            require ext_code.size(address(ext_call.return_data[0]))
+            call address(ext_call.return_data[0]).0x6b4dff1f with:
+                 gas gas_remaining wei
+                args block.gasprice
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require 0 < mem[_10045]
+            _20973 = mem[_10045 + 32]
+            mem[mem[64] + 4] = 'ContractFeatures'
+            require ext_code.size(registryAddress)
+            call registryAddress.0xbb34534c with:
+                 gas gas_remaining wei
+                args 'ContractFeatures'
+            mem[mem[64]] = ext_call.return_data[0]
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require return_data.size >= 32
+            _21197 = mem[_10045]
+            t = 1
+            u = 0
+            u = 0
+            v = 0
+            v = _20973
+            w = _20342
+            while t < _21197:
+                require t < mem[_10045]
+                _30242 = mem[(32 * t) + _10045 + 32]
+                require t + 1 < mem[_10045]
+                _30573 = mem[(32 * t + 1) + _10045 + 32]
+                require ext_code.size(mem[(32 * t) + _10045 + 44 len 20])
+                call mem[(32 * t) + _10045 + 44 len 20].0x8da5cb5b with:
+                     gas gas_remaining wei
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                require ext_code.size(address(ext_call.return_data[0]))
+                call address(ext_call.return_data[0]).0xa5fbf287 with:
+                     gas gas_remaining wei
+                    args address(ext_call.return_data[0]), 1
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                if ext_call.return_data[0]:
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).conversionWhitelist() with:
+                         gas gas_remaining wei
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    if address(ext_call.return_data[0]):
+                        require ext_code.size(address(ext_call.return_data[0]))
+                        call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                             gas gas_remaining wei
+                            args address(arg5)
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_call.return_data[0]
+                if address(v) != mem[(32 * t) + _10045 + 44 len 20]:
+                    require ext_code.size(address(v))
+                    call address(v).0xdd62ed3e with:
+                         gas gas_remaining wei
+                        args this.address, address(ext_call.return_data[0])
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    if ext_call.return_data[0] < w:
+                        require ext_code.size(address(v))
+                        call address(v).0xdd62ed3e with:
+                             gas gas_remaining wei
+                            args this.address, address(ext_call.return_data[0])
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_code.size(address(v))
+                        if ext_call.return_data[0]:
+                            call address(v).approve(address arg1, uint256 arg2) with:
+                                 gas gas_remaining wei
+                                args address(ext_call.return_data[0]), 0
+                            if not ext_call.success:
+                                revert with ext_call.return_data[0 len return_data.size]
+                            require return_data.size >= 32
+                            require ext_call.return_data[0]
+                        call address(v).approve(address arg1, uint256 arg2) with:
+                             gas gas_remaining wei
+                            args address(ext_call.return_data[0]), w
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_call.return_data[0]
+                mem[mem[64] + 4] = address(v)
+                mem[mem[64] + 36] = address(_30573)
+                mem[mem[64] + 68] = w
+                if t == _21197 - 2:
+                    mem[mem[64] + 100] = _20390
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                         gas gas_remaining wei
+                        args address(v), address(_30573), w, _20390
+                else:
+                    mem[mem[64] + 100] = 1
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                         gas gas_remaining wei
+                        args address(v), address(_30573), w, 1
+                mem[mem[64]] = ext_call.return_data[0]
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                t = t + 2
+                u = ext_call.return_data[0]
+                u = _30573
+                v = _30242
+                v = _30573
+                w = ext_call.return_data[0]
+                continue 
+            mem[0] = address(u)
+            mem[32] = 4
+            if stor4[address(u)]:
+                mem[mem[64]] = 0x205c287800000000000000000000000000000000000000000000000000000000
+                mem[mem[64] + 4] = arg5
+                mem[mem[64] + 36] = w
+                require ext_code.size(address(u))
+                call address(u).withdrawTo(address arg1, uint256 arg2) with:
+                     gas gas_remaining wei
+                    args address(arg5), w
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+            else:
+                mem[mem[64] + 4] = arg5
+                mem[mem[64] + 36] = w
+                require ext_code.size(address(u))
+                call address(u).0xa9059cbb with:
+                     gas gas_remaining wei
+                    args address(arg5), w
+                mem[mem[64]] = ext_call.return_data[0]
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                require ext_call.return_data[0]
+            require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+            mem[(32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 192] = w
+            s = _20072
+            s = _10037
+            s = _10045
+            idx = idx + 1
+            s = _10037
+            s = s
+            continue 
+        _20344 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+        mem[mem[64]] = 0xd0e30db000000000000000000000000000000000000000000000000000000000
+        require ext_code.size(address(_20072))
+        call address(_20072).deposit() with:
+           value _20344 wei
+             gas gas_remaining wei
+        if not ext_call.success:
+            revert with ext_call.return_data[0 len return_data.size]
+        require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+        _20450 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+        require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+        _20505 = mem[(32 * idx) + (32 * arg2.length) + (32 * arg1.length) + 192]
+        require idx < mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + 192]
+        _20522 = mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 224]
+        require mem[_10045] > 2
+        require mem[_10045] <= 21
+        require 1 == bool(mem[_10045])
+        require ext_code.size(registryAddress)
+        call registryAddress.0xbb34534c with:
+             gas gas_remaining wei
+            args 'BancorGasPriceLimit'
+        if not ext_call.success:
+            revert with ext_call.return_data[0 len return_data.size]
+        require return_data.size >= 32
+        mem[mem[64]] = 0x6b4dff1f00000000000000000000000000000000000000000000000000000000
+        mem[mem[64] + 4] = block.gasprice
+        require ext_code.size(address(ext_call.return_data[0]))
+        call address(ext_call.return_data[0]).0x6b4dff1f with:
+             gas gas_remaining wei
+            args block.gasprice
+        if not ext_call.success:
+            revert with ext_call.return_data[0 len return_data.size]
+        require 0 < mem[_10045]
+        _21270 = mem[_10045 + 32]
+        mem[mem[64] + 4] = 'ContractFeatures'
+        require ext_code.size(registryAddress)
+        call registryAddress.0xbb34534c with:
+             gas gas_remaining wei
+            args 'ContractFeatures'
+        mem[mem[64]] = ext_call.return_data[0]
+        if not ext_call.success:
+            revert with ext_call.return_data[0 len return_data.size]
+        require return_data.size >= 32
+        _21694 = mem[_10045]
+        t = 1
+        u = 0
+        u = 0
+        v = 0
+        v = _21270
+        w = _20505
+        while t < _21694:
+            require t < mem[_10045]
+            _30245 = mem[(32 * t) + _10045 + 32]
+            require t + 1 < mem[_10045]
+            _30580 = mem[(32 * t + 1) + _10045 + 32]
+            require ext_code.size(mem[(32 * t) + _10045 + 44 len 20])
+            call mem[(32 * t) + _10045 + 44 len 20].0x8da5cb5b with:
+                 gas gas_remaining wei
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require return_data.size >= 32
+            require ext_code.size(address(ext_call.return_data[0]))
+            call address(ext_call.return_data[0]).0xa5fbf287 with:
+                 gas gas_remaining wei
+                args address(ext_call.return_data[0]), 1
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require return_data.size >= 32
+            if ext_call.return_data[0]:
+                require ext_code.size(address(ext_call.return_data[0]))
+                call address(ext_call.return_data[0]).conversionWhitelist() with:
+                     gas gas_remaining wei
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                if address(ext_call.return_data[0]):
+                    require ext_code.size(address(ext_call.return_data[0]))
+                    call address(ext_call.return_data[0]).isWhitelisted(address arg1) with:
+                         gas gas_remaining wei
+                        args address(arg5)
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    require ext_call.return_data[0]
+            if address(v) != mem[(32 * t) + _10045 + 44 len 20]:
+                require ext_code.size(address(v))
+                call address(v).0xdd62ed3e with:
+                     gas gas_remaining wei
+                    args this.address, address(ext_call.return_data[0])
+                if not ext_call.success:
+                    revert with ext_call.return_data[0 len return_data.size]
+                require return_data.size >= 32
+                if ext_call.return_data[0] < w:
+                    require ext_code.size(address(v))
+                    call address(v).0xdd62ed3e with:
+                         gas gas_remaining wei
+                        args this.address, address(ext_call.return_data[0])
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    require ext_code.size(address(v))
+                    if ext_call.return_data[0]:
+                        call address(v).approve(address arg1, uint256 arg2) with:
+                             gas gas_remaining wei
+                            args address(ext_call.return_data[0]), 0
+                        if not ext_call.success:
+                            revert with ext_call.return_data[0 len return_data.size]
+                        require return_data.size >= 32
+                        require ext_call.return_data[0]
+                    call address(v).approve(address arg1, uint256 arg2) with:
+                         gas gas_remaining wei
+                        args address(ext_call.return_data[0]), w
+                    if not ext_call.success:
+                        revert with ext_call.return_data[0 len return_data.size]
+                    require return_data.size >= 32
+                    require ext_call.return_data[0]
+            mem[mem[64] + 4] = address(v)
+            mem[mem[64] + 36] = address(_30580)
+            mem[mem[64] + 68] = w
+            if t == _21694 - 2:
+                mem[mem[64] + 100] = _20522
+                require ext_code.size(address(ext_call.return_data[0]))
+                call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                     gas gas_remaining wei
+                    args address(v), address(_30580), w, _20522
+            else:
+                mem[mem[64] + 100] = 1
+                require ext_code.size(address(ext_call.return_data[0]))
+                call address(ext_call.return_data[0]).change(address arg1, address arg2, uint256 arg3, uint256 arg4) with:
+                     gas gas_remaining wei
+                    args address(v), address(_30580), w, 1
+            mem[mem[64]] = ext_call.return_data[0]
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require return_data.size >= 32
+            t = t + 2
+            u = ext_call.return_data[0]
+            u = _30580
+            v = _30245
+            v = _30580
+            w = ext_call.return_data[0]
+            continue 
+        mem[0] = address(u)
+        mem[32] = 4
+        if stor4[address(u)]:
+            mem[mem[64]] = 0x205c287800000000000000000000000000000000000000000000000000000000
+            mem[mem[64] + 4] = arg5
+            mem[mem[64] + 36] = w
+            require ext_code.size(address(u))
+            call address(u).withdrawTo(address arg1, uint256 arg2) with:
+                 gas gas_remaining wei
+                args address(arg5), w
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+        else:
+            mem[mem[64] + 4] = arg5
+            mem[mem[64] + 36] = w
+            require ext_code.size(address(u))
+            call address(u).0xa9059cbb with:
+                 gas gas_remaining wei
+                args address(arg5), w
+            mem[mem[64]] = ext_call.return_data[0]
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require return_data.size >= 32
+            require ext_call.return_data[0]
+        require idx < mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+        mem[(32 * arg2.length) + (32 * arg1.length) + (32 * idx) + 192] = w
+        s = _20072
+        s = _10037
+        s = _10045
+        idx = idx + 1
+        s = _10037
+        s = s + _20450
+        continue 
+    require s == msg.value
+    mem[mem[64]] = 32
+    mem[mem[64] + 32] = mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+    _10035 = mem[(32 * arg2.length) + (32 * arg1.length) + 160]
+    mem[mem[64] + 64 len floor32(mem[(32 * arg2.length) + (32 * arg1.length) + 160])] = mem[(32 * arg2.length) + (32 * arg1.length) + 192 len floor32(mem[(32 * arg2.length) + (32 * arg1.length) + 160])]
+    return 32, mem[mem[64] + 32 len (32 * _10035) + 32]
+}
+
+
+
+}
