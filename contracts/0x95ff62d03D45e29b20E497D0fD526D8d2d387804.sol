@@ -1,0 +1,173 @@
+contract main {
+
+
+// =======================  Init code  ======================
+
+
+array of uint256 stor0;
+array of uint256 stor1;
+uint8 stor2;
+uint256 stor3;
+uint256 stor5;
+address stor6;
+mapping of uint256 stor7;
+
+function _fallback() payable {
+    bool(stor0.length) = 0
+    stor0.length.field_1 = 8
+    stor0.length.field_192 = 6073077329929013382
+    idx = 0
+    while stor0.length + 31 / 32 > idx:
+        stor0[idx].field_0 = 0
+        idx = idx + 1
+        continue 
+    bool(stor1.length) = 0
+    stor1.length.field_1 = 2
+    stor1.length.field_8 = 'TG' / 256
+    idx = 0
+    while stor1.length + 31 / 32 > idx:
+        stor1[idx].field_0 = 0
+        idx = idx + 1
+        continue 
+    stor2 = 4
+    stor3 = 6800 * 10^6 * 10^stor2
+    require not msg.value
+    stor7[address(msg.sender)] = stor3
+    stor5 = block.timestamp
+    stor6 = msg.sender
+    return code.data[571 len 4950]
+}
+
+
+
+// =====================  Runtime code  =====================
+
+
+array of uint256 name;
+array of uint256 symbol;
+uint8 decimals;
+uint256 totalSupply;
+uint256 sub_ae5acb06;
+uint256 sub_cd848836;
+address stor6;
+mapping of uint256 balanceOf;
+mapping of uint256 sub_0ceb3098;
+mapping of uint256 allowance;
+
+function name() {
+    return name[0 len name.length]
+}
+
+function sub_0ceb3098(?) {
+    return sub_0ceb3098[arg1]
+}
+
+function totalSupply() {
+    return totalSupply
+}
+
+function decimals() {
+    return decimals
+}
+
+function balanceOf(address arg1) {
+    return balanceOf[arg1]
+}
+
+function symbol() {
+    return symbol[0 len symbol.length]
+}
+
+function sub_ae5acb06(?) {
+    return sub_ae5acb06
+}
+
+function sub_cd848836(?) {
+    return sub_cd848836
+}
+
+function allowance(address arg1, address arg2) {
+    return allowance[arg1][arg2]
+}
+
+function _fallback() payable {
+    revert
+}
+
+function approve(address arg1, uint256 arg2) {
+    allowance[address(msg.sender)][address(arg1)] = arg2
+    return 1
+}
+
+function sub_19ffc39f(?) {
+    require sub_ae5acb06 + arg1 <= (6008 * totalSupply / 10000 / 45) + (block.timestamp - sub_cd848836 / 8760 * 24 * 3600 * 6008 * totalSupply / 10000 / 45)
+}
+
+function burn(uint256 arg1) {
+    require balanceOf[address(msg.sender)] >= arg1
+    balanceOf[address(msg.sender)] -= arg1
+    totalSupply -= arg1
+    emit Burn(arg1, msg.sender);
+    return 1
+}
+
+function burnFrom(address arg1, uint256 arg2) {
+    require balanceOf[address(arg1)] >= arg2
+    require arg2 <= allowance[address(arg1)][address(msg.sender)]
+    balanceOf[address(arg1)] -= arg2
+    allowance[address(arg1)][address(msg.sender)] -= arg2
+    totalSupply -= arg2
+    emit Burn(arg2, arg1);
+    return 1
+}
+
+function approveAndCall(address arg1, uint256 arg2, bytes arg3) {
+    allowance[address(msg.sender)][address(arg1)] = arg2
+    require ext_code.size(arg1)
+    call arg1.receiveApproval(address arg1, uint256 arg2, address arg3, bytes arg4) with:
+         gas gas_remaining wei
+        args msg.sender, arg2, address(this.address), Array(len=arg3.length, data=arg3[all])
+    require ext_call.success
+    return 1
+}
+
+function transfer(address arg1, uint256 arg2) {
+    require arg1
+    require balanceOf[address(msg.sender)] >= arg2
+    require balanceOf[address(arg1)] + arg2 > balanceOf[address(arg1)]
+    balanceOf[address(msg.sender)] -= arg2
+    balanceOf[address(arg1)] += arg2
+    emit Transfer(arg2, msg.sender, arg1);
+    require balanceOf[address(msg.sender)] + balanceOf[address(arg1)] == balanceOf[address(msg.sender)] + balanceOf[address(arg1)]
+}
+
+function transferFrom(address arg1, address arg2, uint256 arg3) {
+    require arg3 <= allowance[address(arg1)][address(msg.sender)]
+    allowance[address(arg1)][address(msg.sender)] -= arg3
+    require arg2
+    require balanceOf[address(arg1)] >= arg3
+    require balanceOf[address(arg2)] + arg3 > balanceOf[address(arg2)]
+    balanceOf[address(arg1)] -= arg3
+    balanceOf[address(arg2)] += arg3
+    emit Transfer(arg3, arg1, arg2);
+    require balanceOf[address(arg1)] + balanceOf[address(arg2)] == balanceOf[address(arg1)] + balanceOf[address(arg2)]
+    return 1
+}
+
+function profit(address arg1) {
+    require block.timestamp - sub_0ceb3098[address(arg1)] >= 60
+    require sub_ae5acb06 + (1314 * balanceOf[address(arg1)] / 10 * 10^6) <= (6008 * totalSupply / 10000 / 45) + (block.timestamp - sub_cd848836 / 8760 * 24 * 3600 * 6008 * totalSupply / 10000 / 45)
+    sub_0ceb3098[address(arg1)] = block.timestamp
+    sub_ae5acb06 += 1314 * balanceOf[address(arg1)] / 10 * 10^6
+    require arg1
+    require balanceOf[stor6] >= 1314 * balanceOf[address(arg1)] / 10 * 10^6
+    require balanceOf[address(arg1)] + (1314 * balanceOf[address(arg1)] / 10 * 10^6) > balanceOf[address(arg1)]
+    balanceOf[stor6] -= 1314 * balanceOf[address(arg1)] / 10 * 10^6
+    balanceOf[address(arg1)] += 1314 * balanceOf[address(arg1)] / 10 * 10^6
+    emit Transfer((1314 * balanceOf[address(arg1)] / 10 * 10^6), stor6, arg1);
+    require balanceOf[stor6] + balanceOf[address(arg1)] == balanceOf[stor6] + balanceOf[address(arg1)]
+}
+
+
+
+}
