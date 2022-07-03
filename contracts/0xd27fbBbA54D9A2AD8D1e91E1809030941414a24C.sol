@@ -1,0 +1,106 @@
+contract main {
+
+
+
+
+// =====================  Runtime code  =====================
+
+
+const sub_e6c1980d(?) = sha3(0xfe5472616e73666572286164647265737320726563697069656e742c62797465733131206e6f6e63652c626f6f6c207573655369676e61747572652c626f6f6c20757365417070726f7665642c6164647265737320746f6b656e2c75696e7432353620616d6f756e742c6164647265737320666565526563697069656e742c75696e74323536206665652c75696e7432353620657870697279)
+
+
+uint256 DOMAIN_SEPARATOR;
+mapping of uint8 stor1;
+mapping of uint256 tokenBalances;
+mapping of uint8 stor286993524134135634235711390851126624174930885066728218184841514135014695894179754213062642214563675822356025922669186868616674361159063897022088131731787426012387492475673876205024418352325942276794690816325605871911420384980181085975447758958191625848890409478962865447461453557678840368499458167953202337355289080423355595131579582116082567881503477506655867365847673;
+
+function DOMAIN_SEPARATOR() {
+    return DOMAIN_SEPARATOR
+}
+
+function sub_4098bd4a(?) {
+    require calldata.size - 4 >= 64
+    return bool(stor1[arg1][arg2])
+}
+
+function tokenBalances(address arg1, address arg2) {
+    require calldata.size - 4 >= 64
+    return tokenBalances[arg1][arg2]
+}
+
+function _fallback() payable {
+    revert
+}
+
+function invalidateHash(bytes32 arg1) {
+    require calldata.size - 4 >= 32
+    stor1[address(msg.sender)][arg1] = 1
+}
+
+function deposit() payable {
+    require tokenBalances[address(msg.sender)][0] + msg.value >= tokenBalances[address(msg.sender)][0]
+    tokenBalances[address(msg.sender)][0] += msg.value
+    emit Deposit(msg.sender, msg.value);
+}
+
+function sub_1bd53e9d(?) {
+    require calldata.size - 4 >= 224
+    require cd[196] <= 4294967296
+    require cd[196] + 36 <= calldata.size
+    require ('cd', 196).length <= 4294967296 and cd[196] + (32 * ('cd', 196).length) + 36 <= calldata.size
+    if ('cd', 196).length != 6:
+        require 0 < ('cd', 196).length
+        require 1 < ('cd', 196).length
+        require 2 < ('cd', 196).length
+        signer = erecover(sha3(0, DOMAIN_SEPARATOR, sha3(sha3(0xfe5472616e73666572286164647265737320726563697069656e742c62797465733131206e6f6e63652c626f6f6c207573655369676e61747572652c626f6f6c20757365417070726f7665642c6164647265737320746f6b656e2c75696e7432353620616d6f756e742c6164647265737320666565526563697069656e742c75696e74323536206665652c75696e7432353620657870697279), address(cd[4]), Mask(88, 160, cd[4]) << 8, 0, 1, address(cd[36]), cd[68], address(cd[100]), cd[132], cd[164])), Mask(8, -(('mask_shl', 256, 0, -3, ('cd', ('add', 36, ('cd', 196)))), 0) + 256, 31) << (('mask_shl', 256, 0, -3, ('cd', ('add', 36, ('cd', 196)))), 0) - 8, ('cd', 196)[1], ('cd', 196)[2]) 
+        if not erecover.result:
+            revert with ext_call.return_data[0 len return_data.size]
+        require not stor1[address(signer)][sha3(0, stor0, sha3(('name', 'storFE54', 286993524134135634235711390851126624174930885066728218184841514135014695894179754213062642214563675822356025922669186868616674361159063897022088131731787426012387492475673876205024418352325942276794690816325605871911420384980181085975447758958191625848890409478962865447461453557678840368499458167953202337355289080423355595131579582116082567881503477506655867365847673), address(cd[4]), Mask(88, 160, cd[4]) << 8, 0, 1, address(cd[36]), cd[68], address(cd[100]), cd[132], cd[164]))]
+        require block.timestamp < cd[164]
+        stor1[address(signer)][sha3(0, stor0, sha3(('name', 'storFE54', 286993524134135634235711390851126624174930885066728218184841514135014695894179754213062642214563675822356025922669186868616674361159063897022088131731787426012387492475673876205024418352325942276794690816325605871911420384980181085975447758958191625848890409478962865447461453557678840368499458167953202337355289080423355595131579582116082567881503477506655867365847673), address(cd[4]), Mask(88, 160, cd[4]) << 8, 0, 1, address(cd[36]), cd[68], address(cd[100]), cd[132], cd[164]))] = 1
+    else:
+        require 3 < ('cd', 196).length
+        require 4 < ('cd', 196).length
+        require 5 < ('cd', 196).length
+        signer = erecover(cd[4], Mask(8, -(('mask_shl', 256, 0, -3, ('cd', ('add', 132, ('cd', 196)))), 0) + 256, 31) << (('mask_shl', 256, 0, -3, ('cd', ('add', 132, ('cd', 196)))), 0) - 8, ('cd', 196)[4], ('cd', 196)[5]) 
+        if not erecover.result:
+            revert with ext_call.return_data[0 len return_data.size]
+        require 0 < ('cd', 196).length
+        require 1 < ('cd', 196).length
+        require 2 < ('cd', 196).length
+        if ('cd', 196).length == 6:
+            signer = erecover(sha3(0, DOMAIN_SEPARATOR, sha3(sha3(0xfe5472616e73666572286164647265737320726563697069656e742c62797465733131206e6f6e63652c626f6f6c207573655369676e61747572652c626f6f6c20757365417070726f7665642c6164647265737320746f6b656e2c75696e7432353620616d6f756e742c6164647265737320666565526563697069656e742c75696e74323536206665652c75696e7432353620657870697279), address(signer), Mask(88, 160, cd[4]) << 8, 1, 1, address(cd[36]), cd[68], address(cd[100]), cd[132], cd[164])), Mask(8, -(('mask_shl', 256, 0, -3, ('cd', ('add', 36, ('cd', 196)))), 0) + 256, 31) << (('mask_shl', 256, 0, -3, ('cd', ('add', 36, ('cd', 196)))), 0) - 8, ('cd', 196)[1], ('cd', 196)[2]) 
+            if not erecover.result:
+                revert with ext_call.return_data[0 len return_data.size]
+            require not stor1[address(signer)][sha3(0, stor0, sha3(('name', 'storFE54', 286993524134135634235711390851126624174930885066728218184841514135014695894179754213062642214563675822356025922669186868616674361159063897022088131731787426012387492475673876205024418352325942276794690816325605871911420384980181085975447758958191625848890409478962865447461453557678840368499458167953202337355289080423355595131579582116082567881503477506655867365847673), address(signer), Mask(88, 160, cd[4]) << 8, 1, 1, address(cd[36]), cd[68], address(cd[100]), cd[132], cd[164]))]
+            require block.timestamp < cd[164]
+            stor1[address(signer)][sha3(0, stor0, sha3(('name', 'storFE54', 286993524134135634235711390851126624174930885066728218184841514135014695894179754213062642214563675822356025922669186868616674361159063897022088131731787426012387492475673876205024418352325942276794690816325605871911420384980181085975447758958191625848890409478962865447461453557678840368499458167953202337355289080423355595131579582116082567881503477506655867365847673), address(signer), Mask(88, 160, cd[4]) << 8, 1, 1, address(cd[36]), cd[68], address(cd[100]), cd[132], cd[164]))] = 1
+        else:
+            signer = erecover(sha3(0, DOMAIN_SEPARATOR, sha3(sha3(0xfe5472616e73666572286164647265737320726563697069656e742c62797465733131206e6f6e63652c626f6f6c207573655369676e61747572652c626f6f6c20757365417070726f7665642c6164647265737320746f6b656e2c75696e7432353620616d6f756e742c6164647265737320666565526563697069656e742c75696e74323536206665652c75696e7432353620657870697279), address(signer), Mask(88, 160, cd[4]) << 8, 0, 1, address(cd[36]), cd[68], address(cd[100]), cd[132], cd[164])), Mask(8, -(('mask_shl', 256, 0, -3, ('cd', ('add', 36, ('cd', 196)))), 0) + 256, 31) << (('mask_shl', 256, 0, -3, ('cd', ('add', 36, ('cd', 196)))), 0) - 8, ('cd', 196)[1], ('cd', 196)[2]) 
+            if not erecover.result:
+                revert with ext_call.return_data[0 len return_data.size]
+            require not stor1[address(signer)][sha3(0, stor0, sha3(('name', 'storFE54', 286993524134135634235711390851126624174930885066728218184841514135014695894179754213062642214563675822356025922669186868616674361159063897022088131731787426012387492475673876205024418352325942276794690816325605871911420384980181085975447758958191625848890409478962865447461453557678840368499458167953202337355289080423355595131579582116082567881503477506655867365847673), address(signer), Mask(88, 160, cd[4]) << 8, 0, 1, address(cd[36]), cd[68], address(cd[100]), cd[132], cd[164]))]
+            require block.timestamp < cd[164]
+            stor1[address(signer)][sha3(0, stor0, sha3(('name', 'storFE54', 286993524134135634235711390851126624174930885066728218184841514135014695894179754213062642214563675822356025922669186868616674361159063897022088131731787426012387492475673876205024418352325942276794690816325605871911420384980181085975447758958191625848890409478962865447461453557678840368499458167953202337355289080423355595131579582116082567881503477506655867365847673), address(signer), Mask(88, 160, cd[4]) << 8, 0, 1, address(cd[36]), cd[68], address(cd[100]), cd[132], cd[164]))] = 1
+    emit 0xf684af25: 0, cd[68], address(signer), address(cd[4])
+    require cd[68] + cd[132] >= cd[68]
+    if not address(cd[36]):
+        require tokenBalances[address(signer)][address(cd[36])] - cd[68] - cd[132] <= tokenBalances[address(signer)][address(cd[36])]
+        tokenBalances[address(signer)][address(cd[36])] = tokenBalances[address(signer)][address(cd[36])] - cd[68] - cd[132]
+    else:
+        require ext_code.size(address(cd[36]))
+        call address(cd[36]).0x23b872dd with:
+             gas gas_remaining wei
+            args address(signer), address(this.address), cd[68] + cd[132]
+        if not ext_call.success:
+            revert with ext_call.return_data[0 len return_data.size]
+        require return_data.size >= 32
+    require tokenBalances[address(cd[4])][address(cd[36])] + cd[68] >= tokenBalances[address(cd[4])][address(cd[36])]
+    tokenBalances[address(cd[4])][address(cd[36])] += cd[68]
+    require tokenBalances[address(cd[100])][address(cd[36])] + cd[132] >= tokenBalances[address(cd[100])][address(cd[36])]
+    tokenBalances[address(cd[100])][address(cd[36])] += cd[132]
+}
+
+
+
+}
