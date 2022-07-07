@@ -1,0 +1,219 @@
+contract main {
+
+
+
+
+// =====================  Runtime code  =====================
+
+
+array of uint256 standard;
+array of uint256 name;
+array of uint256 symbol;
+uint8 decimals;
+uint256 totalSupply;
+uint256 initialSupply;
+uint8 stor6; offset 168
+address owner; offset 8
+mapping of uint256 balanceOf;
+mapping of uint256 allowance;
+mapping of uint8 stor9;
+mapping of address sub_e734ddab;
+uint256 sub_146c7f71;
+
+function name() {
+    return name[0 len name.length]
+}
+
+function sub_146c7f71(?) {
+    return sub_146c7f71
+}
+
+function totalSupply() {
+    return totalSupply
+}
+
+function decimals() {
+    return decimals
+}
+
+function initialSupply() {
+    return initialSupply
+}
+
+function standard() {
+    return standard[0 len standard.length]
+}
+
+function accountFrozen(address arg1) {
+    return bool(stor9[arg1])
+}
+
+function balanceOf(address arg1) {
+    return balanceOf[arg1]
+}
+
+function owner() {
+    return owner
+}
+
+function symbol() {
+    return symbol[0 len symbol.length]
+}
+
+function allowance(address arg1, address arg2) {
+    return allowance[address(arg1)][address(arg2)]
+}
+
+function sub_e734ddab(?) {
+    return sub_e734ddab[arg1]
+}
+
+function sub_e86d953b(?) {
+    return bool(stor6)
+}
+
+function _fallback() payable {
+    revert
+}
+
+function goPublic() {
+    require msg.sender == owner
+}
+
+function changeOwner(address arg1) {
+    require msg.sender == owner
+    owner = arg1
+}
+
+function unfreezeAccount(address arg1) {
+    require msg.sender == owner
+    stor9[address(arg1)] = 0
+}
+
+function freezeAccount(address arg1) {
+    require msg.sender == owner
+    sub_146c7f71++
+    stor9[address(arg1)] = 1
+    sub_e734ddab[stor11] = arg1
+}
+
+function approve(address arg1, uint256 arg2) {
+    allowance[address(msg.sender)][address(arg1)] = arg2
+    emit Approval(arg2, msg.sender, arg1);
+    return 1
+}
+
+function burn(uint256 arg1) {
+    require balanceOf[address(msg.sender)] >= arg1
+    require arg1 <= balanceOf[address(msg.sender)]
+    balanceOf[address(msg.sender)] -= arg1
+    require arg1 <= totalSupply
+    totalSupply -= arg1
+    emit Burn(arg1, msg.sender);
+    return 1
+}
+
+function sub_a226c9f2(?) {
+    require msg.sender == owner
+    stor9[address(arg1)] = 1
+    require 10^18 * arg2 <= balanceOf[address(arg1)]
+    balanceOf[address(arg1)] += -1 * 10^18 * arg2
+    require 10^18 * arg2 <= totalSupply
+    totalSupply += -1 * 10^18 * arg2
+    emit Burn((10^18 * arg2), msg.sender);
+}
+
+function sub_3c39911a(?) {
+    require msg.sender == owner
+    require arg1 > 0
+    require not stor6
+    require balanceOf[address(msg.sender)] + (10^18 * arg1) >= balanceOf[address(msg.sender)]
+    balanceOf[address(msg.sender)] += 10^18 * arg1
+    require totalSupply + (10^18 * arg1) >= totalSupply
+    totalSupply += 10^18 * arg1
+    emit Mint((10^18 * arg1), msg.sender);
+}
+
+function burnFrom(address arg1, uint256 arg2) {
+    require arg1
+    require balanceOf[address(arg1)] >= arg2
+    require arg2 <= allowance[address(arg1)][address(msg.sender)]
+    require arg2 <= balanceOf[address(arg1)]
+    balanceOf[address(arg1)] -= arg2
+    require arg2 <= allowance[address(arg1)][address(msg.sender)]
+    allowance[address(arg1)][address(msg.sender)] -= arg2
+    require arg2 <= totalSupply
+    totalSupply -= arg2
+    emit Burn(arg2, arg1);
+    return 1
+}
+
+function approveAndCall(address arg1, uint256 arg2, bytes arg3) {
+    allowance[address(msg.sender)][address(arg1)] = arg2
+    emit Approval(arg2, msg.sender, arg1);
+    require ext_code.size(arg1)
+    call arg1.receiveApproval(address arg1, uint256 arg2, address arg3, bytes arg4) with:
+         gas gas_remaining wei
+        args msg.sender, arg2, address(this.address), Array(len=arg3.length, data=arg3[all])
+    if not ext_call.success:
+        revert with ext_call.return_data[0 len return_data.size]
+    return 1
+}
+
+function transferFrom(address arg1, address arg2, uint256 arg3) {
+    require arg1
+    require balanceOf[address(arg1)] >= arg3
+    require balanceOf[address(arg2)] + arg3 >= balanceOf[address(arg2)]
+    require arg3 <= allowance[address(arg1)][address(msg.sender)]
+    require arg3 <= balanceOf[address(arg1)]
+    balanceOf[address(arg1)] -= arg3
+    require balanceOf[address(arg2)] + arg3 >= balanceOf[address(arg2)]
+    balanceOf[address(arg2)] += arg3
+    require arg3 <= allowance[address(arg1)][address(msg.sender)]
+    allowance[address(arg1)][address(msg.sender)] -= arg3
+    emit Transfer(arg3, arg1, arg2);
+    return 1
+}
+
+function transfer(address arg1, uint256 arg2, bytes arg3) {
+    require not stor9[address(msg.sender)]
+    require arg1
+    require balanceOf[address(msg.sender)] >= arg2
+    require arg2 <= balanceOf[address(msg.sender)]
+    balanceOf[address(msg.sender)] -= arg2
+    require balanceOf[address(arg1)] + arg2 >= balanceOf[address(arg1)]
+    balanceOf[address(arg1)] += arg2
+    if ext_code.size(arg1) > 0:
+        require ext_code.size(arg1)
+        call arg1.tokenFallback(address arg1, uint256 arg2, bytes arg3) with:
+             gas gas_remaining wei
+            args msg.sender, arg2, Array(len=arg3.length, data=arg3[all])
+        if not ext_call.success:
+            revert with ext_call.return_data[0 len return_data.size]
+    emit Transfer(arg2, Array(len=arg3.length, data=arg3[all]), msg.sender, arg1);
+    return 1
+}
+
+function transfer(address arg1, uint256 arg2) {
+    require not stor9[address(msg.sender)]
+    require arg1
+    require balanceOf[address(msg.sender)] >= arg2
+    require arg2 <= balanceOf[address(msg.sender)]
+    balanceOf[address(msg.sender)] -= arg2
+    require balanceOf[address(arg1)] + arg2 >= balanceOf[address(arg1)]
+    balanceOf[address(arg1)] += arg2
+    if ext_code.size(arg1) > 0:
+        mem[228 len 0xc0ee0b8a00000000000000000000000000000000000000000000000000000000] = uint32(msg.sender), arg2, 96, 0xc0ee0b8a00000000000000000000000000000000000000000000000000000000, mem[228 len 0xc0ee0b89ffffffffffffffffffffffffffffffffffffffffffffffffffffff9c]
+        require ext_code.size(arg1)
+        call arg1.tokenFallback(address arg1, uint256 arg2, bytes arg3) with:
+             gas gas_remaining wei
+            args 0, uint32(msg.sender), arg2, 96, 0xc0ee0b8a00000000000000000000000000000000000000000000000000000000, mem[228 len 0xc0ee0b8a00000000000000000000000000000000000000000000000000000000]
+        if not ext_call.success:
+            revert with ext_call.return_data[0 len return_data.size]
+    emit Transfer(arg2, msg.sender, arg1);
+    return 1
+}
+
+
+
+}
