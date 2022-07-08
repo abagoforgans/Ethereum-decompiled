@@ -1,0 +1,1210 @@
+contract main {
+
+
+
+
+// =====================  Runtime code  =====================
+
+
+#
+#  - transferFrom(address arg1, address arg2, uint256 arg3)
+#  - safeTransferFrom(address arg1, address arg2, uint256 arg3)
+#  - sub_523c7010(?)
+#  - safeTransferFrom(address arg1, address arg2, uint256 arg3, bytes arg4)
+#
+address stor0;
+mapping of uint8 stor1;
+address owner;
+
+function supportsInterface(bytes4 arg1) {
+    return bool(stor1[Mask(32, 224, arg1)])
+}
+
+function owner() {
+    return owner
+}
+
+function _fallback() payable {
+    revert
+}
+
+function isOwner() {
+    return (msg.sender == owner)
+}
+
+function balanceOf(address arg1) {
+    require ext_code.size(0xb4d3941e455b2e31a673091bc3c44b4dc76e83c1)
+    delegate 0xb4d3941e455b2e31a673091bc3c44b4dc76e83c1.0x8603f860 with:
+         gas gas_remaining wei
+        args stor0, arg1
+    if not delegate.return_code:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+    return delegate.return_data[0]
+}
+
+function renounceOwnership() {
+    require ext_code.size(stor0)
+    call stor0.getAddress(bytes32 arg1) with:
+         gas gas_remaining wei
+        args 'owner'
+    if not ext_call.success:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+    require msg.sender == ext_call.return_data[12 len 20]
+    emit OwnershipTransferred(owner, 0);
+    owner = 0
+}
+
+function tokenExists(uint256 arg1) {
+    require ext_code.size(0xb4d3941e455b2e31a673091bc3c44b4dc76e83c1)
+    delegate 0xb4d3941e455b2e31a673091bc3c44b4dc76e83c1.0xb5fd4808 with:
+         gas gas_remaining wei
+        args stor0, arg1
+    if not delegate.return_code:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+    return not not delegate.return_data[12 len 20]
+}
+
+function transferOwnership(address arg1) {
+    require ext_code.size(stor0)
+    call stor0.getAddress(bytes32 arg1) with:
+         gas gas_remaining wei
+        args 'owner'
+    if not ext_call.success:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+    require msg.sender == ext_call.return_data[12 len 20]
+    require arg1
+    emit OwnershipTransferred(owner, arg1);
+    owner = arg1
+}
+
+function ownerOf(uint256 arg1) {
+    require ext_code.size(0xb4d3941e455b2e31a673091bc3c44b4dc76e83c1)
+    delegate 0xb4d3941e455b2e31a673091bc3c44b4dc76e83c1.0xb5fd4808 with:
+         gas gas_remaining wei
+        args stor0, arg1
+    if not delegate.return_code:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+    require delegate.return_data[12 len 20]
+    return delegate.return_data[12 len 20]
+}
+
+function isApprovedForAll(address arg1, address arg2) {
+    mem[216] = uint128(arg2), Mask(64, 192, 'operatorApproval') >> 192 or Mask(64, 192, mem[216])
+    require ext_code.size(stor0)
+    call stor0.getBool(bytes32 arg1) with:
+         gas gas_remaining wei
+        args sha3('operatorApproval', uint128(arg1), mem[216 len 24])
+    if not ext_call.success:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+    return bool(ext_call.return_data[0])
+}
+
+function setApprovalForAll(address arg1, bool arg2) {
+    require arg1 != msg.sender
+    mem[216] = uint128(arg1), Mask(64, 192, 'operatorApproval') >> 192 or Mask(64, 192, mem[216])
+    mem[188] = sha3('operatorApproval', Mask(128, 32, msg.sender) >> 32, mem[216 len 24])
+    require ext_code.size(stor0)
+    call stor0.setBool(bytes32 arg1, bool arg2) with:
+         gas gas_remaining wei
+        args mem[188], arg2
+    if not ext_call.success:
+        revert with ext_call.return_data[0 len return_data.size]
+    emit ApprovalForAll(arg2, msg.sender, arg1);
+}
+
+function getApproved(uint256 arg1) {
+    require ext_code.size(0xb4d3941e455b2e31a673091bc3c44b4dc76e83c1)
+    delegate 0xb4d3941e455b2e31a673091bc3c44b4dc76e83c1.0xb5fd4808 with:
+         gas gas_remaining wei
+        args stor0, arg1
+    if not delegate.return_code:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+    require delegate.return_data[12 len 20]
+    require ext_code.size(stor0)
+    call stor0.getAddress(bytes32 arg1) with:
+         gas gas_remaining wei
+        args sha3('approve', Mask(200, 56, arg1) >> 56, mem[199 len 7])
+    if not ext_call.success:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+    return address(ext_call.return_data[0])
+}
+
+function isClaimable(uint256 arg1) {
+    require ext_code.size(0xb4d3941e455b2e31a673091bc3c44b4dc76e83c1)
+    delegate 0xb4d3941e455b2e31a673091bc3c44b4dc76e83c1.0xb5fd4808 with:
+         gas gas_remaining wei
+        args stor0, arg1
+    if not delegate.return_code:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+    require delegate.return_data[12 len 20]
+    require ext_code.size(0xb4d3941e455b2e31a673091bc3c44b4dc76e83c1)
+    delegate 0xb4d3941e455b2e31a673091bc3c44b4dc76e83c1.0xb5fd4808 with:
+         gas gas_remaining wei
+        args stor0, arg1
+    if not delegate.return_code:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+    require ext_code.size(stor0)
+    call stor0.getAddress(bytes32 arg1) with:
+         gas gas_remaining wei
+        args 'owner'
+    if not ext_call.success:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+    if not address(delegate.return_data[0]):
+        return not address(delegate.return_data[0])
+    return (address(delegate.return_data[0]) == ext_call.return_data[12 len 20])
+}
+
+function approve(address arg1, uint256 arg2) {
+    require ext_code.size(0xb4d3941e455b2e31a673091bc3c44b4dc76e83c1)
+    delegate 0xb4d3941e455b2e31a673091bc3c44b4dc76e83c1.0xb5fd4808 with:
+         gas gas_remaining wei
+        args stor0, arg2
+    if not delegate.return_code:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+    require delegate.return_data[12 len 20]
+    require arg1 != delegate.return_data[12 len 20]
+    if msg.sender == delegate.return_data[12 len 20]:
+        mem[171] = sha3('approve', Mask(200, 56, arg2) >> 56, mem[199 len 7])
+        require ext_code.size(stor0)
+        call stor0.setAddress(bytes32 arg1, address arg2) with:
+             gas gas_remaining wei
+            args mem[171], address(arg1)
+    else:
+        mem[216] = uint128(msg.sender), Mask(64, 192, 'operatorApproval') >> 192 or Mask(64, 192, mem[216])
+        require ext_code.size(stor0)
+        call stor0.getBool(bytes32 arg1) with:
+             gas gas_remaining wei
+            args sha3('operatorApproval', Mask(128, 32, delegate.return_data[0]) >> 32, mem[216 len 24])
+        if not ext_call.success:
+            revert with ext_call.return_data[0 len return_data.size]
+        require return_data.size >= 32
+        require ext_call.return_data[0]
+        mem[259] = sha3('approve', Mask(200, 56, arg2) >> 56, mem[287 len 7])
+        require ext_code.size(stor0)
+        call stor0.setAddress(bytes32 arg1, address arg2) with:
+             gas gas_remaining wei
+            args mem[259], address(arg1)
+    if not ext_call.success:
+        revert with ext_call.return_data[0 len return_data.size]
+    emit Approval(address(delegate.return_data[0]), arg1, arg2);
+}
+
+function mintTo(address arg1, uint256 arg2) {
+    require ext_code.size(stor0)
+    call stor0.getAddress(bytes32 arg1) with:
+         gas gas_remaining wei
+        args 'owner'
+    if not ext_call.success:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+    require msg.sender == ext_call.return_data[12 len 20]
+    require arg1
+    require ext_code.size(0xb4d3941e455b2e31a673091bc3c44b4dc76e83c1)
+    delegate 0xb4d3941e455b2e31a673091bc3c44b4dc76e83c1.0xb5fd4808 with:
+         gas gas_remaining wei
+        args stor0, arg2
+    if not delegate.return_code:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+    require not delegate.return_data[12 len 20]
+    mem[174] = sha3('tokenOwner', Mask(176, 80, arg2) >> 80, mem[202 len 10])
+    require ext_code.size(stor0)
+    call stor0.setAddress(bytes32 arg1, address arg2) with:
+         gas gas_remaining wei
+        args mem[174], address(arg1)
+    if not ext_call.success:
+        revert with ext_call.return_data[0 len return_data.size]
+    require ext_code.size(0xb4d3941e455b2e31a673091bc3c44b4dc76e83c1)
+    delegate 0xb4d3941e455b2e31a673091bc3c44b4dc76e83c1.0x8603f860 with:
+         gas gas_remaining wei
+        args stor0, arg1
+    if not delegate.return_code:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+    require delegate.return_data[0] + 1 >= delegate.return_data[0]
+    require ext_code.size(stor0)
+    call stor0.setUint(bytes32 arg1, uint256 arg2) with:
+         gas gas_remaining wei
+        args sha3(0, Mask(192, 64, Mask(32, 192, 'balances') >> 192, arg1, 0, 0) >> 64), delegate.return_data[0] + 1
+    if not ext_call.success:
+        revert with ext_call.return_data[0 len return_data.size]
+    emit Transfer(0, arg1, arg2);
+}
+
+function claim(address arg1, uint256 arg2) {
+    require ext_code.size(stor0)
+    call stor0.getAddress(bytes32 arg1) with:
+         gas gas_remaining wei
+        args 'owner'
+    if not ext_call.success:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+    require msg.sender == ext_call.return_data[12 len 20]
+    require arg1
+    require ext_code.size(0xb4d3941e455b2e31a673091bc3c44b4dc76e83c1)
+    delegate 0xb4d3941e455b2e31a673091bc3c44b4dc76e83c1.0xb5fd4808 with:
+         gas gas_remaining wei
+        args stor0, arg2
+    if not delegate.return_code:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+    require delegate.return_data[12 len 20]
+    require ext_code.size(0xb4d3941e455b2e31a673091bc3c44b4dc76e83c1)
+    delegate 0xb4d3941e455b2e31a673091bc3c44b4dc76e83c1.0xb5fd4808 with:
+         gas gas_remaining wei
+        args stor0, arg2
+    if not delegate.return_code:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+    require ext_code.size(stor0)
+    call stor0.getAddress(bytes32 arg1) with:
+         gas gas_remaining wei
+        args 'owner'
+    if not ext_call.success:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+    if not address(delegate.return_data[0]):
+        require not address(delegate.return_data[0]) == 1
+    else:
+        require address(delegate.return_data[0]) == ext_call.return_data[12 len 20] == 1
+    require ext_code.size(0xb4d3941e455b2e31a673091bc3c44b4dc76e83c1)
+    delegate 0xb4d3941e455b2e31a673091bc3c44b4dc76e83c1.0x8603f860 with:
+         gas gas_remaining wei
+        args stor0, arg1
+    if not delegate.return_code:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+    require delegate.return_data[0] + 1 >= delegate.return_data[0]
+    require ext_code.size(stor0)
+    call stor0.setUint(bytes32 arg1, uint256 arg2) with:
+         gas gas_remaining wei
+        args sha3(Mask(224, 32, Mask(32, 192, 'balances') >> 192, arg1, 0, 0) >> 32), delegate.return_data[0] + 1
+    if not ext_call.success:
+        revert with ext_call.return_data[0 len return_data.size]
+    mem[234] = sha3('tokenOwner', Mask(176, 80, arg2) >> 80, mem[262 len 10])
+    require ext_code.size(stor0)
+    call stor0.setAddress(bytes32 arg1, address arg2) with:
+         gas gas_remaining wei
+        args mem[234], address(arg1)
+    if not ext_call.success:
+        revert with ext_call.return_data[0 len return_data.size]
+    emit Transfer(0, arg1, arg2);
+    emit Claim(address(arg1), arg2);
+}
+
+function sub_555b7678(?) {
+    mem[96] = arg2.length
+    mem[128 len 32 * arg2.length] = call.data[arg2 + 36 len 32 * arg2.length]
+    require ext_code.size(stor0)
+    call stor0.getAddress(bytes32 arg1) with:
+         gas gas_remaining wei
+        args 'owner'
+    mem[(32 * arg2.length) + 128] = ext_call.return_data[0]
+    if not ext_call.success:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+    require msg.sender == ext_call.return_data[12 len 20]
+    require arg1
+    require 0 < arg2.length
+    _7 = mem[128]
+    require arg1
+    require ext_code.size(0xb4d3941e455b2e31a673091bc3c44b4dc76e83c1)
+    delegate 0xb4d3941e455b2e31a673091bc3c44b4dc76e83c1.0xb5fd4808 with:
+         gas gas_remaining wei
+        args stor0, mem[128]
+    if not delegate.return_code:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+    require not delegate.return_data[12 len 20]
+    mem[(32 * arg2.length) + 160] = 'tokenOwner'
+    mem[(32 * arg2.length) + 170] = mem[128]
+    mem[(32 * arg2.length) + 128] = 42
+    mem[(32 * arg2.length) + 206] = sha3('tokenOwner', mem[(32 * arg2.length) + 170 len 22], mem[(32 * arg2.length) + 234 len 10])
+    require ext_code.size(stor0)
+    call stor0.setAddress(bytes32 arg1, address arg2) with:
+         gas gas_remaining wei
+        args mem[(32 * arg2.length) + 206], address(arg1)
+    if not ext_call.success:
+        revert with ext_call.return_data[0 len return_data.size]
+    require ext_code.size(0xb4d3941e455b2e31a673091bc3c44b4dc76e83c1)
+    delegate 0xb4d3941e455b2e31a673091bc3c44b4dc76e83c1.0x8603f860 with:
+         gas gas_remaining wei
+        args stor0, arg1
+    if not delegate.return_code:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+    require delegate.return_data[0] + 1 >= delegate.return_data[0]
+    mem[(32 * arg2.length) + 234] = 'balances'
+    mem[(32 * arg2.length) + 242] = address(arg1)
+    mem[(32 * arg2.length) + 202] = 28
+    mem[64] = (32 * arg2.length) + 262
+    mem[(32 * arg2.length) + 262 len 0] = None
+    mem[(32 * arg2.length) + 298] = delegate.return_data[0] + 1
+    require ext_code.size(stor0)
+    call stor0.setUint(bytes32 arg1, uint256 arg2) with:
+         gas gas_remaining wei
+        args sha3(0, Mask(192, 64, Mask(32, 192, 'balances') >> 192, arg1, 0, 0) >> 64), delegate.return_data[0] + 1
+    if not ext_call.success:
+        revert with ext_call.return_data[0 len return_data.size]
+    emit Transfer(0, arg1, _7);
+    mem[(32 * arg2.length) + 266] = 'owner'
+    require ext_code.size(stor0)
+    call stor0.getAddress(bytes32 arg1) with:
+         gas gas_remaining wei
+        args 'owner'
+    mem[(32 * arg2.length) + 262] = ext_call.return_data[0]
+    if not ext_call.success:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+    idx = 1
+    while idx < arg2.length:
+        require idx < mem[96]
+        _147 = mem[(32 * idx) + 128]
+        _150 = mem[64]
+        mem[mem[64] + 32] = 'tokenOwner'
+        mem[mem[64] + 42] = _147
+        _151 = mem[64]
+        mem[mem[64]] = 42
+        mem[64] = mem[64] + 74
+        _153 = mem[_151]
+        t = _151 + 32
+        u = mem[64]
+        s = mem[_151]
+        while s >= 32:
+            mem[u] = mem[t]
+            t = t + 32
+            u = u + 32
+            s = s - 32
+            continue 
+        mem[mem[64] + floor32(mem[_151])] = mem[_151 + floor32(mem[_151]) + -(mem[_151] % 32) + 64 len mem[_151] % 32] or Mask(8 * -(mem[_151] % 32) + 32, -(8 * -(mem[_151] % 32) + 32) + 256, mem[mem[64] + floor32(mem[_151])])
+        _166 = sha3(mem[mem[64] len _153 + _150 + -mem[64] + 74])
+        mem[mem[64]] = 0xca446dd900000000000000000000000000000000000000000000000000000000
+        mem[mem[64] + 4] = _166
+        mem[mem[64] + 36] = address(ext_call.return_data[0])
+        require ext_code.size(stor0)
+        call stor0.setAddress(bytes32 arg1, address arg2) with:
+             gas gas_remaining wei
+            args _166, address(ext_call.return_data[0])
+        if not ext_call.success:
+            revert with ext_call.return_data[0 len return_data.size]
+        idx = idx + 1
+        continue 
+    mem[mem[64]] = arg1
+    mem[mem[64] + 32] = 64
+    mem[mem[64] + 64] = mem[96]
+    mem[mem[64] + 96 len floor32(mem[96])] = mem[128 len floor32(mem[96])]
+    emit 0xf1200843: address(arg1), 64, mem[mem[64] + 64 len (32 * mem[96]) + 32]
+}
+
+function sub_8ab550ef(?) {
+    mem[96] = arg2.length
+    mem[128 len 32 * arg2.length] = call.data[arg2 + 36 len 32 * arg2.length]
+    require ext_code.size(stor0)
+    call stor0.getAddress(bytes32 arg1) with:
+         gas gas_remaining wei
+        args 'owner'
+    mem[(32 * arg2.length) + 128] = ext_call.return_data[0]
+    if not ext_call.success:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+    require msg.sender == ext_call.return_data[12 len 20]
+    require arg1
+    require 0 < arg2.length
+    _7 = mem[128]
+    if arg2.length != 16:
+        revert with 0, 'tokenIDs should be 1 + limit'
+    require arg1
+    require ext_code.size(0xb4d3941e455b2e31a673091bc3c44b4dc76e83c1)
+    delegate 0xb4d3941e455b2e31a673091bc3c44b4dc76e83c1.0xb5fd4808 with:
+         gas gas_remaining wei
+        args stor0, mem[128]
+    if not delegate.return_code:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+    require not delegate.return_data[12 len 20]
+    mem[(32 * arg2.length) + 160] = 'tokenOwner'
+    mem[(32 * arg2.length) + 170] = mem[128]
+    mem[(32 * arg2.length) + 128] = 42
+    mem[(32 * arg2.length) + 206] = sha3('tokenOwner', mem[(32 * arg2.length) + 170 len 22], mem[(32 * arg2.length) + 234 len 10])
+    require ext_code.size(stor0)
+    call stor0.setAddress(bytes32 arg1, address arg2) with:
+         gas gas_remaining wei
+        args mem[(32 * arg2.length) + 206], address(arg1)
+    if not ext_call.success:
+        revert with ext_call.return_data[0 len return_data.size]
+    require ext_code.size(0xb4d3941e455b2e31a673091bc3c44b4dc76e83c1)
+    delegate 0xb4d3941e455b2e31a673091bc3c44b4dc76e83c1.0x8603f860 with:
+         gas gas_remaining wei
+        args stor0, arg1
+    if not delegate.return_code:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+    require delegate.return_data[0] + 1 >= delegate.return_data[0]
+    mem[(32 * arg2.length) + 234] = 'balances'
+    mem[(32 * arg2.length) + 242] = address(arg1)
+    mem[(32 * arg2.length) + 202] = 28
+    mem[64] = (32 * arg2.length) + 262
+    mem[(32 * arg2.length) + 262 len 0] = None
+    mem[(32 * arg2.length) + 298] = delegate.return_data[0] + 1
+    require ext_code.size(stor0)
+    call stor0.setUint(bytes32 arg1, uint256 arg2) with:
+         gas gas_remaining wei
+        args sha3(0, Mask(192, 64, Mask(32, 192, 'balances') >> 192, arg1, 0, 0) >> 64), delegate.return_data[0] + 1
+    if not ext_call.success:
+        revert with ext_call.return_data[0 len return_data.size]
+    emit Transfer(0, arg1, _7);
+    mem[(32 * arg2.length) + 266] = 'owner'
+    require ext_code.size(stor0)
+    call stor0.getAddress(bytes32 arg1) with:
+         gas gas_remaining wei
+        args 'owner'
+    mem[(32 * arg2.length) + 262] = ext_call.return_data[0]
+    if not ext_call.success:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+    idx = 1
+    while idx < 16:
+        _124 = mem[64]
+        mem[mem[64] + 32] = 'tokenOwner'
+        mem[mem[64] + 42] = _7 + idx
+        _125 = mem[64]
+        mem[mem[64]] = 42
+        mem[64] = mem[64] + 74
+        _127 = mem[_125]
+        t = _125 + 32
+        u = mem[64]
+        s = mem[_125]
+        while s >= 32:
+            mem[u] = mem[t]
+            t = t + 32
+            u = u + 32
+            s = s - 32
+            continue 
+        mem[mem[64] + floor32(mem[_125])] = mem[_125 + floor32(mem[_125]) + -(mem[_125] % 32) + 64 len mem[_125] % 32] or Mask(8 * -(mem[_125] % 32) + 32, -(8 * -(mem[_125] % 32) + 32) + 256, mem[mem[64] + floor32(mem[_125])])
+        _142 = sha3(mem[mem[64] len _127 + _124 + -mem[64] + 74])
+        mem[mem[64]] = 0xca446dd900000000000000000000000000000000000000000000000000000000
+        mem[mem[64] + 4] = _142
+        mem[mem[64] + 36] = address(ext_call.return_data[0])
+        require ext_code.size(stor0)
+        call stor0.setAddress(bytes32 arg1, address arg2) with:
+             gas gas_remaining wei
+            args _142, address(ext_call.return_data[0])
+        if not ext_call.success:
+            revert with ext_call.return_data[0 len return_data.size]
+        idx = idx + 1
+        continue 
+    mem[mem[64]] = arg1
+    mem[mem[64] + 32] = 64
+    mem[mem[64] + 64] = mem[96]
+    mem[mem[64] + 96 len floor32(mem[96])] = mem[128 len floor32(mem[96])]
+    emit 0xf1200843: address(arg1), 64, mem[mem[64] + 64 len (32 * mem[96]) + 32]
+}
+
+function batchMint(address[] arg1, uint256[] arg2) {
+    mem[96] = arg1.length
+    mem[128 len 32 * arg1.length] = call.data[arg1 + 36 len 32 * arg1.length]
+    mem[64] = (32 * arg1.length) + (32 * arg2.length) + 160
+    mem[(32 * arg1.length) + 128] = arg2.length
+    mem[(32 * arg1.length) + 160 len 32 * arg2.length] = call.data[arg2 + 36 len 32 * arg2.length]
+    mem[(32 * arg1.length) + (32 * arg2.length) + 164] = 'owner'
+    require ext_code.size(stor0)
+    call stor0.getAddress(bytes32 arg1) with:
+         gas gas_remaining wei
+        args 'owner'
+    mem[(32 * arg1.length) + (32 * arg2.length) + 160] = ext_call.return_data[0]
+    if not ext_call.success:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+    require msg.sender == ext_call.return_data[12 len 20]
+    if arg1.length != arg2.length:
+        revert with 0, 'ids and addresses need to be same'
+    idx = 0
+    while idx < arg1.length:
+        require idx < mem[96]
+        _58 = mem[(32 * idx) + 128]
+        require idx < mem[(32 * arg1.length) + 128]
+        _62 = mem[(32 * idx) + (32 * arg1.length) + 160]
+        require mem[(32 * idx) + 140 len 20]
+        require ext_code.size(0xb4d3941e455b2e31a673091bc3c44b4dc76e83c1)
+        delegate 0xb4d3941e455b2e31a673091bc3c44b4dc76e83c1.0xb5fd4808 with:
+             gas gas_remaining wei
+            args stor0, mem[(32 * idx) + (32 * arg1.length) + 160]
+        if not delegate.return_code:
+            revert with ext_call.return_data[0 len return_data.size]
+        require return_data.size >= 32
+        require not address(delegate.return_data[0])
+        _67 = mem[64]
+        mem[mem[64] + 32] = 'tokenOwner'
+        mem[mem[64] + 42] = _62
+        _68 = mem[64]
+        mem[mem[64]] = 42
+        mem[64] = mem[64] + 74
+        _70 = mem[_68]
+        t = _68 + 32
+        u = mem[64]
+        s = mem[_68]
+        while s >= 32:
+            mem[u] = mem[t]
+            t = t + 32
+            u = u + 32
+            s = s - 32
+            continue 
+        mem[mem[64] + floor32(mem[_68])] = mem[_68 + floor32(mem[_68]) + -(mem[_68] % 32) + 64 len mem[_68] % 32] or Mask(8 * -(mem[_68] % 32) + 32, -(8 * -(mem[_68] % 32) + 32) + 256, mem[mem[64] + floor32(mem[_68])])
+        mem[mem[64] + 4] = sha3(mem[mem[64] len _70 + _67 + -mem[64] + 74])
+        require ext_code.size(stor0)
+        call stor0.setAddress(bytes32 arg1, address arg2) with:
+             gas gas_remaining wei
+            args mem[mem[64] + 4], address(_58)
+        if not ext_call.success:
+            revert with ext_call.return_data[0 len return_data.size]
+        require ext_code.size(0xb4d3941e455b2e31a673091bc3c44b4dc76e83c1)
+        delegate 0xb4d3941e455b2e31a673091bc3c44b4dc76e83c1.0x8603f860 with:
+             gas gas_remaining wei
+            args stor0, address(_58)
+        if not delegate.return_code:
+            revert with ext_call.return_data[0 len return_data.size]
+        require return_data.size >= 32
+        require delegate.return_data[0] + 1 >= delegate.return_data[0]
+        _108 = mem[64]
+        mem[mem[64] + 32] = 'balances'
+        mem[mem[64] + 40] = address(_58)
+        _109 = mem[64]
+        mem[mem[64]] = 28
+        mem[64] = mem[64] + 60
+        _111 = mem[_109]
+        t = _109 + 32
+        u = mem[64]
+        s = mem[_109]
+        while s >= 32:
+            mem[u] = mem[t]
+            t = t + 32
+            u = u + 32
+            s = s - 32
+            continue 
+        mem[mem[64] + floor32(mem[_109])] = mem[_109 + floor32(mem[_109]) + -(mem[_109] % 32) + 64 len mem[_109] % 32] or Mask(8 * -(mem[_109] % 32) + 32, -(8 * -(mem[_109] % 32) + 32) + 256, mem[mem[64] + floor32(mem[_109])])
+        _124 = sha3(mem[mem[64] len _111 + _108 + -mem[64] + 60])
+        mem[mem[64]] = 0xe2a4853a00000000000000000000000000000000000000000000000000000000
+        mem[mem[64] + 4] = _124
+        mem[mem[64] + 36] = delegate.return_data[0] + 1
+        require ext_code.size(stor0)
+        call stor0.setUint(bytes32 arg1, uint256 arg2) with:
+             gas gas_remaining wei
+            args _124, delegate.return_data[0] + 1
+        if not ext_call.success:
+            revert with ext_call.return_data[0 len return_data.size]
+        emit Transfer(0, address(_58), _62);
+        idx = idx + 1
+        continue 
+    mem[mem[64]] = 32
+    mem[mem[64] + 32] = mem[96]
+    mem[mem[64] + 64 len floor32(mem[96])] = mem[128 len floor32(mem[96])]
+    emit 0x9e8f321b: 32, mem[mem[64] + 32 len (32 * mem[96]) + 32]
+}
+
+function sub_256609b2(?) {
+    mem[64] = (32 * arg2.length) + 128
+    mem[96] = arg2.length
+    mem[128 len 32 * arg2.length] = call.data[arg2 + 36 len 32 * arg2.length]
+    require ext_code.size(stor0)
+    call stor0.getAddress(bytes32 arg1) with:
+         gas gas_remaining wei
+        args 'owner'
+    if not ext_call.success:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+    require msg.sender == ext_call.return_data[12 len 20]
+    require arg1
+    mem[(32 * arg2.length) + 132] = 'owner'
+    require ext_code.size(stor0)
+    call stor0.getAddress(bytes32 arg1) with:
+         gas gas_remaining wei
+        args 'owner'
+    mem[(32 * arg2.length) + 128] = ext_call.return_data[0]
+    if not ext_call.success:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+    require arg1 != ext_call.return_data[12 len 20]
+    s = 0
+    idx = 0
+    while idx < arg2.length:
+        require idx < arg2.length
+        _111 = mem[(32 * idx) + 128]
+        require ext_code.size(0xb4d3941e455b2e31a673091bc3c44b4dc76e83c1)
+        delegate 0xb4d3941e455b2e31a673091bc3c44b4dc76e83c1.0xb5fd4808 with:
+             gas gas_remaining wei
+            args stor0, mem[(32 * idx) + 128]
+        if not delegate.return_code:
+            revert with ext_call.return_data[0 len return_data.size]
+        require return_data.size >= 32
+        require address(delegate.return_data[0])
+        mem[(32 * arg2.length) + 164] = mem[(32 * idx) + 128]
+        require ext_code.size(0xb4d3941e455b2e31a673091bc3c44b4dc76e83c1)
+        delegate 0xb4d3941e455b2e31a673091bc3c44b4dc76e83c1.0xb5fd4808 with:
+             gas gas_remaining wei
+            args stor0, _111
+        if not delegate.return_code:
+            revert with ext_call.return_data[0 len return_data.size]
+        require return_data.size >= 32
+        mem[(32 * arg2.length) + 132] = 'owner'
+        require ext_code.size(stor0)
+        call stor0.getAddress(bytes32 arg1) with:
+             gas gas_remaining wei
+            args 'owner'
+        mem[(32 * arg2.length) + 128] = ext_call.return_data[0]
+        if not ext_call.success:
+            revert with ext_call.return_data[0 len return_data.size]
+        require return_data.size >= 32
+        if not address(delegate.return_data[0]):
+            if not address(delegate.return_data[0]) != 1:
+                s = not address(delegate.return_data[0])
+                idx = idx + 1
+                continue 
+            require ext_code.size(0xb4d3941e455b2e31a673091bc3c44b4dc76e83c1)
+            delegate 0xb4d3941e455b2e31a673091bc3c44b4dc76e83c1.0x8603f860 with:
+                 gas gas_remaining wei
+                args stor0, arg1
+            if not delegate.return_code:
+                revert with ext_call.return_data[0 len return_data.size]
+            require return_data.size >= 32
+            require delegate.return_data[0] + 1 >= delegate.return_data[0]
+            mem[(32 * arg2.length) + 160] = 'balances'
+            mem[(32 * arg2.length) + 168] = address(arg1)
+            mem[(32 * arg2.length) + 128] = 28
+            mem[64] = (32 * arg2.length) + 188
+            t = (32 * arg2.length) + 160
+            u = mem[64]
+            s = mem[(32 * arg2.length) + 128]
+            while s >= 32:
+                mem[u] = mem[t]
+                t = t + 32
+                u = u + 32
+                s = s - 32
+                continue 
+            mem[mem[64] + floor32(mem[(32 * arg2.length) + 128])] = mem[(32 * arg2.length) + floor32(mem[(32 * arg2.length) + 128]) + -(mem[(32 * arg2.length) + 128] % 32) + 192 len mem[(32 * arg2.length) + 128] % 32] or Mask(8 * -(mem[(32 * arg2.length) + 128] % 32) + 32, -(8 * -(mem[(32 * arg2.length) + 128] % 32) + 32) + 256, mem[mem[64] + floor32(mem[(32 * arg2.length) + 128])])
+            _207 = sha3(mem[mem[64] len (32 * arg2.length) + -mem[64] + 216])
+            mem[mem[64]] = 0xe2a4853a00000000000000000000000000000000000000000000000000000000
+            mem[mem[64] + 4] = _207
+            mem[mem[64] + 36] = delegate.return_data[0] + 1
+            require ext_code.size(stor0)
+            call stor0.setUint(bytes32 arg1, uint256 arg2) with:
+                 gas gas_remaining wei
+                args _207, delegate.return_data[0] + 1
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require idx < mem[96]
+            _220 = mem[(32 * idx) + 128]
+            _222 = mem[64]
+            mem[mem[64] + 32] = 'tokenOwner'
+            mem[mem[64] + 42] = _220
+            _223 = mem[64]
+            mem[mem[64]] = 42
+            mem[64] = mem[64] + 74
+            _225 = mem[_223]
+            t = _223 + 32
+            u = mem[64]
+            s = mem[_223]
+            while s >= 32:
+                mem[u] = mem[t]
+                t = t + 32
+                u = u + 32
+                s = s - 32
+                continue 
+            mem[mem[64] + floor32(mem[_223])] = mem[_223 + floor32(mem[_223]) + -(mem[_223] % 32) + 64 len mem[_223] % 32] or Mask(8 * -(mem[_223] % 32) + 32, -(8 * -(mem[_223] % 32) + 32) + 256, mem[mem[64] + floor32(mem[_223])])
+            _271 = sha3(mem[mem[64] len _225 + _222 + -mem[64] + 74])
+            mem[mem[64]] = 0xca446dd900000000000000000000000000000000000000000000000000000000
+            mem[mem[64] + 4] = _271
+            mem[mem[64] + 36] = arg1
+            require ext_code.size(stor0)
+            call stor0.setAddress(bytes32 arg1, address arg2) with:
+                 gas gas_remaining wei
+                args _271, arg1
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require idx < mem[96]
+            emit Transfer(0, arg1, mem[(32 * idx) + 128]);
+            require idx < mem[96]
+            _292 = mem[(32 * idx) + 128]
+            mem[mem[64]] = arg1
+            mem[mem[64] + 32] = _292
+            emit Claim(address(arg1), _292);
+        else:
+            if address(delegate.return_data[0]) == address(ext_call.return_data[0]) != 1:
+                s = address(delegate.return_data[0]) == address(ext_call.return_data[0])
+                idx = idx + 1
+                continue 
+            require ext_code.size(0xb4d3941e455b2e31a673091bc3c44b4dc76e83c1)
+            delegate 0xb4d3941e455b2e31a673091bc3c44b4dc76e83c1.0x8603f860 with:
+                 gas gas_remaining wei
+                args stor0, arg1
+            if not delegate.return_code:
+                revert with ext_call.return_data[0 len return_data.size]
+            require return_data.size >= 32
+            require delegate.return_data[0] + 1 >= delegate.return_data[0]
+            mem[(32 * arg2.length) + 160] = 'balances'
+            mem[(32 * arg2.length) + 168] = address(arg1)
+            mem[(32 * arg2.length) + 128] = 28
+            mem[64] = (32 * arg2.length) + 188
+            t = (32 * arg2.length) + 160
+            u = mem[64]
+            s = mem[(32 * arg2.length) + 128]
+            while s >= 32:
+                mem[u] = mem[t]
+                t = t + 32
+                u = u + 32
+                s = s - 32
+                continue 
+            mem[mem[64] + floor32(mem[(32 * arg2.length) + 128])] = mem[(32 * arg2.length) + floor32(mem[(32 * arg2.length) + 128]) + -(mem[(32 * arg2.length) + 128] % 32) + 192 len mem[(32 * arg2.length) + 128] % 32] or Mask(8 * -(mem[(32 * arg2.length) + 128] % 32) + 32, -(8 * -(mem[(32 * arg2.length) + 128] % 32) + 32) + 256, mem[mem[64] + floor32(mem[(32 * arg2.length) + 128])])
+            _214 = sha3(mem[mem[64] len (32 * arg2.length) + -mem[64] + 216])
+            mem[mem[64]] = 0xe2a4853a00000000000000000000000000000000000000000000000000000000
+            mem[mem[64] + 4] = _214
+            mem[mem[64] + 36] = delegate.return_data[0] + 1
+            require ext_code.size(stor0)
+            call stor0.setUint(bytes32 arg1, uint256 arg2) with:
+                 gas gas_remaining wei
+                args _214, delegate.return_data[0] + 1
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require idx < mem[96]
+            _221 = mem[(32 * idx) + 128]
+            _226 = mem[64]
+            mem[mem[64] + 32] = 'tokenOwner'
+            mem[mem[64] + 42] = _221
+            _227 = mem[64]
+            mem[mem[64]] = 42
+            mem[64] = mem[64] + 74
+            _229 = mem[_227]
+            t = _227 + 32
+            u = mem[64]
+            s = mem[_227]
+            while s >= 32:
+                mem[u] = mem[t]
+                t = t + 32
+                u = u + 32
+                s = s - 32
+                continue 
+            mem[mem[64] + floor32(mem[_227])] = mem[_227 + floor32(mem[_227]) + -(mem[_227] % 32) + 64 len mem[_227] % 32] or Mask(8 * -(mem[_227] % 32) + 32, -(8 * -(mem[_227] % 32) + 32) + 256, mem[mem[64] + floor32(mem[_227])])
+            _278 = sha3(mem[mem[64] len _229 + _226 + -mem[64] + 74])
+            mem[mem[64]] = 0xca446dd900000000000000000000000000000000000000000000000000000000
+            mem[mem[64] + 4] = _278
+            mem[mem[64] + 36] = arg1
+            require ext_code.size(stor0)
+            call stor0.setAddress(bytes32 arg1, address arg2) with:
+                 gas gas_remaining wei
+                args _278, arg1
+            if not ext_call.success:
+                revert with ext_call.return_data[0 len return_data.size]
+            require idx < mem[96]
+            emit Transfer(0, arg1, mem[(32 * idx) + 128]);
+            require idx < mem[96]
+            _296 = mem[(32 * idx) + 128]
+            mem[mem[64]] = arg1
+            mem[mem[64] + 32] = _296
+            emit Claim(address(arg1), _296);
+        require idx < mem[96]
+        if not mem[(32 * idx) + 128]:
+            revert with 0, 'no claimable tokens available'
+    revert with 0, 'no claimable tokens available'
+}
+
+function tokenURI(uint256 arg1) {
+    require ext_code.size(0xb4d3941e455b2e31a673091bc3c44b4dc76e83c1)
+    delegate 0xb4d3941e455b2e31a673091bc3c44b4dc76e83c1.0xb5fd4808 with:
+         gas gas_remaining wei
+        args stor0, arg1
+    if not delegate.return_code:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+    if not delegate.return_data[12 len 20]:
+        revert with 0, 'Token doesn't exist'
+    mem[96] = 57
+    mem[128] = 'https://vaultservice.eastus.clou'
+    mem[160] = 'dapp.azure.com/v1/tokens/'
+    if not arg1:
+        mem[192] = 1
+        mem[224] = '0'
+        mem[256] = 0
+        mem[288] = 0
+        mem[320] = 0
+        mem[352] = 58
+        mem[384 len 1856] = code.data[18057 len 1856]
+        idx = 0
+        s = 0
+        while idx < 57:
+            require idx < 57
+            require s < 58
+            mem[s + 384 len 8] = Mask(8, -(('mask_shl', 8, 248, -3, ('mem', ('range', ('add', 128, ('var', 0)), 32))), 0) + 256, 0) << (('mask_shl', 8, 248, -3, ('mem', ('range', ('add', 128, ('var', 0)), 32))), 0) - 256
+            idx = idx + 1
+            s = s + 1
+            continue 
+        idx = 0
+        s = 57
+        while idx < 1:
+            require idx < 1
+            require s < 58
+            mem[s + 384 len 8] = Mask(8, -(('mask_shl', 8, 248, -3, ('mem', ('range', ('add', 224, ('var', 0)), 32))), 0) + 256, 0) << (('mask_shl', 8, 248, -3, ('mem', ('range', ('add', 224, ('var', 0)), 32))), 0) - 256
+            idx = idx + 1
+            s = s + 1
+            continue 
+        idx = 0
+        s = 58
+        while idx < 0:
+            require idx < 0
+            require s < 58
+            mem[s + 384 len 8] = Mask(8, -(('mask_shl', 8, 248, -3, ('mem', ('range', ('add', 288, ('var', 0)), 32))), 0) + 256, 0) << (('mask_shl', 8, 248, -3, ('mem', ('range', ('add', 288, ('var', 0)), 32))), 0) - 256
+            idx = idx + 1
+            s = s + 1
+            continue 
+        idx = 0
+        s = 58
+        while idx < 0:
+            require idx < 0
+            require s < 58
+            mem[s + 384 len 8] = Mask(8, -(('mask_shl', 8, 248, -3, ('mem', ('range', ('add', 320, ('var', 0)), 32))), 0) + 256, 0) << (('mask_shl', 8, 248, -3, ('mem', ('range', ('add', 320, ('var', 0)), 32))), 0) - 256
+            idx = idx + 1
+            s = s + 1
+            continue 
+        idx = 0
+        s = 58
+        while idx < 0:
+            require idx < 0
+            require s < 58
+            mem[s + 384 len 8] = Mask(8, -(('mask_shl', 8, 248, -3, ('mem', ('range', ('add', 352, ('var', 0)), 32))), 0) + 256, 0) << (('mask_shl', 8, 248, -3, ('mem', ('range', ('add', 352, ('var', 0)), 32))), 0) - 256
+            idx = idx + 1
+            s = s + 1
+            continue 
+        return Array(len=58, data=mem[384], mem[422 len 26])
+    s = 0
+    idx = arg1
+    while idx:
+        s = s + 1
+        idx = idx / 10
+        continue 
+    mem[192] = s
+    mem[64] = ceil32(s) + 224
+    if not s:
+        t = s - 1
+        idx = arg1
+        while idx:
+            require t < mem[192]
+            mem[t + 224 len 8] = Mask(8, -(('mask_shl', 8, 0, 245, ('add', 48, ('mod', ('var', 0), 10))), 0) + 256, 0) << (('mask_shl', 8, 0, 245, ('add', 48, ('mod', ('var', 0), 10))), 0) - 256
+            t = t - 1
+            idx = idx / 10
+            continue 
+        _267 = mem[64]
+        mem[64] = mem[64] + 32
+        mem[_267] = 0
+        _268 = mem[64]
+        mem[64] = mem[64] + 32
+        mem[_268] = 0
+        _269 = mem[64]
+        mem[64] = mem[64] + 32
+        mem[_269] = 0
+        _278 = mem[192]
+        _279 = mem[96]
+        _280 = mem[64]
+        mem[mem[64]] = mem[96] + mem[192]
+        mem[64] = mem[64] + floor32(_279 + _278 + 31) + 32
+        if not _279 + _278:
+            _429 = mem[96]
+            idx = 0
+            s = 0
+            while idx < _429:
+                require idx < mem[96]
+                require s < mem[_280]
+                mem[_280 + s + 32 len 8] = Mask(8, -(('mask_shl', 8, 248, -3, ('mem', ('range', ('add', 128, ('var', 0)), 32))), 0) + 256, 0) << (('mask_shl', 8, 248, -3, ('mem', ('range', ('add', 128, ('var', 0)), 32))), 0) - 256
+                idx = idx + 1
+                s = s + 1
+                continue 
+            _575 = mem[192]
+            idx = 0
+            s = _429
+            while idx < _575:
+                require idx < mem[192]
+                require s < mem[_280]
+                mem[_280 + s + 32 len 8] = Mask(8, -(('mask_shl', 8, 248, -3, ('mem', ('range', ('add', 224, ('var', 0)), 32))), 0) + 256, 0) << (('mask_shl', 8, 248, -3, ('mem', ('range', ('add', 224, ('var', 0)), 32))), 0) - 256
+                _575 = mem[192]
+                idx = idx + 1
+                s = s + 1
+                continue 
+            _697 = mem[_267]
+            idx = 0
+            s = _429 + _575
+            while idx < _697:
+                require idx < mem[_267]
+                require s < mem[_280]
+                mem[_280 + s + 32 len 8] = Mask(8, -(('mask_shl', 8, 248, -3, ('mem', ('range', ('add', 32, ('var', '_267'), ('var', 0)), 32))), 0) + 256, 0) << (('mask_shl', 8, 248, -3, ('mem', ('range', ('add', 32, ('var', '_267'), ('var', 0)), 32))), 0) - 256
+                _697 = mem[_267]
+                idx = idx + 1
+                s = s + 1
+                continue 
+            _795 = mem[_268]
+            idx = 0
+            s = _429 + _575 + _697
+            while idx < _795:
+                require idx < mem[_268]
+                require s < mem[_280]
+                mem[_280 + s + 32 len 8] = Mask(8, -(('mask_shl', 8, 248, -3, ('mem', ('range', ('add', 32, ('var', '_268'), ('var', 0)), 32))), 0) + 256, 0) << (('mask_shl', 8, 248, -3, ('mem', ('range', ('add', 32, ('var', '_268'), ('var', 0)), 32))), 0) - 256
+                _795 = mem[_268]
+                idx = idx + 1
+                s = s + 1
+                continue 
+            _863 = mem[_269]
+            idx = 0
+            s = _429 + _575 + _697 + _795
+            while idx < _863:
+                require idx < mem[_269]
+                require s < mem[_280]
+                mem[_280 + s + 32 len 8] = Mask(8, -(('mask_shl', 8, 248, -3, ('mem', ('range', ('add', 32, ('var', '_269'), ('var', 0)), 32))), 0) + 256, 0) << (('mask_shl', 8, 248, -3, ('mem', ('range', ('add', 32, ('var', '_269'), ('var', 0)), 32))), 0) - 256
+                _863 = mem[_269]
+                idx = idx + 1
+                s = s + 1
+                continue 
+            _879 = mem[64]
+            mem[mem[64]] = 32
+            mem[mem[64] + 32] = mem[_280]
+            _881 = mem[_280]
+            mem[mem[64] + 64 len ceil32(mem[_280])] = mem[_280 + 32 len ceil32(mem[_280])]
+            if not _881 % 32:
+                return 32, mem[mem[64] + 32 len _881 + 32]
+            mem[floor32(_881) + mem[64] + 64] = mem[floor32(_881) + mem[64] + -(_881 % 32) + 96 len _881 % 32]
+            return memory
+              from mem[64]
+               len floor32(_881) + _879 + -mem[64] + 96
+        mem[_280 + 32 len 32 * _279 + _278] = code.data[18057 len 32 * _279 + _278]
+        _430 = mem[96]
+        idx = 0
+        s = 0
+        while idx < _430:
+            require idx < mem[96]
+            require s < mem[_280]
+            mem[_280 + s + 32 len 8] = Mask(8, -(('mask_shl', 8, 248, -3, ('mem', ('range', ('add', 128, ('var', 0)), 32))), 0) + 256, 0) << (('mask_shl', 8, 248, -3, ('mem', ('range', ('add', 128, ('var', 0)), 32))), 0) - 256
+            idx = idx + 1
+            s = s + 1
+            continue 
+        _576 = mem[192]
+        idx = 0
+        s = _430
+        while idx < _576:
+            require idx < mem[192]
+            require s < mem[_280]
+            mem[_280 + s + 32 len 8] = Mask(8, -(('mask_shl', 8, 248, -3, ('mem', ('range', ('add', 224, ('var', 0)), 32))), 0) + 256, 0) << (('mask_shl', 8, 248, -3, ('mem', ('range', ('add', 224, ('var', 0)), 32))), 0) - 256
+            _576 = mem[192]
+            idx = idx + 1
+            s = s + 1
+            continue 
+        _698 = mem[_267]
+        idx = 0
+        s = _430 + _576
+        while idx < _698:
+            require idx < mem[_267]
+            require s < mem[_280]
+            mem[_280 + s + 32 len 8] = Mask(8, -(('mask_shl', 8, 248, -3, ('mem', ('range', ('add', 32, ('var', '_267'), ('var', 0)), 32))), 0) + 256, 0) << (('mask_shl', 8, 248, -3, ('mem', ('range', ('add', 32, ('var', '_267'), ('var', 0)), 32))), 0) - 256
+            _698 = mem[_267]
+            idx = idx + 1
+            s = s + 1
+            continue 
+        _796 = mem[_268]
+        idx = 0
+        s = _430 + _576 + _698
+        while idx < _796:
+            require idx < mem[_268]
+            require s < mem[_280]
+            mem[_280 + s + 32 len 8] = Mask(8, -(('mask_shl', 8, 248, -3, ('mem', ('range', ('add', 32, ('var', '_268'), ('var', 0)), 32))), 0) + 256, 0) << (('mask_shl', 8, 248, -3, ('mem', ('range', ('add', 32, ('var', '_268'), ('var', 0)), 32))), 0) - 256
+            _796 = mem[_268]
+            idx = idx + 1
+            s = s + 1
+            continue 
+        _864 = mem[_269]
+        idx = 0
+        s = _430 + _576 + _698 + _796
+        while idx < _864:
+            require idx < mem[_269]
+            require s < mem[_280]
+            mem[_280 + s + 32 len 8] = Mask(8, -(('mask_shl', 8, 248, -3, ('mem', ('range', ('add', 32, ('var', '_269'), ('var', 0)), 32))), 0) + 256, 0) << (('mask_shl', 8, 248, -3, ('mem', ('range', ('add', 32, ('var', '_269'), ('var', 0)), 32))), 0) - 256
+            _864 = mem[_269]
+            idx = idx + 1
+            s = s + 1
+            continue 
+        _882 = mem[64]
+        mem[mem[64]] = 32
+        mem[mem[64] + 32] = mem[_280]
+        _884 = mem[_280]
+        mem[mem[64] + 64 len ceil32(mem[_280])] = mem[_280 + 32 len ceil32(mem[_280])]
+        if not _884 % 32:
+            return 32, mem[mem[64] + 32 len _884 + 32]
+        mem[floor32(_884) + mem[64] + 64] = mem[floor32(_884) + mem[64] + -(_884 % 32) + 96 len _884 % 32]
+        return memory
+          from mem[64]
+           len floor32(_884) + _882 + -mem[64] + 96
+    mem[224 len 32 * s] = code.data[18057 len 32 * s]
+    t = s - 1
+    idx = arg1
+    while idx:
+        require t < mem[192]
+        mem[t + 224 len 8] = Mask(8, -(('mask_shl', 8, 0, 245, ('add', 48, ('mod', ('var', 0), 10))), 0) + 256, 0) << (('mask_shl', 8, 0, 245, ('add', 48, ('mod', ('var', 0), 10))), 0) - 256
+        t = t - 1
+        idx = idx / 10
+        continue 
+    _270 = mem[64]
+    mem[64] = mem[64] + 32
+    mem[_270] = 0
+    _271 = mem[64]
+    mem[64] = mem[64] + 32
+    mem[_271] = 0
+    _272 = mem[64]
+    mem[64] = mem[64] + 32
+    mem[_272] = 0
+    _284 = mem[192]
+    _285 = mem[96]
+    _286 = mem[64]
+    mem[mem[64]] = mem[96] + mem[192]
+    mem[64] = mem[64] + floor32(_285 + _284 + 31) + 32
+    if not _285 + _284:
+        _431 = mem[96]
+        idx = 0
+        s = 0
+        while idx < _431:
+            require idx < mem[96]
+            require s < mem[_286]
+            mem[_286 + s + 32 len 8] = Mask(8, -(('mask_shl', 8, 248, -3, ('mem', ('range', ('add', 128, ('var', 0)), 32))), 0) + 256, 0) << (('mask_shl', 8, 248, -3, ('mem', ('range', ('add', 128, ('var', 0)), 32))), 0) - 256
+            idx = idx + 1
+            s = s + 1
+            continue 
+        _577 = mem[192]
+        idx = 0
+        s = _431
+        while idx < _577:
+            require idx < mem[192]
+            require s < mem[_286]
+            mem[_286 + s + 32 len 8] = Mask(8, -(('mask_shl', 8, 248, -3, ('mem', ('range', ('add', 224, ('var', 0)), 32))), 0) + 256, 0) << (('mask_shl', 8, 248, -3, ('mem', ('range', ('add', 224, ('var', 0)), 32))), 0) - 256
+            _577 = mem[192]
+            idx = idx + 1
+            s = s + 1
+            continue 
+        _699 = mem[_270]
+        idx = 0
+        s = _431 + _577
+        while idx < _699:
+            require idx < mem[_270]
+            require s < mem[_286]
+            mem[_286 + s + 32 len 8] = Mask(8, -(('mask_shl', 8, 248, -3, ('mem', ('range', ('add', 32, ('var', '_270'), ('var', 0)), 32))), 0) + 256, 0) << (('mask_shl', 8, 248, -3, ('mem', ('range', ('add', 32, ('var', '_270'), ('var', 0)), 32))), 0) - 256
+            _699 = mem[_270]
+            idx = idx + 1
+            s = s + 1
+            continue 
+        _797 = mem[_271]
+        idx = 0
+        s = _431 + _577 + _699
+        while idx < _797:
+            require idx < mem[_271]
+            require s < mem[_286]
+            mem[_286 + s + 32 len 8] = Mask(8, -(('mask_shl', 8, 248, -3, ('mem', ('range', ('add', 32, ('var', '_271'), ('var', 0)), 32))), 0) + 256, 0) << (('mask_shl', 8, 248, -3, ('mem', ('range', ('add', 32, ('var', '_271'), ('var', 0)), 32))), 0) - 256
+            _797 = mem[_271]
+            idx = idx + 1
+            s = s + 1
+            continue 
+        _865 = mem[_272]
+        idx = 0
+        s = _431 + _577 + _699 + _797
+        while idx < _865:
+            require idx < mem[_272]
+            require s < mem[_286]
+            mem[_286 + s + 32 len 8] = Mask(8, -(('mask_shl', 8, 248, -3, ('mem', ('range', ('add', 32, ('var', '_272'), ('var', 0)), 32))), 0) + 256, 0) << (('mask_shl', 8, 248, -3, ('mem', ('range', ('add', 32, ('var', '_272'), ('var', 0)), 32))), 0) - 256
+            _865 = mem[_272]
+            idx = idx + 1
+            s = s + 1
+            continue 
+        _885 = mem[64]
+        mem[mem[64]] = 32
+        mem[mem[64] + 32] = mem[_286]
+        _887 = mem[_286]
+        mem[mem[64] + 64 len ceil32(mem[_286])] = mem[_286 + 32 len ceil32(mem[_286])]
+        if not _887 % 32:
+            return 32, mem[mem[64] + 32 len _887 + 32]
+        mem[floor32(_887) + mem[64] + 64] = mem[floor32(_887) + mem[64] + -(_887 % 32) + 96 len _887 % 32]
+        return memory
+          from mem[64]
+           len floor32(_887) + _885 + -mem[64] + 96
+    mem[_286 + 32 len 32 * _285 + _284] = code.data[18057 len 32 * _285 + _284]
+    _432 = mem[96]
+    idx = 0
+    s = 0
+    while idx < _432:
+        require idx < mem[96]
+        require s < mem[_286]
+        mem[_286 + s + 32 len 8] = Mask(8, -(('mask_shl', 8, 248, -3, ('mem', ('range', ('add', 128, ('var', 0)), 32))), 0) + 256, 0) << (('mask_shl', 8, 248, -3, ('mem', ('range', ('add', 128, ('var', 0)), 32))), 0) - 256
+        idx = idx + 1
+        s = s + 1
+        continue 
+    _578 = mem[192]
+    idx = 0
+    s = _432
+    while idx < _578:
+        require idx < mem[192]
+        require s < mem[_286]
+        mem[_286 + s + 32 len 8] = Mask(8, -(('mask_shl', 8, 248, -3, ('mem', ('range', ('add', 224, ('var', 0)), 32))), 0) + 256, 0) << (('mask_shl', 8, 248, -3, ('mem', ('range', ('add', 224, ('var', 0)), 32))), 0) - 256
+        _578 = mem[192]
+        idx = idx + 1
+        s = s + 1
+        continue 
+    _700 = mem[_270]
+    idx = 0
+    s = _432 + _578
+    while idx < _700:
+        require idx < mem[_270]
+        require s < mem[_286]
+        mem[_286 + s + 32 len 8] = Mask(8, -(('mask_shl', 8, 248, -3, ('mem', ('range', ('add', 32, ('var', '_270'), ('var', 0)), 32))), 0) + 256, 0) << (('mask_shl', 8, 248, -3, ('mem', ('range', ('add', 32, ('var', '_270'), ('var', 0)), 32))), 0) - 256
+        _700 = mem[_270]
+        idx = idx + 1
+        s = s + 1
+        continue 
+    _798 = mem[_271]
+    idx = 0
+    s = _432 + _578 + _700
+    while idx < _798:
+        require idx < mem[_271]
+        require s < mem[_286]
+        mem[_286 + s + 32 len 8] = Mask(8, -(('mask_shl', 8, 248, -3, ('mem', ('range', ('add', 32, ('var', '_271'), ('var', 0)), 32))), 0) + 256, 0) << (('mask_shl', 8, 248, -3, ('mem', ('range', ('add', 32, ('var', '_271'), ('var', 0)), 32))), 0) - 256
+        _798 = mem[_271]
+        idx = idx + 1
+        s = s + 1
+        continue 
+    _866 = mem[_272]
+    idx = 0
+    s = _432 + _578 + _700 + _798
+    while idx < _866:
+        require idx < mem[_272]
+        require s < mem[_286]
+        mem[_286 + s + 32 len 8] = Mask(8, -(('mask_shl', 8, 248, -3, ('mem', ('range', ('add', 32, ('var', '_272'), ('var', 0)), 32))), 0) + 256, 0) << (('mask_shl', 8, 248, -3, ('mem', ('range', ('add', 32, ('var', '_272'), ('var', 0)), 32))), 0) - 256
+        _866 = mem[_272]
+        idx = idx + 1
+        s = s + 1
+        continue 
+    _888 = mem[64]
+    mem[mem[64]] = 32
+    mem[mem[64] + 32] = mem[_286]
+    _890 = mem[_286]
+    mem[mem[64] + 64 len ceil32(mem[_286])] = mem[_286 + 32 len ceil32(mem[_286])]
+    if not _890 % 32:
+        return 32, mem[mem[64] + 32 len _890 + 32]
+    mem[floor32(_890) + mem[64] + 64] = mem[floor32(_890) + mem[64] + -(_890 % 32) + 96 len _890 % 32]
+    return memory
+      from mem[64]
+       len floor32(_890) + _888 + -mem[64] + 96
+}
+
+
+
+}
