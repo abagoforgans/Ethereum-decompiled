@@ -1,0 +1,107 @@
+contract main {
+
+
+
+
+// =====================  Runtime code  =====================
+
+
+#
+#  - sub_faf69601(?)
+#
+address stor0;
+mapping of uint256 sub_25b17002;
+
+function sub_25b17002(?) {
+    return sub_25b17002[arg1]
+}
+
+function sub_2f0e9340(?) {
+    return sub_25b17002[arg1 << 192]
+}
+
+function _fallback() payable {
+    revert
+}
+
+function sub_d6be6be7(?) {
+    if stor0 != msg.sender:
+        revert with 0, 'Unauthorized'
+    emit 0x625ef872: address(arg2), address(arg3), arg4, arg5, arg1
+}
+
+function sub_05204994(?) {
+    if stor0 != msg.sender:
+        revert with 0, 'Unauthorized'
+    if arg2 > sub_25b17002[arg1 << 192]:
+        revert with 0, 'Insufficent funds'
+    sub_25b17002[arg1 << 192] -= arg2
+    emit 0xf9125905: arg2, Array(len=arg3.length, data=arg3[all]), arg4, arg1
+}
+
+function sub_289aeefe(?) {
+    mem[128 len arg1.length] = arg1[all]
+    mem[ceil32(arg1.length) + 128] = arg3.length
+    mem[ceil32(arg1.length) + 160 len arg3.length] = arg3[all]
+    mem[ceil32(arg1.length) + ceil32(arg3.length) + 160] = arg4.length
+    mem[ceil32(arg1.length) + ceil32(arg3.length) + 192 len arg4.length] = arg4[all]
+    if stor0 != msg.sender:
+        revert with 0, 'Unauthorized'
+    mem[ceil32(arg1.length) + ceil32(arg3.length) + ceil32(arg4.length) + 192 len floor32(arg1.length)] = call.data[arg1 + 36 len floor32(arg1.length)]
+    mem[ceil32(arg1.length) + ceil32(arg3.length) + ceil32(arg4.length) + floor32(arg1.length) + -(arg1.length % 32) + 224 len arg1.length % 32] = mem[-(arg1.length % 32) + floor32(arg1.length) + 160 len arg1.length % 32]
+    _53 = sha3(call.data[arg1 + 36 len floor32(arg1.length)], mem[ceil32(arg1.length) + ceil32(arg3.length) + ceil32(arg4.length) + floor32(arg1.length) + 192 len arg1.length % 32])
+    mem[ceil32(arg1.length) + ceil32(arg3.length) + ceil32(arg4.length) + 288] = arg5
+    mem[ceil32(arg1.length) + ceil32(arg3.length) + ceil32(arg4.length) + 320] = arg6
+    mem[ceil32(arg1.length) + ceil32(arg3.length) + ceil32(arg4.length) + 192] = 160
+    mem[ceil32(arg1.length) + ceil32(arg3.length) + ceil32(arg4.length) + 352] = arg1.length
+    mem[ceil32(arg1.length) + ceil32(arg3.length) + ceil32(arg4.length) + 384 len ceil32(arg1.length)] = arg1[all], mem[arg1.length + 128 len ceil32(arg1.length) - arg1.length]
+    if not arg1.length % 32:
+        mem[ceil32(arg1.length) + ceil32(arg3.length) + ceil32(arg4.length) + 224] = arg1.length + 192
+        mem[arg1.length + ceil32(arg1.length) + ceil32(arg3.length) + ceil32(arg4.length) + 416 len ceil32(arg3.length)] = arg3[all], mem[ceil32(arg1.length) + arg3.length + 160 len ceil32(arg3.length) - arg3.length]
+        if not arg3.length % 32:
+            mem[ceil32(arg1.length) + ceil32(arg3.length) + ceil32(arg4.length) + 256] = arg3.length + arg1.length + 224
+            mem[arg3.length + arg1.length + ceil32(arg1.length) + ceil32(arg3.length) + ceil32(arg4.length) + 416] = arg4.length
+            mem[arg3.length + arg1.length + ceil32(arg1.length) + ceil32(arg3.length) + ceil32(arg4.length) + 448 len ceil32(arg4.length)] = arg4[all], mem[ceil32(arg1.length) + ceil32(arg3.length) + arg4.length + 192 len ceil32(arg4.length) - arg4.length]
+            if not arg4.length % 32:
+                emit 0x3c9b0964: Array(len=Mask(8 * ceil32(arg3.length), -(8 * ceil32(arg3.length)) + 256, arg3[all], mem[ceil32(arg1.length) + arg3.length + 160 len ceil32(arg3.length) - arg3.length]) << (8 * ceil32(arg3.length)) - 256, data=mem[ceil32(arg1.length) + (2 * ceil32(arg3.length)) + ceil32(arg4.length) + arg1.length + 416 len arg4.length + arg3.length + -ceil32(arg3.length) + 32]), mem[ceil32(arg1.length) + ceil32(arg3.length) + ceil32(arg4.length) + 224 len floor32(arg1.length) - (arg1.length % 32)], mem[-(arg1.length % 32) + floor32(arg1.length) + 160 len arg1.length % 32], mem[ceil32(arg1.length) + ceil32(arg3.length) + ceil32(arg4.length) + floor32(arg1.length) + 224 len (arg1.length % 32) + 160], arg3.length, _53, arg2
+            else:
+                mem[floor32(arg4.length) + arg3.length + arg1.length + ceil32(arg1.length) + ceil32(arg3.length) + ceil32(arg4.length) + 448] = mem[floor32(arg4.length) + arg3.length + arg1.length + ceil32(arg1.length) + ceil32(arg3.length) + ceil32(arg4.length) + -(arg4.length % 32) + 480 len arg4.length % 32]
+                emit 0x3c9b0964: Array(len=Mask(8 * ceil32(arg3.length), -(8 * ceil32(arg3.length)) + 256, arg3[all], mem[ceil32(arg1.length) + arg3.length + 160 len ceil32(arg3.length) - arg3.length]) << (8 * ceil32(arg3.length)) - 256, data=mem[ceil32(arg1.length) + (2 * ceil32(arg3.length)) + ceil32(arg4.length) + arg1.length + 416 len floor32(arg4.length) + arg3.length + -ceil32(arg3.length) + 64]), mem[ceil32(arg1.length) + ceil32(arg3.length) + ceil32(arg4.length) + 224 len floor32(arg1.length) - (arg1.length % 32)], mem[-(arg1.length % 32) + floor32(arg1.length) + 160 len arg1.length % 32], mem[ceil32(arg1.length) + ceil32(arg3.length) + ceil32(arg4.length) + floor32(arg1.length) + 224 len (arg1.length % 32) + 160], arg3.length, _53, arg2
+        else:
+            mem[floor32(arg3.length) + arg1.length + ceil32(arg1.length) + ceil32(arg3.length) + ceil32(arg4.length) + 416] = mem[floor32(arg3.length) + arg1.length + ceil32(arg1.length) + ceil32(arg3.length) + ceil32(arg4.length) + -(arg3.length % 32) + 448 len arg3.length % 32]
+            mem[ceil32(arg1.length) + ceil32(arg3.length) + ceil32(arg4.length) + 256] = floor32(arg3.length) + arg1.length + 256
+            mem[floor32(arg3.length) + arg1.length + ceil32(arg1.length) + ceil32(arg3.length) + ceil32(arg4.length) + 448] = arg4.length
+            mem[floor32(arg3.length) + arg1.length + ceil32(arg1.length) + ceil32(arg3.length) + ceil32(arg4.length) + 480 len ceil32(arg4.length)] = arg4[all], mem[ceil32(arg1.length) + ceil32(arg3.length) + arg4.length + 192 len ceil32(arg4.length) - arg4.length]
+            if not arg4.length % 32:
+                emit 0x3c9b0964: Array(len=Mask(8 * ceil32(arg3.length), -(8 * ceil32(arg3.length)) + 256, arg3[all], mem[ceil32(arg1.length) + arg3.length + 160 len ceil32(arg3.length) - arg3.length]) << (8 * ceil32(arg3.length)) - 256, data=mem[ceil32(arg1.length) + (2 * ceil32(arg3.length)) + ceil32(arg4.length) + arg1.length + 416 len arg4.length + floor32(arg3.length) + -ceil32(arg3.length) + 64]), mem[ceil32(arg1.length) + ceil32(arg3.length) + ceil32(arg4.length) + 224 len floor32(arg1.length) - (arg1.length % 32)], mem[-(arg1.length % 32) + floor32(arg1.length) + 160 len arg1.length % 32], mem[ceil32(arg1.length) + ceil32(arg3.length) + ceil32(arg4.length) + floor32(arg1.length) + 224 len (arg1.length % 32) + 160], arg3.length, _53, arg2
+            else:
+                mem[floor32(arg4.length) + floor32(arg3.length) + arg1.length + ceil32(arg1.length) + ceil32(arg3.length) + ceil32(arg4.length) + 480] = mem[floor32(arg4.length) + floor32(arg3.length) + arg1.length + ceil32(arg1.length) + ceil32(arg3.length) + ceil32(arg4.length) + -(arg4.length % 32) + 512 len arg4.length % 32]
+                emit 0x3c9b0964: Array(len=Mask(8 * ceil32(arg3.length), -(8 * ceil32(arg3.length)) + 256, arg3[all], mem[ceil32(arg1.length) + arg3.length + 160 len ceil32(arg3.length) - arg3.length]) << (8 * ceil32(arg3.length)) - 256, data=mem[ceil32(arg1.length) + (2 * ceil32(arg3.length)) + ceil32(arg4.length) + arg1.length + 416 len floor32(arg4.length) + floor32(arg3.length) + -ceil32(arg3.length) + 96]), mem[ceil32(arg1.length) + ceil32(arg3.length) + ceil32(arg4.length) + 224 len floor32(arg1.length) - (arg1.length % 32)], mem[-(arg1.length % 32) + floor32(arg1.length) + 160 len arg1.length % 32], mem[ceil32(arg1.length) + ceil32(arg3.length) + ceil32(arg4.length) + floor32(arg1.length) + 224 len (arg1.length % 32) + 160], arg3.length, _53, arg2
+    else:
+        mem[floor32(arg1.length) + ceil32(arg1.length) + ceil32(arg3.length) + ceil32(arg4.length) + 384] = mem[floor32(arg1.length) + ceil32(arg1.length) + ceil32(arg3.length) + ceil32(arg4.length) + -(arg1.length % 32) + 416 len arg1.length % 32]
+        mem[ceil32(arg1.length) + ceil32(arg3.length) + ceil32(arg4.length) + 224] = floor32(arg1.length) + 224
+        mem[floor32(arg1.length) + ceil32(arg1.length) + ceil32(arg3.length) + ceil32(arg4.length) + 448 len ceil32(arg3.length)] = arg3[all], mem[ceil32(arg1.length) + arg3.length + 160 len ceil32(arg3.length) - arg3.length]
+        if not arg3.length % 32:
+            mem[ceil32(arg1.length) + ceil32(arg3.length) + ceil32(arg4.length) + 256] = arg3.length + floor32(arg1.length) + 256
+            mem[arg3.length + floor32(arg1.length) + ceil32(arg1.length) + ceil32(arg3.length) + ceil32(arg4.length) + 448] = arg4.length
+            mem[arg3.length + floor32(arg1.length) + ceil32(arg1.length) + ceil32(arg3.length) + ceil32(arg4.length) + 480 len ceil32(arg4.length)] = arg4[all], mem[ceil32(arg1.length) + ceil32(arg3.length) + arg4.length + 192 len ceil32(arg4.length) - arg4.length]
+            if not arg4.length % 32:
+                emit 0x3c9b0964: Array(len=Mask(8 * ceil32(arg3.length), -(8 * ceil32(arg3.length)) + 256, arg3[all], mem[ceil32(arg1.length) + arg3.length + 160 len ceil32(arg3.length) - arg3.length]) << (8 * ceil32(arg3.length)) - 256, data=mem[ceil32(arg1.length) + (2 * ceil32(arg3.length)) + ceil32(arg4.length) + floor32(arg1.length) + 448 len arg4.length + arg3.length + -ceil32(arg3.length) + 32]), mem[ceil32(arg1.length) + ceil32(arg3.length) + ceil32(arg4.length) + 224 len floor32(arg1.length) - (arg1.length % 32)], mem[-(arg1.length % 32) + floor32(arg1.length) + 160 len arg1.length % 32], mem[ceil32(arg1.length) + ceil32(arg3.length) + ceil32(arg4.length) + floor32(arg1.length) + 224 len 192], arg3.length, _53, arg2
+            else:
+                mem[floor32(arg4.length) + arg3.length + floor32(arg1.length) + ceil32(arg1.length) + ceil32(arg3.length) + ceil32(arg4.length) + 480] = mem[floor32(arg4.length) + arg3.length + floor32(arg1.length) + ceil32(arg1.length) + ceil32(arg3.length) + ceil32(arg4.length) + -(arg4.length % 32) + 512 len arg4.length % 32]
+                emit 0x3c9b0964: Array(len=Mask(8 * ceil32(arg3.length), -(8 * ceil32(arg3.length)) + 256, arg3[all], mem[ceil32(arg1.length) + arg3.length + 160 len ceil32(arg3.length) - arg3.length]) << (8 * ceil32(arg3.length)) - 256, data=mem[ceil32(arg1.length) + (2 * ceil32(arg3.length)) + ceil32(arg4.length) + floor32(arg1.length) + 448 len floor32(arg4.length) + arg3.length + -ceil32(arg3.length) + 64]), mem[ceil32(arg1.length) + ceil32(arg3.length) + ceil32(arg4.length) + 224 len floor32(arg1.length) - (arg1.length % 32)], mem[-(arg1.length % 32) + floor32(arg1.length) + 160 len arg1.length % 32], mem[ceil32(arg1.length) + ceil32(arg3.length) + ceil32(arg4.length) + floor32(arg1.length) + 224 len 192], arg3.length, _53, arg2
+        else:
+            mem[floor32(arg3.length) + floor32(arg1.length) + ceil32(arg1.length) + ceil32(arg3.length) + ceil32(arg4.length) + 448] = mem[floor32(arg3.length) + floor32(arg1.length) + ceil32(arg1.length) + ceil32(arg3.length) + ceil32(arg4.length) + -(arg3.length % 32) + 480 len arg3.length % 32]
+            mem[ceil32(arg1.length) + ceil32(arg3.length) + ceil32(arg4.length) + 256] = floor32(arg3.length) + floor32(arg1.length) + 288
+            mem[floor32(arg3.length) + floor32(arg1.length) + ceil32(arg1.length) + ceil32(arg3.length) + ceil32(arg4.length) + 480] = arg4.length
+            mem[floor32(arg3.length) + floor32(arg1.length) + ceil32(arg1.length) + ceil32(arg3.length) + ceil32(arg4.length) + 512 len ceil32(arg4.length)] = arg4[all], mem[ceil32(arg1.length) + ceil32(arg3.length) + arg4.length + 192 len ceil32(arg4.length) - arg4.length]
+            if not arg4.length % 32:
+                emit 0x3c9b0964: Array(len=Mask(8 * ceil32(arg3.length), -(8 * ceil32(arg3.length)) + 256, arg3[all], mem[ceil32(arg1.length) + arg3.length + 160 len ceil32(arg3.length) - arg3.length]) << (8 * ceil32(arg3.length)) - 256, data=mem[ceil32(arg1.length) + (2 * ceil32(arg3.length)) + ceil32(arg4.length) + floor32(arg1.length) + 448 len arg4.length + floor32(arg3.length) + -ceil32(arg3.length) + 64]), mem[ceil32(arg1.length) + ceil32(arg3.length) + ceil32(arg4.length) + 224 len floor32(arg1.length) - (arg1.length % 32)], mem[-(arg1.length % 32) + floor32(arg1.length) + 160 len arg1.length % 32], mem[ceil32(arg1.length) + ceil32(arg3.length) + ceil32(arg4.length) + floor32(arg1.length) + 224 len 192], arg3.length, _53, arg2
+            else:
+                mem[floor32(arg4.length) + floor32(arg3.length) + floor32(arg1.length) + ceil32(arg1.length) + ceil32(arg3.length) + ceil32(arg4.length) + 512] = mem[floor32(arg4.length) + floor32(arg3.length) + floor32(arg1.length) + ceil32(arg1.length) + ceil32(arg3.length) + ceil32(arg4.length) + -(arg4.length % 32) + 544 len arg4.length % 32]
+                emit 0x3c9b0964: Array(len=Mask(8 * ceil32(arg3.length), -(8 * ceil32(arg3.length)) + 256, arg3[all], mem[ceil32(arg1.length) + arg3.length + 160 len ceil32(arg3.length) - arg3.length]) << (8 * ceil32(arg3.length)) - 256, data=mem[ceil32(arg1.length) + (2 * ceil32(arg3.length)) + ceil32(arg4.length) + floor32(arg1.length) + 448 len floor32(arg4.length) + floor32(arg3.length) + -ceil32(arg3.length) + 96]), mem[ceil32(arg1.length) + ceil32(arg3.length) + ceil32(arg4.length) + 224 len floor32(arg1.length) - (arg1.length % 32)], mem[-(arg1.length % 32) + floor32(arg1.length) + 160 len arg1.length % 32], mem[ceil32(arg1.length) + ceil32(arg3.length) + ceil32(arg4.length) + floor32(arg1.length) + 224 len 192], arg3.length, _53, arg2
+}
+
+
+
+}
