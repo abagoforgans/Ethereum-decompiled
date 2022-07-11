@@ -1,0 +1,176 @@
+contract main {
+
+
+
+
+// =====================  Runtime code  =====================
+
+
+uint256 totalSupply;
+address owner;
+uint8 transferEnable; offset 160
+uint8 lockFlag; offset 168
+uint128 stor2; offset 168
+uint128 stor2; offset 160
+address stor2;
+mapping of uint8 stor3;
+mapping of uint8 stor4;
+mapping of uint256 balanceOf;
+mapping of uint256 allowance;
+array of uint256 name;
+array of uint256 symbol;
+uint8 decimals;
+
+function name() {
+    return name[0 len name.length]
+}
+
+function totalSupply() {
+    return totalSupply
+}
+
+function transferEnable() {
+    return bool(transferEnable)
+}
+
+function decimals() {
+    return decimals
+}
+
+function exclude(address arg1) {
+    require calldata.size - 4 >= 32
+    return bool(stor4[arg1])
+}
+
+function balanceOf(address arg1) {
+    require calldata.size - 4 >= 32
+    return balanceOf[address(arg1)]
+}
+
+function owner() {
+    return owner
+}
+
+function symbol() {
+    return symbol[0 len symbol.length]
+}
+
+function locked(address arg1) {
+    require calldata.size - 4 >= 32
+    return bool(stor3[arg1])
+}
+
+function allowance(address arg1, address arg2) {
+    require calldata.size - 4 >= 64
+    return allowance[address(arg1)][address(arg2)]
+}
+
+function lockFlag() {
+    return bool(lockFlag)
+}
+
+function _fallback() payable {
+    revert
+}
+
+function removeLock(address arg1) {
+    require calldata.size - 4 >= 32
+    require msg.sender == owner
+    stor3[address(arg1)] = 0
+    return 1
+}
+
+function setExclude(address arg1) {
+    require calldata.size - 4 >= 32
+    require msg.sender == owner
+    stor4[address(arg1)] = 1
+    return 1
+}
+
+function enableTransfer(bool arg1) {
+    require calldata.size - 4 >= 32
+    require msg.sender == owner
+    Mask(96, 0, stor2.field_160) = Mask(96, 0, arg1)
+}
+
+function changeOwner(address arg1) {
+    require calldata.size - 4 >= 32
+    require msg.sender == owner
+    require arg1 != owner
+    address(stor2.field_0) = arg1
+}
+
+function disableLock(bool arg1) {
+    require calldata.size - 4 >= 32
+    require msg.sender == owner
+    Mask(88, 0, stor2.field_168) = Mask(88, 0, arg1)
+    return 1
+}
+
+function addLock(address arg1) {
+    require calldata.size - 4 >= 32
+    require msg.sender == owner
+    require arg1 != msg.sender
+    stor3[address(arg1)] = 1
+    return 1
+}
+
+function acceptOwnership() {
+    require msg.sender == address(stor2.field_0)
+    emit OwnerUpdate(owner, address(stor2.field_0));
+    owner = address(stor2.field_0)
+    address(stor2.field_0) = 0
+}
+
+function approve(address arg1, uint256 arg2) {
+    require calldata.size - 4 >= 64
+    require arg2 > 0
+    allowance[address(msg.sender)][address(arg1)] = arg2
+    emit Approval(arg2, msg.sender, arg1);
+    return 1
+}
+
+function transfer(address arg1, uint256 arg2) {
+    require calldata.size - 4 >= 64
+    if not stor4[address(msg.sender)]:
+        require transferEnable
+        if lockFlag:
+            require not stor3[address(msg.sender)]
+    require arg1 != 0
+    require msg.sender != 0
+    require arg2 > 0
+    if balanceOf[address(msg.sender)] < arg2:
+        return 0
+    if balanceOf[address(arg1)] + arg2 <= balanceOf[address(arg1)]:
+        return 0
+    balanceOf[address(msg.sender)] -= arg2
+    balanceOf[address(arg1)] += arg2
+    emit Transfer(arg2, msg.sender, arg1);
+    return 1
+}
+
+function transferFrom(address arg1, address arg2, uint256 arg3) {
+    require calldata.size - 4 >= 96
+    if not stor4[address(msg.sender)]:
+        require transferEnable
+        if lockFlag:
+            require not stor3[address(msg.sender)]
+    require arg2 != 0
+    require msg.sender != 0
+    require arg3 > 0
+    if balanceOf[address(arg1)] < arg3:
+        return 0
+    if allowance[address(arg1)][address(msg.sender)] < arg3:
+        return 0
+    if balanceOf[address(arg2)] + arg3 <= balanceOf[address(arg2)]:
+        return 0
+    balanceOf[address(arg2)] += arg3
+    balanceOf[address(arg1)] -= arg3
+    allowance[address(arg1)][address(msg.sender)] -= arg3
+    emit Transfer(arg3, arg1, arg2);
+    return 1
+}
+
+
+
+}
