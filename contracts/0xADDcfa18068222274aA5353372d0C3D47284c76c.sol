@@ -1,0 +1,88 @@
+contract main {
+
+
+
+
+// =====================  Runtime code  =====================
+
+
+function _fallback() payable {
+  stop
+}
+
+function sub_e97848b0(?) payable {
+    require calldata.size - 4 >= 32
+    create contract with 0 wei
+                    code: code.data[2141 len 3338]
+    if not create.new_address:
+        revert with ext_call.return_data[0 len return_data.size]
+    create contract with 0 wei
+                    code: code.data[5479 len 3387]
+    require ext_code.size(address(create.new_address))
+    call address(create.new_address).ethToToken(address arg1, uint256 arg2) with:
+       value msg.value wei
+         gas gas_remaining wei
+        args address(arg1), 0
+    if not ext_call.success:
+        revert with ext_call.return_data[0 len return_data.size]
+    require ext_code.size(arg1)
+    staticcall arg1.0x70a08231 with:
+            gas gas_remaining wei
+           args this.address
+    if not ext_call.success:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+    emit Debug(string arg1, uint256 arg2):
+               ext_call.return_data[0],
+               ext_call.return_data[0],
+               6,
+               'Tokens',
+    require ext_code.size(address(create.new_address))
+    staticcall address(create.new_address).getExchange(address arg1) with:
+            gas gas_remaining wei
+           args arg1
+    if not ext_call.success:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+    require ext_code.size(arg1)
+    staticcall arg1.0x70a08231 with:
+            gas gas_remaining wei
+           args this.address
+    if not ext_call.success:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+    require ext_code.size(arg1)
+    call arg1.approve(address arg1, uint256 arg2) with:
+         gas gas_remaining wei
+        args address(ext_call.return_data[0]), ext_call.return_data[0]
+    if not ext_call.success:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+    if not ext_call.return_data[0]:
+        revert with 0, 'Approve failed'
+    require ext_code.size(address(create.new_address))
+    staticcall address(create.new_address).getExchange(address arg1) with:
+            gas gas_remaining wei
+           args arg1
+    if not ext_call.success:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+    require ext_code.size(arg1)
+    staticcall arg1.0x70a08231 with:
+            gas gas_remaining wei
+           args this.address
+    if not ext_call.success:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+    require ext_code.size(address(ext_call.return_data[0]))
+    call address(ext_call.return_data[0]).tokenToEthSwapInput(uint256 arg1, uint256 arg2, uint256 arg3) with:
+         gas gas_remaining wei
+        args ext_call.return_data[0], 0, block.timestamp + 600
+    if not ext_call.success:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+}
+
+
+
+}
