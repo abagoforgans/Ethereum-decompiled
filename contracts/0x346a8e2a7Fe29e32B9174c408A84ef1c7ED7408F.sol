@@ -1,0 +1,37 @@
+contract main {
+
+
+
+
+// =====================  Runtime code  =====================
+
+
+address tokenAddress;
+
+function token() payable {
+    return tokenAddress
+}
+
+function _fallback() payable {
+    revert
+}
+
+function burn() payable {
+    require ext_code.size(tokenAddress)
+    staticcall tokenAddress.0x70a08231 with:
+            gas gas_remaining wei
+           args this.address
+    if not ext_call.success:
+        revert with ext_call.return_data[0 len return_data.size]
+    require return_data.size >= 32
+    require ext_code.size(tokenAddress)
+    call tokenAddress.0x42966c68 with:
+         gas gas_remaining wei
+        args ext_call.return_data[0]
+    if not ext_call.success:
+        revert with ext_call.return_data[0 len return_data.size]
+}
+
+
+
+}
