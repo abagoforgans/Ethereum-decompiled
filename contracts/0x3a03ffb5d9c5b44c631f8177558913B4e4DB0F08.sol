@@ -80,6 +80,7 @@ function execute(uint8[] arg1, bytes32[] arg2, bytes32[] arg3, address arg4, uin
         s = signer
         continue 
     nonce++
+    _56 = mem[64]
     _57 = mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + 192]
     mem[mem[64] len ceil32(mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + 192])] = mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + 224 len ceil32(mem[(32 * arg3.length) + (32 * arg2.length) + (32 * arg1.length) + 192])]
     if not _57 % 32:
@@ -92,7 +93,7 @@ function execute(uint8[] arg1, bytes32[] arg2, bytes32[] arg3, address arg4, uin
         call arg4.mem[mem[64] len 4] with:
            value arg5 wei
              gas gas_remaining wei
-            args mem[mem[64] + 4 len floor32(_57) + 28]
+            args mem[mem[64] + 4 len floor32(_57) + _56 + -mem[64] + 28]
     require ext_call.success
 }
 
